@@ -4,31 +4,32 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<EditText
-        android:id="@+id/text_box"
-        android:layout_centerHorizontal="true"
-		android:layout_centerInParent="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dip"
-        android:background="@android:drawable/editbox_background"
-        />
+
 <ImageView 
-	android:id="@+id/logo"
-	android:layout_centerInParent="true"
-	android:layout_width="200dip"
+	android:id="@+id/stalkernet"
+	android:layout_alignParentTop="true"
+	android:layout_alignParentLeft="true"
+	android:layout_width="100dip"
 	android:layout_height="100dip"
 	android:background="@drawable/stalkernet"
-	android:layout_above="@id/text_box"
 	/>
-
-        
-<Button
-        android:id="@+id/search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="35dip"
-        android:layout_below="@id/text_box"
-        android:layout_centerInParent="true"
-        android:text="Search" />
+	
+<ImageView 
+	android:id="@+id/menu"
+	android:layout_alignParentTop="true"
+	android:layout_centerHorizontal="true"
+	android:layout_width="100dip"
+	android:layout_height="100dip"
+	android:background="@drawable/stalkernet"
+	/>
+	
+<ImageView 
+	android:id="@+id/openFloors"
+	android:layout_alignParentTop="true"
+	android:layout_alignParentRight="true"
+	android:layout_width="100dip"
+	android:layout_height="100dip"
+	android:background="@drawable/stalkernet"
+	/>
 	
 </RelativeLayout>
