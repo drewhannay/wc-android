@@ -1,4 +1,4 @@
-package com.wheaton.stalkernet;
+package com.wheaton.app;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -14,8 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class Results extends ListActivity {
