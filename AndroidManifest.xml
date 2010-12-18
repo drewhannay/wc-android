@@ -5,12 +5,15 @@
       android:versionName="1.0">
     <application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
 
-        <activity android:name=".TitleScreen"
+        <activity android:name=".MainScreen"
                   android:label="@string/app_name">
                   <intent-filter>
         			<action android:name="android.intent.action.MAIN" />
             	    <category android:name="android.intent.category.LAUNCHER" />
             	</intent-filter>
+        </activity>
+        <activity android:name=".StalkernetHome"
+        	android:label="@string/app_name">
         </activity>
         <activity android:name=".Results"
         	android:label="@string/app_name">
