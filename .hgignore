@@ -2,3 +2,4 @@ bin/*
 .metadata/*
 .project
 .settings/*
+gen/*

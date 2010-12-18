@@ -28,7 +28,7 @@ public class MainScreen extends Activity implements OnClickListener {
 
 	public void onClick(View v) {
 		switch (v.getId()){
-		
+			
 		}
 		
 		
