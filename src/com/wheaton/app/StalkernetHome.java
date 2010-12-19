@@ -47,7 +47,7 @@ public class StalkernetHome extends Activity {
 				i.putExtra("param", s2);
 				try{
 					URL stalkernet = new URL("http://intra.wheaton.edu/directory/whosnew/index.php/");
-					Scanner in = new Scanner((InputStream) stalkernet.getContent());
+					new Scanner((InputStream) stalkernet.getContent());
 				}catch(Exception e){
 					Toast.makeText(StalkernetHome.this, "Please connect to the Wheaton College network to use this app.", Toast.LENGTH_SHORT).show();
 					return;
