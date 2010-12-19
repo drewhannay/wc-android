@@ -2,6 +2,7 @@ package com.wheaton.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,9 +59,11 @@ public class MainScreen extends Activity implements OnClickListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch(item.getItemId()){
-		//if the help button is pressed...
 		case R.id.contact:
-			//TODO Call contact form from here.
+			//Launch the contact form in the user's web browser.
+			Intent i = new Intent(Intent.ACTION_VIEW, 
+					Uri.parse("https://spreadsheets.google.com/viewform?formkey=dDNFamI5UGJqRDZmNFRkZW96ZHEybXc6MQ")); 
+			startActivity(i);
 			return true;
 		}
 		return false;
