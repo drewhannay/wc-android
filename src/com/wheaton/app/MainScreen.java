@@ -8,9 +8,9 @@ import android.view.View.OnClickListener;
 
 public class MainScreen extends Activity implements OnClickListener {
 	
-	View stalkernetLauncher;
-	View menuLauncher;
-	View openFloorLauncher;
+	private View stalkernetLauncher;
+	private View menuLauncher;
+	private View openFloorLauncher;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,14 @@ public class MainScreen extends Activity implements OnClickListener {
 			i = new Intent(this,StalkernetHome.class);
 			startActivity(i);
 			break;
+		case R.id.menu:
+			i = new Intent(this,MenuHome.class);
+			startActivity(i);
+			break;
+		case R.id.openFloors:
+			i = new Intent(this,OpenFloorHome.class);
+			startActivity(i);
+			break;
 		}
-		
 	}
 }

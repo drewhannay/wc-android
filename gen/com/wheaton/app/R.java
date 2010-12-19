@@ -16,7 +16,9 @@ public final class R {
     public static final class drawable {
         public static final int default_pic=0x7f020000;
         public static final int icon=0x7f020001;
-        public static final int stalkernet=0x7f020002;
+        public static final int menu=0x7f020002;
+        public static final int open_floors=0x7f020003;
+        public static final int stalkernet=0x7f020004;
     }
     public static final class id {
         public static final int curPic=0x7f060003;
@@ -30,8 +32,10 @@ public final class R {
     }
     public static final class layout {
         public static final int main=0x7f030000;
-        public static final int results=0x7f030001;
-        public static final int stalkernet_main=0x7f030002;
+        public static final int menu_main=0x7f030001;
+        public static final int openfloor_main=0x7f030002;
+        public static final int results=0x7f030003;
+        public static final int stalkernet_main=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f050001;
