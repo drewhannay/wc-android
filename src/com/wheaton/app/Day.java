@@ -11,6 +11,15 @@ import java.io.Serializable;
  *
  */
 public class Day implements Serializable {
+/*
+ * To be in the form month day year (space separated)
+ * Year is necessary, because it checks to see
+ * that the month and day are not the same. When
+ * the year changes, both change as well - but, if
+ * they don't use the app for a year (unlikely but 
+ * possible), this would mess things up and they'd get
+ * an old schedule.
+ */
 public String date = "";
 public String cucinaLunch = "";
 public String spiceLunch = "";
