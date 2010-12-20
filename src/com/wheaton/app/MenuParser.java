@@ -1,3 +1,4 @@
+
 package com.wheaton.app;
 
 import java.io.FileInputStream;
@@ -9,9 +10,22 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 import android.content.Context;
-
+/**
+ * A class to do the html parsing and set the appropriate instance varible, which
+ * is made public. Currently, it also saves and reads the saved days stack.
+ * @author Alisa Maas
+ *
+ */
 public class MenuParser {
-public static Stack<Day> days = new Stack<Day>();
+	
+	/*
+	 * A Object to contain the days. It's ordered in a
+	 * stack for maximum efficiency when removing expired
+	 * days. Oldest days are at the top, which also happens 
+	 * to be convenient for processing the days and displaying
+	 * the next recent one.
+	 */
+	public static Stack<Day> days = new Stack<Day>();
 
 	public static void parse(Context con){
 		if(days.empty()){
@@ -22,14 +36,24 @@ public static Stack<Day> days = new Stack<Day>();
 					f_in = con.openFileInput("days_cache");
 				
         		// Read object using ObjectInputStream
-				ObjectInputStream obj_in;
-					obj_in = new ObjectInputStream (f_in);
-				days = (Stack<Day>) obj_in.readObject();
+				ObjectInputStream obj_in = new ObjectInputStream (f_in);
+				days = (Stack<Day>) obj_in.readObject(); //read in the stack, if there.
+				parse(con); //This will hopefully crop any old days.
 				}catch(Exception e){
 					//this should never, ever happen since
 					//as of now days_cache is our ONLY file.
 				}
+			}
 			//TODO if no file, parse the html
+				Stack<Day> stack = new Stack<Day>();
+				//TODO actually parse here, placing the data in the stack 
+				
+				if(stack.empty())
+					stack.push(new Day("Sorry, but saga has not yet published the menu. Check back later for more details."));
+			
+			else{
+				
+			}
 		}
 		else{
 			//crop expired days by comparing to the current time/date
@@ -64,6 +88,8 @@ public static Stack<Day> days = new Stack<Day>();
 			//once a day, at the most.
 			if(days.empty())
 				parse(con);
+			
+		}
 			//Either way, at the end of the method, write the new object
 			//to data in case. TODO - put in the main menu class at some point?
 			//onPause? Seems like a good use for it...
@@ -74,6 +100,5 @@ public static Stack<Day> days = new Stack<Day>();
 			// Write object out to disk
 			obj_out.writeObject (days);}catch(Exception e){}
 		}
-		}
-	}
+	
 }

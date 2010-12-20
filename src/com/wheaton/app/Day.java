@@ -20,7 +20,7 @@ public class Day implements Serializable {
  * possible), this would mess things up and they'd get
  * an old schedule.
  */
-public String date = "";
+public String date = "1 1 1800";
 public String cucinaLunch = "";
 public String spiceLunch = "";
 public String classicsLunch = "";
