@@ -3,4 +3,7 @@
     <string name="search">Search</string>
     <string name="app_name">Wheaton College</string>
     <string name="contact_label">Contact Us</string>
+    <string name="next_button">Next</string>
+    <string name="prev_button">Previous</string>
+    <string name="today_button">Today</string>
 </resources>

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,7 +12,7 @@ import android.widget.ViewAnimator;
 //superfluous comment -AW
 public class MenuHome extends Activity implements OnClickListener {
 
-	Button next,previous;
+	Button next,previous,today;
 	ViewAnimator display;
 	
 	@Override
@@ -26,6 +25,8 @@ public class MenuHome extends Activity implements OnClickListener {
 		next.setOnClickListener(this);
 		previous = (Button) findViewById(R.id.leftButton);
 		previous.setOnClickListener(this);
+		today = (Button) findViewById(R.id.todayButton);
+		today.setOnClickListener(this);
 		display = (ViewAnimator) findViewById(R.id.view_area);
 		
 		ArrayList<View> days = fakeViews();//TODO Set days to the actual ArrayList of Days
@@ -60,6 +61,9 @@ public class MenuHome extends Activity implements OnClickListener {
 			break;
 		case R.id.leftButton:
 			display.showPrevious();
+			break;
+		case R.id.todayButton:
+			display.setDisplayedChild(0);
 			break;
 		}
 		

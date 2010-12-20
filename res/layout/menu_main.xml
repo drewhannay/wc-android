@@ -6,23 +6,30 @@
 
 	<Button
 		android:id="@+id/leftButton"
-		android:text="&lt;"
+		android:text="@string/prev_button"
 		android:layout_alignParentLeft="true"
-		android:layout_height="fill_parent"
-		android:layout_width="30dip" />
+		android:layout_height="50dip"
+		android:layout_width="100dip" />
 	<Button
 		android:id="@+id/rightButton"
-		android:text="&gt;"
+		android:text="@string/next_button"
 		android:layout_alignParentRight="true"
-		android:layout_height="fill_parent"
-		android:layout_width="30dip" />
-	<ViewAnimator
-		android:id="@+id/view_area"
-		android:layout_width="200dip"
-		android:layout_height="fill_parent"
-		android:background="@color/background"
+		android:layout_height="50dip"
+		android:layout_width="100dip" />
+	<Button
+		android:id="@+id/todayButton"
+		android:text="@string/today_button"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
 		android:layout_toRightOf="@id/leftButton"
 		android:layout_toLeftOf="@id/rightButton"
+		android:layout_height="50dip"
+		android:layout_width="fill_parent" />	
+	<ViewAnimator
+		android:id="@+id/view_area"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_below="@id/leftButton"
 		android:inAnimation="@android:anim/slide_in_left"
 		android:outAnimation="@android:anim/slide_out_right"
 		
