@@ -57,13 +57,21 @@ public class MenuHome extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()){
 		case R.id.rightButton:
+			display.setOutAnimation(this, android.R.anim.slide_out_right);
+			display.setInAnimation(this, android.R.anim.slide_in_left);
 			display.showNext();
 			break;
 		case R.id.leftButton:
+			display.setInAnimation(this, android.R.anim.fade_in);
+			display.setOutAnimation(this, android.R.anim.fade_out);
 			display.showPrevious();
 			break;
 		case R.id.todayButton:
-			display.setDisplayedChild(0);
+			if(!display.getCurrentView().equals(display.getChildAt(0))){
+				display.setInAnimation(this, android.R.anim.fade_in);
+				display.setOutAnimation(this, android.R.anim.fade_out);
+				display.setDisplayedChild(0);
+			}
 			break;
 		}
 		
