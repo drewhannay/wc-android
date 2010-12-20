@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ViewAnimator;
-
+//superfluous comment -AW
 public class MenuHome extends Activity implements OnClickListener {
 
 	Button next,previous;
