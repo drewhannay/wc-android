@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
-</LinearLayout>
+
+	<Button
+		android:id="@+id/leftButton"
+		android:text="&lt;"
+		android:layout_alignParentLeft="true"
+		android:layout_height="fill_parent"
+		android:layout_width="30dip" />
+	<Button
+		android:id="@+id/rightButton"
+		android:text="&gt;"
+		android:layout_alignParentRight="true"
+		android:layout_height="fill_parent"
+		android:layout_width="30dip" />
+	<ViewAnimator
+		android:id="@+id/view_area"
+		android:layout_width="200dip"
+		android:layout_height="fill_parent"
+		android:background="@color/background"
+		android:layout_toRightOf="@id/leftButton"
+		android:layout_toLeftOf="@id/rightButton"
+		android:inAnimation="@android:anim/slide_in_left"
+		android:outAnimation="@android:anim/slide_out_right"
+		
+		 ></ViewAnimator>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
