@@ -80,13 +80,15 @@ public class MenuParser {
 			//TODO actually parse here, placing the data in the stack 
 			try{
 				URL lunchmenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu.html");
-				//URL dinnermenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html");
+				URL dinnermenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html");
 				Scanner lunchin = new Scanner((InputStream) lunchmenu.getContent());
-				//Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
+				Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
 				String lunchline = "";
-				//String dinnerline = "";
+				String dinnerline = "";
 				ArrayList<ArrayList<String>> allLunchStations = new ArrayList<ArrayList<String>>();
 				ArrayList<ArrayList<String>> allLunchItems = new ArrayList<ArrayList<String>>();
+				ArrayList<ArrayList<String>> allDinnerStations = new ArrayList<ArrayList<String>>();
+				ArrayList<ArrayList<String>> allDinnerItems = new ArrayList<ArrayList<String>>();
 				dates = new ArrayList<String>();
 				while(lunchin.hasNext()){
 					while(lunchin.hasNext()&&!lunchline.contains("align=\"center\"><strong><br>")&&!(lunchline = lunchin.nextLine()).contains("align=\"center\"><strong><br>"));
@@ -123,25 +125,64 @@ public class MenuParser {
 					//lunchline = lunchin.nextLine();
 					lunchline = lunchline.substring(lunchline.indexOf("ng>")+3);
 					lunchline = lunchline.substring(0,lunchline.indexOf("<"));
-					lunchstations.add(lunchline);
-					Log.e("s",lunchline);
+					//Log.e("s",lunchline);
 					if(lunchline.equals(""))
 						continue;
+					lunchstations.add(lunchline);
+					Log.e("lunch",lunchline);
 					lunchline = lunchin.nextLine();
 					lunchline = lunchline.substring(lunchline.indexOf(">")+1);
 					if(lunchline.contains("&amp;")){
 						lunchline = lunchline.substring(0,lunchline.indexOf("&amp;")+1) + lunchline.substring(lunchline.indexOf("&amp;")+5);
 					}
 					lunchitems.add(lunchline);
-					Log.e("l",lunchline);
+					Log.e("lunch",lunchline);
 					
 					}
 					allLunchStations.add(lunchstations);	
 					allLunchItems.add(lunchitems);
+					Log.e("Next Day (lunch)","----------");
 				}
-				//while(!(dinnerline = dinnerin.nextLine()).contains("align=\"center\"><strong><br>"));
-
-			}catch(Exception e){
+					while(dinnerin.hasNext()){
+						while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")&&!(dinnerline = dinnerin.nextLine()).contains("align=\"center\"><strong><br>"));
+						if(!dinnerin.hasNext()){
+							break;
+						}
+						ArrayList<String> dinnerstations = new ArrayList<String>();
+						ArrayList<String> dinneritems = new ArrayList<String>(); 
+						dinnerline = dinnerline.substring(dinnerline.indexOf("\"center\"><strong><br>"));
+						if(dinnerline.indexOf(' ')==21){
+							dinnerline = dinnerline.substring(21); //in case they have a random space
+							//before the day of the week - for some reason they do for the first day, but not
+							//the rest..
+						}
+						while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")){
+						while(dinnerin.hasNext()&&!dinnerline.contains("<strong>"))
+							dinnerline = dinnerin.nextLine();
+						if(!dinnerin.hasNext())
+							break;
+						if(dinnerline.contains("align=\"center\"><strong><br>"))
+							break;
+						dinnerline = dinnerline.substring(dinnerline.indexOf("ng>")+3);
+						dinnerline = dinnerline.substring(0,dinnerline.indexOf("<"));
+						if(dinnerline.equals(""))
+							continue;
+						dinnerstations.add(dinnerline);
+						Log.e("d",dinnerline);
+						dinnerline = dinnerin.nextLine();
+						dinnerline = dinnerline.substring(dinnerline.indexOf(">")+1);
+						if(dinnerline.contains("&amp;")){
+							dinnerline = dinnerline.substring(0,dinnerline.indexOf("&amp;")+1) + dinnerline.substring(dinnerline.indexOf("&amp;")+5);
+						}
+						dinneritems.add(dinnerline);
+						Log.e("l",dinnerline);
+						
+						}
+						allDinnerStations.add(dinnerstations);	
+						allDinnerItems.add(dinneritems);
+						Log.e("next day","-----------");
+					}
+					}catch(Exception e){
 				Log.e("MenuParser",e.getMessage());
 			}
 			if(stack.empty()){
