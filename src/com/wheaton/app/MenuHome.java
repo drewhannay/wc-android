@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,6 +35,9 @@ public class MenuHome extends Activity implements OnClickListener {
 		for(View day:days){
 			display.addView(day);
 		}
+		
+		if(display.getChildCount()==1)
+			next.setVisibility(View.INVISIBLE);
 			
 		
 		
@@ -58,26 +62,34 @@ public class MenuHome extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()){
 		case R.id.rightButton:
-			next.setVisibility(View.VISIBLE);
-			previous.setVisibility(View.VISIBLE);
-			if(display.getCurrentView().equals(display.getChildAt((display.getChildCount()-2))))
-				next.setVisibility(View.INVISIBLE);
 			display.setOutAnimation(this, android.R.anim.slide_out_right);
 			display.setInAnimation(this, android.R.anim.slide_in_left);
 			display.showNext();
+			
+			if(display.getDisplayedChild()==display.getChildCount()-1)
+				next.setVisibility(View.INVISIBLE);
+			previous.setVisibility(View.VISIBLE);
+			
 			break;
 		case R.id.leftButton:
-			next.setVisibility(View.VISIBLE);
 			display.setInAnimation(this, android.R.anim.fade_in);
 			display.setOutAnimation(this, android.R.anim.fade_out);
 			display.showPrevious();
-			if(display.getCurrentView().equals(display.getChildAt(0)))
+			
+			if(display.getDisplayedChild()==0)
 				previous.setVisibility(View.INVISIBLE);
-			break;
-		case R.id.todayButton:
 			next.setVisibility(View.VISIBLE);
+			
+			break;
+		case R.id.todayButton:			
+			if(display.getChildCount()==1)
+				next.setVisibility(View.INVISIBLE);
+			else
+				next.setVisibility(View.VISIBLE);
+
+			previous.setVisibility(View.INVISIBLE);
+			
 			if(!display.getCurrentView().equals(display.getChildAt(0))){
-				previous.setVisibility(View.INVISIBLE);
 				display.setInAnimation(this, android.R.anim.fade_in);
 				display.setOutAnimation(this, android.R.anim.fade_out);
 				display.setDisplayedChild(0);
