@@ -133,7 +133,7 @@ public class MenuParser {
 					Log.e("lunch",lunchline);
 					lunchline = lunchin.nextLine();
 					lunchline = lunchline.substring(lunchline.indexOf(">")+1);
-					if(lunchline.contains("&amp;")){
+					while(lunchline.contains("&amp;")){
 						lunchline = lunchline.substring(0,lunchline.indexOf("&amp;")+1) + lunchline.substring(lunchline.indexOf("&amp;")+5);
 					}
 					lunchitems.add(lunchline);
@@ -167,7 +167,7 @@ public class MenuParser {
 						Log.e("d",dinnerline);
 						dinnerline = dinnerin.nextLine();
 						dinnerline = dinnerline.substring(dinnerline.indexOf(">")+1);
-						if(dinnerline.contains("&amp;")){
+						while(dinnerline.contains("&amp;")){
 							dinnerline = dinnerline.substring(0,dinnerline.indexOf("&amp;")+1) + dinnerline.substring(dinnerline.indexOf("&amp;")+5);
 						}
 						dinneritems.add(dinnerline);
