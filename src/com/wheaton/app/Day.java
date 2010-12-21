@@ -21,24 +21,56 @@ public class Day implements Serializable {
  * an old schedule.
  */
 public String date = "1 1 1800";
-public String cucinaLunch = "";
-public String spiceLunch = "";
-public String classicsLunch = "";
-public String cucinaDinner = "";
-public String spiceDinner = "";
-public String classicsDinner = "";
+
+/*
+ * To be in the form station1name station2name station3name...etc. The
+ * names should be separated by spaces so we can use StringTokenizers,
+ * and this should account for days when they have random stations.
+ */
+public String lunchStations = "";
+/*
+ * The entrees offered at lunch, organized by station, separated by
+ * spaces.
+ */
+public String lunchEntrees = "";
+/*
+ * To be in the form station1name station2name station3name...etc. The
+ * names should be separated by spaces so we can use StringTokenizers,
+ * and this should account for days when they have random stations.
+ */
+public String dinnerStations = "";
+/*
+ * The entrees offered at dinner, organized by station, separated by
+ * spaces.
+ */
+public String dinnerEntrees = "";
+
+/*
+ * In case instead of meals, saga decides to post a message - for example, "Merry Christmas!"
+ */
 public String specialMessage = "";
 
-	public Day(String date, String cucinaLunch, String spiceLunch, String classicsLunch,String cucinaDinner, String spiceDinner, String classicsDinner){
+	/**
+	 * Most common constructor, sets up usual information.
+	 * @param date to set the date
+	 * @param lunchStations to set the names of stations (lunch)
+	 * @param lunchEntrees to set the dishes offered (lunch)
+	 * @param dinnerStations to set the names of stations (dinner)
+	 * @param dinnerEntrees to set the dishes offered (dinner)
+	 */
+	public Day(String date, String lunchStations, String lunchEntrees, String dinnerStations, String dinnerEntrees){
 		this.date = date;
-		this.cucinaLunch = cucinaLunch;
-		this.spiceLunch = spiceLunch;
-		this.classicsLunch = classicsLunch;
-		this.cucinaDinner = cucinaDinner;
-		this.spiceDinner = spiceDinner;
-		this.classicsDinner = classicsDinner;
+		this.lunchStations = lunchStations;
+		this.lunchEntrees = lunchEntrees;
+		this.dinnerStations = dinnerStations;
+		this.dinnerEntrees = dinnerEntrees;
+		
 	
 	}
+	/**
+	 * Special case constructor to account for unusual circumstances.
+	 * @param message The message to display.
+	 */
 	public Day(String message){
 		this.specialMessage = message;
 	}
