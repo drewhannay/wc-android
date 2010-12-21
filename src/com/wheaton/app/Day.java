@@ -11,6 +11,11 @@ import java.io.Serializable;
  *
  */
 public class Day implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 /*
  * To be in the form month day year (space separated)
  * Year is necessary, because it checks to see

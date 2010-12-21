@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,6 +38,10 @@ public class MenuHome extends Activity implements OnClickListener {
 		//If there's only one Child View, we don't need a next button.
 		if(display.getChildCount()==1)
 			next.setVisibility(View.INVISIBLE);
+		
+		MenuParser.parse(this);
+
+		
 	}
 
 	//TODO Remove this method.
@@ -52,6 +57,12 @@ public class MenuHome extends Activity implements OnClickListener {
 		toReturn.add(v1);
 		toReturn.add(v2);
 		toReturn.add(v3);
+		
+		
+		View v4 = getLayoutInflater().inflate(R.layout.food_menu, null);
+		toReturn.add(v4);
+		View v5 = getLayoutInflater().inflate(R.layout.stalkernet_main, null);
+		toReturn.add(v5);
 		
 		return toReturn;
 	}
@@ -90,6 +101,11 @@ public class MenuHome extends Activity implements OnClickListener {
 			
 			break;
 		case R.id.todayButton:			
+			
+			ArrayList<String> dates = MenuParser.dates;
+			for(String s:dates)
+				Log.d("Dates", s);
+			
 			//Don't jump if we're already at the beginning.
 			if(display.getDisplayedChild()!=0){
 				display.setInAnimation(this, android.R.anim.fade_in);

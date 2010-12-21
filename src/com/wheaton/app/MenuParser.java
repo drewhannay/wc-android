@@ -15,6 +15,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 import android.content.Context;
+import android.util.Log;
 /**
  * A class to do the html parsing and set the appropriate instance variable, which
  * is made public. Currently, it also saves and reads the saved days stack.
@@ -23,6 +24,23 @@ import android.content.Context;
  */
 public class MenuParser {
 	
+	public static ArrayList<String> dates;
+	private static HashMap<String,Integer> monthToInt = new HashMap<String,Integer>();
+	static{
+		monthToInt.put("January",0);
+		monthToInt.put("February",1);
+		monthToInt.put("March", 2);
+		monthToInt.put("April",3);
+		monthToInt.put("May",4);
+		monthToInt.put("June",5);
+		monthToInt.put("July",6);
+		monthToInt.put("August",7);
+		monthToInt.put("September", 8);
+		monthToInt.put("October",9);
+		monthToInt.put("November",10);
+		monthToInt.put("December",11);
+	}
+		
 	/*
 	 * A Object to contain the days. It's ordered in a
 	 * stack for maximum efficiency when removing expired
@@ -32,72 +50,69 @@ public class MenuParser {
 	 */
 	public static Stack<Day> days = new Stack<Day>();
 
+	@SuppressWarnings("unchecked")
 	public static void parse(Context con){
+		
+		//TODO Fix the saving/reading of the file, then remove this line.
+		con.deleteFile("days_cache");
+		
+		
 		if(days.empty()){
 			if(con.fileList().length != 0){ 
 			
         		FileInputStream f_in = null;
 				try {
 					f_in = con.openFileInput("days_cache");
-				
-        		// Read object using ObjectInputStream
-				ObjectInputStream obj_in = new ObjectInputStream (f_in);
-				days = (Stack<Day>) obj_in.readObject(); //read in the stack, if there.
-				parse(con); //This will hopefully crop any old days.
-				return;
+					
+					// Read object using ObjectInputStream
+					ObjectInputStream obj_in = new ObjectInputStream (f_in);
+					days = (Stack<Day>) obj_in.readObject(); //read in the stack, if there.
+					parse(con); //This will hopefully crop any old days.
+					return;
 				}catch(Exception e){
 					//this should never, ever happen since
 					//as of now days_cache is our ONLY file.
 				}
 			}
 			//TODO if no file, parse the html
-				Stack<Day> stack = new Stack<Day>();
-				//TODO actually parse here, placing the data in the stack 
-				try{
-					URL lunchmenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu.html");
-					URL dinnermenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html");
-					Scanner lunchin = new Scanner((InputStream) lunchmenu.getContent());
-					Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
-					String lunchline = "";
-					String dinnerline = "";
-					HashMap<String,Integer> monthToInt = new HashMap<String,Integer>();
-					monthToInt.put("January",0);
-					monthToInt.put("February",1);
-					monthToInt.put("March", 2);
-					monthToInt.put("April",3);
-					monthToInt.put("May",4);
-					monthToInt.put("June",5);
-					monthToInt.put("July",6);
-					monthToInt.put("August",7);
-					monthToInt.put("September", 8);
-					monthToInt.put("October",9);
-					monthToInt.put("November",10);
-					monthToInt.put("December",11);
-					ArrayList<String> dates = new ArrayList<String>();
-					while(lunchin.hasNext()){
+			Stack<Day> stack = new Stack<Day>();
+			//TODO actually parse here, placing the data in the stack 
+			try{
+				URL lunchmenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu.html");
+				//URL dinnermenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html");
+				Scanner lunchin = new Scanner((InputStream) lunchmenu.getContent());
+				//Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
+				String lunchline = "";
+				//String dinnerline = "";
+
+				dates = new ArrayList<String>();
+				while(lunchin.hasNext()){
 					while(lunchin.hasNext()&&!(lunchline = lunchin.nextLine()).contains("align=\"center\"><strong><br>"));
-					if(!lunchin.hasNext())
+					if(!lunchin.hasNext()){
 						break;
+					}
 					lunchline = lunchline.substring(lunchline.indexOf("\"center\"><strong><br>"));
-					dinnerline = dinnerline.substring(dinnerline.indexOf("\"center\"><strong><br>"));
+					//dinnerline = dinnerline.substring(dinnerline.indexOf("\"center\"><strong><br>"));
 					StringTokenizer lunch_token = new StringTokenizer(lunchline);
-					StringTokenizer dinner_token = new StringTokenizer(dinnerline);
+					//StringTokenizer dinner_token = new StringTokenizer(dinnerline);
 					lunch_token.nextToken();
-					dinner_token.nextToken();
+					//dinner_token.nextToken();
 					String date = "";
 					date += monthToInt.get(lunch_token.nextToken())+ " ";
 					String temp = lunch_token.nextToken();
 					temp = (temp.contains(",")?temp.substring(0,temp.length()-1):temp);
 					date+=temp + " " + lunch_token.nextToken();
 					dates.add(date);
-					}
-					while(!(dinnerline = dinnerin.nextLine()).contains("align=\"center\"><strong><br>"));
+				}
+				//while(!(dinnerline = dinnerin.nextLine()).contains("align=\"center\"><strong><br>"));
 
-					
-				}catch(Exception e){}
-				if(stack.empty())
-					stack.push(new Day("Sorry, but saga has not yet published the menu. Check back later for more details."));
-			
+				
+			}catch(Exception e){
+				Log.e("MenuParser",e.getMessage());
+			}
+			if(stack.empty()){
+				stack.push(new Day("Sorry, but saga has not yet published the menu. Check back later for more details."));
+			}
 			else{
 				
 			}
@@ -137,15 +152,15 @@ public class MenuParser {
 				parse(con);
 			
 		}
-			//Either way, at the end of the method, write the new object
-			//to data in case. TODO - put in the main menu class at some point?
-			//onPause? Seems like a good use for it...
-			try{FileOutputStream f_out = con.openFileOutput("days_cache", Context.MODE_PRIVATE);
+		//Either way, at the end of the method, write the new object
+		//to data in case. TODO - put in the main menu class at some point?
+		//onPause? Seems like a good use for it...
+		try{FileOutputStream f_out = con.openFileOutput("days_cache", Context.MODE_PRIVATE);
 
-			// Write object with ObjectOutputStream
-			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
-			// Write object out to disk
-			obj_out.writeObject (days);}catch(Exception e){}
-		}
+		// Write object with ObjectOutputStream
+		ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
+		// Write object out to disk
+		obj_out.writeObject (days);}catch(Exception e){}
+	}
 	
 }
