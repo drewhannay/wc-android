@@ -10,12 +10,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+/**
+ * Class to run the main screen of the application.
+ * Get references to the different Views in the Activity and use
+ * them to let the user launch the individual sections of the
+ * application.
+ * @author Drew Hannay
+ *
+ */
 public class MainScreen extends Activity implements OnClickListener {
 	
-	private View stalkernetLauncher;
-	private View menuLauncher;
-	private View openFloorLauncher;
+	/**
+	 * The Views used to control the on screen buttons and images.
+	 */
+	private View stalkernetLauncher, menuLauncher, openFloorLauncher;
 	
+	/**
+	 * Method to override the default onCreate method for an Activity.
+	 * Set the layout for this activity, set up the buttons and
+	 * launch Threads to preemptively parse through the Menu and
+	 * Open Floor information.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,9 +50,21 @@ public class MainScreen extends Activity implements OnClickListener {
             }
         };
         t.start();
+        
+        //TODO Uncomment this when OpenFloorParser is ready.
+//        t = new Thread() {
+//        	public void run() {
+//        		OpenFloorParser.parse(MainScreen.this);
+//        	}
+//        };
 		
 	}
 
+	/**
+	 * Method to determine what to do when a button is clicked.
+	 * Use a switch statement on the given View's ID to launch
+	 * the correct activity.
+	 */
 	public void onClick(View v) {
 		Intent i;
 		switch(v.getId()){
@@ -56,6 +83,11 @@ public class MainScreen extends Activity implements OnClickListener {
 		}
 	}
 	
+	/**
+	 * Method to override the creation of the Options Menu.
+	 * Get the MenuInflater and inflate it with the appropriate
+	 * XML file containing the options menu.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu){
 		super.onCreateOptionsMenu(menu);
@@ -64,6 +96,11 @@ public class MainScreen extends Activity implements OnClickListener {
 		return true;
 	}
 	
+	/**
+	 * Method to determine what to do when a menu button is pressed.
+	 * Use a switch statement on the ID of the selected menu item 
+	 * and launch the correct activity for that menu item.
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch(item.getItemId()){

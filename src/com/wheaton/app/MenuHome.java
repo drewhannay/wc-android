@@ -5,16 +5,36 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ViewAnimator;
+
+/**
+ * Class to run the Menu section of the application.
+ * Get references to the different buttons and ViewAnimator,
+ * fill the ViewAnimator, and let the user scroll through 
+ * the different day's menus.
+ * @author Drew Hannay
+ *
+ */
 public class MenuHome extends Activity implements OnClickListener {
 
+	/**
+	 * Buttons to control movement throughout the different menu screens.
+	 */
 	Button next,previous,today;
+	/**
+	 * The display through which the different day's schedules will be displayed.
+	 */
 	ViewAnimator display;
 	
+	/**
+	 * Method to override the default onCreate method for an Activity.
+	 * Set the layout for this Activity, then set up the buttons and 
+	 * the ViewAnimator. If necessary, make the "Next" display button
+	 * invisible.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -38,9 +58,6 @@ public class MenuHome extends Activity implements OnClickListener {
 		//If there's only one Child View, we don't need a next button.
 		if(display.getChildCount()==1)
 			next.setVisibility(View.INVISIBLE);
-		
-		//MenuParser.parse(this);
-
 		
 	}
 
@@ -100,11 +117,7 @@ public class MenuHome extends Activity implements OnClickListener {
 			next.setVisibility(View.VISIBLE);
 			
 			break;
-		case R.id.todayButton:			
-			
-			ArrayList<String> dates = MenuParser.dates;
-			for(String s:dates)
-				Log.d("Dates", s);
+		case R.id.todayButton:
 			
 			//Don't jump if we're already at the beginning.
 			if(display.getDisplayedChild()!=0){
