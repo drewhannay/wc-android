@@ -39,7 +39,7 @@ public class MenuHome extends Activity implements OnClickListener {
 		if(display.getChildCount()==1)
 			next.setVisibility(View.INVISIBLE);
 		
-		MenuParser.parse(this);
+		//MenuParser.parse(this);
 
 		
 	}

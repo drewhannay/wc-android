@@ -28,6 +28,14 @@ public class MainScreen extends Activity implements OnClickListener {
 		openFloorLauncher = findViewById(R.id.openFloors);
 		openFloorLauncher.setOnClickListener(this);
 		
+		//Preemptively grab the Menu information.
+        Thread t = new Thread() {
+            public void run() {
+            	MenuParser.parse(MainScreen.this);
+            }
+        };
+        t.start();
+		
 	}
 
 	public void onClick(View v) {
@@ -69,6 +77,4 @@ public class MainScreen extends Activity implements OnClickListener {
 		return false;
 		
 	}
-	
-	
 }
