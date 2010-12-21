@@ -3,6 +3,8 @@ package com.wheaton.app;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import android.util.Log;
+
 /**
  * A class to hold the day, including the lunch and
  * dinner schedule, Serializable so it can be stored in
@@ -73,6 +75,19 @@ public String specialMessage = "";
 	 */
 	public Day(String message){
 		this.specialMessage = message;
+	}
+	public void print(){
+		Log.e("Date: ", date);
+		if(lunchStations!=null)
+		for(int i = 0;i<lunchStations.size();i++){
+			Log.e(lunchStations.get(i) + ": ", lunchEntrees.get(i));
+		}
+		Log.e("Dinner","is served");
+		if(dinnerStations!=null)
+		for(int i = 0;i<dinnerStations.size();i++){
+			Log.e(dinnerStations.get(i) + ": ", dinnerEntrees.get(i));
+		}
+		Log.e("Next day.","----------");
 	}
 
 }

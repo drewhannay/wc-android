@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -150,12 +151,7 @@ public class MenuParser {
 						}
 						ArrayList<String> dinnerstations = new ArrayList<String>();
 						ArrayList<String> dinneritems = new ArrayList<String>(); 
-						dinnerline = dinnerline.substring(dinnerline.indexOf("\"center\"><strong><br>"));
-						if(dinnerline.indexOf(' ')==21){
-							dinnerline = dinnerline.substring(21); //in case they have a random space
-							//before the day of the week - for some reason they do for the first day, but not
-							//the rest..
-						}
+						dinnerline = "";
 						while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")){
 						while(dinnerin.hasNext()&&!dinnerline.contains("<strong>"))
 							dinnerline = dinnerin.nextLine();
@@ -181,6 +177,21 @@ public class MenuParser {
 						allDinnerStations.add(dinnerstations);	
 						allDinnerItems.add(dinneritems);
 						Log.e("next day","-----------");
+					}
+					//TODO create stack of Days here!
+					Log.e("d","making stack");
+					for(int i = 0;i<=(allLunchStations.size()>allDinnerStations.size()?allLunchStations.size()-1:allDinnerStations.size()-1);i++){
+						ArrayList<String> dinnerstations = (allDinnerStations.size()<=i?null:allDinnerStations.get(i));
+						ArrayList<String> dinneritems = (allDinnerItems.size()<=i?null:allDinnerItems.get(i));
+						ArrayList<String> lunchstations = (allLunchStations.size()<=i?null:allLunchStations.get(i));
+						ArrayList<String> lunchitems = (allLunchItems.size()<=i?null:allLunchItems.get(i));
+						String date = dates.get(i);
+						days.push(new Day(date,lunchstations,lunchitems,dinnerstations,dinneritems));
+						
+					}
+					Log.e("d","before printing");
+					for(Iterator<Day> it = days.iterator();it.hasNext();){
+						it.next().print();
 					}
 					}catch(Exception e){
 				Log.e("MenuParser",e.getMessage());
