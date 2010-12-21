@@ -1,6 +1,7 @@
 package com.wheaton.app;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * A class to hold the day, including the lunch and
@@ -28,27 +29,21 @@ public class Day implements Serializable {
 public String date = "1 1 1800";
 
 /*
- * To be in the form station1name station2name station3name...etc. The
- * names should be separated by spaces so we can use StringTokenizers,
- * and this should account for days when they have random stations.
+ * Names of lunch stations.
  */
-public String lunchStations = "";
+public ArrayList<String> lunchStations;;
 /*
- * The entrees offered at lunch, organized by station, separated by
- * spaces.
+ * The entrees offered at lunch, organized by station.
  */
-public String lunchEntrees = "";
+public ArrayList<String> lunchEntrees;
 /*
- * To be in the form station1name station2name station3name...etc. The
- * names should be separated by spaces so we can use StringTokenizers,
- * and this should account for days when they have random stations.
+ * Names of dinner stations
  */
-public String dinnerStations = "";
+public ArrayList<String> dinnerStations;
 /*
- * The entrees offered at dinner, organized by station, separated by
- * spaces.
+ * The entrees offered at dinner, organized by station.
  */
-public String dinnerEntrees = "";
+public ArrayList<String> dinnerEntrees;
 
 /*
  * In case instead of meals, saga decides to post a message - for example, "Merry Christmas!"
@@ -63,7 +58,7 @@ public String specialMessage = "";
 	 * @param dinnerStations to set the names of stations (dinner)
 	 * @param dinnerEntrees to set the dishes offered (dinner)
 	 */
-	public Day(String date, String lunchStations, String lunchEntrees, String dinnerStations, String dinnerEntrees){
+	public Day(String date, ArrayList<String> lunchStations, ArrayList<String> lunchEntrees, ArrayList<String> dinnerStations, ArrayList<String> dinnerEntrees){
 		this.date = date;
 		this.lunchStations = lunchStations;
 		this.lunchEntrees = lunchEntrees;

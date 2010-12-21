@@ -24,7 +24,8 @@ import android.util.Log;
  */
 public class MenuParser {
 	
-	public static ArrayList<String> dates;
+	public static ArrayList<String> dates; //TODO move inside method after done testing
+	
 	private static HashMap<String,Integer> monthToInt = new HashMap<String,Integer>();
 	static{
 		monthToInt.put("January",0);
@@ -84,15 +85,23 @@ public class MenuParser {
 				//Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
 				String lunchline = "";
 				//String dinnerline = "";
-
+				ArrayList<ArrayList<String>> allLunchStations = new ArrayList<ArrayList<String>>();
+				ArrayList<ArrayList<String>> allLunchItems = new ArrayList<ArrayList<String>>();
 				dates = new ArrayList<String>();
 				while(lunchin.hasNext()){
-					while(lunchin.hasNext()&&!(lunchline = lunchin.nextLine()).contains("align=\"center\"><strong><br>"));
+					while(lunchin.hasNext()&&!lunchline.contains("align=\"center\"><strong><br>")&&!(lunchline = lunchin.nextLine()).contains("align=\"center\"><strong><br>"));
 					if(!lunchin.hasNext()){
 						break;
 					}
+					ArrayList<String> lunchstations = new ArrayList<String>();
+					ArrayList<String> lunchitems = new ArrayList<String>(); 
 					lunchline = lunchline.substring(lunchline.indexOf("\"center\"><strong><br>"));
 					//dinnerline = dinnerline.substring(dinnerline.indexOf("\"center\"><strong><br>"));
+					if(lunchline.indexOf(' ')==21){
+						lunchline = lunchline.substring(21); //in case they have a random space
+						//before the day of the week - for some reason they do for the first day, but not
+						//the rest..
+					}
 					StringTokenizer lunch_token = new StringTokenizer(lunchline);
 					//StringTokenizer dinner_token = new StringTokenizer(dinnerline);
 					lunch_token.nextToken();
@@ -102,11 +111,36 @@ public class MenuParser {
 					String temp = lunch_token.nextToken();
 					temp = (temp.contains(",")?temp.substring(0,temp.length()-1):temp);
 					date+=temp + " " + lunch_token.nextToken();
+					date = date.contains("<")?date.substring(0,date.indexOf("<")):date;
 					dates.add(date);
+					while(lunchin.hasNext()&&!lunchline.contains("align=\"center\"><strong><br>")){
+					while(lunchin.hasNext()&&!lunchline.contains("<strong>"))
+						lunchline = lunchin.nextLine();
+					if(!lunchin.hasNext())
+						break;
+					if(lunchline.contains("align=\"center\"><strong><br>"))
+						break;
+					//lunchline = lunchin.nextLine();
+					lunchline = lunchline.substring(lunchline.indexOf("ng>")+3);
+					lunchline = lunchline.substring(0,lunchline.indexOf("<"));
+					lunchstations.add(lunchline);
+					Log.e("s",lunchline);
+					if(lunchline.equals(""))
+						continue;
+					lunchline = lunchin.nextLine();
+					lunchline = lunchline.substring(lunchline.indexOf(">")+1);
+					if(lunchline.contains("&amp;")){
+						lunchline = lunchline.substring(0,lunchline.indexOf("&amp;")+1) + lunchline.substring(lunchline.indexOf("&amp;")+5);
+					}
+					lunchitems.add(lunchline);
+					Log.e("l",lunchline);
+					
+					}
+					allLunchStations.add(lunchstations);	
+					allLunchItems.add(lunchitems);
 				}
 				//while(!(dinnerline = dinnerin.nextLine()).contains("align=\"center\"><strong><br>"));
 
-				
 			}catch(Exception e){
 				Log.e("MenuParser",e.getMessage());
 			}
