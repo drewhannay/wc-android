@@ -222,7 +222,7 @@ public class MenuParser {
 						allDinnerItems.add(dinneritems);
 					}
 					//create stack of Days
-					for(int i = 0;i<=(allLunchStations.size()>allDinnerStations.size()?allLunchStations.size()-1:allDinnerStations.size()-1);i++){
+					for(int i = (allLunchStations.size()>allDinnerStations.size()?allLunchStations.size()-1:allDinnerStations.size()-1);i>-1;i--){
 						ArrayList<String> dinnerstations = (allDinnerStations.size()<=i?null:allDinnerStations.get(i));
 						ArrayList<String> dinneritems = (allDinnerItems.size()<=i?null:allDinnerItems.get(i));
 						ArrayList<String> lunchstations = (allLunchStations.size()<=i?null:allLunchStations.get(i));
@@ -239,39 +239,7 @@ public class MenuParser {
 		//NOTE - Everything above this line is tested and working code. It looks like the code below doesn't yet
 		//work, but I haven't tested yet.
 		
-			//crop expired days by comparing to the current time/date
-		else{	
-			Calendar calendar = Calendar.getInstance();
-			int currentMonth = calendar.get(Calendar.MONTH);
-			int currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
-			int currentYear =(calendar.get(Calendar.YEAR));
-			while(!days.empty()){
-				StringTokenizer st = new StringTokenizer((days.peek()).date);
-				int tempMonth = Integer.parseInt(st.nextToken());
-				if(tempMonth!=currentMonth){
-					days.pop();
-					continue;
-				}
-				int tempDay = Integer.parseInt(st.nextToken());
-					if(tempDay<currentDay){
-						days.pop();
-						continue;
-					}
-				int tempYear = Integer.parseInt(st.nextToken());
-				if(tempYear<currentYear){
-					days.pop();
-					continue;
-				}
-				break;
-			}
-			//if we've emptied the stack, fill it again. This will
-			//perform checks again and determine to parse the html.
-			//Here would be a good use for a goto if java still had one
-			//to avoid extra checking. But this will never happen more than
-			//once a day, at the most.
-			if(days.empty())
-				parse(con);
-		}
+		crop(con); //If the crop code is causing crashing, comment out this line.
 		
 		//Either way, at the end of the method, write the new object
 		//to data in case. TODO - put in the main menu class at some point?
@@ -283,7 +251,43 @@ public class MenuParser {
 		// Write object out to disk
 		obj_out.writeObject (days);}catch(Exception e){}
 	}
-	
+	/**
+	 * Crop the old days from the Days stack.
+	 */
+	public static void crop(Context con){
+		Calendar calendar = Calendar.getInstance();
+		int currentMonth = calendar.get(Calendar.MONTH);
+		int currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
+		int currentYear =(calendar.get(Calendar.YEAR));
+		Log.e("date grabbed:",currentMonth + " "+ currentDay + " " + currentYear);
+		
+		while(!days.empty()){
+			StringTokenizer st = new StringTokenizer((days.peek()).date);
+			int tempMonth = Integer.parseInt(st.nextToken());
+			if(tempMonth!=currentMonth){
+				days.pop();
+				continue;
+			}
+			int tempDay = Integer.parseInt(st.nextToken());
+				if(tempDay<currentDay){
+					days.pop();
+					continue;
+				}
+			int tempYear = Integer.parseInt(st.nextToken());
+			if(tempYear<currentYear){
+				days.pop();
+				continue;
+			}
+			break;
+		}
+		//if we've emptied the stack, fill it again. This will
+		//perform checks again and determine to parse the html.
+		//Here would be a good use for a goto if java still had one
+		//to avoid extra checking. But this will never happen more than
+		//once a day, at the most.
+		if(days.empty())
+			parse(con);
+	}
 	public static ArrayList<View> toArrayList(LayoutInflater l){
 		ArrayList<View> toReturn = new ArrayList<View>();
 		WebView v;
@@ -300,8 +304,9 @@ public class MenuParser {
 //			t.setText(d.dinnerPrint());
 //			toReturn.add(v);
 //		}
-		for(Iterator<Day> it = days.iterator();it.hasNext();){
-			d = it.next();
+		
+		for(Stack<Day> st = days;!st.empty();){
+			d = st.pop();
 			String webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
 					"text-align: center; }</style></head><body>";
 				webCode +="<h1>" + d.printableDate + "</h1><h2><center><strong><u>Lunch</u></strong>" +
