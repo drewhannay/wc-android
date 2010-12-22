@@ -80,7 +80,7 @@ public class MenuParser {
 	public static void parse(Context con){
 		
 		//TODO Fix the saving/reading of the file, then remove this line.
-		con.deleteFile("days_cache");
+		//con.deleteFile("days_cache");
 		
 		
 		if(days.empty()){
@@ -89,12 +89,14 @@ public class MenuParser {
 			
         		FileInputStream f_in = null;
 				try {
+					Log.e("reading in","Reading file...");
 					f_in = con.openFileInput("days_cache");
 					
 					// Read object using ObjectInputStream
 					ObjectInputStream obj_in = new ObjectInputStream (f_in);
 					days = (Stack<Day>) obj_in.readObject(); //read in the stack, if there.
-					parse(con); //This will hopefully crop any old days.
+					crop(con,true); //This will hopefully crop any old days.
+					Log.e("IO","Finished reading in");
 					return;
 				}catch(Exception e){
 					//this should never, ever happen since
@@ -203,6 +205,7 @@ public class MenuParser {
 						//since the dates have already been added, adding the dates again is unnecessary.
 						ArrayList<String> dinnerstations = new ArrayList<String>();
 						ArrayList<String> dinneritems = new ArrayList<String>(); 
+						
 						dinnerline = "";
 						while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")){
 						while(dinnerin.hasNext()&&!dinnerline.contains("<strong>"))
@@ -247,7 +250,7 @@ public class MenuParser {
 		}
 		Log.e("FINISHED", "Finished Parsing");
 //		else
-//		crop(con); //If the crop code is causing crashing, comment out this line.
+//		crop(con, false); //If the crop code is causing crashing, comment out this line.
 		
 		
 		//NOTE - Everything above this line is tested and working code. It looks like the code below doesn't yet
@@ -269,7 +272,7 @@ public class MenuParser {
 	 * @param con Used to pass back in the call to parse,
 	 * in the event that we have emptied the stack by cropping.
 	 */
-	public static void crop(Context con){
+	public static void crop(Context con, boolean reparse){
 		
 		
 	
@@ -299,8 +302,10 @@ public class MenuParser {
 		//Here would be a good use for a goto if java still had one
 		//to avoid extra checking. But this will never happen more than
 		//once a day, at the most.
-		if(days.empty())
+		if(reparse &&days.empty()){
+			con.deleteFile("days_cache");
 			parse(con);
+		}
 	}
 	public static ArrayList<View> toArrayList(LayoutInflater l){
 		ArrayList<View> toReturn = new ArrayList<View>();
