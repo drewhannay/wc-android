@@ -267,9 +267,11 @@ public class MenuParser {
 			d = it.next();
 			v = l.inflate(R.layout.food_menu, null);
 			t = (TextView) v.findViewById(R.id.date);
-			t.setText(d.date);
-			t = (TextView) v.findViewById(R.id.menu_items);
-			t.setText(d.print());
+			t.setText(d.printableDate);
+			t = (TextView) v.findViewById(R.id.lunch_items);
+			t.setText(d.lunchPrint());
+			t = (TextView) v.findViewById(R.id.dinner_items);
+			t.setText(d.dinnerPrint());
 			toReturn.add(v);
 		}
 		

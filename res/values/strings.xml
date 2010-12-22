@@ -6,4 +6,6 @@
     <string name="next_button">Next</string>
     <string name="prev_button">Previous</string>
     <string name="today_button">Today</string>
+    <string name="lunch_label">Lunch</string>
+    <string name="dinner_label">Dinner</string>
 </resources>
