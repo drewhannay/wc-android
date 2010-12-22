@@ -87,6 +87,8 @@ public String printableDate = "";
 			for(int i = 0;i<lunchStations.size();i++){
 				toReturn += "<h3><em>"+ lunchStations.get(i) + "</em></h3><p>" + lunchEntrees.get(i) + "</p><hr/>";
 			}
+			toReturn = toReturn.substring(0,toReturn.length()-5);
+			toReturn += "<br/>";
 		}
 		else{
 			toReturn += "<p>No Lunch Listed.</p>";

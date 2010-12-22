@@ -30,8 +30,8 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_below="@id/leftButton"
-		android:inAnimation="@android:anim/slide_in_left"
-		android:outAnimation="@android:anim/slide_out_right"
+		android:inAnimation="@android:anim/fade_in"
+		android:outAnimation="@android:anim/fade_out"
 		
 		 ></ViewAnimator>
 

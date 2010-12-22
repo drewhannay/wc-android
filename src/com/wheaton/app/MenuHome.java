@@ -94,8 +94,6 @@ public class MenuHome extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()){
 		case R.id.rightButton:
-			display.setOutAnimation(this, android.R.anim.slide_out_right);
-			display.setInAnimation(this, android.R.anim.slide_in_left);
 			display.showNext();
 			
 			//If this view is the last one in the group, don't let the
@@ -106,8 +104,6 @@ public class MenuHome extends Activity implements OnClickListener {
 			previous.setVisibility(View.VISIBLE);
 			break;
 		case R.id.leftButton:
-			display.setInAnimation(this, android.R.anim.fade_in);
-			display.setOutAnimation(this, android.R.anim.fade_out);
 			display.showPrevious();
 			
 			//If this is the first view, there's nothing to go backwards to.
@@ -121,8 +117,6 @@ public class MenuHome extends Activity implements OnClickListener {
 			
 			//Don't jump if we're already at the beginning.
 			if(display.getDisplayedChild()!=0){
-				display.setInAnimation(this, android.R.anim.fade_in);
-				display.setOutAnimation(this, android.R.anim.fade_out);
 				display.setDisplayedChild(0);
 			
 				//If there's only one child, we can't go forward. Otherwise we can.
