@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -259,8 +260,8 @@ public class MenuParser {
 	
 	public static ArrayList<View> toArrayList(LayoutInflater l){
 		ArrayList<View> toReturn = new ArrayList<View>();
-//		View v;
-//		Day d;
+		WebView v;
+		Day d;
 //		TextView t;
 //		for(Iterator<Day> it = days.iterator();it.hasNext();){
 //			d = it.next();
@@ -273,13 +274,21 @@ public class MenuParser {
 //			t.setText(d.dinnerPrint());
 //			toReturn.add(v);
 //		}
-		String example = "<html><body><h1>Monday, December 20, 2010</h1><h2><strong>Lunch</strong></h2><h3><u>Kettles</u></h3><p>Tomato Soup</p>" +
-				"<h3><u>Classics</u></h3><p>Ham & Grilled Cheese, Zuchini & Squash, Roasted Wedge Potatoes, " +
-				"House Salad. Vegetarian: Grilled Cheese</p><h2>Dinner</h2><p>No dinner listed</p></body></html>";
-		WebView v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
-		v.loadData(example, "text/html", "utf-8");
-		Log.e("WEBVIEW","Finished making webview");
-		toReturn.add(v);
+		for(Iterator<Day> it = days.iterator();it.hasNext();){
+			d = it.next();
+			String webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
+					"text-align: center; }</style></head><body>";
+				webCode +="<h1>" + d.printableDate + "</h1><h2><center><strong><u>Lunch</u></strong>" +
+						"</center></h2>";
+				webCode += d.lunchPrint();
+				webCode += "<h2><center><strong><u>Dinner</u></strong></center></h2>";
+				webCode += d.dinnerPrint();
+				webCode += "</body></html>";
+				v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
+				v.loadData(webCode, "text/html", "utf-8");
+				v.setBackgroundColor(0);
+				toReturn.add(v);
+		}
 		
 		return toReturn;
 	}
