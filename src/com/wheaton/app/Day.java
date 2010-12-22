@@ -81,11 +81,11 @@ public String printableDate = "";
 		String toReturn = "";
 		if(lunchStations!=null){
 			for(int i = 0;i<lunchStations.size();i++){
-				toReturn += lunchStations.get(i) + "\n" + lunchEntrees.get(i) + "\n\n";
+				toReturn += "<h3><em>"+ lunchStations.get(i) + "</em></h3><p>" + lunchEntrees.get(i) + "</p>";
 			}
 		}
 		else{
-			toReturn += "No Lunch Listed.\n";
+			toReturn += "<p>No Lunch Listed.</p>";
 		}
 		return toReturn;
 	}
@@ -94,11 +94,11 @@ public String printableDate = "";
 		String toReturn = "";
 		if(dinnerStations!=null){
 			for(int i = 0;i<dinnerStations.size();i++){
-				toReturn += dinnerStations.get(i) + "\n" + dinnerEntrees.get(i) + "\n\n";
+				toReturn += "<h3><em>" + dinnerStations.get(i) + "</em></h3><p>" + dinnerEntrees.get(i) + "</p>";
 			}
 		}
 		else{
-			toReturn += "No Dinner Listed.\n";
+			toReturn += "<p>No Dinner Listed.</p>";
 		}
 		return toReturn;
 	}
