@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -105,8 +104,8 @@ public class MenuParser {
 			//if no file, parse the html
 			
 			try{
-				URL lunchmenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu.html"); //read in from the lunch menu
-				URL dinnermenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html"); //read in from the dinner menu
+				URL lunchmenu = new URL("http://dl.dropbox.com/u/3309375/menu1.html"); //read in from the lunch menu
+				URL dinnermenu = new URL("http://dl.dropbox.com/u/3309375/menu2.html"); //read in from the dinner menu
 				Scanner lunchin = new Scanner((InputStream) lunchmenu.getContent());
 				Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
 				String lunchline = "";
@@ -158,8 +157,8 @@ public class MenuParser {
 					StringTokenizer st = new StringTokenizer(date);
 					
 					//In an attempt to speed up parsing, if the date we're reading in is less than the current date, keep going.
-					if(Integer.parseInt(st.nextToken())<currentMonth || Integer.parseInt(st.nextToken())<currentDay||Integer.parseInt(st.nextToken())<currentYear)
-						continue;
+			//if(Integer.parseInt(st.nextToken())<currentMonth || Integer.parseInt(st.nextToken())<currentDay||Integer.parseInt(st.nextToken())<currentYear)
+			//	continue;
 					dates.add(date); //Adds this to the ArrayList of dates used for stack sorting
 					lunchline = lunchline.substring(0,(lunchline.length()-6)); //Gets rid of the year. Remove this line
 					//if we decide we want to display the date after all. This is used for the printable date.
@@ -246,9 +245,9 @@ public class MenuParser {
 						Log.e("MenuParser",e.getMessage());
 					}
 		}
-		
-		else
-		crop(con); //If the crop code is causing crashing, comment out this line.
+		Log.e("FINISHED", "Finished Parsing");
+//		else
+//		crop(con); //If the crop code is causing crashing, comment out this line.
 		
 		
 		//NOTE - Everything above this line is tested and working code. It looks like the code below doesn't yet
