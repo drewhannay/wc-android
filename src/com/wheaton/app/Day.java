@@ -76,18 +76,40 @@ public String specialMessage = "";
 	public Day(String message){
 		this.specialMessage = message;
 	}
-	public void print(){
-		Log.e("Date: ", date);
-		if(lunchStations!=null)
-		for(int i = 0;i<lunchStations.size();i++){
-			Log.e(lunchStations.get(i) + ": ", lunchEntrees.get(i));
+	
+	
+//	public void print(){
+//		Log.e("Date: ", date);
+//		if(lunchStations!=null)
+//		for(int i = 0;i<lunchStations.size();i++){
+//			Log.e(lunchStations.get(i) + ": ", lunchEntrees.get(i));
+//		}
+//		Log.e("Dinner","is served");
+//		if(dinnerStations!=null)
+//		for(int i = 0;i<dinnerStations.size();i++){
+//			Log.e(dinnerStations.get(i) + ": ", dinnerEntrees.get(i));
+//		}
+//		Log.e("Next day.","----------");
+//	}
+	public String print(){
+		String toReturn = "Lunch\n";
+		if(lunchStations!=null){
+			for(int i = 0;i<lunchStations.size();i++){
+				toReturn += lunchStations.get(i) + ": " + lunchEntrees.get(i) + "\n";
+			}
 		}
-		Log.e("Dinner","is served");
-		if(dinnerStations!=null)
-		for(int i = 0;i<dinnerStations.size();i++){
-			Log.e(dinnerStations.get(i) + ": ", dinnerEntrees.get(i));
+		else{
+			toReturn += "No Lunch Listed.\n";
 		}
-		Log.e("Next day.","----------");
+		toReturn += "\nDinner\n";
+		if(dinnerStations!=null){
+			for(int i = 0;i<dinnerStations.size();i++){
+				toReturn += dinnerStations.get(i) + ": " + dinnerEntrees.get(i) + "\n";
+			}
+		}
+		else{
+			toReturn += "No Dinner Listed.\n";
+		}
+		return toReturn;
 	}
-
 }

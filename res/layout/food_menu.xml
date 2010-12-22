@@ -1,71 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_weight="1">
     <TextView
-        android:text="Date Here:"
-        android:textSize="15pt"
-        android:gravity="center_horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+    	android:id="@+id/date"
+    	android:layout_alignParentTop="true"
+    	android:layout_centerHorizontal="true"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:textColor="#FFF"
+    	android:text="@string/app_name"
+    	android:textSize="20dip" />
     <TextView
-        android:text="Cucina Lunch"
-        android:textSize="15pt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-    <TextView
-        android:text="Spice Lunch"
-        android:textSize="15pt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-    <TextView
-        android:text="Taqeria(sp?) Lunch"
-        android:textSize="15pt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-        
-   	<TextView
-        android:text="Classics Lunch"
-        android:textSize="15pt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>	
-        <TextView
-        android:text="Cucina Dinner"
-        android:textSize="15pt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-    <TextView
-        android:text="Spice Dinner"
-        android:textSize="15pt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-    <TextView
-        android:text="Taqeria(sp?) Dinner"
-        android:textSize="15pt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-        
-   	<TextView
-        android:text="Classics Dinner"
-        android:textSize="15pt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>	
-  </LinearLayout>
-  
-  </LinearLayout>
+    	android:id="@+id/menu_items"
+    	android:layout_below="@id/date"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" />
+    
+</RelativeLayout>

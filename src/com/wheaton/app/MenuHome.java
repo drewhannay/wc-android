@@ -50,7 +50,7 @@ public class MenuHome extends Activity implements OnClickListener {
 		today.setOnClickListener(this);
 		display = (ViewAnimator) findViewById(R.id.view_area);
 		
-		ArrayList<View> days = fakeViews();//TODO Set days to the actual ArrayList of Days
+		ArrayList<View> days = MenuParser.toArrayList(getLayoutInflater());
 		for(View day:days){
 			display.addView(day);
 		}

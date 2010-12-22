@@ -17,6 +17,9 @@ import java.util.StringTokenizer;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 /**
  * A class to do the html parsing and set the appropriate instance variable, which
  * is made public. Currently, it also saves and reads the saved days stack.
@@ -130,19 +133,19 @@ public class MenuParser {
 					if(lunchline.equals(""))
 						continue;
 					lunchstations.add(lunchline);
-					Log.e("lunch",lunchline);
+//					Log.e("lunch",lunchline);
 					lunchline = lunchin.nextLine();
 					lunchline = lunchline.substring(lunchline.indexOf(">")+1);
 					while(lunchline.contains("&amp;")){
 						lunchline = lunchline.substring(0,lunchline.indexOf("&amp;")+1) + lunchline.substring(lunchline.indexOf("&amp;")+5);
 					}
 					lunchitems.add(lunchline);
-					Log.e("lunch",lunchline);
+//					Log.e("lunch",lunchline);
 					
 					}
 					allLunchStations.add(lunchstations);	
 					allLunchItems.add(lunchitems);
-					Log.e("Next Day (lunch)","----------");
+//					Log.e("Next Day (lunch)","----------");
 				}
 					while(dinnerin.hasNext()){
 						while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")&&!(dinnerline = dinnerin.nextLine()).contains("align=\"center\"><strong><br>"));
@@ -164,22 +167,22 @@ public class MenuParser {
 						if(dinnerline.equals(""))
 							continue;
 						dinnerstations.add(dinnerline);
-						Log.e("d",dinnerline);
+//						Log.e("d",dinnerline);
 						dinnerline = dinnerin.nextLine();
 						dinnerline = dinnerline.substring(dinnerline.indexOf(">")+1);
 						while(dinnerline.contains("&amp;")){
 							dinnerline = dinnerline.substring(0,dinnerline.indexOf("&amp;")+1) + dinnerline.substring(dinnerline.indexOf("&amp;")+5);
 						}
 						dinneritems.add(dinnerline);
-						Log.e("l",dinnerline);
+//						Log.e("l",dinnerline);
 						
 						}
 						allDinnerStations.add(dinnerstations);	
 						allDinnerItems.add(dinneritems);
-						Log.e("next day","-----------");
+//						Log.e("next day","-----------");
 					}
 					//TODO create stack of Days here!
-					Log.e("d","making stack");
+//					Log.e("d","making stack");
 					for(int i = 0;i<=(allLunchStations.size()>allDinnerStations.size()?allLunchStations.size()-1:allDinnerStations.size()-1);i++){
 						ArrayList<String> dinnerstations = (allDinnerStations.size()<=i?null:allDinnerStations.get(i));
 						ArrayList<String> dinneritems = (allDinnerItems.size()<=i?null:allDinnerItems.get(i));
@@ -189,15 +192,15 @@ public class MenuParser {
 						days.push(new Day(date,lunchstations,lunchitems,dinnerstations,dinneritems));
 						
 					}
-					Log.e("d","before printing");
-					for(Iterator<Day> it = days.iterator();it.hasNext();){
-						it.next().print();
-					}
+//					Log.e("d","before printing");
+//					for(Iterator<Day> it = days.iterator();it.hasNext();){
+//						it.next().print();
+//					}
 					}catch(Exception e){
-				Log.e("MenuParser",e.getMessage());
-			}
+						Log.e("MenuParser",e.getMessage());
+					}
 			if(stack.empty()){
-				stack.push(new Day("Sorry, but saga has not yet published the menu. Check back later for more details."));
+				stack.push(new Day("Sorry, but Saga has not yet published the menu. Check back later for more details."));
 			}
 			else{
 				
@@ -247,6 +250,24 @@ public class MenuParser {
 		ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 		// Write object out to disk
 		obj_out.writeObject (days);}catch(Exception e){}
+	}
+	
+	public static ArrayList<View> toArrayList(LayoutInflater l){
+		ArrayList<View> toReturn = new ArrayList<View>();
+		View v;
+		Day d;
+		TextView t;
+		for(Iterator<Day> it = days.iterator();it.hasNext();){
+			d = it.next();
+			v = l.inflate(R.layout.food_menu, null);
+			t = (TextView) v.findViewById(R.id.date);
+			t.setText(d.date);
+			t = (TextView) v.findViewById(R.id.menu_items);
+			t.setText(d.print());
+			toReturn.add(v);
+		}
+		
+		return toReturn;
 	}
 	
 }
