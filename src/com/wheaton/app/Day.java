@@ -52,6 +52,8 @@ public ArrayList<String> dinnerEntrees;
  */
 public String specialMessage = "";
 
+public String printableDate = "";
+
 	/**
 	 * Most common constructor, sets up usual information.
 	 * @param date to set the date
@@ -60,13 +62,13 @@ public String specialMessage = "";
 	 * @param dinnerStations to set the names of stations (dinner)
 	 * @param dinnerEntrees to set the dishes offered (dinner)
 	 */
-	public Day(String date, ArrayList<String> lunchStations, ArrayList<String> lunchEntrees, ArrayList<String> dinnerStations, ArrayList<String> dinnerEntrees){
+	public Day(String date, String printableDate,ArrayList<String> lunchStations, ArrayList<String> lunchEntrees, ArrayList<String> dinnerStations, ArrayList<String> dinnerEntrees){
 		this.date = date;
 		this.lunchStations = lunchStations;
 		this.lunchEntrees = lunchEntrees;
 		this.dinnerStations = dinnerStations;
 		this.dinnerEntrees = dinnerEntrees;
-		
+		this.printableDate = printableDate;
 	
 	}
 	/**

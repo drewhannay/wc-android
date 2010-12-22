@@ -54,7 +54,7 @@ public class MenuParser {
 	 * the next recent one.
 	 */
 	public static Stack<Day> days = new Stack<Day>();
-
+	
 	@SuppressWarnings("unchecked")
 	public static void parse(Context con){
 		
@@ -94,6 +94,7 @@ public class MenuParser {
 				ArrayList<ArrayList<String>> allDinnerStations = new ArrayList<ArrayList<String>>();
 				ArrayList<ArrayList<String>> allDinnerItems = new ArrayList<ArrayList<String>>();
 				dates = new ArrayList<String>();
+				ArrayList<String> printableDates = new ArrayList<String>();
 				while(lunchin.hasNext()){
 					while(lunchin.hasNext()&&!lunchline.contains("align=\"center\"><strong><br>")&&!(lunchline = lunchin.nextLine()).contains("align=\"center\"><strong><br>"));
 					if(!lunchin.hasNext()){
@@ -102,13 +103,17 @@ public class MenuParser {
 					ArrayList<String> lunchstations = new ArrayList<String>();
 					ArrayList<String> lunchitems = new ArrayList<String>(); 
 					lunchline = lunchline.substring(lunchline.indexOf("\"center\"><strong><br>"));
-					//dinnerline = dinnerline.substring(dinnerline.indexOf("\"center\"><strong><br>"));
 					if(lunchline.indexOf(' ')==21){
-						lunchline = lunchline.substring(21); //in case they have a random space
+						lunchline = lunchline.substring(22); //in case they have a random space
 						//before the day of the week - for some reason they do for the first day, but not
 						//the rest..
 					}
+					else lunchline = lunchline.substring(21);
+					lunchline = lunchline.substring(0,lunchline.indexOf("<"));
 					StringTokenizer lunch_token = new StringTokenizer(lunchline);
+					//if(lunchline.contains("\"center\"><strong><br>"))
+					//	lunchline = lunchline.substring(21);
+					printableDates.add(lunchline);
 					//StringTokenizer dinner_token = new StringTokenizer(dinnerline);
 					lunch_token.nextToken();
 					//dinner_token.nextToken();
@@ -188,8 +193,9 @@ public class MenuParser {
 						ArrayList<String> dinneritems = (allDinnerItems.size()<=i?null:allDinnerItems.get(i));
 						ArrayList<String> lunchstations = (allLunchStations.size()<=i?null:allLunchStations.get(i));
 						ArrayList<String> lunchitems = (allLunchItems.size()<=i?null:allLunchItems.get(i));
+						String printableDate = printableDates.get(i);
 						String date = dates.get(i);
-						days.push(new Day(date,lunchstations,lunchitems,dinnerstations,dinneritems));
+						days.push(new Day(date,printableDate,lunchstations,lunchitems,dinnerstations,dinneritems));
 						
 					}
 //					Log.e("d","before printing");
