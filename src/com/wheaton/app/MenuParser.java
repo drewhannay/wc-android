@@ -100,8 +100,8 @@ public class MenuParser {
 			//if no file, parse the html
 			
 			try{
-				URL lunchmenu = new URL("http://webcache.googleusercontent.com/search?q=cache:HAknwMB-AVIJ:www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu.html+wheaton+college+anderson+commons+weekly+menu.html&cd=6&hl=en&ct=clnk&gl=us"); //read in from the lunch menu
-				URL dinnermenu = new URL("http://webcache.googleusercontent.com/search?q=cache:Oy54Tzd4ZUcJ:www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html+wheaton+college+anderson+commons+weekly+menu.html&cd=7&hl=en&ct=clnk&gl=us"); //read in from the dinner menu
+				URL lunchmenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu.html"); //read in from the lunch menu
+				URL dinnermenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html"); //read in from the dinner menu
 				Scanner lunchin = new Scanner((InputStream) lunchmenu.getContent());
 				Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
 				String lunchline = "";
