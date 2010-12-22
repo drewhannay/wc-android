@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Day implements Serializable {
 	/**
-	 * 
+	 * Needed by compiler.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -50,6 +50,9 @@ public ArrayList<String> dinnerEntrees;
  */
 public String specialMessage = "";
 
+/*
+ * More user-friendly version of the date.
+ */
 public String printableDate = "";
 
 	/**
@@ -71,6 +74,7 @@ public String printableDate = "";
 	}
 	/**
 	 * Special case constructor to account for unusual circumstances.
+	 * Currently unused.
 	 * @param message The message to display.
 	 */
 	public Day(String message){

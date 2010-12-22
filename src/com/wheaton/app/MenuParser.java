@@ -33,6 +33,11 @@ public class MenuParser {
 	 * from 0). Used for determining old meals.
 	 */
 	private static HashMap<String,Integer> monthToInt = new HashMap<String,Integer>();
+	
+	private static Calendar calendar = Calendar.getInstance(); //used to get current date
+	private static int currentMonth = calendar.get(Calendar.MONTH); 
+	private static int currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
+	private static int currentYear =(calendar.get(Calendar.YEAR));
 	/*
 	 * Set up the monthToInt hashmap. Should only be done once, upon 
 	 * instatiation of the class.
@@ -150,6 +155,11 @@ public class MenuParser {
 					temp = (temp.contains(",")?temp.substring(0,temp.length()-1):temp);
 					date+=temp + " " + lunch_token.nextToken();
 					date = date.contains("<")?date.substring(0,date.indexOf("<")):date;
+					StringTokenizer st = new StringTokenizer(date);
+					
+					//In an attempt to speed up parsing, if the date we're reading in is less than the current date, keep going.
+					if(Integer.parseInt(st.nextToken())<currentMonth || Integer.parseInt(st.nextToken())<currentDay||Integer.parseInt(st.nextToken())<currentYear)
+						continue;
 					dates.add(date); //Adds this to the ArrayList of dates used for stack sorting
 					lunchline = lunchline.substring(0,(lunchline.length()-6)); //Gets rid of the year. Remove this line
 					//if we decide we want to display the date after all. This is used for the printable date.
@@ -236,10 +246,14 @@ public class MenuParser {
 						Log.e("MenuParser",e.getMessage());
 					}
 		}
+		
+		else
+		crop(con); //If the crop code is causing crashing, comment out this line.
+		
+		
 		//NOTE - Everything above this line is tested and working code. It looks like the code below doesn't yet
 		//work, but I haven't tested yet.
 		
-		crop(con); //If the crop code is causing crashing, comment out this line.
 		
 		//Either way, at the end of the method, write the new object
 		//to data in case. TODO - put in the main menu class at some point?
@@ -253,29 +267,30 @@ public class MenuParser {
 	}
 	/**
 	 * Crop the old days from the Days stack.
+	 * @param con Used to pass back in the call to parse,
+	 * in the event that we have emptied the stack by cropping.
 	 */
 	public static void crop(Context con){
-		Calendar calendar = Calendar.getInstance();
-		int currentMonth = calendar.get(Calendar.MONTH);
-		int currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
-		int currentYear =(calendar.get(Calendar.YEAR));
-		Log.e("date grabbed:",currentMonth + " "+ currentDay + " " + currentYear);
 		
-		while(!days.empty()){
-			StringTokenizer st = new StringTokenizer((days.peek()).date);
+		
+	
+		while(!days.empty()){ //as long as there's still Days in the stack keep looking
+			StringTokenizer st = new StringTokenizer((days.peek()).date); //to find the date in the
+			//Day
 			int tempMonth = Integer.parseInt(st.nextToken());
-			if(tempMonth!=currentMonth){
-				days.pop();
+			if(tempMonth<currentMonth){ //If the month is less than the current month, it must be old. 
+				days.pop(); //get rid of the old Day.
 				continue;
 			}
 			int tempDay = Integer.parseInt(st.nextToken());
-				if(tempDay<currentDay){
-					days.pop();
+				if(tempDay<currentDay){ //If the day is less than the current day, it must be old.
+					days.pop(); //get rid of the old Day.
 					continue;
 				}
 			int tempYear = Integer.parseInt(st.nextToken());
-			if(tempYear<currentYear){
-				days.pop();
+			if(tempYear<currentYear){ //If the year is less than the current year, they are looking at
+				//an old year.
+				days.pop(); //get rid of the old Day.
 				continue;
 			}
 			break;
