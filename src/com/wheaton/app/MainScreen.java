@@ -1,9 +1,11 @@
 package com.wheaton.app;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +21,20 @@ import android.view.View.OnClickListener;
  *
  */
 public class MainScreen extends Activity implements OnClickListener {
+	
+    // Need handler for callbacks to the UI thread
+    final Handler mHandler = new Handler();
+    
+    private ProgressDialog pd = null;
+    
+    private boolean isFinished = false;
+
+    // Create runnable for posting
+    final Runnable mUpdateResults = new Runnable() {
+        public void run() {
+            updateResultsInUi();
+        }
+    };
 	
 	/**
 	 * The Views used to control the on screen buttons and images.
@@ -47,9 +63,11 @@ public class MainScreen extends Activity implements OnClickListener {
         Thread t = new Thread() {
             public void run() {
             	MenuParser.parse(MainScreen.this);
+            	mHandler.post(mUpdateResults);
             }
         };
         t.start();
+        
         
         //TODO Uncomment this when OpenFloorParser is ready.
 //        t = new Thread() {
@@ -73,8 +91,12 @@ public class MainScreen extends Activity implements OnClickListener {
 			startActivity(i);
 			break;
 		case R.id.menu:
-			i = new Intent(this,MenuHome.class);
-			startActivity(i);
+			if(!isFinished)
+				pd = ProgressDialog.show(this, "Loading", "Please wait while Menus are loaded", true, false);
+			else{
+				i = new Intent(this,MenuHome.class);
+				startActivity(i);
+			}
 			break;
 		case R.id.openFloors:
 			i = new Intent(this,OpenFloorHome.class);
@@ -112,6 +134,15 @@ public class MainScreen extends Activity implements OnClickListener {
 			return true;
 		}
 		return false;
-		
 	}
+	
+    private void updateResultsInUi() {
+    	isFinished = true;
+    	if(pd != null){
+    		if(pd.isShowing())
+    			pd.dismiss();
+    		Intent i = new Intent(this,MenuHome.class);
+			startActivity(i);
+    	}
+    }
 }
