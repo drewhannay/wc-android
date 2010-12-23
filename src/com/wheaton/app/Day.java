@@ -102,6 +102,7 @@ public String printableDate = "";
 			for(int i = 0;i<dinnerStations.size();i++){
 				toReturn += "<h3><em>" + dinnerStations.get(i) + "</em></h3><p>" + dinnerEntrees.get(i) + "</p><hr/>";
 			}
+			toReturn = toReturn.substring(0,toReturn.length()-5);
 		}
 		else{
 			toReturn += "<p>No Dinner Listed.</p>";

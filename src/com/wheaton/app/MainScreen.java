@@ -25,14 +25,16 @@ public class MainScreen extends Activity implements OnClickListener {
     // Need handler for callbacks to the UI thread
     final Handler mHandler = new Handler();
     
-    private ProgressDialog pd = null;
+    private ProgressDialog pd;
     
-    private boolean isFinished = false;
-
-    // Create runnable for posting
-    final Runnable mUpdateResults = new Runnable() {
+    final Runnable launchMenu = new Runnable() {
         public void run() {
-            updateResultsInUi();
+            launchMenu();
+        }
+    };
+    final Runnable launchOpenFloor = new Runnable() {
+        public void run() {
+            launchOpenFloor();
         }
     };
 	
@@ -58,24 +60,6 @@ public class MainScreen extends Activity implements OnClickListener {
 		menuLauncher.setOnClickListener(this);
 		openFloorLauncher = findViewById(R.id.openFloors);
 		openFloorLauncher.setOnClickListener(this);
-		
-		//Preemptively grab the Menu information.
-        Thread t = new Thread() {
-            public void run() {
-            	MenuParser.parse(MainScreen.this);
-            	mHandler.post(mUpdateResults);
-            }
-        };
-        t.start();
-        
-        
-        //TODO Uncomment this when OpenFloorParser is ready.
-//        t = new Thread() {
-//        	public void run() {
-//        		OpenFloorParser.parse(MainScreen.this);
-//        	}
-//        };
-		
 	}
 
 	/**
@@ -91,16 +75,26 @@ public class MainScreen extends Activity implements OnClickListener {
 			startActivity(i);
 			break;
 		case R.id.menu:
-			if(!isFinished)
-				pd = ProgressDialog.show(this, "Loading", "Please wait while Menus are loaded", true, false);
-			else{
-				i = new Intent(this,MenuHome.class);
-				startActivity(i);
-			}
+			//Preemptively grab the Menu information.
+	        Thread t = new Thread() {
+	            public void run() {
+	            	MenuParser.parse(MainScreen.this);
+	            	mHandler.post(launchMenu);
+	            }
+	        };
+	        t.start();
+	        pd = ProgressDialog.show(this, "Loading", "Please wait while Menus are loaded", true, false);
 			break;
 		case R.id.openFloors:
-			i = new Intent(this,OpenFloorHome.class);
-			startActivity(i);
+	        //TODO Uncomment this when OpenFloorParser is ready.
+//	        t = new Thread() {
+//	        	public void run() {
+//	        		OpenFloorParser.parse(MainScreen.this);
+//					mHandler.post(launchOpenFloor);
+//	        	}
+//	        };
+//	        t.start();
+//	        pd = ProgressDialog.show(this, "Loading", "Please wait while schedules are loaded", true, false);
 			break;
 		}
 	}
@@ -136,13 +130,14 @@ public class MainScreen extends Activity implements OnClickListener {
 		return false;
 	}
 	
-    private void updateResultsInUi() {
-    	isFinished = true;
-    	if(pd != null){
-    		if(pd.isShowing())
-    			pd.dismiss();
-    		Intent i = new Intent(this,MenuHome.class);
-			startActivity(i);
-    	}
+    private void launchMenu() {
+		pd.dismiss();
+		Intent i = new Intent(this,MenuHome.class);
+		startActivity(i);
+    }
+    private void launchOpenFloor()  {
+    	pd.dismiss();
+    	Intent i = new Intent(this,OpenFloorHome.class);
+		startActivity(i);
     }
 }

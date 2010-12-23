@@ -3,7 +3,6 @@ package com.wheaton.app;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,7 +36,6 @@ public class MenuHome extends Activity implements OnClickListener {
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu_main);
 		
@@ -59,29 +57,6 @@ public class MenuHome extends Activity implements OnClickListener {
 		if(display.getChildCount()==1)
 			next.setVisibility(View.INVISIBLE);
 		
-	}
-
-	//TODO Remove this method.
-	private ArrayList<View> fakeViews() {
-		ArrayList<View> toReturn = new ArrayList<View>();
-		View v1 = new View(this);
-		v1.setBackgroundColor(Color.RED);
-		View v2 = new View(this);
-		v2.setBackgroundColor(Color.BLUE);
-		View v3 = new View(this);
-		v3.setBackgroundColor(Color.GREEN);
-		
-		toReturn.add(v1);
-		toReturn.add(v2);
-		toReturn.add(v3);
-		
-		
-		View v4 = getLayoutInflater().inflate(R.layout.food_menu, null);
-		toReturn.add(v4);
-		View v5 = getLayoutInflater().inflate(R.layout.stalkernet_main, null);
-		toReturn.add(v5);
-		
-		return toReturn;
 	}
 
 	/**
