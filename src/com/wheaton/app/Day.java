@@ -81,6 +81,12 @@ public String printableDate = "";
 		this.specialMessage = message;
 	}
 
+	/**
+	 * Method to print the lunch stations and items for this day.
+	 * Iterate through the lunchStations ArrayList, grab the information, HTML
+	 * format it, and add it to the String to return.
+	 * @return A String containing the HTML-formatted lunch information from this Day.
+	 */
 	public String lunchPrint(){
 		String toReturn = "";
 		if(lunchStations!=null){
@@ -96,6 +102,12 @@ public String printableDate = "";
 		return toReturn;
 	}
 	
+	/**
+	 * Method to print the dinner stations and items for this day.
+	 * Iterate through the dinnerStations ArrayList, grab the information, HTML
+	 * format it, and add it to the String to return.
+	 * @return A String containing the HTML-formatted dinner information from this Day.
+	 */
 	public String dinnerPrint(){
 		String toReturn = "";
 		if(dinnerStations!=null){
