@@ -11,7 +11,7 @@
 	android:layout_alignParentLeft="true"
 	android:layout_width="100dip"
 	android:layout_height="100dip"
-	android:background="@drawable/stalkernet"
+	android:background="@drawable/stalkernet_square"
 	/>
 	
 <ImageView 
