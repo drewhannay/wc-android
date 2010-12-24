@@ -109,17 +109,21 @@ public class StalkernetHome extends Activity {
 	}
 
 	/**
-	 * 
+	 * Given the Matches, compile the results into
+	 * a readable format.
 	 * @param matches
-	 * @return
+	 * @return The String versions of all matches found.
 	 */
 	public static String[] makeStrings(Match[] matches) {
+		//If nothing was found, return a message informing the user
 		if(matches.length==0){
 			String[] temp = {"No results found."};
 			return temp;
 		}
+		//Other case, make an appropriate array of Strings
 		String[] strings = new String[matches.length];
 		
+		//Go through the Matches and get the String version, compiling the results
 		for(int i = 0; i<matches.length;i++)
 			strings[i] = matches[i].toString();
 		
@@ -127,35 +131,62 @@ public class StalkernetHome extends Activity {
 	}
 
 	/**
-	 * 
+	 * Parse the html code after searching and compile the results 
+	 * into Matches.
 	 * @param param
 	 * @return
 	 */
 	public static Match[] makeMatches(String param){
+		//The URL to retrieve results from
 		URL stalkernet;
 		try {
 			stalkernet = new URL("http://intra.wheaton.edu/directory/whosnew/index.php?search_text=" + param);
 			Scanner in = new Scanner((InputStream) stalkernet.getContent());
 			
 			String s = "";
+			//Add more to the String until the entire file has been
+			//read in.
 			while(in.hasNext())
 				s += in.next();
+			//To contain the Matches.
 			ArrayList<Match> matches = new ArrayList<Match>();
+			
+			//as long as there are more...
 			while(s.contains("<match>")){
+				//Find the first name of the current match
 				String first_name = s.substring(s.indexOf("<first_name>")+12,s.indexOf("</first_name>"));
-				if(first_name.contains("Extraresults"))
+				if(first_name.contains("Extraresults")) //special case - too many results to process.
 					break;
+				//Get the last name of the current match
 				String last_name = s.substring(s.indexOf("<last_name>")+11,s.indexOf("</last_name>"));
+				
+				//Get the middle name of the current match.
 				String middle_name = s.substring(s.indexOf("<middle_name>")+13,s.indexOf("</middle_name>"));
+				
+				//Get the preferred first name of the match
 				String preferred_first_name = s.substring(s.indexOf("<preferred_first_name>")+22,s.indexOf("</preferred_first_name>"));
+				
+				//Get the student type
 				String student_type = s.substring(s.indexOf("<student_type>")+14,s.indexOf("</student_type>"));
+				
+				//Add a space, since for some reason parsing the html removes the space between the new <student type>
 				student_type = student_type.substring(0,3) + " " + student_type.substring(3,student_type.length());
+				
+				//Get the year entered
 				String year_entered = s.substring(s.indexOf("<year_entered>")+14,s.indexOf("</year_entered>"));
+				
+				//Get the address of the photo
 				String photo_file = s.substring(s.indexOf("<photo_file>")+12,s.indexOf("</photo_file>"));
+				
+				//We have all the necessary information for the match, so compile it.
 				matches.add(new Match(first_name,last_name,middle_name,preferred_first_name,
 						student_type,year_entered,photo_file));
+				
+				//Get rid of the trailing </match> tag to move on to the next match.
 				s = s.substring(s.indexOf("</match>")+1,s.length());
 			}
+			
+			//Move the results from an ArrayList to an array.
 			Match[] finalmatches = new Match[matches.size()];
 			for(int i = 0;i<finalmatches.length;i++){
 				finalmatches[i] = matches.get(i);
@@ -168,7 +199,7 @@ public class StalkernetHome extends Activity {
 			//TODO Do something to explain to the user why this didn't work.
 		}
 		
-		
+		//If there are no results, return an array with an empty match.
 		return new Match[]{new Match("", "", "", "", "", "", "")};
 	}
 
