@@ -320,6 +320,56 @@ public class Map extends MapActivity {
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
        
+        point = new GeoPoint(41866065,-88095873);
+        overlayitem = new OverlayItem(point, "Crescent Apartments", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41865826,-88095916);
+        overlayitem = new OverlayItem(point, "Michigan Apartments", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869729,-88092306);
+        overlayitem = new OverlayItem(point, "Saint and Elliot Residential Complex", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869573,-88089978);
+        overlayitem = new OverlayItem(point, "Terrace Apartments", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868239,-88097155);
+        overlayitem = new OverlayItem(point, "602 Chase", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868203,-88095401);
+        overlayitem = new OverlayItem(point, "802 College", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868243,-88094881);
+        overlayitem = new OverlayItem(point, "814 College", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868271,-88094628);
+        overlayitem = new OverlayItem(point, "818 College", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868422,-88093566);
+        overlayitem = new OverlayItem(point, "904 College", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868466,-88093293);
+        overlayitem = new OverlayItem(point, "916 College", null);
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
         mapView.invalidate();
         
         
