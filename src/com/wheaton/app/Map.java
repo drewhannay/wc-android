@@ -83,20 +83,150 @@ public class Map extends MapActivity {
         MyItemizedOverlay itemizedoverlay = new MyItemizedOverlay(drawable, this);
         
         GeoPoint point = new GeoPoint(41868334,-88094650);
-        OverlayItem overlayitem = new OverlayItem(point, "Corinthian Co-op", "Hours:\nMonday: 1-3 pm\n" +
-        		"Tuesday: 10:30 am - 12 pm\nWednesday: 3-5 pm\nThursday: 11:30 am -12:30 pm\nSaturday 10 am -12 pm");
+        OverlayItem overlayitem = new OverlayItem(point, "Corinthian Co-op", "Hours:\nMonday: 1pm - 3pm\n" +
+        		"Tuesday: 10:30am - 12pm\nWednesday: 3pm - 5pm\nThursday: 11:30am - 12:30pm\nSaturday 10am -12pm");
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870643,-88096887);
         overlayitem = new OverlayItem(point, "Sports & Recreation Complex", "Hours:\nMonday-Friday: 6am - 11pm\n" +
-        		"Saturday: 8am - 11pm\nSunday: 2pm-5pm");
+        		"Saturday: 8am - 11pm\nSunday: 2pm - 5pm");
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
+        point = new GeoPoint(41870120,-88099526);
+        overlayitem = new OverlayItem(point, "Buswell Memorial Library", "Hours:\nMonday-Thursday: 7:30am - 12am\n" +
+        	 "Friday: 7:30am - 10pm\n" + "Saturday: 8:30am - 10pm\nSunday: Closed");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
         
+        point = new GeoPoint(41869888,-88100621);
+        overlayitem = new OverlayItem(point, "Edman Memorial Chapel", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
         
+        point = new GeoPoint(41869053,-88100626);
+        overlayitem = new OverlayItem(point, "Pierce Memorial Chapel", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868746,-88100669);
+        overlayitem = new OverlayItem(point, "McAlister Conservatory", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869173,-88099875);
+        overlayitem = new OverlayItem(point, "Adams Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868498,-88099617);
+        overlayitem = new OverlayItem(point, "Blanchard Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869145,-88098738);
+        overlayitem = new OverlayItem(point, "Memorial Student Center", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868966,-88098196);
+        overlayitem = new OverlayItem(point, "Williston Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(4186889,-88097933);
+        overlayitem = new OverlayItem(point, "Student Services Building", "Hours:\nMonday - Thursday: 9am - 6pm\n"+
+"Friday: 9am - 5pm\nSaturday: 10am - 4pm");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869685,-88098952);
+        overlayitem = new OverlayItem(point, "Schell Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870056,-88098877);
+        overlayitem = new OverlayItem(point, "Wyngarden Health Center", "Clinic Hours:\nMonday - Thursday: 7:30am - 6:30pm\n"+
+        	"Friday: 7:30am - 5pm\nSaturday: 11am - 1pm");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870611,-88098453);
+        overlayitem = new OverlayItem(point, "Armerding Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870256,-8809789);
+        overlayitem = new OverlayItem(point, "Evans Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870256,-8809789);
+        overlayitem = new OverlayItem(point, "McManis Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869165,-88097139);
+        overlayitem = new OverlayItem(point, "Todd M. Beamer Student Center", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869733,-88096152);
+        overlayitem = new OverlayItem(point, "Wheaton Science Center", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869549,-88094972);
+        overlayitem = new OverlayItem(point, "Jenks Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41866737,-88099376);
+        overlayitem = new OverlayItem(point, "Billy Graham Center", "Museum Hours:\nMonday-Saturday: 9:30am - 5:30pm\n"+
+        		"Sunday: 1pm - 5pm");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41867396,-88095986);
+        overlayitem = new OverlayItem(point, "McCully Stadium", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41869549,-88094972);
+        overlayitem = new OverlayItem(point, "Bean Stadium", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41867787,-88092837);
+        overlayitem = new OverlayItem(point, "Chase Service Center", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41872525,-88097633);
+        overlayitem = new OverlayItem(point, "Grammar School", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870617,-88101181);
+        overlayitem = new OverlayItem(point, "Marion E. Wade Center", "Hours:\nMonday - Friday: 9am - 4pm\n"
+        		+ "Saturdays 9am - 12pm");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41868298,-88101487);
+        overlayitem = new OverlayItem(point, "Westgate", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41866175,-88099907);
+        overlayitem = new OverlayItem(point, "Campus Utility", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+       
         mapView.invalidate();
+        
+        
 	}
 
 	@Override

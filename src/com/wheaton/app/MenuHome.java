@@ -48,7 +48,7 @@ public class MenuHome extends Activity implements OnClickListener {
 		today.setOnClickListener(this);
 		display = (ViewAnimator) findViewById(R.id.view_area);
 		
-		ArrayList<View> days = MenuParser.toArrayList(getLayoutInflater());
+		ArrayList<View> days = MenuParser.toArrayList(getLayoutInflater());  /*toArrayList(getLayoutInflater());*/
 		for(View day:days){
 			display.addView(day);
 		}
