@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -87,6 +86,8 @@ public class MainScreen extends Activity implements OnClickListener {
 	        pd = ProgressDialog.show(this, "Loading", "Please wait while Menus are loaded", true, false);
 			break;
 		case R.id.openFloors:
+			i = new Intent(this, Map.class);
+			startActivity(i);
 	        //TODO Uncomment this when OpenFloorParser is ready.
 //	        t = new Thread() {
 //	        	public void run() {
