@@ -20,7 +20,7 @@ public class Map extends MapActivity {
 	
 	GeoPoint p;
 	
-	class MyItemizedOverlay extends ItemizedOverlay {
+	class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 		private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 		Context mContext;
@@ -96,7 +96,7 @@ public class Map extends MapActivity {
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41872681,-88096774);
-        overlayitem = new OverlayItem(point, "Fischer Hall", "");
+        overlayitem = new OverlayItem(point, "Fischer Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
 
@@ -107,127 +107,127 @@ public class Map extends MapActivity {
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870707,-88094805);
-        overlayitem = new OverlayItem(point, "Smith/Traber Halls", "");
+        overlayitem = new OverlayItem(point, "Smith/Traber Halls", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41871774,-88098899);
-        overlayitem = new OverlayItem(point, "Hearth House", "");
+        overlayitem = new OverlayItem(point, "Hearth House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41871436,-88098936);
-        overlayitem = new OverlayItem(point, "Phoenix House", "");
+        overlayitem = new OverlayItem(point, "Phoenix House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41871253,-88098917);
-        overlayitem = new OverlayItem(point, "Irving House", "");
+        overlayitem = new OverlayItem(point, "Irving House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41871073,-88098917);
-        overlayitem = new OverlayItem(point, "Hunter House", "");
+        overlayitem = new OverlayItem(point, "Hunter House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
 
         point = new GeoPoint(41871097,-88098542);
-        overlayitem = new OverlayItem(point, "Fine Arts House", "");
+        overlayitem = new OverlayItem(point, "Fine Arts House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41871448,-88095245);
-        overlayitem = new OverlayItem(point, "LeBar House", "");
+        overlayitem = new OverlayItem(point, "LeBar House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41871265,-88095259);
-        overlayitem = new OverlayItem(point, "Country House", "");
+        overlayitem = new OverlayItem(point, "Country House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870909,-88095852);
-        overlayitem = new OverlayItem(point, "International House", "");
+        overlayitem = new OverlayItem(point, "International House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870685,-88095860);
-        overlayitem = new OverlayItem(point, "Kay House", "");
+        overlayitem = new OverlayItem(point, "Kay House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870518,-88095862);
-        overlayitem = new OverlayItem(point, "Fellowship House", "");
+        overlayitem = new OverlayItem(point, "Fellowship House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870364,-88095892);
-        overlayitem = new OverlayItem(point, "Mathetai House", "");
+        overlayitem = new OverlayItem(point, "Mathetai House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
 
         point = new GeoPoint(41868790,-88094875);
-        overlayitem = new OverlayItem(point, "White House", "");
+        overlayitem = new OverlayItem(point, "White House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
 
         point = new GeoPoint(41868263,-88096831);
-        overlayitem = new OverlayItem(point, "Chase House", "");
+        overlayitem = new OverlayItem(point, "Chase House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
 
         point = new GeoPoint(41866892,-88100932);
-        overlayitem = new OverlayItem(point, "Graham House", "");
+        overlayitem = new OverlayItem(point, "Graham House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
 
         point = new GeoPoint(41870026,-88101527);
-        overlayitem = new OverlayItem(point, "Harbor House", "");
+        overlayitem = new OverlayItem(point, "Harbor House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
 
         point = new GeoPoint(41870849,-88101111);
-        overlayitem = new OverlayItem(point, "Teresa House", "");
+        overlayitem = new OverlayItem(point, "Teresa House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41871085,-88101135);
-        overlayitem = new OverlayItem(point, "Kilby House", "");
+        overlayitem = new OverlayItem(point, "Kilby House", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869888,-88100621);
-        overlayitem = new OverlayItem(point, "Edman Memorial Chapel", "");
+        overlayitem = new OverlayItem(point, "Edman Memorial Chapel", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869053,-88100626);
-        overlayitem = new OverlayItem(point, "Pierce Memorial Chapel", "");
+        overlayitem = new OverlayItem(point, "Pierce Memorial Chapel", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41868746,-88100669);
-        overlayitem = new OverlayItem(point, "McAlister Conservatory", "");
+        overlayitem = new OverlayItem(point, "McAlister Conservatory", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869173,-88099875);
-        overlayitem = new OverlayItem(point, "Adams Hall", "");
+        overlayitem = new OverlayItem(point, "Adams Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41868498,-88099617);
-        overlayitem = new OverlayItem(point, "Blanchard Hall", "");
+        overlayitem = new OverlayItem(point, "Blanchard Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869145,-88098738);
-        overlayitem = new OverlayItem(point, "Memorial Student Center", "");
+        overlayitem = new OverlayItem(point, "Memorial Student Center", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41868966,-88098196);
-        overlayitem = new OverlayItem(point, "Williston Hall", "");
+        overlayitem = new OverlayItem(point, "Williston Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
@@ -238,7 +238,7 @@ public class Map extends MapActivity {
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869685,-88098952);
-        overlayitem = new OverlayItem(point, "Schell Hall", "");
+        overlayitem = new OverlayItem(point, "Schell Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
@@ -249,32 +249,32 @@ public class Map extends MapActivity {
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870611,-88098453);
-        overlayitem = new OverlayItem(point, "Armerding Hall", "");
+        overlayitem = new OverlayItem(point, "Armerding Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870256,-8809789);
-        overlayitem = new OverlayItem(point, "Evans Hall", "");
+        overlayitem = new OverlayItem(point, "Evans Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41870256,-8809789);
-        overlayitem = new OverlayItem(point, "McManis Hall", "");
+        overlayitem = new OverlayItem(point, "McManis Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869165,-88097139);
-        overlayitem = new OverlayItem(point, "Todd M. Beamer Student Center", "");
+        overlayitem = new OverlayItem(point, "Todd M. Beamer Student Center", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869733,-88096152);
-        overlayitem = new OverlayItem(point, "Wheaton Science Center", "");
+        overlayitem = new OverlayItem(point, "Wheaton Science Center", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869549,-88094972);
-        overlayitem = new OverlayItem(point, "Jenks Hall", "");
+        overlayitem = new OverlayItem(point, "Jenks Hall", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
@@ -285,22 +285,22 @@ public class Map extends MapActivity {
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41867396,-88095986);
-        overlayitem = new OverlayItem(point, "McCully Stadium", "");
+        overlayitem = new OverlayItem(point, "McCully Stadium", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41869549,-88094972);
-        overlayitem = new OverlayItem(point, "Bean Stadium", "");
+        overlayitem = new OverlayItem(point, "Bean Stadium", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41867787,-88092837);
-        overlayitem = new OverlayItem(point, "Chase Service Center", "");
+        overlayitem = new OverlayItem(point, "Chase Service Center", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41872525,-88097633);
-        overlayitem = new OverlayItem(point, "Grammar School", "");
+        overlayitem = new OverlayItem(point, "Grammar School", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
@@ -311,12 +311,12 @@ public class Map extends MapActivity {
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41868298,-88101487);
-        overlayitem = new OverlayItem(point, "Westgate", "");
+        overlayitem = new OverlayItem(point, "Westgate", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
         point = new GeoPoint(41866175,-88099907);
-        overlayitem = new OverlayItem(point, "Campus Utility", "");
+        overlayitem = new OverlayItem(point, "Campus Utility", null);
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
        
