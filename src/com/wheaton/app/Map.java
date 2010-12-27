@@ -51,6 +51,7 @@ public class Map extends MapActivity {
 		  AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 		  dialog.setTitle(item.getTitle());
 		  dialog.setMessage(item.getSnippet());
+		  dialog.setNegativeButton("Close", null);
 		  dialog.show();
 		  return true;
 		}
@@ -94,9 +95,104 @@ public class Map extends MapActivity {
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
+        point = new GeoPoint(41872681,-88096774);
+        overlayitem = new OverlayItem(point, "Fischer Hall", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+
         point = new GeoPoint(41870120,-88099526);
         overlayitem = new OverlayItem(point, "Buswell Memorial Library", "Hours:\nMonday-Thursday: 7:30am - 12am\n" +
         	 "Friday: 7:30am - 10pm\n" + "Saturday: 8:30am - 10pm\nSunday: Closed");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870707,-88094805);
+        overlayitem = new OverlayItem(point, "Smith/Traber Halls", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41871774,-88098899);
+        overlayitem = new OverlayItem(point, "Hearth House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41871436,-88098936);
+        overlayitem = new OverlayItem(point, "Phoenix House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41871253,-88098917);
+        overlayitem = new OverlayItem(point, "Irving House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41871073,-88098917);
+        overlayitem = new OverlayItem(point, "Hunter House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+
+        point = new GeoPoint(41871097,-88098542);
+        overlayitem = new OverlayItem(point, "Fine Arts House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41871448,-88095245);
+        overlayitem = new OverlayItem(point, "LeBar House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41871265,-88095259);
+        overlayitem = new OverlayItem(point, "Country House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870909,-88095852);
+        overlayitem = new OverlayItem(point, "International House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870685,-88095860);
+        overlayitem = new OverlayItem(point, "Kay House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870518,-88095862);
+        overlayitem = new OverlayItem(point, "Fellowship House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41870364,-88095892);
+        overlayitem = new OverlayItem(point, "Mathetai House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+
+        point = new GeoPoint(41868790,-88094875);
+        overlayitem = new OverlayItem(point, "White House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+
+        point = new GeoPoint(41868263,-88096831);
+        overlayitem = new OverlayItem(point, "Chase House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+
+        point = new GeoPoint(41866892,-88100932);
+        overlayitem = new OverlayItem(point, "Graham House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+
+        point = new GeoPoint(41870026,-88101527);
+        overlayitem = new OverlayItem(point, "Harbor House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+
+        point = new GeoPoint(41870849,-88101111);
+        overlayitem = new OverlayItem(point, "Teresa House", "");
+        itemizedoverlay.addOverlay(overlayitem);
+        mapOverlays.add(itemizedoverlay);
+        
+        point = new GeoPoint(41871085,-88101135);
+        overlayitem = new OverlayItem(point, "Kilby House", "");
         itemizedoverlay.addOverlay(overlayitem);
         mapOverlays.add(itemizedoverlay);
         
