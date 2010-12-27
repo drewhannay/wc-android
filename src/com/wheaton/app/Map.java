@@ -67,7 +67,7 @@ public class Map extends MapActivity {
 	    mapView.setBuiltInZoomControls(true);
 	    
 	    MapController mc = mapView.getController();
-        String coordinates[] = {"41.8691", "-88.0970"};
+        String coordinates[] = {"41.870024","-88.098384"};
         double lat = Double.parseDouble(coordinates[0]);
         double lng = Double.parseDouble(coordinates[1]);
  
@@ -76,7 +76,7 @@ public class Map extends MapActivity {
             (int) (lng * 1E6));
  
         mc.animateTo(p);
-        mc.setZoom(17);  
+        mc.setZoom(19);  
         mapView.setSatellite(true);
         
         List<Overlay> mapOverlays = mapView.getOverlays();

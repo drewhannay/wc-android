@@ -376,6 +376,14 @@ public class MenuParser {
 				v.setBackgroundColor(0);
 				toReturn.add(v);
 		}
+		if(toReturn.size()==0){
+			v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
+			String webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
+			"text-align: center; }</style></head><body><br/><br/><br/><br/><h1>No current cafe menu available</h1></body></html>";
+			v.loadData(webCode, "text/html", "utf-8");
+			v.setBackgroundColor(0);
+			toReturn.add(v);
+		}
 		return toReturn;
 	}
 	

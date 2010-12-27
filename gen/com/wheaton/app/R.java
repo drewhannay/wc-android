@@ -17,11 +17,12 @@ public final class R {
         public static final int blur=0x7f020000;
         public static final int default_pic=0x7f020001;
         public static final int icon=0x7f020002;
-        public static final int menu=0x7f020003;
-        public static final int open_floors=0x7f020004;
-        public static final int push_pin=0x7f020005;
-        public static final int stalkernet=0x7f020006;
-        public static final int stalkernet_square=0x7f020007;
+        public static final int icon_old=0x7f020003;
+        public static final int menu=0x7f020004;
+        public static final int open_floors=0x7f020005;
+        public static final int push_pin=0x7f020006;
+        public static final int stalkernet=0x7f020007;
+        public static final int stalkernet_square=0x7f020008;
     }
     public static final class id {
         public static final int contact=0x7f07000e;
