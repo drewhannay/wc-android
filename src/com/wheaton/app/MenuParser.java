@@ -1,4 +1,3 @@
-
 package com.wheaton.app;
 
 import java.io.FileInputStream;
@@ -205,11 +204,7 @@ public class MenuParser {
 						lunchline = lunchin.nextLine();
 						lunchline = lunchline.substring(lunchline.indexOf(">")+1);
 						
-						//Convert any HTML "&amp"s to simply "&"
-						while(lunchline.contains("&amp;")){ 
-							lunchline = lunchline.substring(0,lunchline.indexOf("&amp;")+1) + 
-									lunchline.substring(lunchline.indexOf("&amp;")+5);
-						}
+
 						lunchitems.add(lunchline);
 					
 					}
@@ -265,11 +260,7 @@ public class MenuParser {
 						dinnerline = dinnerin.nextLine();
 						dinnerline = dinnerline.substring(dinnerline.indexOf(">")+1);
 						
-						//Again, replace the "&amp"s with simply "&"
-						while(dinnerline.contains("&amp;")){
-							dinnerline = dinnerline.substring(0,dinnerline.indexOf("&amp;")+1) + 
-									dinnerline.substring(dinnerline.indexOf("&amp;")+5);
-						}
+
 						dinneritems.add(dinnerline);
 					
 					}
