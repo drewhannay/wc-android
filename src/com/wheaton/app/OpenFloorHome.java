@@ -19,25 +19,25 @@ public class OpenFloorHome extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map);
+		setContentView(R.layout.openfloor_main);
 		
-//		next = (Button) findViewById(R.id.rightButton);
-//		next.setOnClickListener(this);
-//		previous = (Button) findViewById(R.id.leftButton);
-//		previous.setOnClickListener(this);
-//		previous.setVisibility(View.INVISIBLE);//No need for a previous button at the beginning.
-//		today = (Button) findViewById(R.id.todayButton);
-//		today.setOnClickListener(this);
-//		display = (ViewAnimator) findViewById(R.id.view_area);
-//		
-//		ArrayList<View> days = fakeViews();//TODO Set days to the actual ArrayList of Days
-//		for(View day:days){
-//			display.addView(day);
-//		}
-//		
-//		//If there's only one Child View, we don't need a next button.
-//		if(display.getChildCount()==1)
-//			next.setVisibility(View.INVISIBLE);
+		next = (Button) findViewById(R.id.rightButton);
+		next.setOnClickListener(this);
+		previous = (Button) findViewById(R.id.leftButton);
+		previous.setOnClickListener(this);
+		previous.setVisibility(View.INVISIBLE);//No need for a previous button at the beginning.
+		today = (Button) findViewById(R.id.todayButton);
+		today.setOnClickListener(this);
+		display = (ViewAnimator) findViewById(R.id.view_area);
+		
+		ArrayList<View> days = fakeViews();//TODO Set days to the actual ArrayList of Days
+		for(View day:days){
+			display.addView(day);
+		}
+		
+		//If there's only one Child View, we don't need a next button.
+		if(display.getChildCount()==1)
+			next.setVisibility(View.INVISIBLE);
 	}
 	
 	//TODO Remove this method.

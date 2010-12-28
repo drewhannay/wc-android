@@ -41,7 +41,7 @@ public class MainScreen extends Activity implements OnClickListener {
 	/**
 	 * The Views used to control the on screen buttons and images.
 	 */
-	private View stalkernetLauncher, menuLauncher, openFloorLauncher;
+	private View stalkernetLauncher, menuLauncher, openFloorLauncher, mapLauncher, linksLauncher, aboutLauncher;
 	
 	/**
 	 * Method to override the default onCreate method for an Activity.
@@ -60,6 +60,12 @@ public class MainScreen extends Activity implements OnClickListener {
 		menuLauncher.setOnClickListener(this);
 		openFloorLauncher = findViewById(R.id.openFloors);
 		openFloorLauncher.setOnClickListener(this);
+		mapLauncher = findViewById(R.id.map);
+		mapLauncher.setOnClickListener(this);
+		linksLauncher = findViewById(R.id.links);
+		linksLauncher.setOnClickListener(this);
+		aboutLauncher = findViewById(R.id.about);
+		aboutLauncher.setOnClickListener(this);
 	}
 
 	/**
@@ -83,20 +89,29 @@ public class MainScreen extends Activity implements OnClickListener {
 	            }
 	        };
 	        t.start();
-	        pd = ProgressDialog.show(this, "Loading", "Please wait while Menus are loaded", true, false);
+	        pd = ProgressDialog.show(this, "Loading", "Please wait while menus are loaded", true, false);
 			break;
 		case R.id.openFloors:
+	        t = new Thread() {
+	        	public void run() {
+	        		OpenFloorParser.parse(MainScreen.this);
+					mHandler.post(launchOpenFloor);
+	        	}
+	        };
+	        t.start();
+	        pd = ProgressDialog.show(this, "Loading", "Please wait while schedules are loaded", true, false);
+			break;
+		case R.id.map:
 			i = new Intent(this, Map.class);
 			startActivity(i);
-	        //TODO Uncomment this when OpenFloorParser is ready.
-//	        t = new Thread() {
-//	        	public void run() {
-//	        		OpenFloorParser.parse(MainScreen.this);
-//					mHandler.post(launchOpenFloor);
-//	        	}
-//	        };
-//	        t.start();
-//	        pd = ProgressDialog.show(this, "Loading", "Please wait while schedules are loaded", true, false);
+			break;
+		case R.id.links:
+			i = new Intent(this, Links.class);
+			startActivity(i);
+			break;
+		case R.id.about:
+			i = new Intent(this, About.class);
+			startActivity(i);
 			break;
 		}
 	}
