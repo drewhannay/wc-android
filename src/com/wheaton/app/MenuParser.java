@@ -80,19 +80,10 @@ public class MenuParser {
 	public static void parse(Context con){
 		
 		if(days.empty()){
-			
-			/**if(con.fileList().length!=0){  //in the case of an empty days stack, try to
+			if(con.fileList().length != 0){  //in the case of an empty days stack, try to
 				//read in more days from the file (so we don't have to parse)
-				boolean contains = false;
-				for(int i = 0;i<con.fileList().length;i++){
-					if((con.fileList()[i]).equals("days_cach")){
-						contains = true;
-						break;
-					}
-				}
-				
+			
         		FileInputStream f_in = null;
-        		if(contains)
 				try {
 					Log.e("reading in","Reading file...");
 					f_in = con.openFileInput("days_cache");
@@ -106,13 +97,13 @@ public class MenuParser {
 				}catch(Exception e){
 					Log.e("MenuParserOpenFile", e.toString());
 				}
-			}*/
+			}
 			//if no file, parse the HTML
 			
 			try{
 				//Create URL Objects to read in the lunch and dinner menus from the Internet.
-				URL lunchmenu = new URL("https://dl.dropbox.com/u/3309375/menu1.html"); 
-				URL dinnermenu = new URL("https://dl.dropbox.com/u/3309375/menu2.html");
+				URL lunchmenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu.html"); 
+				URL dinnermenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html");
 				//Make Scanners from the URLs.
 				Scanner lunchin = new Scanner((InputStream) lunchmenu.getContent());
 				Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
@@ -175,9 +166,9 @@ public class MenuParser {
 					StringTokenizer st = new StringTokenizer(date);
 					
 					//Optimization: If the date we're reading in is less than the current date, keep going.
-					//if(Integer.parseInt(st.nextToken())<currentMonth || Integer.parseInt(st.nextToken()) < currentDay
-						//	|| Integer.parseInt(st.nextToken()) < currentYear)
-						//continue;
+					if(Integer.parseInt(st.nextToken())<currentMonth || Integer.parseInt(st.nextToken()) < currentDay
+							|| Integer.parseInt(st.nextToken()) < currentYear)
+						continue;
 					
 					dates.add(date); //Adds this to the ArrayList of dates used for stack sorting
 					
@@ -219,19 +210,6 @@ public class MenuParser {
 							lunchline = lunchline.substring(0,lunchline.indexOf("&amp;")+1) + 
 									lunchline.substring(lunchline.indexOf("&amp;")+5);
 						}
-						String templine = "";
-						String oldtemp = lunchin.nextLine();
-						while(oldtemp.contains("<a href")){
-							templine += "\n" +oldtemp.substring(oldtemp.indexOf("<img"),oldtemp.indexOf("src=\"")+5) + "http://www.cafebonappetit.com" + oldtemp.substring(oldtemp.indexOf("src=\"")+5,oldtemp.length()-5);
-							if(!(templine.charAt(templine.length()-2)=='/'))
-								templine = templine.substring(0,templine.length()-1) + "/" + templine.substring(templine.length()-1);
-							//lunchline+="\n" + templine+"\n";
-							
-							oldtemp = lunchin.nextLine();
-						}
-						//lunchline+="\n"+ templine;
-						Log.e("Test",templine);
-						lunchline+=templine;
 						lunchitems.add(lunchline);
 					
 					}
@@ -292,18 +270,6 @@ public class MenuParser {
 							dinnerline = dinnerline.substring(0,dinnerline.indexOf("&amp;")+1) + 
 									dinnerline.substring(dinnerline.indexOf("&amp;")+5);
 						}
-						String templine = "";
-						String oldtemp = dinnerin.nextLine();
-						while(oldtemp.contains("<a href")){
-							templine += "\n" +oldtemp.substring(oldtemp.indexOf("<img"),oldtemp.indexOf("src=\"")+5) + "http://www.cafebonappetit.com" + oldtemp.substring(oldtemp.indexOf("src=\"")+5,oldtemp.length()-5);
-							if(!(templine.charAt(templine.length()-2)=='/'))
-								templine = templine.substring(0,templine.length()-1) + "/" + templine.substring(templine.length()-1);
-							//lunchline+="\n" + templine+"\n";
-							
-							oldtemp = dinnerin.nextLine();
-						}
-						dinnerline+="\n"+ templine;
-						Log.e("Test",templine);
 						dinneritems.add(dinnerline);
 					
 					}
