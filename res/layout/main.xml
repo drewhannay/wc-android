@@ -31,5 +31,19 @@
 	android:layout_height="100dip"
 	android:background="@drawable/open_floors"
 	/>
+
+<ImageView 
+	android:id="@+id/map"
+	android:layout_width="100dip"
+	android:layout_height="100dip"
+	android:background="@drawable/about"
+	/>
+	
+<ImageView 
+	android:id="@+id/about"
+	android:layout_width="100dip"
+	android:layout_height="100dip"
+	android:background="@drawable/about"
+	/>
 	
 </RelativeLayout>

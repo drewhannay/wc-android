@@ -219,7 +219,7 @@ public class MenuParser {
 							lunchline = lunchline.substring(0,lunchline.indexOf("&amp;")+1) + 
 									lunchline.substring(lunchline.indexOf("&amp;")+5);
 						}
-						/**String templine = "";
+						String templine = "";
 						String oldtemp = lunchin.nextLine();
 						while(oldtemp.contains("<a href")){
 							templine += "\n" +oldtemp.substring(oldtemp.indexOf("<img"),oldtemp.indexOf("src=\"")+5) + "http://www.cafebonappetit.com" + oldtemp.substring(oldtemp.indexOf("src=\"")+5,oldtemp.length()-5);
@@ -231,7 +231,7 @@ public class MenuParser {
 						}
 						//lunchline+="\n"+ templine;
 						Log.e("Test",templine);
-						//lunchline+=templine;*/
+						lunchline+=templine;
 						lunchitems.add(lunchline);
 					
 					}
