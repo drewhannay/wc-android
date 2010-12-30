@@ -16,6 +16,11 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
+/*
+ * Class to display campus map with pushpins at each building.
+ * @author Drew Hannay, Andrew Wolfe
+ * December 28, 2010
+ */
 public class Map extends MapActivity {
 	
 	GeoPoint p;
