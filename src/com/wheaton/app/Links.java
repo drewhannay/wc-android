@@ -24,35 +24,39 @@ public class Links extends ListActivity {
 	//To hold the text to be displayed for each list item.
 	//Each line is numbered as a sanity check when matching to the URL array.
 	private static final String[] TEXT = {
-		"Google",		//1
-		"Facebook",		//2
-		"Arena Theater",//3
-		"Athletics",	//4
-		"BannerWeb",	//5
-		"Bookstore",	//6
-		"Bon Appétit",	//7
-		"Catalog",		//8
-		"Conservatory",	//9
-		"HoneyRock",	//10
-		"Library",		//11
-		"myWheaton",	//12
-		"WETN"			//13
+		"Events Calendar",					//1
+		"Academic Calendar",				//2
+		"Athletics",						//3
+		"Housing Calendar",					//4
+		"Long Term Calendar",				//5
+		"General Education Requirements",	//6
+		"My Wheaton Portal",				//7
+		"Chapel Schedule",					//8
+		"Arena Theater",					//9
+		"Bookstore",						//10
+		"Registrar's Catalog",				//11
+		"Conservatory",						//12
+		"HoneyRock",						//13
+		"Library",							//14
+		"WETN"								//15
 		};
 	//To hold the URL to launch when an item is clicked.
 	private static final String[] URLS = {
-		"http://www.google.com",					//1
-		"http://www.facebook.com",					//2
-		"http://www.wheatonarena.com",				//3
-		"http://athletics.wheaton.edu",				//4
-		"https://bannerweb.wheaton.edu",			//5
-		"http://www.wheatonbooks.com",				//6
-		"http://www.cafebonappetit.com/wheaton",	//7
-		"http://www.wheaton.edu/Registrar/catalog",	//8
-		"http://www.wheaton.edu/Conservatory",		//9
-		"http://www.honeyrockcamp.org",				//10
-		"http://library.wheaton.edu",				//11
-		"https://my.wheaton.edu",					//12
-		"http://www.wheaton.edu/wetn"				//13
+		"http://wheaton.edu/Calendars/events.html",													//1
+		"http://wheaton.edu/Calendars/academic.html",												//2
+		"http://athletics.wheaton.edu",																//3
+		"http://www.wheaton.edu/reslife/dates.htm",													//4
+		"http://www.wheaton.edu/Registrar/schedules/future_calendar.pdf",	 						//5
+		"http://wheaton.edu/Registrar/catalog/ug_acad_policies.htm#General_Education_Requirements",	//6
+		"http://my.wheaton.edu",																	//7
+		"http://www.wheaton.edu/chaplain/Program/schedule.html",									//8
+		"http://www.wheatonarena.com",																//9
+		"http://www.wheatonbooks.com",																//10
+		"http://www.wheaton.edu/Registrar/catalog",													//11
+		"http://www.wheaton.edu/Conservatory",														//12
+		"http://www.honeyrockcamp.org",																//13
+		"http://library.wheaton.edu",																//14
+		"http://www.wheaton.edu/wetn"																//15
 		};
 	
 	/**
