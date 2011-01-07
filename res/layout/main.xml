@@ -5,11 +5,19 @@
     android:layout_height="fill_parent"
     >
 
+<ImageView
+	android:id="@+id/welcome"
+	android:layout_width="fill_parent"
+	android:layout_height="125dip"
+	android:layout_alignParentTop="true"
+	android:background="@drawable/home" />
+	
+
 <ImageView 
 	android:id="@+id/menu"
 	android:layout_width="100dip"
 	android:layout_height="100dip"
-	android:layout_alignParentTop="true"
+	android:layout_below="@id/welcome"
 	android:layout_centerHorizontal="true"
 	android:background="@drawable/menu"
 	/>
@@ -18,7 +26,7 @@
 	android:id="@+id/stalkernet"
 	android:layout_width="fill_parent"
 	android:layout_height="100dip"
-	android:layout_alignParentTop="true"
+	android:layout_below="@id/welcome"
 	android:layout_alignParentLeft="true"
 	android:layout_toLeftOf="@id/menu"
 	android:background="@drawable/stalkernet_square"
@@ -28,7 +36,7 @@
 	android:id="@+id/openFloors"
 	android:layout_width="fill_parent"
 	android:layout_height="100dip"
-	android:layout_alignParentTop="true"
+	android:layout_below="@id/welcome"
 	android:layout_alignParentRight="true"
 	android:layout_toRightOf="@id/menu"
 	android:background="@drawable/open_floors"
@@ -40,7 +48,7 @@
 	android:layout_height="100dip"
 	android:layout_below="@id/menu"
 	android:layout_centerHorizontal="true"
-	android:background="@drawable/about"
+	android:background="@drawable/misc"
 	/>
 
 <ImageView 
@@ -50,7 +58,7 @@
 	android:layout_below="@id/stalkernet"
 	android:layout_alignParentLeft="true"
 	android:layout_toLeftOf="@id/links"
-	android:background="@drawable/about"
+	android:background="@drawable/map"
 	/>
 	
 <ImageView 
