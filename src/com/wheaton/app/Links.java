@@ -24,41 +24,41 @@ public class Links extends ListActivity {
 	//To hold the text to be displayed for each list item.
 	//Each line is numbered as a sanity check when matching to the URL array.
 	private static final String[] TEXT = {
-		"Events Calendar",					//1
-		"Academic Calendar",				//2
+		"Academic Calendar",				//1
+		"Arena Theater",					//2
 		"Athletics",						//3
-		"Housing Calendar",					//4
-		"Long Term Calendar",				//5
-		"General Education Requirements",	//6
-		"My Wheaton Portal",				//7
-		"Chapel Schedule",					//8
-		"Arena Theater",					//9
-		"Bookstore",						//10
-		"Registrar's Catalog",				//11
-		"Conservatory",						//12
-		"HoneyRock",						//13
-		"Library",							//14
-		"WETN",								//15
-		"Metra Schedule"					//16
+		"Bookstore",						//4
+		"Chapel Schedule",					//5
+		"Conservatory",						//6
+		"Events Calendar",					//7
+		"General Education Requirements",	//8
+		"HoneyRock",						//9
+		"Housing Calendar",					//10
+		"Library",							//11
+		"Long Term Calendar",				//12
+		"Metra Schedule",					//13
+		"My Wheaton Portal",				//14
+		"Registrar's Catalog",				//15
+		"WETN"								//16
 		};
 	//To hold the URL to launch when an item is clicked.
 	private static final String[] URLS = {
-		"http://wheaton.edu/Calendars/events.html",													//1
-		"http://wheaton.edu/Calendars/academic.html",												//2
+		"http://wheaton.edu/Calendars/academic.html",												//1
+		"http://www.wheatonarena.com",																//2
 		"http://athletics.wheaton.edu",																//3
-		"http://www.wheaton.edu/reslife/dates.htm",													//4
-		"http://www.wheaton.edu/Registrar/schedules/future_calendar.pdf",	 						//5
-		"http://wheaton.edu/Registrar/catalog/ug_acad_policies.htm#General_Education_Requirements",	//6
-		"http://my.wheaton.edu",																	//7
-		"http://www.wheaton.edu/chaplain/Program/schedule.html",									//8
-		"http://www.wheatonarena.com",																//9
-		"http://www.wheatonbooks.com",																//10
-		"http://www.wheaton.edu/Registrar/catalog",													//11
-		"http://www.wheaton.edu/Conservatory",														//12
-		"http://www.honeyrockcamp.org",																//13
-		"http://library.wheaton.edu",																//14
-		"http://www.wheaton.edu/wetn",																//15
-		"http://www.metrarail.com"																	//16
+		"http://www.wheatonbooks.com",																//4
+		"http://www.wheaton.edu/chaplain/Program/schedule.html",									//5
+		"http://www.wheaton.edu/Conservatory",														//6
+		"http://wheaton.edu/Calendars/events.html",													//7
+		"http://wheaton.edu/Registrar/catalog/ug_acad_policies.htm#General_Education_Requirements",	//8
+		"http://www.honeyrockcamp.org",																//9
+		"http://www.wheaton.edu/reslife/dates.htm",													//10
+		"http://library.wheaton.edu",																//11
+		"http://www.wheaton.edu/Registrar/schedules/future_calendar.pdf",	 						//12
+		"http://www.metrarail.com",																	//13
+		"http://my.wheaton.edu",																	//14
+		"http://www.wheaton.edu/Registrar/catalog",													//15
+		"http://www.wheaton.edu/wetn"																//16
 		};
 	
 	/**
