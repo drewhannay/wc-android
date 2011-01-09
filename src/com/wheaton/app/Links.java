@@ -38,7 +38,8 @@ public class Links extends ListActivity {
 		"Conservatory",						//12
 		"HoneyRock",						//13
 		"Library",							//14
-		"WETN"								//15
+		"WETN",								//15
+		"Metra Schedule"					//16
 		};
 	//To hold the URL to launch when an item is clicked.
 	private static final String[] URLS = {
@@ -56,7 +57,8 @@ public class Links extends ListActivity {
 		"http://www.wheaton.edu/Conservatory",														//12
 		"http://www.honeyrockcamp.org",																//13
 		"http://library.wheaton.edu",																//14
-		"http://www.wheaton.edu/wetn"																//15
+		"http://www.wheaton.edu/wetn",																//15
+		"http://www.metrarail.com"																	//16
 		};
 	
 	/**

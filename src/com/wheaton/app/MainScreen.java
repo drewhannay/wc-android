@@ -37,11 +37,17 @@ public class MainScreen extends Activity implements OnClickListener {
             launchOpenFloor();
         }
     };
+    final Runnable launchChapel = new Runnable(){
+    	public void run(){
+    		launchChapel();
+    	}
+    };
 	
 	/**
 	 * The Views used to control the on screen buttons and images.
 	 */
-	private View stalkernetLauncher, menuLauncher, openFloorLauncher, mapLauncher, linksLauncher, aboutLauncher;
+	private View stalkernetLauncher, menuLauncher, openFloorLauncher, 
+	mapLauncher, linksLauncher, aboutLauncher, chapelLauncher;
 	
 	/**
 	 * Method to override the default onCreate method for an Activity.
@@ -58,14 +64,16 @@ public class MainScreen extends Activity implements OnClickListener {
 		stalkernetLauncher.setOnClickListener(this);
 		menuLauncher = findViewById(R.id.menu);
 		menuLauncher.setOnClickListener(this);
-		openFloorLauncher = findViewById(R.id.openFloors);
-		openFloorLauncher.setOnClickListener(this);
+		//openFloorLauncher = findViewById(R.id.openFloors);
+		//openFloorLauncher.setOnClickListener(this);
 		mapLauncher = findViewById(R.id.map);
 		mapLauncher.setOnClickListener(this);
 		linksLauncher = findViewById(R.id.links);
 		linksLauncher.setOnClickListener(this);
 		aboutLauncher = findViewById(R.id.about);
 		aboutLauncher.setOnClickListener(this);
+		chapelLauncher = findViewById(R.id.chapel);
+		chapelLauncher.setOnClickListener(this);
 	}
 
 	/**
@@ -91,16 +99,16 @@ public class MainScreen extends Activity implements OnClickListener {
 	        t.start();
 	        pd = ProgressDialog.show(this, "Loading", "Please wait while menus are loaded", true, false);
 			break;
-		case R.id.openFloors:
-	        t = new Thread() {
-	        	public void run() {
-	        		OpenFloorParser.parse(MainScreen.this);
-					mHandler.post(launchOpenFloor);
-	        	}
-	        };
-	        t.start();
-	        pd = ProgressDialog.show(this, "Loading", "Please wait while schedules are loaded", true, false);
-			break;
+//		case R.id.openFloors:
+//	        t = new Thread() {
+//	        	public void run() {
+//	        		OpenFloorParser.parse(MainScreen.this);
+//					mHandler.post(launchOpenFloor);
+//	        	}
+//	        };
+//	        t.start();
+//	        pd = ProgressDialog.show(this, "Loading", "Please wait while schedules are loaded", true, false);
+//			break;
 		case R.id.map:
 			i = new Intent(this, Map.class);
 			startActivity(i);
@@ -112,6 +120,16 @@ public class MainScreen extends Activity implements OnClickListener {
 		case R.id.about:
 			i = new Intent(this, About.class);
 			startActivity(i);
+			break;
+		case R.id.chapel:
+			t = new Thread() {
+				public void run() {
+					ChapelParser.parse(MainScreen.this);
+					mHandler.post(launchChapel);
+		        }
+			};
+		    t.start();
+		    pd = ProgressDialog.show(this, "Loading", "Please wait while the chapel schedule is loaded.", true, false);
 			break;
 		}
 	}
@@ -156,5 +174,10 @@ public class MainScreen extends Activity implements OnClickListener {
     	pd.dismiss();
     	Intent i = new Intent(this,OpenFloorHome.class);
 		startActivity(i);
+    }
+    private void launchChapel(){
+    	pd.dismiss();
+    	Intent i = new Intent(this,ChapelHome.class);
+    	startActivity(i);
     }
 }

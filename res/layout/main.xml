@@ -33,13 +33,13 @@
 	/>
 	
 <ImageView 
-	android:id="@+id/openFloors"
+	android:id="@+id/chapel"
 	android:layout_width="fill_parent"
 	android:layout_height="100dip"
 	android:layout_below="@id/welcome"
 	android:layout_alignParentRight="true"
 	android:layout_toRightOf="@id/menu"
-	android:background="@drawable/open_floors"
+	android:background="@drawable/chapel"
 	/>
 
 <ImageView 
