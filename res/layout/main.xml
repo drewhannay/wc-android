@@ -33,32 +33,42 @@
 	/>
 	
 <ImageView 
-	android:id="@+id/map"
+	android:id="@+id/chapel"
 	android:layout_width="fill_parent"
 	android:layout_height="100dip"
 	android:layout_below="@id/welcome"
 	android:layout_alignParentRight="true"
 	android:layout_toRightOf="@id/menu"
-	android:background="@drawable/map"
-	/>
-
-<ImageView 
-	android:id="@+id/about"
-	android:layout_width="100dip"
-	android:layout_height="100dip"
-	android:layout_below="@id/menu"
-	android:layout_centerHorizontal="true"
-	android:background="@drawable/about"
+	android:background="@drawable/chapel"
 	/>
 
 <ImageView 
 	android:id="@+id/links"
+	android:layout_width="100dip"
+	android:layout_height="100dip"
+	android:layout_below="@id/menu"
+	android:layout_centerHorizontal="true"
+	android:background="@drawable/misc"
+	/>
+
+<ImageView 
+	android:id="@+id/map"
 	android:layout_width="fill_parent"
 	android:layout_height="100dip"
 	android:layout_below="@id/stalkernet"
 	android:layout_alignParentLeft="true"
-	android:layout_toLeftOf="@id/about"
-	android:background="@drawable/misc"
+	android:layout_toLeftOf="@id/links"
+	android:background="@drawable/map"
 	/>
-
+	
+<ImageView 
+	android:id="@+id/about"
+	android:layout_width="fill_parent"
+	android:layout_height="100dip"
+	android:layout_below="@id/menu"
+	android:layout_toRightOf="@id/links"
+	android:layout_alignParentRight="true"
+	android:background="@drawable/about"
+	/>
+	
 </RelativeLayout>

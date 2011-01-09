@@ -72,8 +72,8 @@ public class MainScreen extends Activity implements OnClickListener {
 		linksLauncher.setOnClickListener(this);
 		aboutLauncher = findViewById(R.id.about);
 		aboutLauncher.setOnClickListener(this);
-//		chapelLauncher = findViewById(R.id.chapel);
-//		chapelLauncher.setOnClickListener(this);
+		chapelLauncher = findViewById(R.id.chapel);
+		chapelLauncher.setOnClickListener(this);
 	}
 
 	/**
@@ -121,16 +121,16 @@ public class MainScreen extends Activity implements OnClickListener {
 			i = new Intent(this, About.class);
 			startActivity(i);
 			break;
-//		case R.id.chapel:
-//			t = new Thread() {
-//				public void run() {
-//					ChapelParser.parse(MainScreen.this);
-//					mHandler.post(launchChapel);
-//		        }
-//			};
-//		    t.start();
-//		    pd = ProgressDialog.show(this, "Loading", "Please wait while the chapel schedule is loaded.", true, false);
-//			break;
+		case R.id.chapel:
+			t = new Thread() {
+				public void run() {
+					ChapelParser.parse(MainScreen.this);
+					mHandler.post(launchChapel);
+		        }
+			};
+		    t.start();
+		    pd = ProgressDialog.show(this, "Loading", "Please wait while the chapel schedule is loaded.", true, false);
+			break;
 		}
 	}
 	
