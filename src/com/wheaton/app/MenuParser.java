@@ -32,6 +32,10 @@ public class MenuParser {
 	 */
 	private static HashMap<String,Integer> monthToInt = new HashMap<String,Integer>();
 	
+	private static HashMap<Integer,String> dayofweek = new HashMap<Integer,String>();
+	
+	private static HashMap<Integer,String> intToMonth = new HashMap<Integer,String>();
+	
 	private static Calendar calendar = Calendar.getInstance(); //used to get current date
 	private static int currentMonth = calendar.get(Calendar.MONTH); 
 	private static int currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
@@ -53,6 +57,26 @@ public class MenuParser {
 		monthToInt.put("October",9);
 		monthToInt.put("November",10);
 		monthToInt.put("December",11);
+		
+		intToMonth.put(0,"January");
+		intToMonth.put(1,"February");
+		intToMonth.put(2,"March");
+		intToMonth.put(3,"April");
+		intToMonth.put(4,"May");
+		intToMonth.put(5,"June");
+		intToMonth.put(6,"July");
+		intToMonth.put(7,"August");
+		intToMonth.put(8,"September");
+		intToMonth.put(9,"October");
+		intToMonth.put(10,"November");
+		intToMonth.put(11,"December");
+		dayofweek.put(calendar.SUNDAY,"Sunday");
+		dayofweek.put(calendar.MONDAY,"Monday");
+		dayofweek.put(calendar.TUESDAY,"Tuesday");
+		dayofweek.put(calendar.WEDNESDAY,"Wednesday");
+		dayofweek.put(calendar.THURSDAY,"Thursday");
+		dayofweek.put(calendar.FRIDAY, "Friday");
+		dayofweek.put(calendar.SATURDAY, "Saturday");
 	}
 		
 	/*
@@ -280,6 +304,23 @@ public class MenuParser {
 					String date = dates.get(i);
 					days.push(new Day(date,printableDate,lunchstations,lunchitems,dinnerstations,dinneritems));
 					
+				}
+				Day temp = days.peek();
+				if(days.peek()!=null){
+				String date = temp.date;
+				StringTokenizer st = new StringTokenizer(date);
+				int month = Integer.parseInt(st.nextToken());
+				int day = Integer.parseInt(st.nextToken());
+				int year = Integer.parseInt(st.nextToken());
+				if(currentMonth!=month||currentDay!=day||currentYear!=year){
+				
+				
+				String printabledate = dayofweek.get(calendar.DAY_OF_WEEK) + ", " + intToMonth.get(month) + " " + day;
+				
+					days.push(new Day((currentMonth + " " + currentDay + " " + currentYear),printabledate,null,null,null,null));
+				
+				}
+				
 				}
 				}catch(Exception e){
 					Log.e("MenuParser",e.getMessage());
