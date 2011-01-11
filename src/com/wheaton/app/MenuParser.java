@@ -314,11 +314,8 @@ public class MenuParser {
 				int year = Integer.parseInt(st.nextToken());
 				if(currentMonth!=month||currentDay!=day||currentYear!=year){
 				
-				
 				String printabledate = dayofweek.get(calendar.DAY_OF_WEEK) + ", " + intToMonth.get(month) + " " + day;
-				
 					days.push(new Day((currentMonth + " " + currentDay + " " + currentYear),printabledate,null,null,null,null));
-				
 				}
 				
 				}
