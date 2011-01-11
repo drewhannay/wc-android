@@ -19,12 +19,21 @@
 		android:layout_below="@id/curPic"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"/>
+<com.admob.android.ads.AdView
+		android:id="@+id/ad"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/view_area"
+		android:layout_alignParentBottom="true"
+		/>
 <ListView
 		android:id="@android:id/list"
 		android:layout_below="@id/selection"
+		android:layout_above="@id/ad"
 		android:layout_width="fill_parent" 
 		android:layout_height="fill_parent"
 		android:drawSelectorOnTop="false"
 		/>
+
 
 </RelativeLayout>

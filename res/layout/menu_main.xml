@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:myapp="http://schemas.android.com/apk/res/com.wheaton.app"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
 
@@ -31,11 +32,18 @@
 		android:layout_height="75dip"
 		android:layout_below="@id/todayButton"
 		android:background="@drawable/menu_header"	/>
+	<com.admob.android.ads.AdView
+		android:id="@+id/ad"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		/>
 	<ViewAnimator
 		android:id="@+id/view_area"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_below="@id/menuHeader"
+		android:layout_above="@id/ad"
 		android:inAnimation="@android:anim/fade_in"
 		android:outAnimation="@android:anim/fade_out"
 		

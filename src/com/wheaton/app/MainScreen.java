@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.admob.android.ads.AdManager;
+
 /**
  * Class to run the main screen of the application.
  * Get references to the different Views in the Activity and use
@@ -59,6 +61,11 @@ public class MainScreen extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		AdManager.setTestDevices( new String[] { 
+			      AdManager.TEST_EMULATOR, // Android emulator 
+			      "E83D20734F72FB3108F104ABC0FFC738", // My T-Mobile G1 Test Phone 
+		});
 		
 		stalkernetLauncher = findViewById(R.id.stalkernet);
 		stalkernetLauncher.setOnClickListener(this);
