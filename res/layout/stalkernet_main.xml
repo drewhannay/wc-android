@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:myapp="http://schemas.android.com/apk/res/com.wheaton.app"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -30,5 +31,12 @@
         android:layout_below="@id/text_box"
         android:layout_centerInParent="true"
         android:text="Search" />
+<com.admob.android.ads.AdView
+		android:id="@+id/ad"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		/>
+        
 	
 </RelativeLayout>

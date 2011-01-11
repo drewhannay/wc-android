@@ -25,11 +25,18 @@
 		android:layout_toLeftOf="@id/rightButton"
 		android:layout_height="50dip"
 		android:layout_width="fill_parent" />	
+	<com.admob.android.ads.AdView
+		android:id="@+id/ad"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		/>
 	<ViewAnimator
 		android:id="@+id/view_area"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_below="@id/leftButton"
+		android:layout_above="@id/ad"
 		android:inAnimation="@android:anim/fade_in"
 		android:outAnimation="@android:anim/fade_out"
 		
