@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Stack;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 
 public class ChapelParser {
 	private static HashMap<String,Integer> monthToInt = new HashMap<String,Integer>();
@@ -40,13 +40,17 @@ public class ChapelParser {
 			Scanner chapelin = new Scanner((InputStream) chapel.getContent());
 			String line = chapelin.nextLine();
 			String text = "";
-			while(chapelin.hasNext()){
+
 			while(chapelin.hasNext()&&(!(line.contains("Chapel Schedule"))))
-					line = chapelin.nextLine();
-			text = line;
-			if(line.contains("</table>"))
-				break;
+				line = chapelin.nextLine();
 			
+			line = chapelin.nextLine();
+			
+			while(chapelin.hasNext()){
+				text += line;
+				if(line.contains("</table>"))
+					break;
+				line = chapelin.nextLine();
 			}
 			 schedule = new ChapelSchedule(currentMonth<8,text);
 			
@@ -62,8 +66,17 @@ public class ChapelParser {
 	
 	public static ArrayList<View> toArrayList(LayoutInflater l){
 		ArrayList<View> toReturn = new ArrayList<View>();
-		//WebView v;
+		WebView v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
 		
+		String webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
+					"text-align: center; }</style></head><body>";
+		webCode += schedule.html;
+		
+		webCode += "</body></html>";
+		
+		v.loadData(webCode, "text/html", "utf-8");
+		v.setBackgroundColor(0);
+		toReturn.add(v);
 		return toReturn;
 	}
 }
