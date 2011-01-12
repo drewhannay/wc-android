@@ -105,7 +105,12 @@ public class MenuParser {
 		if(days.empty()){
 			if(con.fileList().length != 0){  //in the case of an empty days stack, try to
 				//read in more days from the file (so we don't have to parse)
-			
+				boolean readin = false;
+				for(String a: con.fileList()){
+					if(a.equals("days_cache"))
+						readin = true;
+				} 
+				if(readin){
         		FileInputStream f_in = null;
 				try {
 					Log.e("reading in","Reading file...");
@@ -119,6 +124,7 @@ public class MenuParser {
 					return;
 				}catch(Exception e){
 					Log.e("MenuParserOpenFile", e.toString());
+				}
 				}
 			}
 			//if no file, parse the HTML
@@ -251,9 +257,40 @@ public class MenuParser {
 					//ArrayList<String>s to hold the dinner stations and items for this day.
 					ArrayList<String> dinnerstations = new ArrayList<String>();
 					ArrayList<String> dinneritems = new ArrayList<String>(); 
+					//Cut off unnecessary heading tags
+					dinnerline = dinnerline.substring(dinnerline.indexOf("\"center\"><strong><br>"));
 					
-					//Reset dinnerline because we don't need to collect dates again.
-					dinnerline = "";
+					//Take care of random space that occasionally occurs before the day of the week.
+					if(dinnerline.indexOf(' ')==21){
+						dinnerline = dinnerline.substring(22);
+					}
+					//Normal case
+					else {
+						dinnerline = dinnerline.substring(21); 
+					}
+					
+					//Get rid of trailing tags
+					dinnerline =dinnerline.substring(0,dinnerline.indexOf("<"));
+					
+					//To process date information
+					StringTokenizer dinner_token = new StringTokenizer(dinnerline);
+					
+					dinner_token.nextToken();
+					String date = "";
+					
+					//Formatting stuff to get the date in correctly in the form month day year (IE, 11 20 2010)
+					date += monthToInt.get(dinner_token.nextToken())+ " ";
+					String temp = dinner_token.nextToken();
+					temp = (temp.contains(",")?temp.substring(0,temp.length()-1):temp);
+					date+=temp + " " + dinner_token.nextToken();
+					date = date.contains("<")?date.substring(0,date.indexOf("<")):date;
+					StringTokenizer st = new StringTokenizer(date);
+					
+					//Optimization: If the date we're reading in is less than the current date, keep going.
+					if(Integer.parseInt(st.nextToken())<currentMonth || Integer.parseInt(st.nextToken()) < currentDay
+							|| Integer.parseInt(st.nextToken()) < currentYear)
+						continue;
+					
 					
 					while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")){
 						//Move to the name of the next dinner station.
@@ -273,6 +310,7 @@ public class MenuParser {
 						//Crop the line to contain only the wanted station name.
 						dinnerline = dinnerline.substring(dinnerline.indexOf("ng>")+3);
 						dinnerline = dinnerline.substring(0,dinnerline.indexOf("<"));
+						
 						
 						//Cover case of grabbing an empty dinner station name.
 						if(dinnerline.equals("")){
@@ -295,7 +333,7 @@ public class MenuParser {
 				
 				
 				//Create the stack of Days
-				for(int i = (allLunchStations.size()>allDinnerStations.size()?allLunchStations.size()-1:allDinnerStations.size()-1);i>-1;i--){
+				for(int i = allLunchStations.size()-1;i>-1;i--){
 					ArrayList<String> dinnerstations = (allDinnerStations.size()<=i?null:allDinnerStations.get(i));
 					ArrayList<String> dinneritems = (allDinnerItems.size()<=i?null:allDinnerItems.get(i));
 					ArrayList<String> lunchstations = (allLunchStations.size()<=i?null:allLunchStations.get(i));
@@ -320,6 +358,7 @@ public class MenuParser {
 				
 				}
 				}catch(Exception e){
+					e.printStackTrace();
 					Log.e("MenuParser",e.getMessage());
 				}
 		}
