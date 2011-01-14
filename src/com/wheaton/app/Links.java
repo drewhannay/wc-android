@@ -2,7 +2,11 @@ package com.wheaton.app;
 
 import java.util.TreeMap;
 
+import com.games.textgame.TitleScreen;
+
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -114,5 +119,31 @@ public class Links extends ListActivity {
 	private void editLink(int pos) {
 		// TODO Auto-generated method stub
 		
+	}
+	private void addLink(){
+		AlertDialog.Builder alert = new AlertDialog.Builder(Links.this);  
+		alert.setTitle("Please enter a name for the link.");  
+		final EditText input = new EditText(Links.this);  
+		alert.setView(input); 
+		final String[] hack = new String[2];
+		  
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
+			public void onClick(DialogInterface dialog, int whichButton) {
+				hack[0] = input.getText().toString();
+			}
+		
+	});
+		AlertDialog.Builder alert2 = new AlertDialog.Builder(Links.this);  
+		alert2.setTitle("Please enter a name for the link.");  
+		final EditText input2 = new EditText(Links.this);  
+		alert2.setView(input2); 
+		  
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
+			public void onClick(DialogInterface dialog, int whichButton) {
+				hack[1] = input.getText().toString();
+			}
+		
+	});
+		t.put(hack[0], hack[1]);
 	}
 }
