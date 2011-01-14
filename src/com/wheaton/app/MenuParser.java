@@ -70,13 +70,13 @@ public class MenuParser {
 		intToMonth.put(9,"October");
 		intToMonth.put(10,"November");
 		intToMonth.put(11,"December");
-		dayofweek.put(calendar.SUNDAY,"Sunday");
-		dayofweek.put(calendar.MONDAY,"Monday");
-		dayofweek.put(calendar.TUESDAY,"Tuesday");
-		dayofweek.put(calendar.WEDNESDAY,"Wednesday");
-		dayofweek.put(calendar.THURSDAY,"Thursday");
-		dayofweek.put(calendar.FRIDAY, "Friday");
-		dayofweek.put(calendar.SATURDAY, "Saturday");
+		dayofweek.put(Calendar.SUNDAY,"Sunday");
+		dayofweek.put(Calendar.MONDAY,"Monday");
+		dayofweek.put(Calendar.TUESDAY,"Tuesday");
+		dayofweek.put(Calendar.WEDNESDAY,"Wednesday");
+		dayofweek.put(Calendar.THURSDAY,"Thursday");
+		dayofweek.put(Calendar.FRIDAY, "Friday");
+		dayofweek.put(Calendar.SATURDAY, "Saturday");
 	}
 		
 	/*
@@ -352,7 +352,7 @@ public class MenuParser {
 				int year = Integer.parseInt(st.nextToken());
 				if(currentMonth!=month||currentDay!=day||currentYear!=year){
 				
-				String printabledate = dayofweek.get(calendar.DAY_OF_WEEK) + ", " + intToMonth.get(month) + " " + day;
+				String printabledate = dayofweek.get(Calendar.DAY_OF_WEEK) + ", " + intToMonth.get(month) + " " + day;
 					days.push(new Day((currentMonth + " " + currentDay + " " + currentYear),printabledate,null,null,null,null));
 				}
 				

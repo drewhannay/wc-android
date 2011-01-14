@@ -76,11 +76,10 @@ public class ChapelParser{
 			// Write object out to disk
 			obj_out.writeObject (schedule);
 		}catch(Exception a){
-			Log.e("MenuParserFileIO", a.toString());
+			Log.e("ChapelParserFileIO", a.toString());
 		}
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			Log.e("ChapelParser",e1.toString());
 		}
 	}
 
