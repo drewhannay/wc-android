@@ -6,10 +6,15 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
 /**
@@ -58,7 +63,7 @@ public class Links extends ListActivity {
 		adapter = new ArrayAdapter<String>(this, R.layout.link_item, TEXT);
 		setListAdapter(adapter);
 
-//		registerForContextMenu(getListView());
+		registerForContextMenu(getListView());
 		
 		//After getting the view, enable the text filter, so the user can type to narrow the search results.
 		ListView lv = getListView();
@@ -75,39 +80,39 @@ public class Links extends ListActivity {
 		  });
 	}	
 	
-//	@Override
-//	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
-//	  super.onCreateContextMenu(menu, v, menuInfo);
-//	  MenuInflater inflater = getMenuInflater();
-//	  inflater.inflate(R.menu.context_menu, menu);
-//	}
-//	
-//	@Override
-//	public boolean onContextItemSelected(MenuItem item) {
-//	  AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-//	  switch (item.getItemId()) {
-//	  case R.id.edit:
-//	    editLink(info.position);
-//	    return true;
-//	  case R.id.delete:
-//	    deleteLink(info.position);
-//	    return true;
-//	  default:
-//	    return super.onContextItemSelected(item);
-//	  }
-//	}
-//
-//	private void deleteLink(int pos) {
-//		// TODO Auto-generated method stub
-//		String[] temp = new String[t.size()];
-//		t.keySet().toArray(temp);
-//		String toRemove = temp[pos];
-//		t.remove(toRemove);
-//		
-//	}
-//
-//	private void editLink(int pos) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
+	  super.onCreateContextMenu(menu, v, menuInfo);
+	  MenuInflater inflater = getMenuInflater();
+	  inflater.inflate(R.menu.context_menu, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	  AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	  switch (item.getItemId()) {
+	  case R.id.edit:
+	    editLink(info.position);
+	    return true;
+	  case R.id.delete:
+	    deleteLink(info.position);
+	    return true;
+	  default:
+	    return super.onContextItemSelected(item);
+	  }
+	}
+
+	private void deleteLink(int pos) {
+		// TODO Auto-generated method stub
+		String[] temp = new String[t.size()];
+		t.keySet().toArray(temp);
+		String toRemove = temp[pos];
+		t.remove(toRemove);
+		
+	}
+
+	private void editLink(int pos) {
+		// TODO Auto-generated method stub
+		
+	}
 }
