@@ -81,8 +81,10 @@ containing a value of this type.
         public static final int about_content=0x7f070000;
         public static final int ad=0x7f070001;
         public static final int chapel=0x7f070007;
-        public static final int contact=0x7f070014;
+        public static final int contact=0x7f070016;
         public static final int curPic=0x7f07000f;
+        public static final int delete=0x7f070015;
+        public static final int edit=0x7f070014;
         public static final int leftButton=0x7f07000b;
         public static final int links=0x7f070008;
         public static final int logo=0x7f070012;
@@ -113,7 +115,8 @@ containing a value of this type.
         public static final int stalkernet_main=0x7f03000a;
     }
     public static final class menu {
-        public static final int menu=0x7f060000;
+        public static final int context_menu=0x7f060000;
+        public static final int menu=0x7f060001;
     }
     public static final class string {
         public static final int about_text=0x7f050009;

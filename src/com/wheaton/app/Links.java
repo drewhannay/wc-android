@@ -1,5 +1,7 @@
 package com.wheaton.app;
 
+import java.util.TreeMap;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,45 +23,8 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class Links extends ListActivity {
 	
-	//To hold the text to be displayed for each list item.
-	//Each line is numbered as a sanity check when matching to the URL array.
-	private static final String[] TEXT = {
-		"Academic Calendar",				//1
-		"Arena Theater",					//2
-		"Athletics",						//3
-		"Bookstore",						//4
-		"Chapel Schedule",					//5
-		"Conservatory",						//6
-		"Events Calendar",					//7
-		"General Education Requirements",	//8
-		"HoneyRock",						//9
-		"Housing Calendar",					//10
-		"Library",							//11
-		"Long Term Calendar",				//12
-		"Metra Schedule",					//13
-		"My Wheaton Portal",				//14
-		"Registrar's Catalog",				//15
-		"WETN"								//16
-		};
-	//To hold the URL to launch when an item is clicked.
-	private static final String[] URLS = {
-		"http://wheaton.edu/Calendars/academic.html",												//1
-		"http://www.wheatonarena.com",																//2
-		"http://athletics.wheaton.edu",																//3
-		"http://www.wheatonbooks.com",																//4
-		"http://www.wheaton.edu/chaplain/Program/schedule.html",									//5
-		"http://www.wheaton.edu/Conservatory",														//6
-		"http://wheaton.edu/Calendars/events.html",													//7
-		"http://wheaton.edu/Registrar/catalog/ug_acad_policies.htm#General_Education_Requirements",	//8
-		"http://www.honeyrockcamp.org",																//9
-		"http://www.wheaton.edu/reslife/dates.htm",													//10
-		"http://library.wheaton.edu",																//11
-		"http://www.wheaton.edu/Registrar/schedules/future_calendar.pdf",	 						//12
-		"http://www.metrarail.com",																	//13
-		"http://my.wheaton.edu",																	//14
-		"http://www.wheaton.edu/Registrar/catalog",													//15
-		"http://www.wheaton.edu/wetn"																//16
-		};
+	private static TreeMap<String, String> t = new TreeMap<String, String>();
+	private static ArrayAdapter<String> adapter;
 	
 	/**
 	 * Override the default onCreate method for a ListActivity.
@@ -69,9 +34,32 @@ public class Links extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		t.put("Academic Calendar","http://wheaton.edu/Calendars/academic.html");
+		t.put("Arena Theater","http://www.wheatonarena.com");
+		t.put("Athletics","http://athletics.wheaton.edu");
+		t.put("Bookstore","http://www.wheatonbooks.com");
+		t.put("Chapel Schedule","http://www.wheaton.edu/chaplain/Program/schedule.html");
+		t.put("Conservatory","http://www.wheaton.edu/Conservatory");
+		t.put("Events Calendar","http://wheaton.edu/Calendars/events.html");
+		t.put("General Education Requirements","http://wheaton.edu/Registrar/catalog/ug_acad_policies.htm#General_Education_Requirements");
+		t.put("HoneyRock","http://www.honeyrockcamp.org");
+		t.put("Housing Calendar","http://www.wheaton.edu/reslife/dates.htm");
+		t.put("Library","http://library.wheaton.edu");
+		t.put("Long Term Calendar","http://www.wheaton.edu/Registrar/schedules/future_calendar.pdf");
+		t.put("Metra Schedule","http://www.metrarail.com");
+		t.put("My Wheaton Portal","http://my.wheaton.edu");
+		t.put("Registrar's Catalog","http://www.wheaton.edu/Registrar/catalog");
+		t.put("WETN","http://www.wheaton.edu/wetn");
+		
 		//Set the ListAdapter to read in the TEXT array, using the layout link_item.xml
-		setListAdapter(new ArrayAdapter<String>(this, R.layout.link_item, TEXT));
+		String[] TEXT = new String[t.size()];
+		t.keySet().toArray(TEXT);
+		adapter = new ArrayAdapter<String>(this, R.layout.link_item, TEXT);
+		setListAdapter(adapter);
 
+//		registerForContextMenu(getListView());
+		
 		//After getting the view, enable the text filter, so the user can type to narrow the search results.
 		ListView lv = getListView();
 		lv.setTextFilterEnabled(true);
@@ -81,10 +69,45 @@ public class Links extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				//Launch an Intent to the browser using the URL in the same position as the TEXT that was clicked.
-				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS[position]));
+				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse((String)t.values().toArray()[position]));
 		    	startActivity(i);
 		    }
 		  });
 	}	
-
+	
+//	@Override
+//	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
+//	  super.onCreateContextMenu(menu, v, menuInfo);
+//	  MenuInflater inflater = getMenuInflater();
+//	  inflater.inflate(R.menu.context_menu, menu);
+//	}
+//	
+//	@Override
+//	public boolean onContextItemSelected(MenuItem item) {
+//	  AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+//	  switch (item.getItemId()) {
+//	  case R.id.edit:
+//	    editLink(info.position);
+//	    return true;
+//	  case R.id.delete:
+//	    deleteLink(info.position);
+//	    return true;
+//	  default:
+//	    return super.onContextItemSelected(item);
+//	  }
+//	}
+//
+//	private void deleteLink(int pos) {
+//		// TODO Auto-generated method stub
+//		String[] temp = new String[t.size()];
+//		t.keySet().toArray(temp);
+//		String toRemove = temp[pos];
+//		t.remove(toRemove);
+//		
+//	}
+//
+//	private void editLink(int pos) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }
