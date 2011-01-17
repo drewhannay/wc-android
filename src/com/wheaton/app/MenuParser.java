@@ -107,8 +107,10 @@ public class MenuParser {
 				//read in more days from the file (so we don't have to parse)
 				boolean readin = false;
 				for(String a: con.fileList()){
-					if(a.equals("days_cache"))
+					if(a.equals("days_cache1"))
 						readin = true;
+					else if(a.equals("days_cache"))
+						con.deleteFile("days_cache");
 				} 
 				if(readin){
         		FileInputStream f_in = null;
@@ -242,7 +244,8 @@ public class MenuParser {
 					allLunchStations.add(lunchstations); 
 					allLunchItems.add(lunchitems);
 				}
-				
+				ArrayList<String> datehack = new ArrayList<String>();
+				ArrayList<String> printableDinnerDates = new ArrayList<String>();
 				//Do almost the same thing for dinner.
 				while(dinnerin.hasNext()){
 					//Cut off everything before the first date by looking for specific HTML.
@@ -291,7 +294,9 @@ public class MenuParser {
 							|| Integer.parseInt(st.nextToken()) < currentYear)
 						continue;
 					
-					
+					datehack.add(date);
+					dinnerline = dinnerline.substring(0,(dinnerline.length()-6));
+					printableDinnerDates.add(dinnerline);
 					while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")){
 						//Move to the name of the next dinner station.
 						while(dinnerin.hasNext()&&!dinnerline.contains("<strong>")){
@@ -333,15 +338,70 @@ public class MenuParser {
 				
 				
 				//Create the stack of Days
-				for(int i = allLunchStations.size()-1;i>-1;i--){
-					ArrayList<String> dinnerstations = (allDinnerStations.size()<=i?null:allDinnerStations.get(i));
-					ArrayList<String> dinneritems = (allDinnerItems.size()<=i?null:allDinnerItems.get(i));
+				for(int i = allLunchStations.size()-1,j = allDinnerStations.size()-1;i>-1;){
+					ArrayList<String> dinnerstations = (allDinnerStations.size()<=j||j<0?null:allDinnerStations.get(j));
+					ArrayList<String> dinneritems = (allDinnerItems.size()<=j||j<0?null:allDinnerItems.get(j));
 					ArrayList<String> lunchstations = (allLunchStations.size()<=i?null:allLunchStations.get(i));
 					ArrayList<String> lunchitems = (allLunchItems.size()<=i?null:allLunchItems.get(i));
 					String printableDate = printableDates.get(i);
+					String printableDinnerDate = (printableDinnerDates.size()<j||j<0?"a":printableDinnerDates.get(j));
 					String date = dates.get(i);
-					days.push(new Day(date,printableDate,lunchstations,lunchitems,dinnerstations,dinneritems));
-					
+					String dateTest = (datehack.size()<j||j<0?"a":datehack.get(j));
+					Day toAdd = null;
+					if(printableDinnerDate.equals("a")){
+						toAdd = new Day(date,printableDate,lunchstations,lunchitems,null,null);
+						i--;
+					}
+					else if(!date.equals(dateTest)){
+						StringTokenizer st = new StringTokenizer(date);
+						StringTokenizer st2 = new StringTokenizer(dateTest);
+						int lunchmonth = Integer.parseInt(st.nextToken());
+						int dinnermonth = Integer.parseInt(st2.nextToken());
+						int lunchday = Integer.parseInt(st.nextToken());
+						int dinnerday = Integer.parseInt(st2.nextToken());
+						int lunchyear = Integer.parseInt(st.nextToken());
+						int dinneryear = Integer.parseInt(st.nextToken());
+						
+						if(lunchyear!=dinneryear){
+							if(lunchyear<dinneryear){
+								toAdd = new Day(date,printableDate,lunchstations,lunchitems,null,null);
+								i--;
+							}
+							else{
+								toAdd = new Day(dateTest,printableDinnerDate,null,null,dinnerstations,dinneritems);
+								j--;
+							}
+							
+						}
+						else if(lunchmonth!=dinnermonth){
+							if(lunchmonth<dinneryear){
+								toAdd = new Day(date,printableDate,lunchstations,lunchitems,null,null);
+								i--;
+							}
+							else{
+								toAdd = new Day(dateTest,printableDinnerDate,null,null,dinnerstations,dinneritems);
+								j--;
+							}
+							
+						}
+						else if(lunchday!=dinnerday){
+							if(lunchday<dinnerday){
+								toAdd = new Day(date,printableDate,lunchstations,lunchitems,null,null);
+								i--;
+							}
+							else{
+								toAdd = new Day(dateTest,printableDinnerDate,null,null,dinnerstations,dinneritems);
+								j--;
+							}
+							
+						}
+					}
+					else{
+						toAdd = new Day(date,printableDate,lunchstations,lunchitems,dinnerstations,dinneritems);
+						i--;
+						j--;
+					}
+					days.push(toAdd);
 				}
 				Day temp = days.peek();
 				if(days.peek()!=null){
@@ -369,7 +429,7 @@ public class MenuParser {
 		
 		//Either way, at the end of the method, write the new object to data.
 		try{
-			FileOutputStream f_out = con.openFileOutput("days_cache", Context.MODE_PRIVATE);
+			FileOutputStream f_out = con.openFileOutput("days_cache1", Context.MODE_PRIVATE);
 			// Write object with ObjectOutputStream
 			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 			// Write object out to disk
