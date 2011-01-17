@@ -15,4 +15,10 @@
     (as it should, with all the work we put into this), then maybe you should thank us. Our CPO numbers are 1122, 2122, 
     3175, and 2263, respectively.  So if you suddenly find yourself in the mood for writing personal notes, keep us in mind.
     (We also accept candy...yum...)</string>
+    <string name="add_title">Add a Link</string>
+    <string name="edit_title">Edit</string>
+    <string name="ok">Okay</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="name">Name</string>
+    <string name="url">URL</string>
 </resources>

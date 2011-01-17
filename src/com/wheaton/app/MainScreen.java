@@ -62,11 +62,11 @@ public class MainScreen extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		AdManager.setTestDevices( new String[] { 
-			      AdManager.TEST_EMULATOR, // Android emulator 
-			      "E83D20734F72FB3108F104ABC0FFC738", // My T-Mobile G1 Test Phone 
-		});
-		
+//		AdManager.setTestDevices( new String[] { 
+//			      AdManager.TEST_EMULATOR, // Android emulator 
+//			      "E83D20734F72FB3108F104ABC0FFC738", // My T-Mobile G1 Test Phone 
+//		});
+//		
 		stalkernetLauncher = findViewById(R.id.stalkernet);
 		stalkernetLauncher.setOnClickListener(this);
 		menuLauncher = findViewById(R.id.menu);
