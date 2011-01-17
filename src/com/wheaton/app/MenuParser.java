@@ -417,6 +417,10 @@ public class MenuParser {
 				}
 				
 				}
+				else{
+					Log.e("test",Calendar.DAY_OF_WEEK+"");
+					days.push(new Day((currentMonth + " " + currentDay + " " + currentYear),(intToMonth.get(currentMonth) + " " + currentDay),null,null,null,null));
+				}
 				}catch(Exception e){
 					e.printStackTrace();
 					Log.e("MenuParser",e.getMessage());
