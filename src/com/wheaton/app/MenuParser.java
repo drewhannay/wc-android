@@ -116,7 +116,7 @@ public class MenuParser {
         		FileInputStream f_in = null;
 				try {
 					Log.e("reading in","Reading file...");
-					f_in = con.openFileInput("days_cache");
+					f_in = con.openFileInput("days_cache1");
 					
 					// Read object using ObjectInputStream
 					ObjectInputStream obj_in = new ObjectInputStream (f_in);
