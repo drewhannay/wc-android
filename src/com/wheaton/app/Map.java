@@ -33,6 +33,63 @@ public class Map extends MapActivity {
 	
 	static{
 		checkins.put("Sports & Recreation Complex", "http://m.foursquare.com/checkin?vid=10540646");
+		checkins.put("Corinthian Co-op", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Sports & Recreation Complex", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Fischer Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Lawson Field", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Buswell Memorial Library", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Smith/Traber Halls", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Hearth House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Phoenix House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Irving House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Hunter House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Fine Arts House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("LeBar House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Country House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("International House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Kay House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Fellowship House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Mathetai House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("White House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Chase House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Graham House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Harbor House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Teresa House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Kilby House", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Edman Memorial Chapel", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Pierce Memorial Chapel", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("McAlister Conservatory", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Adams Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Blanchard Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Memorial Student Center", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Williston Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Student Services Building", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Schell Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Wyngarden Health Center", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Armerding Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Evans Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("McManis Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Todd M. Beamer Student Center", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Wheaton Science Center", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Jenks Hall", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Arena Theater", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Billy Graham Center", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("McCully Stadium", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Bean Stadium", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Chase Service Center", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Marion E. Wade Center", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Westgate", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Campus Utility", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Crescent Apartments", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Michigan Apartments", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Saint and Elliot Residential Complex", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("Terrace Apartments", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("602 Chase", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("802 College", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("814 College", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("818 College", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("904 College", "http://m.foursquare.com/checkin?vid=");
+		checkins.put("916 College", "http://m.foursquare.com/checkin?vid=");
 	}
 	
 	class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
