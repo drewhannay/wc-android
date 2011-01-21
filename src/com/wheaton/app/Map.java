@@ -1,11 +1,15 @@
 package com.wheaton.app;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.maps.GeoPoint;
@@ -24,6 +28,12 @@ import com.google.android.maps.OverlayItem;
 public class Map extends MapActivity {
 	
 	GeoPoint p;
+	
+	private static HashMap<String,String> checkins = new HashMap<String,String>();
+	
+	static{
+		checkins.put("Sports & Recreation Complex", "http://m.foursquare.com/checkin?vid=10540646");
+	}
 	
 	class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
@@ -52,10 +62,17 @@ public class Map extends MapActivity {
 		
 		@Override
 		protected boolean onTap(int index) {
-		  OverlayItem item = mOverlays.get(index);
+		  final OverlayItem item = mOverlays.get(index);
 		  AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 		  dialog.setTitle(item.getTitle());
 		  dialog.setMessage(item.getSnippet());
+		  dialog.setPositiveButton("Check In with Foursquare", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(checkins.get(item.getTitle())));
+			    	startActivity(i);
+				}
+		  });
+			
 		  dialog.setNegativeButton("Close", null);
 		  dialog.show();
 		  return true;
