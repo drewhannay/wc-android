@@ -403,8 +403,9 @@ public class MenuParser {
 					}
 					days.push(toAdd);
 				}
+				
+				if(!days.empty()){
 				Day temp = days.peek();
-				if(days.peek()!=null){
 				String date = temp.date;
 				StringTokenizer st = new StringTokenizer(date);
 				int month = Integer.parseInt(st.nextToken());
