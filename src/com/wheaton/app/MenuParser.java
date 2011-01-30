@@ -195,10 +195,12 @@ public class MenuParser {
 					date+=temp + " " + lunch_token.nextToken();
 					date = date.contains("<")?date.substring(0,date.indexOf("<")):date;
 					StringTokenizer st = new StringTokenizer(date);
-					
+					int tempMonth = Integer.parseInt(st.nextToken());
+					int tempDay = Integer.parseInt(st.nextToken());
+					int tempYear = Integer.parseInt(st.nextToken());
 					//Optimization: If the date we're reading in is less than the current date, keep going.
-					if(Integer.parseInt(st.nextToken())<currentMonth || Integer.parseInt(st.nextToken()) < currentDay
-							|| Integer.parseInt(st.nextToken()) < currentYear)
+					if(tempMonth<currentMonth || (tempMonth==currentMonth&&tempDay<currentDay)
+							|| tempYear<currentYear)
 						continue;
 					
 					dates.add(date); //Adds this to the ArrayList of dates used for stack sorting
@@ -288,10 +290,12 @@ public class MenuParser {
 					date+=temp + " " + dinner_token.nextToken();
 					date = date.contains("<")?date.substring(0,date.indexOf("<")):date;
 					StringTokenizer st = new StringTokenizer(date);
-					
+					int tempMonth = Integer.parseInt(st.nextToken());
+					int tempDay = Integer.parseInt(st.nextToken());
+					int tempYear = Integer.parseInt(st.nextToken());
 					//Optimization: If the date we're reading in is less than the current date, keep going.
-					if(Integer.parseInt(st.nextToken())<currentMonth || Integer.parseInt(st.nextToken()) < currentDay
-							|| Integer.parseInt(st.nextToken()) < currentYear)
+					if(tempMonth<currentMonth || (tempMonth==currentMonth&&tempDay<currentDay)
+							|| tempYear<currentYear)
 						continue;
 					
 					datehack.add(date);
@@ -414,7 +418,7 @@ public class MenuParser {
 				if(currentMonth!=month||currentDay!=day||currentYear!=year){
 				
 				String printabledate = dayofweek.get(Calendar.DAY_OF_WEEK) + ", " + intToMonth.get(month) + " " + day;
-					days.push(new Day((currentMonth + " " + currentDay + " " + currentYear),printabledate,null,null,null,null));
+					days.push(new Day((-1 + " " + -1 + " " + 1880),printabledate,null,null,null,null));
 				}
 				
 				}
@@ -459,7 +463,7 @@ public class MenuParser {
 				continue;
 			}
 			int tempDay = Integer.parseInt(st.nextToken());
-				if(tempDay<currentDay){ //If the day is less than the current day, it must be old.
+				if(tempMonth==currentMonth&&tempDay<currentDay){ //If the day is less than the current day, it must be old.
 					days.pop(); //get rid of the old Day.
 					continue;
 				}
