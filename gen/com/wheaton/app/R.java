@@ -77,47 +77,49 @@ containing a value of this type.
         public static final int stalkernet_square=0x7f020010;
     }
     public static final class id {
-        public static final int about=0x7f07000e;
+        public static final int about=0x7f07000f;
         public static final int about_content=0x7f070000;
         public static final int ad=0x7f070001;
-        public static final int chapel=0x7f07000b;
-        public static final int contact=0x7f07001a;
-        public static final int curPic=0x7f070013;
-        public static final int delete=0x7f070019;
-        public static final int edit=0x7f070018;
-        public static final int leftButton=0x7f07000f;
-        public static final int links=0x7f07000c;
-        public static final int logo=0x7f070016;
-        public static final int map=0x7f07000d;
-        public static final int menu=0x7f070009;
-        public static final int menuHeader=0x7f070012;
+        public static final int chapel=0x7f07000c;
+        public static final int contact=0x7f07001b;
+        public static final int curPic=0x7f070014;
+        public static final int delete=0x7f07001a;
+        public static final int edit=0x7f070019;
+        public static final int foursquare=0x7f070008;
+        public static final int leftButton=0x7f070010;
+        public static final int links=0x7f07000d;
+        public static final int logo=0x7f070017;
+        public static final int map=0x7f07000e;
+        public static final int menu=0x7f07000a;
+        public static final int menuHeader=0x7f070013;
         public static final int name_display=0x7f070003;
         public static final int namet=0x7f070004;
-        public static final int rightButton=0x7f070010;
-        public static final int search_button=0x7f070017;
-        public static final int selection=0x7f070014;
-        public static final int stalkernet=0x7f07000a;
-        public static final int text_box=0x7f070015;
-        public static final int todayButton=0x7f070011;
+        public static final int rightButton=0x7f070011;
+        public static final int search_button=0x7f070018;
+        public static final int selection=0x7f070015;
+        public static final int stalkernet=0x7f07000b;
+        public static final int text_box=0x7f070016;
+        public static final int todayButton=0x7f070012;
         public static final int url=0x7f070006;
         public static final int url_display=0x7f070005;
         public static final int view_area=0x7f070002;
         public static final int web=0x7f070007;
-        public static final int welcome=0x7f070008;
+        public static final int welcome=0x7f070009;
     }
     public static final class layout {
         public static final int about=0x7f030000;
         public static final int chapel_main=0x7f030001;
         public static final int enter_url=0x7f030002;
         public static final int food_menu=0x7f030003;
-        public static final int link_item=0x7f030004;
-        public static final int links=0x7f030005;
-        public static final int main=0x7f030006;
-        public static final int map=0x7f030007;
-        public static final int menu_main=0x7f030008;
-        public static final int openfloor_main=0x7f030009;
-        public static final int results=0x7f03000a;
-        public static final int stalkernet_main=0x7f03000b;
+        public static final int foursquare=0x7f030004;
+        public static final int link_item=0x7f030005;
+        public static final int links=0x7f030006;
+        public static final int main=0x7f030007;
+        public static final int map=0x7f030008;
+        public static final int menu_main=0x7f030009;
+        public static final int openfloor_main=0x7f03000a;
+        public static final int results=0x7f03000b;
+        public static final int stalkernet_main=0x7f03000c;
     }
     public static final class menu {
         public static final int context_menu=0x7f060000;

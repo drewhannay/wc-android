@@ -1,8 +1,11 @@
 package com.wheaton.app;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,6 +14,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.webkit.WebView;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -32,63 +39,63 @@ public class Map extends MapActivity {
 	private static HashMap<String,String> checkins = new HashMap<String,String>();
 	
 	static{
-		checkins.put("Corinthian Co-op", "http://m.foursquare.com/checkin?vid=16001979");
-		checkins.put("Sports & Recreation Complex", "http://m.foursquare.com/checkin?vid=10540646");
-		checkins.put("Fischer Hall", "http://m.foursquare.com/checkin?vid=16001640");
-		checkins.put("Lawson Field", "http://m.foursquare.com/checkin?vid=16006762");
-		checkins.put("Buswell Memorial Library", "http://m.foursquare.com/checkin?vid=16002733");
-		checkins.put("Smith/Traber Halls", "http://m.foursquare.com/checkin?vid=16001585");
-		checkins.put("Hearth House", "http://m.foursquare.com/checkin?vid=16002339");
-		checkins.put("Phoenix House", "http://m.foursquare.com/checkin?vid=16002783");
-		checkins.put("Irving House", "http://m.foursquare.com/checkin?vid=16002822");
-		checkins.put("Hunter House", "http://m.foursquare.com/checkin?vid=16002850");
-		checkins.put("Fine Arts House", "http://m.foursquare.com/checkin?vid=16002885");
-		checkins.put("LeBar House", "http://m.foursquare.com/checkin?vid=16005441");
-		checkins.put("Country House", "http://m.foursquare.com/checkin?vid=16005530");
-		checkins.put("International House", "http://m.foursquare.com/checkin?vid=16005560");
-		checkins.put("Kay House", "http://m.foursquare.com/checkin?vid=16002974");
-		checkins.put("Fellowship House", "http://m.foursquare.com/checkin?vid=16004707");
-		checkins.put("Mathetai House", "http://m.foursquare.com/checkin?vid=16004792");
-		checkins.put("White House", "http://m.foursquare.com/checkin?vid=16004957");
-		checkins.put("Chase House", "http://m.foursquare.com/checkin?vid=16005007");
-		checkins.put("Graham House", "http://m.foursquare.com/checkin?vid=16002380");
-		checkins.put("Harbor House", "http://m.foursquare.com/checkin?vid=16005612");
-		checkins.put("Teresa House", "http://m.foursquare.com/checkin?vid=16005065");
-		checkins.put("Kilby House", "http://m.foursquare.com/checkin?vid=16005140");
-		checkins.put("Edman Memorial Chapel", "http://m.foursquare.com/checkin?vid=9045392");
-		checkins.put("Pierce Memorial Chapel", "http://m.foursquare.com/checkin?vid=12259236");
-		checkins.put("McAlister Conservatory", "http://m.foursquare.com/checkin?vid=16001770");
-		checkins.put("Adams Hall", "http://m.foursquare.com/checkin?vid=16005670");
-		checkins.put("Blanchard Hall", "http://m.foursquare.com/checkin?vid=16005711");
-		checkins.put("Memorial Student Center", "http://m.foursquare.com/checkin?vid=16005768");
-		checkins.put("Williston Hall", "http://m.foursquare.com/checkin?vid=16001660");
-		checkins.put("Student Services Building", "http://m.foursquare.com/checkin?vid=16005810");
-		checkins.put("Schell Hall", "http://m.foursquare.com/checkin?vid=16005845");
-		checkins.put("Wyngarden Health Center", "http://m.foursquare.com/checkin?vid=16005870");
-		checkins.put("Armerding Hall", "http://m.foursquare.com/checkin?vid=16005903");
-		checkins.put("Evans Hall", "http://m.foursquare.com/checkin?vid=16001327");
-		checkins.put("McManis Hall", "http://m.foursquare.com/checkin?vid=16001327");
-		checkins.put("Todd M. Beamer Student Center", "http://m.foursquare.com/checkin?vid=4906597");
-		checkins.put("Wheaton Science Center", "http://m.foursquare.com/checkin?vid=16001817");
-		checkins.put("Jenks Hall", "http://m.foursquare.com/checkin?vid=16005968");
-		checkins.put("Arena Theater", "http://m.foursquare.com/checkin?vid=16006014");
-		checkins.put("Billy Graham Center", "http://m.foursquare.com/checkin?vid=10646396");
-		checkins.put("McCully Stadium", "http://m.foursquare.com/checkin?vid=10207217");
-		checkins.put("Bean Stadium", "http://m.foursquare.com/checkin?vid=16006338");
-		checkins.put("Chase Service Center", "http://m.foursquare.com/checkin?vid=16005408");
-		checkins.put("Marion E. Wade Center", "http://m.foursquare.com/checkin?vid=16006384");
-		checkins.put("Westgate", "http://m.foursquare.com/checkin?vid=16006442");
-		checkins.put("Campus Utility", "http://m.foursquare.com/checkin?vid=16006486");
-		checkins.put("Crescent Apartments", "http://m.foursquare.com/checkin?vid=16006546");
-		checkins.put("Michigan Apartments", "http://m.foursquare.com/checkin?vid=16006546");
-		checkins.put("Saint and Elliot Residential Complex", "http://m.foursquare.com/checkin?vid=16006631");
-		checkins.put("Terrace Apartments", "http://m.foursquare.com/checkin?vid=16006656");
-		checkins.put("602 Chase", "http://m.foursquare.com/checkin?vid=16002150");
-		checkins.put("802 College", "http://m.foursquare.com/checkin?vid=16002229");
-		checkins.put("814 College", "http://m.foursquare.com/checkin?vid=16002229");
-		checkins.put("818 College", "http://m.foursquare.com/checkin?vid=16002229");
-		checkins.put("904 College", "http://m.foursquare.com/checkin?vid=16002229");
-		checkins.put("916 College", "http://m.foursquare.com/checkin?vid=16002229");
+		checkins.put("Corinthian Co-op", "16001979");
+		checkins.put("Sports & Recreation Complex", "10540646");
+		checkins.put("Fischer Hall", "16001640");
+		checkins.put("Lawson Field", "16006762");
+		checkins.put("Buswell Memorial Library", "16002733");
+		checkins.put("Smith/Traber Halls", "16001585");
+		checkins.put("Hearth House", "16002339");
+		checkins.put("Phoenix House", "16002783");
+		checkins.put("Irving House", "16002822");
+		checkins.put("Hunter House", "16002850");
+		checkins.put("Fine Arts House", "16002885");
+		checkins.put("LeBar House", "16005441");
+		checkins.put("Country House", "16005530");
+		checkins.put("International House", "16005560");
+		checkins.put("Kay House", "16002974");
+		checkins.put("Fellowship House", "16004707");
+		checkins.put("Mathetai House", "16004792");
+		checkins.put("White House", "16004957");
+		checkins.put("Chase House", "16005007");
+		checkins.put("Graham House", "16002380");
+		checkins.put("Harbor House", "16005612");
+		checkins.put("Teresa House", "16005065");
+		checkins.put("Kilby House", "16005140");
+		checkins.put("Edman Memorial Chapel", "9045392");
+		checkins.put("Pierce Memorial Chapel", "12259236");
+		checkins.put("McAlister Conservatory", "16001770");
+		checkins.put("Adams Hall", "16005670");
+		checkins.put("Blanchard Hall", "16005711");
+		checkins.put("Memorial Student Center", "16005768");
+		checkins.put("Williston Hall", "16001660");
+		checkins.put("Student Services Building", "16005810");
+		checkins.put("Schell Hall", "16005845");
+		checkins.put("Wyngarden Health Center", "16005870");
+		checkins.put("Armerding Hall", "16005903");
+		checkins.put("Evans Hall", "16001327");
+		checkins.put("McManis Hall", "16001327");
+		checkins.put("Todd M. Beamer Student Center", "4906597");
+		checkins.put("Wheaton Science Center", "16001817");
+		checkins.put("Jenks Hall", "16005968");
+		checkins.put("Arena Theater", "16006014");
+		checkins.put("Billy Graham Center", "10646396");
+		checkins.put("McCully Stadium", "10207217");
+		checkins.put("Bean Stadium", "16006338");
+		checkins.put("Chase Service Center", "16005408");
+		checkins.put("Marion E. Wade Center", "16006384");
+		checkins.put("Westgate", "16006442");
+		checkins.put("Campus Utility", "16006486");
+		checkins.put("Crescent Apartments", "16006546");
+		checkins.put("Michigan Apartments", "16006546");
+		checkins.put("Saint and Elliot Residential Complex", "16006631");
+		checkins.put("Terrace Apartments", "16006656");
+		checkins.put("602 Chase", "16002150");
+		checkins.put("802 College", "16002229");
+		checkins.put("814 College", "16002229");
+		checkins.put("818 College", "16002229");
+		checkins.put("904 College", "16002229");
+		checkins.put("916 College", "16002229");
 	}
 	
 	class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
@@ -118,23 +125,37 @@ public class Map extends MapActivity {
 		
 		@Override
 		protected boolean onTap(int index) {
-		  final OverlayItem item = mOverlays.get(index);
-		  AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-		  dialog.setTitle(item.getTitle());
-		  dialog.setMessage(item.getSnippet());
-		  if(checkins.containsKey(item.getTitle())){
-			  dialog.setPositiveButton("Check In with Foursquare", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(checkins.get(item.getTitle())));
-				    	startActivity(i);
-					}
-			  });
-		  }			
-		  dialog.setNegativeButton("Close", null);
-		  dialog.show();
-		  return true;
+			final OverlayItem item = mOverlays.get(index);
+			
+			LayoutInflater inflater = LayoutInflater.from(Map.this);
+		  	View alertDialogView = inflater.inflate(R.layout.foursquare, null);
+
+		  	WebView myWebView = (WebView) alertDialogView.findViewById(R.id.foursquare);
+		  	String webCode = "<html><body><p>";
+		  	//If the building has hours text, add that to the webCode String
+		  	if(item.getSnippet()!=null){
+		  		webCode += item.getSnippet();
+		  	}
+		  	webCode += hereNow(item);
+		  	
+		  	myWebView.loadData(webCode + "</p></body></html>", "text/html", "utf-8");
+		  
+		  	AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+		  	dialog.setTitle(item.getTitle());
+		  	dialog.setView(alertDialogView);
+		  	if(checkins.containsKey(item.getTitle())){
+		  		dialog.setPositiveButton("Check In with Foursquare", new DialogInterface.OnClickListener() {
+		  			public void onClick(DialogInterface dialog, int which) {
+		  				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(
+		  						"http://m.foursquare.com/checkin?vid=" + checkins.get(item.getTitle())));
+		  				startActivity(i);
+		  			}
+		  		});
+		  	}			
+		  	dialog.setNegativeButton("Close", null);
+		  	dialog.show();
+		  	return true;
 		}
-		
 	}
 	
 	@Override
@@ -163,13 +184,13 @@ public class Map extends MapActivity {
         MyItemizedOverlay itemizedoverlay = new MyItemizedOverlay(drawable, this);
         
         GeoPoint point = new GeoPoint(41868334,-88094650);
-        OverlayItem overlayitem = new OverlayItem(point, "Corinthian Co-op", "Hours:\nMonday: 1pm - 3pm\n" +
-        		"Tuesday: 10:30am - 12pm\nWednesday: 3pm - 5pm\nThursday: 11:30am - 12:30pm\nSaturday 10am -12pm");
+        OverlayItem overlayitem = new OverlayItem(point, "Corinthian Co-op", "Hours:<br />Monday: 1pm - 3pm<br />" +
+        		"Tuesday: 10:30am - 12pm<br />Wednesday: 3pm - 5pm<br />Thursday: 11:30am - 12:30pm<br />Saturday 10am -12pm");
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41870643,-88096887);
-        overlayitem = new OverlayItem(point, "Sports & Recreation Complex", "Hours:\nMonday-Friday: 6am - 11pm\n" +
-        		"Saturday: 8am - 11pm\nSunday: 2pm - 5pm");
+        overlayitem = new OverlayItem(point, "Sports & Recreation Complex", "Hours:<br />Monday-Friday: 6am - 11pm<br />" +
+        		"Saturday: 8am - 11pm<br />Sunday: 2pm - 5pm");
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41872681,-88096774);
@@ -182,8 +203,8 @@ public class Map extends MapActivity {
 
         
         point = new GeoPoint(41870120,-88099526);
-        overlayitem = new OverlayItem(point, "Buswell Memorial Library", "Hours:\nMonday-Thursday: 7:30am - 12am\n" +
-        	 "Friday: 7:30am - 10pm\n" + "Saturday: 8:30am - 10pm\nSunday: Closed");
+        overlayitem = new OverlayItem(point, "Buswell Memorial Library", "Hours:<br />Monday-Thursday: 7:30am - 12am<br />" +
+        	 "Friday: 7:30am - 10pm<br />" + "Saturday: 8:30am - 10pm<br />Sunday: Closed");
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41870707,-88094805);
@@ -287,8 +308,8 @@ public class Map extends MapActivity {
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41868890,-88097933);
-        overlayitem = new OverlayItem(point, "Student Services Building", "Hours:\nMonday - Thursday: 9am - 6pm\n"+
-"Friday: 9am - 5pm\nSaturday: 10am - 4pm");
+        overlayitem = new OverlayItem(point, "Student Services Building", "Hours:<br />Monday - Thursday: 9am - 6pm<br />"+
+"Friday: 9am - 5pm<br />Saturday: 10am - 4pm");
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41869685,-88098952);
@@ -296,8 +317,8 @@ public class Map extends MapActivity {
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41870056,-88098877);
-        overlayitem = new OverlayItem(point, "Wyngarden Health Center", "Clinic Hours:\nMonday - Thursday: 7:30am - 6:30pm\n"+
-        	"Friday: 7:30am - 5pm\nSaturday: 11am - 1pm");
+        overlayitem = new OverlayItem(point, "Wyngarden Health Center", "Clinic Hours:<br />Monday - Thursday: 7:30am - 6:30pm<br />"+
+        	"Friday: 7:30am - 5pm<br />Saturday: 11am - 1pm");
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41870611,-88098453);
@@ -329,7 +350,7 @@ public class Map extends MapActivity {
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41866737,-88099376);
-        overlayitem = new OverlayItem(point, "Billy Graham Center", "Museum Hours:\nMonday-Saturday: 9:30am - 5:30pm\n"+
+        overlayitem = new OverlayItem(point, "Billy Graham Center", "Museum Hours:<br />Monday-Saturday: 9:30am - 5:30pm<br />"+
         		"Sunday: 1pm - 5pm");
         itemizedoverlay.addOverlay(overlayitem);
         
@@ -346,7 +367,7 @@ public class Map extends MapActivity {
         itemizedoverlay.addOverlay(overlayitem);
         
         point = new GeoPoint(41870617,-88101181);
-        overlayitem = new OverlayItem(point, "Marion E. Wade Center", "Hours:\nMonday - Friday: 9am - 4pm\n"
+        overlayitem = new OverlayItem(point, "Marion E. Wade Center", "Hours:<br />Monday - Friday: 9am - 4pm<br />"
         		+ "Saturdays 9am - 12pm");
         itemizedoverlay.addOverlay(overlayitem);
         
@@ -407,6 +428,49 @@ public class Map extends MapActivity {
 	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
+	}
+	
+	private String hereNow(OverlayItem item){
+		String toReturn = "";
+		String input = "";
+		try {
+			Log.e("IN","https://api.foursquare.com/v2/venues/" + checkins.get(item.getTitle()) + "/herenow?oauth_token=XD3XXTRVVLOOGY3PL5NTI3RSJ1ZKWKC1OBU5DPJI53OFYXRV");
+			Scanner in = new Scanner((InputStream) new URL("https://api.foursquare.com/v2/venues/" + checkins.get(item.getTitle()) + "/herenow?oauth_token=XD3XXTRVVLOOGY3PL5NTI3RSJ1ZKWKC1OBU5DPJI53OFYXRV").getContent());
+		
+		
+			
+			while(in.hasNext()){
+				input += in.next();
+			}
+			//in.close();
+			
+		} catch (Exception e) {
+			Log.e("MAP", e.toString());
+		}
+		try{	
+			String url = "";
+			input = input.substring(input.indexOf("count\":")+7);
+			Log.e("First Check",input);
+			toReturn += "<center>";
+			for(int n = Integer.parseInt(input.substring(0,input.indexOf(',')));n>0;n--){
+				Log.e("N EQUALS", n+"");
+				input = input.substring(input.indexOf("http://"));
+				url = input.substring(0, input.indexOf("\""));
+				input = input.substring(input.indexOf("\""));
+				Log.e("URL EQUALS", url);
+				toReturn += "<img src=\"" + url + "\" width=\"75\" height=\"75\" />  ";
+			}
+			toReturn += "</center>";
+			
+			if(!toReturn.equals("<center></center>")){
+				toReturn = "<p>Here Now:</p>" + toReturn;
+				Log.e("TORETURN",toReturn);
+			}
+		} catch (Exception e) {
+			Log.e("MAP2", e.toString());
+		}
+		
+		return toReturn;
 	}
 
 }
