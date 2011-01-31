@@ -81,6 +81,7 @@ containing a value of this type.
         public static final int about_content=0x7f070000;
         public static final int ad=0x7f070001;
         public static final int chapel=0x7f07000c;
+        public static final int clear_cache=0x7f07001c;
         public static final int contact=0x7f07001b;
         public static final int curPic=0x7f070014;
         public static final int delete=0x7f07001a;
@@ -131,6 +132,7 @@ containing a value of this type.
         public static final int add_title=0x7f05000a;
         public static final int app_name=0x7f050001;
         public static final int cancel_button=0x7f05000d;
+        public static final int clear_cache=0x7f050010;
         public static final int contact_label=0x7f050002;
         public static final int dinner_label=0x7f050007;
         public static final int edit_title=0x7f05000b;

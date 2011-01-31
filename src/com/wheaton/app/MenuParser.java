@@ -107,16 +107,14 @@ public class MenuParser {
 				//read in more days from the file (so we don't have to parse)
 				boolean readin = false;
 				for(String a: con.fileList()){
-					if(a.equals("days_cache1"))
+					if(a.equals("days_cache"))
 						readin = true;
-					else if(a.equals("days_cache"))
-						con.deleteFile("days_cache");
 				} 
 				if(readin){
         		FileInputStream f_in = null;
 				try {
 					Log.e("reading in","Reading file...");
-					f_in = con.openFileInput("days_cache1");
+					f_in = con.openFileInput("days_cache");
 					
 					// Read object using ObjectInputStream
 					ObjectInputStream obj_in = new ObjectInputStream (f_in);
@@ -438,7 +436,7 @@ public class MenuParser {
 		
 		//Either way, at the end of the method, write the new object to data.
 		try{
-			FileOutputStream f_out = con.openFileOutput("days_cache1", Context.MODE_PRIVATE);
+			FileOutputStream f_out = con.openFileOutput("days_cache", Context.MODE_PRIVATE);
 			// Write object with ObjectOutputStream
 			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 			// Write object out to disk

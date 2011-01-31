@@ -168,6 +168,11 @@ public class MainScreen extends Activity implements OnClickListener {
 					Uri.parse("https://spreadsheets.google.com/viewform?formkey=dDNFamI5UGJqRDZmNFRkZW96ZHEybXc6MQ")); 
 			startActivity(i);
 			return true;
+		case R.id.clear_cache:
+			//Delete any cached data
+			for(String a:this.fileList())
+				deleteFile(a);
+			return true;
 		}
 		return false;
 	}

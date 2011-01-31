@@ -3,4 +3,6 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:id="@+id/contact"
   	android:title="@string/contact_label" />
+  <item android:id="@+id/clear_cache"
+  	android:title="@string/clear_cache" />
 </menu>
