@@ -178,7 +178,7 @@ public class MenuParser {
 					}
 					
 					//Get rid of trailing tags
-					lunchline = lunchline.substring(0,lunchline.indexOf("<"));
+					lunchline = lunchline.substring(0,lunchline.contains("<")?lunchline.indexOf("<"):lunchline.length());
 					
 					//To process date information
 					StringTokenizer lunch_token = new StringTokenizer(lunchline);
@@ -426,7 +426,7 @@ public class MenuParser {
 				}
 				}catch(Exception e){
 					e.printStackTrace();
-					Log.e("MenuParser",e.getMessage()+"");
+					Log.e("MenuParser",e.getMessage()+" " + e);
 				}
 		}
 		else {
