@@ -426,7 +426,7 @@ public class MenuParser {
 				}
 				}catch(Exception e){
 					e.printStackTrace();
-					Log.e("MenuParser",e.getMessage());
+					Log.e("MenuParser",e.getMessage()+"");
 				}
 		}
 		else {
@@ -442,7 +442,7 @@ public class MenuParser {
 			// Write object out to disk
 			obj_out.writeObject (days);
 		}catch(Exception e){
-			Log.e("MenuParserFileIO", e.toString());
+			Log.e("MenuParserFileIO", e.toString()+"");
 		}
 	}
 
