@@ -99,31 +99,7 @@ public class MenuParser {
          * @param con Used for file IO. 
          */
         public static void parse(Context con){
-                if(days.empty()){
-                        if(con.fileList().length != 0){  //in the case of an empty days stack, try to
-                                //read in more days from the file (so we don't have to parse)
-                                boolean readin = false;
-                                for(String a: con.fileList()){
-                                        if(a.equals("days_cache"))
-                                                readin = true;
-                                } 
-                                if(readin){
-                        FileInputStream f_in = null;
-                                try {
-                                        Log.e("reading in","Reading file...");
-                                        f_in = con.openFileInput("days_cache");
-                                        
-                                        // Read object using ObjectInputStream
-                                        ObjectInputStream obj_in = new ObjectInputStream (f_in);
-                                        days = (Stack<Day>) obj_in.readObject(); //read in the stack, if there.
-                                        crop(con,true); //This will hopefully crop any old days.
-                                        Log.e("IO","Finished reading in");
-                                        return;
-                                }catch(Exception e){
-                                        Log.e("MenuParserOpenFile", e.toString());
-                                }
-                                }
-                        }
+                
                         //if no file, parse the html
                         try{
                                 Scanner menu = new Scanner((InputStream)(new URL("http://dl.dropbox.com/u/3579162/menu.txt")).getContent());
@@ -193,14 +169,13 @@ public class MenuParser {
                                         days.push(parsedDays[i]);
                                 }
                                 
-                                crop(con,false);
+                                crop(con);
                         }catch(Exception e){
                                 e.printStackTrace();
-                                Log.e("MenuParser",e.toString());
+                                
                         }
                         
-                }
-                crop(con,true);
+                
                 
         }
         /**
@@ -244,7 +219,7 @@ public class MenuParser {
          * @param con Used to pass back in the call to parse,
          * in the event that we have emptied the stack by cropping.
          */
-        public static void crop(Context con, boolean reparse){
+        public static void crop(Context con){
                 while(!days.empty()){ //as long as there's still Days in the stack keep looking
                         StringTokenizer st = new StringTokenizer((days.peek()).date); //Grab the date from the Day.
                         int tempMonth = Integer.parseInt(st.nextToken());
@@ -263,15 +238,6 @@ public class MenuParser {
                                 continue;
                         }
                         break;
-                }
-                //If we've emptied the stack, fill it again. This will
-                //perform checks again and determine to parse the HTML.
-                //Here would be a good use for a goto if java still had one
-                //to avoid extra checking. But this will never happen more than
-                //once a day, at the most.
-                if(reparse && days.empty()){
-                        con.deleteFile("days_cache");
-                        parse(con);
                 }
         }
         
