@@ -162,30 +162,7 @@ public class MenuParser {
                                 next.lunchHours = line;
                                 
                                 if(!line.contains("Closed")){
-                                while(!line.contains("---Dinner---")){
-                                        while(!line.contains("Station:")&&!line.contains("---Dinner---")){
-                                                line = menu.nextLine();
-                                                }
-                                        offset = 1;
-                                        if(line.contains(": "))
-                                                offset++;
-                                        line = line.substring(line.indexOf(":")+offset);
-                                        lunchStations.add(line);
-                                        
-                                        line = menu.nextLine();
-                                        offset = 1;
-                                        if(line.contains(": "))
-                                                offset++;
-                                        line = line.substring(line.indexOf(":")+offset);
-                                        String lunchString = "";
-                                        while(!line.contains("Station: ")&&!line.contains("---Dinner---")){
-                                                lunchString+=line;
-                                                line = menu.nextLine();
-                                        }
-                                        
-                                        lunchEntrees.add(lunchString);
-                                        
-                                        }
+                                	parseMeal(line,lunchStations,lunchEntrees,menu,"---Dinner---");
                                 }
                                 else{
                                         
@@ -201,29 +178,7 @@ public class MenuParser {
                                 line = line.substring(line.indexOf(":")+offset);
                                 next.dinnerHours = line;
                                 if(!line.contains("Closed")){
-                                while(!line.contains("------")){
-                                        while(!line.contains("Station:")&&!line.contains("------")){
-                                                line = menu.nextLine();
-                                                }
-                                        offset = 1;
-                                        if(line.contains(": "))
-                                                offset++;
-                                        line = line.substring(line.indexOf(":")+offset);
-                                        dinnerStations.add(line);
-                                        line = menu.nextLine();
-                                        offset = 1;
-                                        if(line.contains(": "))
-                                                offset++;
-                                        line = line.substring(line.indexOf(":")+offset);
-                                        String dinnerString = "";
-                                        
-                                        while(!line.contains("Station:")&&!line.contains("------")){
-                                                dinnerString+=line;
-                                                line = menu.nextLine();
-                                        }
-                                        dinnerEntrees.add(dinnerString);
-                                        
-                                        }
+                                	parseMeal(line,dinnerStations,dinnerEntrees,menu,"------");
                                 }
                                 else{
                                         dinnerStations = null;
@@ -237,16 +192,52 @@ public class MenuParser {
                                 for(int i = 6;i>-1;i--){
                                         days.push(parsedDays[i]);
                                 }
+                                
                                 crop(con,false);
                         }catch(Exception e){
                                 e.printStackTrace();
                                 Log.e("MenuParser",e.toString());
                         }
-                        crop(con,true);
+                        
                 }
+                crop(con,true);
                 
         }
-
+        /**
+         * Parses either a lunch or dinner from the document.
+         * @param line The current line
+         * @param mealStations The current array list of meal station names
+         * @param mealEntrees The current array list of meal entrees
+         * @param menu The scanner providing access to the file
+         * @param endToken What string marks the end of the meal? "---Dinner---" for lunch
+         * and "------" for dinner. 
+         */
+        public static void parseMeal(String line,ArrayList<String> mealStations,ArrayList<String> mealEntrees,Scanner menu,String endToken){
+        	while(!line.contains(endToken)){
+                while(!line.contains("Station:")&&!line.contains(endToken)){
+                        line = menu.nextLine();
+                        }
+               int offset = 1;
+                if(line.contains(": "))
+                        offset++;
+                line = line.substring(line.indexOf(":")+offset);
+                mealStations.add(line);
+                line = menu.nextLine();
+                offset = 1;
+                if(line.contains(": "))
+                        offset++;
+                line = line.substring(line.indexOf(":")+offset);
+                String string = "";
+                
+                while(!line.contains("Station:")&&!line.contains(endToken)){
+                        string+=line;
+                        line = menu.nextLine();
+                }
+                mealEntrees.add(string);
+                
+                }
+        }
+        
         
         /**
          * Crop the old days from the Days stack.
