@@ -55,6 +55,15 @@ public String specialMessage = "";
  */
 public String printableDate = "";
 
+/*
+ * Current lunch hours.
+ */
+public String lunchHours = "";
+
+/*
+ * Current dinner hours.
+ */
+public String  dinnerHours = "";
 	/**
 	 * Most common constructor, sets up usual information.
 	 * @param date to set the date
@@ -73,6 +82,12 @@ public String printableDate = "";
 	
 	}
 	/**
+	 * Default constructor, set fields as we go along to save storage room.
+	 */
+	public Day(){
+		
+	}
+	/**
 	 * Special case constructor to account for unusual circumstances.
 	 * Currently unused.
 	 * @param message The message to display.
@@ -88,7 +103,7 @@ public String printableDate = "";
 	 * @return A String containing the HTML-formatted lunch information from this Day.
 	 */
 	public String lunchPrint(){
-		String toReturn = "";
+	String toReturn = "";
 		if(lunchStations!=null){
 			for(int i = 0;i<lunchStations.size();i++){
 				toReturn += "<h3><em>"+ lunchStations.get(i) + "</em></h3><p>" + lunchEntrees.get(i) + "</p><hr/>";
@@ -100,6 +115,7 @@ public String printableDate = "";
 			toReturn += "<p>No Lunch Listed.</p>";
 		}
 		return toReturn;
+	
 	}
 	
 	/**
@@ -120,5 +136,6 @@ public String printableDate = "";
 			toReturn += "<p>No Dinner Listed.</p>";
 		}
 		return toReturn;
+		
 	}
 }

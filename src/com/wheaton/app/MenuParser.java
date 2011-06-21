@@ -1,10 +1,8 @@
 package com.wheaton.app;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,7 +88,7 @@ public class MenuParser {
 	
 	@SuppressWarnings("unchecked")
 	
-	
+		
 	/**
 	 * Trim the stack of Days, if it exists, and read in
 	 * the file, if it exists and the stack does not. If 
@@ -101,7 +99,6 @@ public class MenuParser {
 	 * @param con Used for file IO. 
 	 */
 	public static void parse(Context con){
-		
 		if(days.empty()){
 			if(con.fileList().length != 0){  //in the case of an empty days stack, try to
 				//read in more days from the file (so we don't have to parse)
@@ -127,323 +124,127 @@ public class MenuParser {
 				}
 				}
 			}
-			//if no file, parse the HTML
-			
+			//if no file, parse the html
 			try{
-				//Create URL Objects to read in the lunch and dinner menus from the Internet.
-				URL lunchmenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu.html"); 
-				URL dinnermenu = new URL("http://www.cafebonappetit.com/wheaton/cafes/anderson/weekly_menu2.html");
-				//Make Scanners from the URLs.
-				Scanner lunchin = new Scanner((InputStream) lunchmenu.getContent());
-				Scanner dinnerin = new Scanner((InputStream) dinnermenu.getContent());
-				//Create Lunch and Dinner line strings.
-				String lunchline = "", dinnerline = "";
-				
-				//Hold all the ArrayList<String>s for all the Days of the week, for lunch and dinner.
-				ArrayList<ArrayList<String>> allLunchStations = new ArrayList<ArrayList<String>>(); 
-				ArrayList<ArrayList<String>> allLunchItems = new ArrayList<ArrayList<String>>();
-				ArrayList<ArrayList<String>> allDinnerStations = new ArrayList<ArrayList<String>>();
-				ArrayList<ArrayList<String>> allDinnerItems = new ArrayList<ArrayList<String>>();
-				
-				//Keep track of all the dates found and store them in two forms.
-				ArrayList<String> dates = new ArrayList<String>(); 
-				ArrayList<String> printableDates = new ArrayList<String>();
-				
-				//While there's more things in the lunch menu to read...
-				while(lunchin.hasNext()){ 
-					//Cut off everything before the first date by looking for specific HTML.
-					while(lunchin.hasNext()&&!lunchline.contains("align=\"center\"><strong><br>")
-							&&!(lunchline = lunchin.nextLine()).contains("align=\"center\"><strong><br>")){
-						//Do nothing. Loop is only used for getting to the next date in the HTML code.
+				Scanner menu = new Scanner((InputStream)(new URL("http://dl.dropbox.com/u/3579162/menu.txt")).getContent());
+				String line = menu.nextLine();
+				Day[] parsedDays = new Day[7];
+				//main loop, until EOF
+				for(int i = 0;i<7;i++){
+					while(!line.contains("Date:")){
+						line = menu.nextLine();
 					}
+					Day next = new Day();
+					ArrayList<String> lunchStations = new ArrayList<String>();
+					ArrayList<String> dinnerStations = new ArrayList<String>();
+					ArrayList<String> lunchEntrees = new ArrayList<String>();
+					ArrayList<String> dinnerEntrees = new ArrayList<String>();
+					line = line.substring(line.indexOf(" ")+1);
+					next.printableDate = line; // get the printable version of the date.
 					
-					//If we're out of code, just stop.
-					if(!lunchin.hasNext()){
-						break;
-					}
-					//ArrayList<String>s to hold the lunch stations and items for this day.
-					ArrayList<String> lunchstations = new ArrayList<String>();
-					ArrayList<String> lunchitems = new ArrayList<String>();
+					line = line.substring(line.indexOf(" ")+1);
+					int month = monthToInt.get(line.substring(0,line.indexOf(" ")));
+					line = line.substring(line.indexOf(" ") +1);
+					int day_n = Integer.parseInt(line.substring(0,line.indexOf(",")));
+					line = line.substring(line.indexOf(" ")+1); //reliant on the fact that there IS a space
+					//between the comma and year.
+					int year = Integer.parseInt(line); //this means no space at end of the line, try to 
+					//fix this later.
+					next.date = month + " " + day_n + " " + year;
 					
-					//Cut off unnecessary heading tags
-					lunchline = lunchline.substring(lunchline.indexOf("\"center\"><strong><br>"));
-					
-					//Take care of random space that occasionally occurs before the day of the week.
-					if(lunchline.indexOf(' ')==21){
-						lunchline = lunchline.substring(22);
-					}
-					//Normal case
-					else {
-						lunchline = lunchline.substring(21); 
-					}
-					
-					//Get rid of trailing tags
-					lunchline = lunchline.substring(0,lunchline.indexOf("<"));
-					
-					//To process date information
-					StringTokenizer lunch_token = new StringTokenizer(lunchline);
-					
-					lunch_token.nextToken();
-					String date = "";
-					
-					//Formatting stuff to get the date in correctly in the form month day year (IE, 11 20 2010)
-					date += monthToInt.get(lunch_token.nextToken())+ " ";
-					String temp = lunch_token.nextToken();
-					temp = (temp.contains(",")?temp.substring(0,temp.length()-1):temp);
-					date+=temp + " " + lunch_token.nextToken();
-					date = date.contains("<")?date.substring(0,date.indexOf("<")):date;
-					StringTokenizer st = new StringTokenizer(date);
-					int tempMonth = Integer.parseInt(st.nextToken());
-					int tempDay = Integer.parseInt(st.nextToken());
-					int tempYear = Integer.parseInt(st.nextToken());
-					//Optimization: If the date we're reading in is less than the current date, keep going.
-					if(tempMonth<currentMonth || (tempMonth==currentMonth&&tempDay<currentDay)
-							|| tempYear<currentYear)
-						continue;
-					
-					dates.add(date); //Adds this to the ArrayList of dates used for stack sorting
-					
-					//Remove the year from the printableDate and add to the list.
-					lunchline = lunchline.substring(0,(lunchline.length()-6));
-					printableDates.add(lunchline);
-					
-					while(lunchin.hasNext()&&!lunchline.contains("align=\"center\"><strong><br>")){
-						//Move to the name of the next lunch station.
-						while(lunchin.hasNext()&&!lunchline.contains("<strong>")){
-							lunchline = lunchin.nextLine();
-						}
-
-						//If we're out of code, stop.
-						if(!lunchin.hasNext()){
-							break;
-						}
-						//If we're at the right spot, stop.
-						if(lunchline.contains("align=\"center\"><strong><br>")){
-							break;
-						}
-						
-						//Crop the line to contain only the wanted station name.
-						lunchline = lunchline.substring(lunchline.indexOf("ng>")+3);
-						lunchline = lunchline.substring(0,lunchline.indexOf("<"));
-
-						//Cover case of grabbing an empty lunch station name.
-						if(lunchline.equals("")){
-							continue;
-						}
-						
-						//Find and crop the items in that station
-						lunchstations.add(lunchline);
-						lunchline = lunchin.nextLine();
-						lunchline = lunchline.substring(lunchline.indexOf(">")+1);
-						
-
-						lunchitems.add(lunchline);
-					
-					}
-					//When done with the day, add the ArrayLists to the appropriate ArrayList of ArrayList<String>s.
-					allLunchStations.add(lunchstations); 
-					allLunchItems.add(lunchitems);
+				while(!line.contains("Hours:")){
+					line = menu.nextLine();
 				}
-				ArrayList<String> datehack = new ArrayList<String>();
-				ArrayList<String> printableDinnerDates = new ArrayList<String>();
-				//Do almost the same thing for dinner.
-				while(dinnerin.hasNext()){
-					//Cut off everything before the first date by looking for specific HTML.
-					while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")&&
-							!(dinnerline = dinnerin.nextLine()).contains("align=\"center\"><strong><br>")){
-						//Do nothing. Loop is only used for getting to the next date in the HTML code.
-					}
-					//If we're out of code, just stop.
-					if(!dinnerin.hasNext()){
-						break;
-					}
-					//ArrayList<String>s to hold the dinner stations and items for this day.
-					ArrayList<String> dinnerstations = new ArrayList<String>();
-					ArrayList<String> dinneritems = new ArrayList<String>(); 
-					//Cut off unnecessary heading tags
-					dinnerline = dinnerline.substring(dinnerline.indexOf("\"center\"><strong><br>"));
-					
-					//Take care of random space that occasionally occurs before the day of the week.
-					if(dinnerline.indexOf(' ')==21){
-						dinnerline = dinnerline.substring(22);
-					}
-					//Normal case
-					else {
-						dinnerline = dinnerline.substring(21); 
-					}
-					
-					//Get rid of trailing tags
-					dinnerline =dinnerline.substring(0,dinnerline.indexOf("<"));
-					
-					//To process date information
-					StringTokenizer dinner_token = new StringTokenizer(dinnerline);
-					
-					dinner_token.nextToken();
-					String date = "";
-					
-					//Formatting stuff to get the date in correctly in the form month day year (IE, 11 20 2010)
-					date += monthToInt.get(dinner_token.nextToken())+ " ";
-					String temp = dinner_token.nextToken();
-					temp = (temp.contains(",")?temp.substring(0,temp.length()-1):temp);
-					date+=temp + " " + dinner_token.nextToken();
-					date = date.contains("<")?date.substring(0,date.indexOf("<")):date;
-					StringTokenizer st = new StringTokenizer(date);
-					int tempMonth = Integer.parseInt(st.nextToken());
-					int tempDay = Integer.parseInt(st.nextToken());
-					int tempYear = Integer.parseInt(st.nextToken());
-					//Optimization: If the date we're reading in is less than the current date, keep going.
-					if(tempMonth<currentMonth || (tempMonth==currentMonth&&tempDay<currentDay)
-							|| tempYear<currentYear)
-						continue;
-					
-					datehack.add(date);
-					dinnerline = dinnerline.substring(0,(dinnerline.length()-6));
-					printableDinnerDates.add(dinnerline);
-					while(dinnerin.hasNext()&&!dinnerline.contains("align=\"center\"><strong><br>")){
-						//Move to the name of the next dinner station.
-						while(dinnerin.hasNext()&&!dinnerline.contains("<strong>")){
-							dinnerline = dinnerin.nextLine();
-						}
-						
-						//If we're out of code, stop.
-						if(!dinnerin.hasNext()){
-							break;
-						}
-						//If we're at the right spot, stop.
-						if(dinnerline.contains("align=\"center\"><strong><br>")){
-							break;
-						}
-						
-						//Crop the line to contain only the wanted station name.
-						dinnerline = dinnerline.substring(dinnerline.indexOf("ng>")+3);
-						dinnerline = dinnerline.substring(0,dinnerline.indexOf("<"));
-						
-						
-						//Cover case of grabbing an empty dinner station name.
-						if(dinnerline.equals("")){
-							continue;
-						}
-						
-						//Find and crop the items in that station
-						dinnerstations.add(dinnerline);
-						dinnerline = dinnerin.nextLine();
-						dinnerline = dinnerline.substring(dinnerline.indexOf(">")+1);
-						
-
-						dinneritems.add(dinnerline);
-					
-					}
-					//When done with the day, add the ArrayLists to the appropriate ArrayList of ArrayList<String>s.
-					allDinnerStations.add(dinnerstations);	
-					allDinnerItems.add(dinneritems);
-				}
+				int offset = 1;
+				if(line.contains(": "))
+					offset++;
+				line = line.substring(line.indexOf(":")+offset);
+				next.lunchHours = line;
 				
-				
-				//Create the stack of Days
-				for(int i = allLunchStations.size()-1,j = allDinnerStations.size()-1;i>-1;){
-					ArrayList<String> dinnerstations = (allDinnerStations.size()<=j||j<0?null:allDinnerStations.get(j));
-					ArrayList<String> dinneritems = (allDinnerItems.size()<=j||j<0?null:allDinnerItems.get(j));
-					ArrayList<String> lunchstations = (allLunchStations.size()<=i?null:allLunchStations.get(i));
-					ArrayList<String> lunchitems = (allLunchItems.size()<=i?null:allLunchItems.get(i));
-					String printableDate = printableDates.get(i);
-					String printableDinnerDate = (printableDinnerDates.size()<j||j<0?"a":printableDinnerDates.get(j));
-					String date = dates.get(i);
-					String dateTest = (datehack.size()<j||j<0?"a":datehack.get(j));
-					Day toAdd = null;
-					if(printableDinnerDate.equals("a")){
-						toAdd = new Day(date,printableDate,lunchstations,lunchitems,null,null);
-						i--;
-					}
-					else if(!date.equals(dateTest)){
-						StringTokenizer st = new StringTokenizer(date);
-						StringTokenizer st2 = new StringTokenizer(dateTest);
-						int lunchmonth = Integer.parseInt(st.nextToken());
-						int dinnermonth = Integer.parseInt(st2.nextToken());
-						int lunchday = Integer.parseInt(st.nextToken());
-						int dinnerday = Integer.parseInt(st2.nextToken());
-						int lunchyear = Integer.parseInt(st.nextToken());
-						int dinneryear = Integer.parseInt(st.nextToken());
-						
-						if(lunchyear!=dinneryear){
-							if(lunchyear<dinneryear){
-								toAdd = new Day(date,printableDate,lunchstations,lunchitems,null,null);
-								i--;
-							}
-							else{
-								toAdd = new Day(dateTest,printableDinnerDate,null,null,dinnerstations,dinneritems);
-								j--;
-							}
-							
+				if(!line.contains("Closed")){
+				while(!line.contains("---Dinner---")){
+					while(!line.contains("Station:")&&!line.contains("---Dinner---")){
+						line = menu.nextLine();
 						}
-						else if(lunchmonth!=dinnermonth){
-							if(lunchmonth<dinneryear){
-								toAdd = new Day(date,printableDate,lunchstations,lunchitems,null,null);
-								i--;
-							}
-							else{
-								toAdd = new Day(dateTest,printableDinnerDate,null,null,dinnerstations,dinneritems);
-								j--;
-							}
-							
-						}
-						else if(lunchday!=dinnerday){
-							if(lunchday<dinnerday){
-								toAdd = new Day(date,printableDate,lunchstations,lunchitems,null,null);
-								i--;
-							}
-							else{
-								toAdd = new Day(dateTest,printableDinnerDate,null,null,dinnerstations,dinneritems);
-								j--;
-							}
-							
-						}
+					offset = 1;
+					if(line.contains(": "))
+						offset++;
+					line = line.substring(line.indexOf(":")+offset);
+					lunchStations.add(line);
+					
+					line = menu.nextLine();
+					offset = 1;
+					if(line.contains(": "))
+						offset++;
+					line = line.substring(line.indexOf(":")+offset);
+					String lunchString = "";
+					while(!line.contains("Station: ")&&!line.contains("---Dinner---")){
+						lunchString+=line;
+						line = menu.nextLine();
 					}
-					else{
-						toAdd = new Day(date,printableDate,lunchstations,lunchitems,dinnerstations,dinneritems);
-						i--;
-						j--;
+					
+					lunchEntrees.add(lunchString);
+					
 					}
-					days.push(toAdd);
-				}
-				
-				if(!days.empty()){
-				Day temp = days.peek();
-				String date = temp.date;
-				StringTokenizer st = new StringTokenizer(date);
-				int month = Integer.parseInt(st.nextToken());
-				int day = Integer.parseInt(st.nextToken());
-				int year = Integer.parseInt(st.nextToken());
-				if(currentMonth!=month||currentDay!=day||currentYear!=year){
-				
-				String printabledate = dayofweek.get(Calendar.DAY_OF_WEEK) + ", " + intToMonth.get(month) + " " + day;
-					days.push(new Day((-1 + " " + -1 + " " + 1880),printabledate,null,null,null,null));
-				}
-				
 				}
 				else{
-					Log.e("test",Calendar.DAY_OF_WEEK+"");
-					days.push(new Day((currentMonth + " " + currentDay + " " + currentYear),(intToMonth.get(currentMonth) + " " + currentDay),null,null,null,null));
+					
+					lunchStations = null;
 				}
-				}catch(Exception e){
-					e.printStackTrace();
-					Log.e("MenuParser",e.getMessage());
+				
+				while(!line.contains("Hours:")){
+					line = menu.nextLine();
 				}
-		}
-		else {
-			//The Day Stack was not empty, so we need to remove any old days.
-			crop(con, false);
+				offset = 1;
+				if(line.contains(": "))
+					offset++;
+				line = line.substring(line.indexOf(":")+offset);
+				next.dinnerHours = line;
+				if(!line.contains("Closed")){
+				while(!line.contains("------")){
+					while(!line.contains("Station:")&&!line.contains("------")){
+						line = menu.nextLine();
+						}
+					offset = 1;
+					if(line.contains(": "))
+						offset++;
+					line = line.substring(line.indexOf(":")+offset);
+					dinnerStations.add(line);
+					line = menu.nextLine();
+					offset = 1;
+					if(line.contains(": "))
+						offset++;
+					line = line.substring(line.indexOf(":")+offset);
+					String dinnerString = "";
+					
+					while(!line.contains("Station:")&&!line.contains("------")){
+						dinnerString+=line;
+						line = menu.nextLine();
+					}
+					dinnerEntrees.add(dinnerString);
+					
+					}
+				}
+				else{
+					dinnerStations = null;
+				}
+				next.lunchEntrees = lunchEntrees;
+				next.dinnerEntrees = dinnerEntrees;
+				next.lunchStations = lunchStations;
+				next.dinnerStations = dinnerStations;
+				parsedDays[i] = next;
+				}
+				for(int i = 6;i>-1;i--){
+					days.push(parsedDays[i]);
+				}
+				crop(con,false);
+			}catch(Exception e){
+				e.printStackTrace();
+				Log.e("MenuParser",e.toString());
+			}
+			crop(con,true);
 		}
 		
-		//Either way, at the end of the method, write the new object to data.
-		try{
-			FileOutputStream f_out = con.openFileOutput("days_cache", Context.MODE_PRIVATE);
-			// Write object with ObjectOutputStream
-			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
-			// Write object out to disk
-			obj_out.writeObject (days);
-		}catch(Exception e){
-			Log.e("MenuParserFileIO", e.toString());
-		}
 	}
 
 	
