@@ -62,12 +62,12 @@ public class MainScreen extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-//		
-//		AdRequest request = new AdRequest();
-//
-//		request.addTestDevice(AdRequest.TEST_EMULATOR);
-//
-//		
+		
+		AdRequest request = new AdRequest();
+
+		request.addTestDevice(AdRequest.TEST_EMULATOR);
+
+		
 		
 		stalkernetLauncher = findViewById(R.id.stalkernet);
 		stalkernetLauncher.setOnClickListener(this);
