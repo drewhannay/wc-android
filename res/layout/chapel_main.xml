@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
 
-	<com.admob.android.ads.AdView
+<com.google.ads.AdView
 		android:id="@+id/ad"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
+		ads:adUnitId="a14d2a372c31403"
+		ads:adSize="BANNER"
+        ads:loadAdOnCreate="true"
 		/>
 	<ViewAnimator
 		android:id="@+id/view_area"

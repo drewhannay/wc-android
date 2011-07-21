@@ -2,6 +2,7 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:myapp="http://schemas.android.com/apk/res/com.wheaton.app"
+  xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
 
@@ -32,11 +33,14 @@
 		android:layout_height="75dip"
 		android:layout_below="@id/todayButton"
 		android:background="@drawable/menu_header"	/>
-	<com.admob.android.ads.AdView
+<com.google.ads.AdView
 		android:id="@+id/ad"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
+		ads:adUnitId="a14d2a372c31403"
+		ads:adSize="BANNER"
+        ads:loadAdOnCreate="true"
 		/>
 	<ViewAnimator
 		android:id="@+id/view_area"

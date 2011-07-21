@@ -1,5 +1,7 @@
 package com.wheaton.app;
 
+import com.google.ads.AdRequest;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,8 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-
-import com.admob.android.ads.AdManager;
 
 /**
  * Class to run the main screen of the application.
@@ -62,10 +62,12 @@ public class MainScreen extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		AdManager.setTestDevices( new String[] { 
-			      AdManager.TEST_EMULATOR, // Android emulator 
-			      "E83D20734F72FB3108F104ABC0FFC738", // My T-Mobile G1 Test Phone 
-		});
+		
+//		AdRequest request = new AdRequest();
+//
+//		request.addTestDevice(AdRequest.TEST_EMULATOR);
+
+		
 		
 		stalkernetLauncher = findViewById(R.id.stalkernet);
 		stalkernetLauncher.setOnClickListener(this);
