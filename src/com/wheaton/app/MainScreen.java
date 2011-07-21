@@ -63,9 +63,9 @@ public class MainScreen extends Activity implements OnClickListener {
 		setContentView(R.layout.main);
 		
 		
-//		AdRequest request = new AdRequest();
-//
-//		request.addTestDevice(AdRequest.TEST_EMULATOR);
+		AdRequest request = new AdRequest();
+
+		request.addTestDevice(AdRequest.TEST_EMULATOR);
 
 		
 		
