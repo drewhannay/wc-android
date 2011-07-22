@@ -102,7 +102,7 @@ public class MenuParser {
                 
                         //if no file, parse the html
                         try{
-                                Scanner menu = new Scanner((InputStream)(new URL("http://dl.dropbox.com/u/3579162/menu.txt")).getContent());
+                                Scanner menu = new Scanner((InputStream)(new URL("http://dl.dropbox.com/u/36045671/menu.txt")).getContent());
                                 String line = menu.nextLine();
                                 Day[] parsedDays = new Day[7];
                                 //main loop, until EOF
