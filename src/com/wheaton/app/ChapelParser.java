@@ -17,86 +17,99 @@ import android.view.View;
 import android.webkit.WebView;
 
 public class ChapelParser{
-	
+
+	private static boolean ERROR = false;
+
 	private static Calendar calendar = Calendar.getInstance(); //used to get current date
 	private static int currentMonth = calendar.get(Calendar.MONTH); 
 	private static int currentYear =(calendar.get(Calendar.YEAR));
 	private static ChapelSchedule schedule;
-	
+
 	public static void parse(Context con){
 		try {
-			
-				boolean readin = false;
-				for(String a: con.fileList()){
-					if(a.equals("chapel_cache"))
-						readin = true;
-				}
-				
-					
+
+			boolean readin = false;
+			for(String a: con.fileList()){
+				if(a.equals("chapel_cache"))
+					readin = true;
+			}
+
+
 			if(readin){
 				Log.e("R","Reading in");
-			FileInputStream f_in = con.openFileInput("chapel_cache");
-			
-			// Read object using ObjectInputStream
-			ObjectInputStream obj_in = new ObjectInputStream (f_in);
-			schedule = (ChapelSchedule) obj_in.readObject(); //read in the stack, if there.
-			if(schedule.year==currentYear||(schedule.firstSemester&&currentMonth>7)||(!schedule.firstSemester&&currentMonth<8))
-				return;
+				FileInputStream f_in = con.openFileInput("chapel_cache");
+
+				// Read object using ObjectInputStream
+				ObjectInputStream obj_in = new ObjectInputStream (f_in);
+				schedule = (ChapelSchedule) obj_in.readObject(); //read in the stack, if there.
+				if(schedule.year==currentYear||(schedule.firstSemester&&currentMonth>7)||(!schedule.firstSemester&&currentMonth<8))
+					return;
 			}
-			
+
 		}catch (Exception e) {
 			e.printStackTrace();
+			ERROR = true;
 		}
 		URL chapel;
 		try {
-			chapel = new URL("http://www.wheaton.edu/chaplain/Program/schedule.html");
-		
-		Scanner chapelin = new Scanner((InputStream) chapel.getContent());
-		String line = chapelin.nextLine();
-		String text = "";
-		while(chapelin.hasNext()&&(!(line.contains("Chapel Schedule"))))
+			chapel = new URL("http://dl.dropbox.com/u/35618101/Chapel%20Schedule.txt");
+
+			Scanner chapelin = new Scanner((InputStream) chapel.getContent());
+			String line = chapelin.nextLine();
+			String text = "";
+			while(chapelin.hasNext()&&(!(line.contains("Chapel Schedule"))))
+				line = chapelin.nextLine();
+
 			line = chapelin.nextLine();
-		
-		line = chapelin.nextLine();
-		
-		while(chapelin.hasNext()){
-			text += line;
-			if(line.contains("</table>"))
-				break;
-			line = chapelin.nextLine();
-		}
-		boolean firstSemester = currentMonth>7;
-		int year = currentYear;
-		String html = text;
-		schedule = new ChapelSchedule(firstSemester,html,year);
-		try{
-			FileOutputStream f_out = con.openFileOutput("chapel_cache", Context.MODE_PRIVATE);
-			// Write object with ObjectOutputStream
-			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
-			// Write object out to disk
-			obj_out.writeObject (schedule);
-		}catch(Exception a){
-			Log.e("ChapelParserFileIO", a.toString());
-		}
+
+			while(chapelin.hasNext()){
+				text += line;
+				if(line.contains("</table>"))
+					break;
+				line = chapelin.nextLine();
+			}
+			boolean firstSemester = currentMonth>7;
+			int year = currentYear;
+			String html = text;
+			schedule = new ChapelSchedule(firstSemester,html,year);
+			try{
+				FileOutputStream f_out = con.openFileOutput("chapel_cache", Context.MODE_PRIVATE);
+				// Write object with ObjectOutputStream
+				ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
+				// Write object out to disk
+				obj_out.writeObject (schedule);
+			}catch(Exception a){
+				Log.e("ChapelParserFileIO", a.toString());
+				ERROR = true;
+			}
 		} catch (Exception e1) {
 			Log.e("ChapelParser",e1.toString());
+			ERROR = true;
 		}
 	}
 
 	public static void crop(Context con){
-		
+
 	}
-	
+
 	public static ArrayList<View> toArrayList(LayoutInflater l){
 		ArrayList<View> toReturn = new ArrayList<View>();
 		WebView v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
-		
-		String webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
-					"text-align: center; }</style></head><body>";
+		String webCode;
+		if(ERROR){
+			webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
+			"text-align: center; }</style></head><body><br/><br/><br/><br/><h1>The chapel schedule is not yet available. Check back soon!</h1></body></html>";
+			v.loadData(webCode, "text/html", "utf-8");
+			v.setBackgroundColor(0);
+			toReturn.add(v);
+			return toReturn;
+		}
+		webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
+		"text-align: center; }</style></head><body>";
 		webCode += schedule.html;
-		
+
 		webCode += "</body></html>";
-		
+
 		v.loadData(webCode, "text/html", "utf-8");
 		v.setBackgroundColor(0);
 		toReturn.add(v);

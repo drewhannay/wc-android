@@ -1,8 +1,6 @@
 package com.wheaton.app;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,7 +10,6 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -86,9 +83,6 @@ public class MenuParser {
          */
         public static Stack<Day> days = new Stack<Day>();
         
-        @SuppressWarnings("unchecked")
-        
-                
         /**
          * Trim the stack of Days, if it exists, and read in
          * the file, if it exists and the stack does not. If 
