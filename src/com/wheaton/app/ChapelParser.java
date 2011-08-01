@@ -79,7 +79,8 @@ public class ChapelParser{
 					text += line;
 				}
 				Log.e("HERE",text);
-				line = chapelin.nextLine();//Skip over the line of dashes
+				if(chapelin.hasNext()) //line I put in to fix NoSuchElementException <--Alisa
+					line = chapelin.nextLine();//Skip over the line of dashes
 //				info = parseDay(text);
 //				if(week.addDay(info))
 //					continue;
@@ -102,7 +103,11 @@ public class ChapelParser{
 //				ERROR = true;
 //			}
 		} catch (Exception e1) {
-			Log.e("ChapelParser1",e1.toString());
+			for(StackTraceElement s: e1.getStackTrace()){
+				Log.e("ChapelParser1",s.toString()); //Print the WHOLE stack trace so we can tell
+				//where this error actually came from
+			}
+			
 			ERROR = true;
 		}
 	}
