@@ -48,7 +48,7 @@ public class ChapelWeek implements Serializable{
 		for(String[] day:schedule){
 			toReturn += "<h1>"+day[0]+"</h1>";
 			if(day[3].equals("Y"))
-				toReturn += "<span style=\"color:#A80000;\">";
+				toReturn += "<span style=\"color:#000066;\">";
 			toReturn += "<h2>"+day[1]+"</h2>";
 			toReturn += "<h3>"+day[2]+"</h3>";
 			toReturn += "<p>"+day[4]+"</p>";

@@ -3,7 +3,6 @@ package com.wheaton.app;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +28,7 @@ public class OpenFloorHome extends Activity implements OnClickListener{
 		today.setOnClickListener(this);
 		display = (ViewAnimator) findViewById(R.id.view_area);
 		
-		ArrayList<View> days = fakeViews();//TODO Set days to the actual ArrayList of Days
+		ArrayList<View> days = OpenFloorParser.toArrayList(getLayoutInflater());
 		for(View day:days){
 			display.addView(day);
 		}
@@ -37,23 +36,6 @@ public class OpenFloorHome extends Activity implements OnClickListener{
 		//If there's only one Child View, we don't need a next button.
 		if(display.getChildCount()==1)
 			next.setVisibility(View.INVISIBLE);
-	}
-	
-	//TODO Remove this method.
-	private ArrayList<View> fakeViews() {
-		ArrayList<View> toReturn = new ArrayList<View>();
-		View v1 = new View(this);
-		v1.setBackgroundColor(Color.RED);
-		View v2 = new View(this);
-		v2.setBackgroundColor(Color.BLUE);
-		View v3 = new View(this);
-		v3.setBackgroundColor(Color.GREEN);
-		
-		toReturn.add(v1);
-		toReturn.add(v2);
-		toReturn.add(v3);
-		
-		return toReturn;
 	}
 	
 	
@@ -109,5 +91,4 @@ public class OpenFloorHome extends Activity implements OnClickListener{
 			break;
 		}
 	}
-	
 }
