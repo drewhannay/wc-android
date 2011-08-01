@@ -41,8 +41,26 @@ public class ChapelWeek implements Serializable{
 	}
 		
 	public String toString(){
-		//TODO Implement this method.
-		return "";
+		String toReturn = "<html><head><style type=\"text/css\"> h1 { font-size: 1.1em; font-weight: bold; " +
+        "text-align: center; color:#CC6600; } h2 { font-size: 0.9em; } h3 { font-style:italic; font-size: 0.8em;}" +
+        "p { font-size: 0.7em; } </style></head><body>";
+		
+		for(String[] day:schedule){
+			toReturn += "<h1>"+day[0]+"</h1>";
+			if(day[3].equals("Y"))
+				toReturn += "<span style=\"color:#A80000;\">";
+			toReturn += "<h2>"+day[1]+"</h2>";
+			toReturn += "<h3>"+day[2]+"</h3>";
+			toReturn += "<p>"+day[4]+"</p>";
+			if(day[3].equals("Y"))
+				toReturn += "</span>";
+			
+			toReturn += "<hr />";
+			
+		}
+		
+		
+		return toReturn;
 	}
 	
 	

@@ -13,7 +13,14 @@ import android.widget.ViewAnimator;
  * Class to run the Menu section of the application.
  * Get references to the different buttons and ViewAnimator,
  * fill the ViewAnimator, and let the user scroll through 
- * the different day's menus.
+ * the different day's menus.		next = (Button) findViewById(R.id.rightButton);
+		next.setOnClickListener(this);
+		previous = (Button) findViewById(R.id.leftButton);
+		previous.setOnClickListener(this);
+		previous.setVisibility(View.INVISIBLE);//No need for a previous button at the beginning.
+		today = (Button) findViewById(R.id.todayButton);
+		today.setOnClickListener(this);
+
  * @author Drew Hannay
  *
  */
@@ -48,9 +55,9 @@ public class MenuHome extends Activity implements OnClickListener {
 		today.setOnClickListener(this);
 		display = (ViewAnimator) findViewById(R.id.view_area);
 		
-		ArrayList<View> days = MenuParser.toArrayList(getLayoutInflater());  /*toArrayList(getLayoutInflater());*/
-		for(View day:days){
-			display.addView(day);
+		ArrayList<View> weeks = MenuParser.toArrayList(getLayoutInflater());  /*toArrayList(getLayoutInflater());*/
+		for(View week:weeks){
+			display.addView(week);
 		}
 		
 		//If there's only one Child View, we don't need a next button.
