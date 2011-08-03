@@ -25,7 +25,7 @@ public class ChapelParser{
 	public static void parse(Context con){
 		URL chapel;
 		try {
-			chapel = new URL("http://dl.dropbox.com/u/35618101/Chapel%20Schedule.txt");
+			chapel = new URL("http://dl.dropbox.com/u/36045671/Chapel%20Schedule.txt");
 
 			Scanner chapelin = new Scanner((InputStream) chapel.getContent());
 			String line = chapelin.nextLine();

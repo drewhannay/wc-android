@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Alisa Maas
  *
  */
-public class Day implements Serializable {
+public class MenuDay implements Serializable {
 	/**
 	 * Needed by compiler.
 	 */
@@ -72,7 +72,7 @@ public String  dinnerHours = "";
 	 * @param dinnerStations to set the names of stations (dinner)
 	 * @param dinnerEntrees to set the dishes offered (dinner)
 	 */
-	public Day(String date, String printableDate,ArrayList<String> lunchStations, ArrayList<String> lunchEntrees, ArrayList<String> dinnerStations, ArrayList<String> dinnerEntrees){
+	public MenuDay(String date, String printableDate,ArrayList<String> lunchStations, ArrayList<String> lunchEntrees, ArrayList<String> dinnerStations, ArrayList<String> dinnerEntrees){
 		this.date = date;
 		this.lunchStations = lunchStations;
 		this.lunchEntrees = lunchEntrees;
@@ -84,7 +84,7 @@ public String  dinnerHours = "";
 	/**
 	 * Default constructor, set fields as we go along to save storage room.
 	 */
-	public Day(){
+	public MenuDay(){
 		
 	}
 	/**
@@ -92,7 +92,7 @@ public String  dinnerHours = "";
 	 * Currently unused.
 	 * @param message The message to display.
 	 */
-	public Day(String message){
+	public MenuDay(String message){
 		this.specialMessage = message;
 	}
 

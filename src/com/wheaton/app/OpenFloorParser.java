@@ -1,15 +1,75 @@
 package com.wheaton.app;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
 public class OpenFloorParser {
 	
+	private static boolean ERROR = false;
+
+//	private static Calendar calendar = Calendar.getInstance(); //used to get current date
+//	private static int currentMonth = calendar.get(Calendar.MONTH); 
+//	private static int currentYear =(calendar.get(Calendar.YEAR));
+
+	private static ArrayList<OpenFloorDay> schedule;
+
+	
 	public static void parse(Context con){
-		
+		URL openFloor;
+		try {
+			openFloor = new URL("http://dl.dropbox.com/u/36045671/openfloor.txt");
+
+			Scanner openFloorIn = new Scanner((InputStream) openFloor.getContent());
+			String line = openFloorIn.nextLine();
+
+			//Skip past the example text
+			while(openFloorIn.hasNext()&&(!(line.contains("-----"))))
+				line = openFloorIn.nextLine();
+			line = openFloorIn.nextLine();//And skip the line of dashes
+
+
+			OpenFloorDay day;
+			String[] info;
+
+			day = new OpenFloorDay();
+			schedule = new ArrayList<OpenFloorDay>();
+
+//			while(openFloorIn.hasNext()&&(!(line.contains("-----")))){
+//				String text = "";
+//				while(openFloorIn.hasNext()&&(!(line.contains("-----")))){
+//					text += line;
+//					line = openFloorIn.nextLine();
+//				}
+//
+//				if(openFloorIn.hasNext()) //If we're not already at the end
+//					line = openFloorIn.nextLine();//Skip over the line of dashes
+//				info = parseDay(text);
+//				if(day.addDay(info))
+//					continue;
+//				else{
+//					schedule.add(day);
+//					day = new ChapelWeek();
+//					day.addDay(info);
+//				}
+//			}
+			schedule.add(day);
+
+		} catch (Exception e) {
+			Log.e("OpenFloorParser.parse()",e.toString());
+			for(StackTraceElement s: e.getStackTrace()){
+				Log.e("OpenFloorParser.parse()",s.toString()); //Print the WHOLE stack trace so we can tell
+				//where this error actually came from
+			}
+
+			ERROR = true;
+		}
 	}
 	
 	public static ArrayList<View> toArrayList(LayoutInflater l){

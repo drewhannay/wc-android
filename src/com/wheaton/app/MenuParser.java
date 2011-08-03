@@ -81,7 +81,7 @@ public class MenuParser {
          * to be convenient for processing the days and displaying
          * the next recent one.
          */
-        public static Stack<Day> days = new Stack<Day>();
+        public static Stack<MenuDay> days = new Stack<MenuDay>();
         
         /**
          * Trim the stack of Days, if it exists, and read in
@@ -98,13 +98,13 @@ public class MenuParser {
                         try{
                                 Scanner menu = new Scanner((InputStream)(new URL("http://dl.dropbox.com/u/36045671/menu.txt")).getContent());
                                 String line = menu.nextLine();
-                                Day[] parsedDays = new Day[7];
+                                MenuDay[] parsedDays = new MenuDay[7];
                                 //main loop, until EOF
                                 for(int i = 0;i<7;i++){
                                         while(!line.contains("Date:")){
                                                 line = menu.nextLine();
                                         }
-                                        Day next = new Day();
+                                        MenuDay next = new MenuDay();
                                         ArrayList<String> lunchStations = new ArrayList<String>();
                                         ArrayList<String> dinnerStations = new ArrayList<String>();
                                         ArrayList<String> lunchEntrees = new ArrayList<String>();
@@ -247,8 +247,8 @@ public class MenuParser {
         public static ArrayList<View> toArrayList(LayoutInflater l){
                 ArrayList<View> toReturn = new ArrayList<View>();
                 WebView v;
-                Day d;
-                for(Stack<Day> st = days;!st.empty();){
+                MenuDay d;
+                for(Stack<MenuDay> st = days;!st.empty();){
                         d = st.pop();
                         String webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
                                         "text-align: center; }</style></head><body>";

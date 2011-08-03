@@ -3,16 +3,16 @@ package com.wheaton.app;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ChapelWeek implements Serializable{
+public class OpenFloorDay implements Serializable {
 
-	private static final long serialVersionUID = 3559824920871726320L;
+	private static final long serialVersionUID = -5664251875919714947L;
 	private static final String[] weekdays = new String[]{"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 	
 	
 	private ArrayList<String[]> schedule;
-
 	
-	public ChapelWeek(){
+	
+	public OpenFloorDay(){
 		schedule = new ArrayList<String[]>();
 	}
 	
