@@ -6,18 +6,11 @@ import java.util.ArrayList;
 public class OpenFloorDay implements Serializable {
 
 	private static final long serialVersionUID = -5664251875919714947L;
-	private static final String[] weekdays = new String[]{"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-	
 	
 	private ArrayList<String[]> schedule;
 	
-	
 	public OpenFloorDay(){
 		schedule = new ArrayList<String[]>();
-	}
-	
-	public boolean addDay(String date, String title, String speakers, String specialSeries, String description){
-		return addDay(new String[]{date,title,speakers,specialSeries,description});
 	}
 	
 	public boolean addDay(String[] info){
@@ -25,12 +18,6 @@ public class OpenFloorDay implements Serializable {
 			String lastDate = schedule.get(schedule.size()-1)[0];
 			String oldDay = lastDate.substring(0,lastDate.indexOf(","));
 			String newDay = info[0].substring(0, info[0].indexOf(","));
-			for(String s:weekdays){
-				if(s.equals(newDay))//If we find the Day we're trying to add before the previous day, it must be a new week.
-					return false;
-				if(s.equals(oldDay))
-					break;
-			}
 		}
 		schedule.add(info);
 		return true;

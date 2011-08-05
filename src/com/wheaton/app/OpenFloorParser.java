@@ -18,7 +18,7 @@ public class OpenFloorParser {
 //	private static int currentMonth = calendar.get(Calendar.MONTH); 
 //	private static int currentYear =(calendar.get(Calendar.YEAR));
 
-	private static ArrayList<OpenFloorDay> schedule;
+	private static ArrayList<String> schedule;
 
 	
 	public static void parse(Context con){
@@ -33,20 +33,32 @@ public class OpenFloorParser {
 			while(openFloorIn.hasNext()&&(!(line.contains("-----"))))
 				line = openFloorIn.nextLine();
 			line = openFloorIn.nextLine();//And skip the line of dashes
+			line = openFloorIn.nextLine();//And the "END EXAMPLE!" line
+			line = openFloorIn.nextLine();//And the next line of dashes
+			
 
+			schedule = new ArrayList<String>();
 
-			OpenFloorDay day;
-			String[] info;
-
-			day = new OpenFloorDay();
-			schedule = new ArrayList<OpenFloorDay>();
-
-//			while(openFloorIn.hasNext()&&(!(line.contains("-----")))){
-//				String text = "";
-//				while(openFloorIn.hasNext()&&(!(line.contains("-----")))){
-//					text += line;
-//					line = openFloorIn.nextLine();
-//				}
+			while(openFloorIn.hasNext()){
+				String text = "";
+				while((line.equals("") || line.contains("-----"))&& openFloorIn.hasNext())
+					line = openFloorIn.nextLine();
+				text += "<h1>" + line.trim() + "</h1>";
+				while(openFloorIn.hasNext() && !line.contains("Open Fischer Floors:"))
+					line = openFloorIn.nextLine();
+				text += "<h2>" + line.trim() + "</h2>";
+				while(openFloorIn.hasNext()&&(!(line.contains("Open Smith/Traber Floors:")))){			
+					text += line.trim() + "<br />";
+					line = openFloorIn.nextLine();
+				}
+				text += "<h2>" + line.trim() + "</h2>";
+				while(openFloorIn.hasNext()&&(!(line.contains("-----")))){			
+					text += line.trim() + "<br />";
+					line = openFloorIn.nextLine();
+				
+				
+				
+				
 //
 //				if(openFloorIn.hasNext()) //If we're not already at the end
 //					line = openFloorIn.nextLine();//Skip over the line of dashes
@@ -57,9 +69,9 @@ public class OpenFloorParser {
 //					schedule.add(day);
 //					day = new ChapelWeek();
 //					day.addDay(info);
-//				}
-//			}
-			schedule.add(day);
+				}
+			}
+//			schedule.add(day);
 
 		} catch (Exception e) {
 			Log.e("OpenFloorParser.parse()",e.toString());
