@@ -1,88 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout 
+<ScrollView 
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:myapp="http://schemas.android.com/apk/res/com.wheaton.app"
 	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-    android:orientation="vertical"
+	android:orientation="vertical"
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"
+	android:background="@color/white"
+	>
+<RelativeLayout 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-
-<ImageView
-	android:id="@+id/welcome"
-	android:layout_width="fill_parent"
-	android:layout_height="125dip"
-	android:layout_alignParentTop="true"
-	android:background="@drawable/home" />
 	
+<ImageView 
+	android:id="@+id/stalkernet"
+	android:layout_width="130dip"
+	android:layout_height="130dip"
+	android:layout_alignParentLeft="true"
+	android:layout_marginLeft="26dip"
+	android:layout_marginTop="13dip"
+	android:layout_marginRight="10dip"
+	android:background="@drawable/stalkernet_square"
+	/>
+
+<ImageView 
+	android:id="@+id/chapel"
+	android:layout_width="130dip"
+	android:layout_height="130dip"
+	android:layout_alignParentRight="true"
+	android:layout_marginRight="26dip"
+	android:layout_marginTop="13dip"
+	android:background="@drawable/chapel"
+	/>
+	
+<ImageView 
+	android:id="@+id/open_floor"
+	android:layout_width="130dip"
+	android:layout_height="130dip"
+	android:layout_below="@id/stalkernet"
+	android:layout_marginLeft="26dip"
+	android:layout_marginTop="10dip"
+	android:layout_marginRight="10dip"
+	android:background="@drawable/open_floor"
+	/>
 
 <ImageView 
 	android:id="@+id/menu"
-	android:layout_width="100dip"
-	android:layout_height="100dip"
-	android:layout_below="@id/welcome"
-	android:layout_centerHorizontal="true"
-	android:background="@drawable/menu"
-	/>
-
-<ImageView 
-	android:id="@+id/stalkernet"
-	android:layout_width="fill_parent"
-	android:layout_height="100dip"
-	android:layout_below="@id/welcome"
-	android:layout_alignParentLeft="true"
-	android:layout_toLeftOf="@id/menu"
-	android:background="@drawable/stalkernet_square"
-	/>
-	
-<ImageView 
-	android:id="@+id/chapel"
-	android:layout_width="fill_parent"
-	android:layout_height="100dip"
-	android:layout_below="@id/welcome"
+	android:layout_width="130dip"
+	android:layout_height="130dip"
+	android:layout_below="@id/chapel"
 	android:layout_alignParentRight="true"
-	android:layout_toRightOf="@id/menu"
-	android:background="@drawable/chapel"
-	/>
-
-<ImageView 
-	android:id="@+id/links"
-	android:layout_width="100dip"
-	android:layout_height="100dip"
-	android:layout_below="@id/menu"
-	android:layout_centerHorizontal="true"
-	android:background="@drawable/misc"
-	/>
-
-<ImageView 
-	android:id="@+id/map"
-	android:layout_width="fill_parent"
-	android:layout_height="100dip"
-	android:layout_below="@id/stalkernet"
-	android:layout_alignParentLeft="true"
-	android:layout_toLeftOf="@id/links"
-	android:background="@drawable/map"
+	android:layout_marginRight="26dip"
+	android:layout_marginTop="10dip"
+	android:background="@drawable/menu"
 	/>
 	
 <ImageView 
 	android:id="@+id/about"
-	android:layout_width="fill_parent"
-	android:layout_height="100dip"
+	android:layout_width="268dip"
+	android:layout_height="130dip"
 	android:layout_below="@id/menu"
-	android:layout_toRightOf="@id/links"
-	android:layout_alignParentRight="true"
-	android:background="@drawable/about"
+	android:layout_centerHorizontal="true"
+	android:layout_marginTop="10dip"
+	android:background="@drawable/about_rect"
 	/>
 	
+<ImageView 
+	android:id="@+id/map"
+	android:layout_width="130dip"
+	android:layout_height="130dip"
+	android:layout_below="@id/about"
+	android:layout_alignParentLeft="true"
+	android:layout_marginTop="10dip"
+	android:layout_marginLeft="26dip"
+	android:background="@drawable/map"
+	/>	
+	
+<ImageView 
+	android:id="@+id/links"
+	android:layout_width="130dip"
+	android:layout_height="130dip"
+	android:layout_below="@id/about"
+	android:layout_alignParentRight="true"
+	android:layout_marginTop="10dip"
+	android:layout_marginRight="26dip"
+	android:background="@drawable/links"
+	/>
 	
 <com.google.ads.AdView
-		android:id="@+id/ad"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		ads:adUnitId="a14d2a372c31403"
-		ads:adSize="BANNER"
-        ads:loadAdOnCreate="true"
-		/>
+	android:id="@+id/ad"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:layout_alignParentBottom="true"
+	android:layout_below="@id/links"
+	android:layout_marginTop="15dip"
+	ads:adUnitId="a14d2a372c31403"
+	ads:adSize="BANNER"
+       ads:loadAdOnCreate="true"
+	/>
 	
 </RelativeLayout>
+
+</ScrollView>
