@@ -1,7 +1,5 @@
 package com.wheaton.app;
 
-import com.google.ads.AdRequest;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.google.ads.AdRequest;
 
 /**
  * Class to run the main screen of the application.
@@ -73,8 +73,8 @@ public class MainScreen extends Activity implements OnClickListener {
 		stalkernetLauncher.setOnClickListener(this);
 		menuLauncher = findViewById(R.id.menu);
 		menuLauncher.setOnClickListener(this);
-		//openFloorLauncher = findViewById(R.id.openFloors);
-		//openFloorLauncher.setOnClickListener(this);
+		openFloorLauncher = findViewById(R.id.open_floor);
+		openFloorLauncher.setOnClickListener(this);
 		mapLauncher = findViewById(R.id.map);
 		mapLauncher.setOnClickListener(this);
 		linksLauncher = findViewById(R.id.links);
@@ -108,16 +108,16 @@ public class MainScreen extends Activity implements OnClickListener {
 	        t.start();
 	        pd = ProgressDialog.show(this, "Loading", "Please wait while menus are loaded", true, false);
 			break;
-//		case R.id.openFloors:
-//	        t = new Thread() {
-//	        	public void run() {
-//	        		OpenFloorParser.parse(MainScreen.this);
-//					mHandler.post(launchOpenFloor);
-//	        	}
-//	        };
-//	        t.start();
-//	        pd = ProgressDialog.show(this, "Loading", "Please wait while schedules are loaded", true, false);
-//			break;
+		case R.id.open_floor:
+	        t = new Thread() {
+	        	public void run() {
+	        		OpenFloorParser.parse(MainScreen.this);
+					mHandler.post(launchOpenFloor);
+	        	}
+	        };
+	        t.start();
+	        pd = ProgressDialog.show(this, "Loading", "Please wait while schedules are loaded", true, false);
+			break;
 		case R.id.map:
 			i = new Intent(this, Map.class);
 			startActivity(i);

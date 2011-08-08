@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 
 public class OpenFloorParser {
 	
@@ -40,38 +41,32 @@ public class OpenFloorParser {
 			schedule = new ArrayList<String>();
 
 			while(openFloorIn.hasNext()){
-				String text = "";
+				String text = "<head><style type=\"text/css\"> h1 { font-size: 1.1em; font-weight: bold; " +
+					"text-align: center; color:#CC6600; } h2 { font-size: 0.9em; } h3 { font-style:italic; font-size: 0.8em;}" +
+					"p { font-size: 0.7em; } </style></head>";
 				while((line.equals("") || line.contains("-----"))&& openFloorIn.hasNext())
 					line = openFloorIn.nextLine();
 				text += "<h1>" + line.trim() + "</h1>";
 				while(openFloorIn.hasNext() && !line.contains("Open Fischer Floors:"))
 					line = openFloorIn.nextLine();
 				text += "<h2>" + line.trim() + "</h2>";
+				line = openFloorIn.nextLine();
 				while(openFloorIn.hasNext()&&(!(line.contains("Open Smith/Traber Floors:")))){			
 					text += line.trim() + "<br />";
 					line = openFloorIn.nextLine();
 				}
 				text += "<h2>" + line.trim() + "</h2>";
+				line = openFloorIn.nextLine();
 				while(openFloorIn.hasNext()&&(!(line.contains("-----")))){			
 					text += line.trim() + "<br />";
 					line = openFloorIn.nextLine();
-				
-				
-				
-				
-//
-//				if(openFloorIn.hasNext()) //If we're not already at the end
-//					line = openFloorIn.nextLine();//Skip over the line of dashes
-//				info = parseDay(text);
-//				if(day.addDay(info))
-//					continue;
-//				else{
-//					schedule.add(day);
-//					day = new ChapelWeek();
-//					day.addDay(info);
 				}
+				text += "</body></html>";
+				schedule.add(text);
+				
+				
+				
 			}
-//			schedule.add(day);
 
 		} catch (Exception e) {
 			Log.e("OpenFloorParser.parse()",e.toString());
@@ -86,23 +81,23 @@ public class OpenFloorParser {
 	
 	public static ArrayList<View> toArrayList(LayoutInflater l){
 		ArrayList<View> toReturn = new ArrayList<View>();
-//		WebView v;
-//		String webCode;
-//		if(ERROR){
-//			v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
-//			webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
-//			"text-align: center; }</style></head><body><br/><br/><br/><br/><h1>The chapel schedule is not yet available. Check back soon!</h1></body></html>";
-//			v.loadData(webCode, "text/html", "utf-8");
-//			v.setBackgroundColor(0);
-//			toReturn.add(v);
-//			return toReturn;
-//		}
-//		for(ChapelWeek week:schedule){
-//			v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
-//			v.loadData(week.toString(), "text/html", "utf-8");
-//			v.setBackgroundColor(0);
-//			toReturn.add(v);
-//		}
+		WebView v;
+		String webCode;
+		if(ERROR){
+			v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
+			webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
+			"text-align: center; }</style></head><body><br/><br/><br/><br/><h1>The open floor schedule is not yet available. Check back soon!</h1></body></html>";
+			v.loadData(webCode, "text/html", "utf-8");
+			v.setBackgroundColor(0);
+			toReturn.add(v);
+			return toReturn;
+		}
+		for(String day:schedule){
+			v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
+			v.loadData(day, "text/html", "utf-8");
+			v.setBackgroundColor(0);
+			toReturn.add(v);
+		}
 		return toReturn;
 	}
 

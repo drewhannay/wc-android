@@ -26,6 +26,13 @@
 		android:layout_toLeftOf="@id/rightButton"
 		android:layout_height="50dip"
 		android:layout_width="fill_parent" />
+	<ImageView
+		android:id="@+id/openFloorHeader"
+		android:layout_width="fill_parent"
+		android:layout_height="75dip"
+		android:layout_below="@id/todayButton"
+		android:background="@drawable/open_floor_header" />
+		
 	<com.google.ads.AdView
 		android:id="@+id/ad"
 		android:layout_width="fill_parent"
@@ -39,7 +46,7 @@
 		android:id="@+id/view_area"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:layout_below="@id/leftButton"
+		android:layout_below="@id/openFloorHeader"
 		android:inAnimation="@android:anim/slide_in_left"
 		android:outAnimation="@android:anim/slide_out_right"
 		
