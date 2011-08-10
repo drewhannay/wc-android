@@ -65,17 +65,15 @@ containing a value of this type.
         public static final int default_pic=0x7f020004;
         public static final int home=0x7f020005;
         public static final int icon=0x7f020006;
-        public static final int icon_old=0x7f020007;
-        public static final int icon_older=0x7f020008;
-        public static final int links=0x7f020009;
-        public static final int map=0x7f02000a;
-        public static final int menu=0x7f02000b;
-        public static final int menu_header=0x7f02000c;
-        public static final int open_floor=0x7f02000d;
-        public static final int open_floor_header=0x7f02000e;
-        public static final int push_pin=0x7f02000f;
-        public static final int stalkernet=0x7f020010;
-        public static final int stalkernet_square=0x7f020011;
+        public static final int links=0x7f020007;
+        public static final int map=0x7f020008;
+        public static final int menu=0x7f020009;
+        public static final int menu_header=0x7f02000a;
+        public static final int open_floor=0x7f02000b;
+        public static final int open_floor_header=0x7f02000c;
+        public static final int push_pin=0x7f02000d;
+        public static final int stalkernet=0x7f02000e;
+        public static final int stalkernet_square=0x7f02000f;
     }
     public static final class id {
         public static final int about=0x7f070012;
