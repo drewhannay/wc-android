@@ -64,7 +64,7 @@ public class OpenFloorParser {
 				text += "</body></html>";
 				schedule.add(text);
 				
-				
+				schedule.add(text);
 				
 			}
 

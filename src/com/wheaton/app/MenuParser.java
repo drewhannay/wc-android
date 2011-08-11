@@ -10,6 +10,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -109,7 +110,8 @@ public class MenuParser {
                                         ArrayList<String> dinnerStations = new ArrayList<String>();
                                         ArrayList<String> lunchEntrees = new ArrayList<String>();
                                         ArrayList<String> dinnerEntrees = new ArrayList<String>();
-                                        line = line.substring(line.indexOf(" ")+1);
+                                        line = line.substring(line.indexOf(":")+1).trim();
+                                       
                                         next.printableDate = line; // get the printable version of the date.
                                         
                                         line = line.substring(line.indexOf(" ")+1);
@@ -125,10 +127,8 @@ public class MenuParser {
                                 while(!line.contains("Hours:")){
                                         line = menu.nextLine();
                                 }
-                                int offset = 1;
-                                if(line.contains(": "))
-                                        offset++;
-                                line = line.substring(line.indexOf(":")+offset);
+
+                                line = line.substring(line.indexOf(":")+1).trim();
                                 next.lunchHours = line;
                                 
                                 if(!line.contains("Closed")){
@@ -142,10 +142,9 @@ public class MenuParser {
                                 while(!line.contains("Hours:")){
                                         line = menu.nextLine();
                                 }
-                                offset = 1;
-                                if(line.contains(": "))
-                                        offset++;
-                                line = line.substring(line.indexOf(":")+offset);
+                                
+                       
+                                line = line.substring(line.indexOf(":")+1).trim();
                                 next.dinnerHours = line;
                                 if(!line.contains("Closed")){
                                 	parseMeal(line,dinnerStations,dinnerEntrees,menu,"------");
@@ -186,16 +185,12 @@ public class MenuParser {
                 while(!line.contains("Station:")&&!line.contains(endToken)){
                         line = menu.nextLine();
                         }
-               int offset = 1;
-                if(line.contains(": "))
-                        offset++;
-                line = line.substring(line.indexOf(":")+offset);
+
+                line = line.substring(line.indexOf(":")+1).trim();
                 mealStations.add(line);
                 line = menu.nextLine();
-                offset = 1;
-                if(line.contains(": "))
-                        offset++;
-                line = line.substring(line.indexOf(":")+offset);
+
+                line = line.substring(line.indexOf(":")+1).trim();
                 String string = "";
                 
                 while(!line.contains("Station:")&&!line.contains(endToken)){
