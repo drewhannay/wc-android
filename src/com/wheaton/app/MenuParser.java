@@ -10,70 +10,18 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 /**
  * A class to do the HTML parsing and set the appropriate instance variable, which
- * is made public. Currently, it also saves and reads the saved days stack.
+ * is made public.
  * @author Alisa Maas
  *
  */
 public class MenuParser {
         
-        /**
-         * To convert from the name of the month to the number (counting
-         * from 0). Used for determining old meals.
-         */
-        private static HashMap<String,Integer> monthToInt = new HashMap<String,Integer>();
-        
-        private static HashMap<Integer,String> dayofweek = new HashMap<Integer,String>();
-        
-        private static HashMap<Integer,String> intToMonth = new HashMap<Integer,String>();
-        
-        private static Calendar calendar = Calendar.getInstance(); //used to get current date
-        private static int currentMonth = calendar.get(Calendar.MONTH); 
-        private static int currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
-        private static int currentYear =(calendar.get(Calendar.YEAR));
-        /*
-         * Set up the monthToInt HashMap. Should only be done once, upon 
-         * instantiation of the class.
-         */
-        static{
-                monthToInt.put("January",0);
-                monthToInt.put("February",1);
-                monthToInt.put("March", 2);
-                monthToInt.put("April",3);
-                monthToInt.put("May",4);
-                monthToInt.put("June",5);
-                monthToInt.put("July",6);
-                monthToInt.put("August",7);
-                monthToInt.put("September", 8);
-                monthToInt.put("October",9);
-                monthToInt.put("November",10);
-                monthToInt.put("December",11);
-                
-                intToMonth.put(0,"January");
-                intToMonth.put(1,"February");
-                intToMonth.put(2,"March");
-                intToMonth.put(3,"April");
-                intToMonth.put(4,"May");
-                intToMonth.put(5,"June");
-                intToMonth.put(6,"July");
-                intToMonth.put(7,"August");
-                intToMonth.put(8,"September");
-                intToMonth.put(9,"October");
-                intToMonth.put(10,"November");
-                intToMonth.put(11,"December");
-                dayofweek.put(Calendar.SUNDAY,"Sunday");
-                dayofweek.put(Calendar.MONDAY,"Monday");
-                dayofweek.put(Calendar.TUESDAY,"Tuesday");
-                dayofweek.put(Calendar.WEDNESDAY,"Wednesday");
-                dayofweek.put(Calendar.THURSDAY,"Thursday");
-                dayofweek.put(Calendar.FRIDAY, "Friday");
-                dayofweek.put(Calendar.SATURDAY, "Saturday");
-        }
+       
                 
         /*
          * A Object to contain the days. It's ordered in a
@@ -94,13 +42,33 @@ public class MenuParser {
          * @param con Used for file IO. 
          */
         public static void parse(Context con){
-                
+        	Calendar calendar = Calendar.getInstance(); //used to get current date
+           int currentMonth = calendar.get(Calendar.MONTH); 
+           int currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
+           int currentYear =(calendar.get(Calendar.YEAR));
+           HashMap<String,Integer> monthToInt = new HashMap<String,Integer>();
+           monthToInt.put("January",0);
+           monthToInt.put("February",1);
+           monthToInt.put("March", 2);
+           monthToInt.put("April",3);
+           monthToInt.put("May",4);
+           monthToInt.put("June",5);
+           monthToInt.put("July",6);
+           monthToInt.put("August",7);
+           monthToInt.put("September", 8);
+           monthToInt.put("October",9);
+           monthToInt.put("November",10);
+           monthToInt.put("December",11);
+     
+                		boolean todaySet = false;
                         //if no file, parse the html
                         try{
                                 Scanner menu = new Scanner((InputStream)(new URL("http://dl.dropbox.com/u/36045671/menu.txt")).getContent());
                                 String line = menu.nextLine();
                                 MenuDay[] parsedDays = new MenuDay[7];
+                                MenuHome.todayIndex = -1;
                                 //main loop, until EOF
+                       
                                 for(int i = 0;i<7;i++){
                                         while(!line.contains("Date:")){
                                                 line = menu.nextLine();
@@ -123,7 +91,26 @@ public class MenuParser {
                                         int year = Integer.parseInt(line); //this means no space at end of the line, try to 
                                         //fix this later.
                                         next.date = month + " " + day_n + " " + year;
+                                        StringTokenizer st = new StringTokenizer(next.date); //Grab the date from the Day.
+                                        int tempMonth = Integer.parseInt(st.nextToken());
+                                        boolean notToday = false;
+                                        if(tempMonth!=currentMonth){ //If the month is less than the current month, it must be old
+                                                notToday = true;
+                                        }
+                                        int tempDay = Integer.parseInt(st.nextToken());
+                                        if(tempDay!=currentDay){ //If the day is less than the current day, it must be old                          
+                                                        notToday = true;
+                                                }
+                                        int tempYear = Integer.parseInt(st.nextToken());
+                                        if(tempYear!=currentYear){ //If the year is less than the current year, it must be old.
+                                                notToday = true;
+                                        }
+                                        if(!todaySet&&!notToday){
+                                        	MenuHome.todayIndex = i;
+                                        	todaySet = true;
+                                        }
                                         
+                                
                                 while(!line.contains("Hours:")){
                                         line = menu.nextLine();
                                 }
@@ -158,11 +145,19 @@ public class MenuParser {
                                 next.dinnerStations = dinnerStations;
                                 parsedDays[i] = next;
                                 }
-                                for(int i = 6;i>-1;i--){
-                                        days.push(parsedDays[i]);
+                                
+                                if(todaySet){
+                                	for(int i = 6;i>-1;i--){
+                                		days.push(parsedDays[i]);
+                                	}
+                               
+                                }
+                                else{
+                                	MenuHome.todayIndex = 0;
                                 }
                                 
-                                crop(con);
+                                
+                                //crop(con);
                         }catch(Exception e){
                                 e.printStackTrace();
                                 
@@ -199,34 +194,6 @@ public class MenuParser {
                 }
                 mealEntrees.add(string);
                 
-                }
-        }
-        
-        
-        /**
-         * Crop the old days from the Days stack.
-         * @param con Used to pass back in the call to parse,
-         * in the event that we have emptied the stack by cropping.
-         */
-        public static void crop(Context con){
-                while(!days.empty()){ //as long as there's still Days in the stack keep looking
-                        StringTokenizer st = new StringTokenizer((days.peek()).date); //Grab the date from the Day.
-                        int tempMonth = Integer.parseInt(st.nextToken());
-                        if(tempMonth<currentMonth){ //If the month is less than the current month, it must be old. 
-                                days.pop(); //get rid of the old Day.
-                                continue;
-                        }
-                        int tempDay = Integer.parseInt(st.nextToken());
-                                if(tempMonth==currentMonth&&tempDay<currentDay){ //If the day is less than the current day, it must be old.
-                                        days.pop(); //get rid of the old Day.
-                                        continue;
-                                }
-                        int tempYear = Integer.parseInt(st.nextToken());
-                        if(tempYear<currentYear){ //If the year is less than the current year, it must be old.
-                                days.pop(); //get rid of the old Day.
-                                continue;
-                        }
-                        break;
                 }
         }
         

@@ -34,6 +34,8 @@ public class MenuHome extends Activity implements OnClickListener {
 	 * The display through which the different day's schedules will be displayed.
 	 */
 	ViewAnimator display;
+	//to keep track of the "today" index in the menu.
+	public static int todayIndex;
 	
 	/**
 	 * Method to override the default onCreate method for an Activity.
@@ -50,7 +52,8 @@ public class MenuHome extends Activity implements OnClickListener {
 		next.setOnClickListener(this);
 		previous = (Button) findViewById(R.id.leftButton);
 		previous.setOnClickListener(this);
-		previous.setVisibility(View.INVISIBLE);//No need for a previous button at the beginning.
+		if(todayIndex == 0)
+			previous.setVisibility(View.INVISIBLE);//No need for a previous button at the beginning.
 		today = (Button) findViewById(R.id.todayButton);
 		today.setOnClickListener(this);
 		display = (ViewAnimator) findViewById(R.id.view_area);
@@ -59,10 +62,12 @@ public class MenuHome extends Activity implements OnClickListener {
 		for(View week:weeks){
 			display.addView(week);
 		}
-		
+		display.setDisplayedChild(todayIndex);
 		//If there's only one Child View, we don't need a next button.
-		if(display.getChildCount()==1)
+		if(display.getChildAt(todayIndex+1)==null)
 			next.setVisibility(View.INVISIBLE);
+		else
+			next.setVisibility(View.VISIBLE);
 		
 	}
 
@@ -74,6 +79,8 @@ public class MenuHome extends Activity implements OnClickListener {
 	 * are not.
 	 */
 	public void onClick(View v) {
+		if(todayIndex < 0)
+			todayIndex = 0;
 		switch (v.getId()){
 		case R.id.rightButton:
 			display.showNext();
@@ -98,20 +105,26 @@ public class MenuHome extends Activity implements OnClickListener {
 		case R.id.todayButton:
 			
 			//Don't jump if we're already at the beginning.
-			if(display.getDisplayedChild()!=0){
-				display.setDisplayedChild(0);
+			if(display.getDisplayedChild()!=todayIndex){
+				display.setDisplayedChild(todayIndex);
 			
 				//If there's only one child, we can't go forward. Otherwise we can.
-				if(display.getChildCount()==1)
+				if(display.getChildAt(todayIndex+1)==null)
 					next.setVisibility(View.INVISIBLE);
 				else
 					next.setVisibility(View.VISIBLE);
 	
 				//We just jumped to the first Child, so there's no previous.
-				previous.setVisibility(View.INVISIBLE);
+				if(todayIndex == 0){
+					previous.setVisibility(View.INVISIBLE);
+					
+				}
+				else
+					previous.setVisibility(View.VISIBLE);
 			}
 			break;
 		}
+		
 	}
 
 }

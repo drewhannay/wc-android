@@ -15,9 +15,9 @@ public class OpenFloorDay implements Serializable {
 	
 	public boolean addDay(String[] info){
 		if(schedule.size()!=0){
-			String lastDate = schedule.get(schedule.size()-1)[0];
+			/* String lastDate = schedule.get(schedule.size()-1)[0];
 			String oldDay = lastDate.substring(0,lastDate.indexOf(","));
-			String newDay = info[0].substring(0, info[0].indexOf(","));
+			String newDay = info[0].substring(0, info[0].indexOf(","));*/
 		}
 		schedule.add(info);
 		return true;
