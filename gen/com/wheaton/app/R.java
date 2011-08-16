@@ -89,7 +89,7 @@ containing a value of this type.
         public static final int foursquare=0x7f07000c;
         public static final int leftButton=0x7f070001;
         public static final int links=0x7f070014;
-        public static final int logo=0x7f07001a;
+        public static final int logo=0x7f070019;
         public static final int map=0x7f070013;
         public static final int menu=0x7f070011;
         public static final int menuHeader=0x7f070015;
@@ -102,7 +102,7 @@ containing a value of this type.
         public static final int search_button=0x7f07001b;
         public static final int selection=0x7f070018;
         public static final int stalkernet=0x7f07000e;
-        public static final int text_box=0x7f070019;
+        public static final int text_box=0x7f07001a;
         public static final int todayButton=0x7f070003;
         public static final int url=0x7f07000a;
         public static final int url_display=0x7f070009;

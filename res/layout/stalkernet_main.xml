@@ -5,26 +5,24 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/white"
     >
+<ImageView 
+	android:id="@+id/logo"
+	android:layout_width="wrap_content"
+	android:layout_height="120dip"
+	android:layout_alignParentTop="true"
+	android:background="@drawable/stalkernet"
+	/>
 <EditText
         android:id="@+id/text_box"
         android:layout_centerHorizontal="true"
-		android:layout_centerInParent="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
         android:layout_margin="5dip"
         android:background="@android:drawable/editbox_background"
-        />
-<ImageView 
-	android:id="@+id/logo"
-	android:layout_centerInParent="true"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:background="@drawable/stalkernet"
-	android:layout_above="@id/text_box"
-	/>
-
-        
+        />   
 <Button
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
