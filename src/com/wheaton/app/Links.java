@@ -36,11 +36,14 @@ public class Links extends ListActivity {
 		super.onCreate(savedInstanceState);
 		
 		t.put("Academic Calendar","http://wheaton.edu/Academics/Academic-Calendar");
+        t.put("Admissions","http://wheaton.edu/Admissions-and-aid");
 		t.put("Arena Theater","http://www.wheatonarena.com");
 		t.put("Athletics","http://athletics.wheaton.edu");
 		t.put("Bookstore","http://www.wheatonbooks.com");
 		t.put("Chapel Schedule","http://www.wheaton.edu/Student-Life/Spiritual-Life/Chapel/Schedule");
 		t.put("Conservatory","http://www.wheaton.edu/academics/departments/conservatory");
+        t.put("Counseling Center","http://www.wheaton.edu/student-life/student-care/counseling-center");
+        t.put("Course Schedules","http://wheaton.edu/Academics/Services/Registrar/Schedules");
 		t.put("Events Calendar","http://wheaton.edu/events");
 		//TODO The gen-ed link works for now but redirects to a www2.wheaton.edu site...test later.
 		t.put("General Education Requirements","http://wheaton.edu/Registrar/catalog/ug_acad_policies.htm#General_Education_Requirements");

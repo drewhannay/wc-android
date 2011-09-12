@@ -4,3 +4,4 @@ bin/*
 .settings/*
 .classpath
 gen/*
+.DS_Store
