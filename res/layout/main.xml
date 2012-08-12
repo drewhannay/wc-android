@@ -1,102 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white"
     android:orientation="vertical" >
 
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/stalkernet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="13dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/stalkernet_square" />
+
+                <ImageView
+                    android:id="@+id/chapel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/chapel" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/open_floor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="13dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/open_floor" />
+
+                <ImageView
+                    android:id="@+id/menu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/menu" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/about"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
+                android:layout_marginTop="13dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/about_rect" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginRight="26dp"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/map"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="13dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/map" />
+
+                <ImageView
+                    android:id="@+id/links"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/links" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <com.google.ads.AdView
-        android:id="@+id/ad"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="15dip"
+        android:layout_marginTop="15dp"
         ads:adSize="BANNER"
         ads:adUnitId="a14d2a372c31403"
         ads:loadAdOnCreate="true"
         android:background="@color/white" />
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/ad"
-        android:background="@color/white" >
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:id="@+id/stalkernet"
-                android:layout_width="130dip"
-                android:layout_height="130dip"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="26dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="13dip"
-                android:background="@drawable/stalkernet_square" />
-
-            <ImageView
-                android:id="@+id/chapel"
-                android:layout_width="130dip"
-                android:layout_height="130dip"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="26dip"
-                android:layout_marginTop="13dip"
-                android:background="@drawable/chapel" />
-
-            <ImageView
-                android:id="@+id/open_floor"
-                android:layout_width="130dip"
-                android:layout_height="130dip"
-                android:layout_below="@id/stalkernet"
-                android:layout_marginLeft="26dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/open_floor" />
-
-            <ImageView
-                android:id="@+id/menu"
-                android:layout_width="130dip"
-                android:layout_height="130dip"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/chapel"
-                android:layout_marginRight="26dip"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/menu" />
-
-            <ImageView
-                android:id="@+id/about"
-                android:layout_width="268dip"
-                android:layout_height="130dip"
-                android:layout_below="@id/menu"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/about_rect" />
-
-            <ImageView
-                android:id="@+id/map"
-                android:layout_width="130dip"
-                android:layout_height="130dip"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/about"
-                android:layout_marginLeft="26dip"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/map" />
-
-            <ImageView
-                android:id="@+id/links"
-                android:layout_width="130dip"
-                android:layout_height="130dip"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/about"
-                android:layout_marginBottom="15dip"
-                android:layout_marginRight="26dip"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/links" />
-        </RelativeLayout>
-    </ScrollView>
-
-</RelativeLayout>
+</LinearLayout>
