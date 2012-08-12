@@ -33,7 +33,7 @@
         	android:label="@string/app_name"
         	android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".Map" 
+        <activity android:name=".MapScreen" 
         	android:label="@string/app_name"
         	android:theme="@android:style/Theme.NoTitleBar"
         	android:screenOrientation="portrait" />

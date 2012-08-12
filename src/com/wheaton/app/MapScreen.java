@@ -32,7 +32,7 @@ import com.google.android.maps.OverlayItem;
  * @author Drew Hannay, Andrew Wolfe
  * December 28, 2010
  */
-public class Map extends MapActivity {
+public class MapScreen extends MapActivity {
 	
 	GeoPoint p;
 	
@@ -127,7 +127,7 @@ public class Map extends MapActivity {
 		protected boolean onTap(int index) {
 			final OverlayItem item = mOverlays.get(index);
 			
-			LayoutInflater inflater = LayoutInflater.from(Map.this);
+			LayoutInflater inflater = LayoutInflater.from(MapScreen.this);
 		  	View alertDialogView = inflater.inflate(R.layout.foursquare, null);
 
 		  	WebView myWebView = (WebView) alertDialogView.findViewById(R.id.foursquare);

@@ -3,15 +3,14 @@
     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@android:color/white"
     android:orientation="vertical" >
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/white" >
+        android:layout_weight="1" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -27,7 +26,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    android:id="@+id/stalkernet"
+                    android:id="@+id/whos_who"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="13dp"
@@ -116,6 +115,6 @@
         ads:adSize="BANNER"
         ads:adUnitId="a14d2a372c31403"
         ads:loadAdOnCreate="true"
-        android:background="@color/white" />
+        android:background="@android:color/white" />
 
 </LinearLayout>
