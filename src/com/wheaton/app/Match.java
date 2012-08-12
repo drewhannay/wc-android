@@ -1,30 +1,40 @@
 package com.wheaton.app;
 
+
 public class Match {
 	
 	private String firstName;
 	private String lastName;
-	private String middleName;
 	private String preferredFirst;
-	private String studentType;
-	private String yearEntered;
+	private boolean studentType;
+	private String klazz;
 	private String imgURL;
+	private String cpo;
+	private String department;
 	
-	public Match(String firstName, String lastName, String middleName, String preferredFirst, String studentType, String yearEntered, String imgURL){
+	public Match(String firstName, String lastName, String preferredFirst, boolean studentType, String klazz, String cpo, String department, String imgURL){
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.middleName = middleName;
 		this.preferredFirst = preferredFirst;
 		this.studentType = studentType;
-		this.yearEntered = yearEntered;
+		this.klazz = klazz;
 		this.imgURL = imgURL;
+		this.cpo = cpo;
+		this.department = department;
 	}
 	
 	public String toString(){
 		String s = firstName;
 		if(!preferredFirst.equals(""))
 			s += " (" + preferredFirst + ")";
-		s += " " + middleName + " " + lastName + ", " + studentType + ", " + yearEntered;
+		s += " " + lastName + "";
+		if(studentType){
+			s+= ""+(!cpo.equals("")?(",\nCPO: " + cpo):("")) + (!klazz.equals("")?
+					", " +klazz: "") + " Student";
+			}
+		else
+			s+=(!department.equals("")?", \n"+department+" Department":"");
+		
 		return s;
 	}
 	

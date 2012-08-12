@@ -55,7 +55,7 @@ public class Results extends ListActivity {
 					int position, long id) {
 				//Set the displayed image to the image from the selected result
 				curPic.setImageDrawable(LoadImageFromWebOperations(
-						"http://intra.wheaton.edu/directory/whosnew/" + matches[position].getImage()));
+						matches[position].getImage()));
 			}
 		});
 	}
