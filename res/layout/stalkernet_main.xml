@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:myapp="http://schemas.android.com/apk/res/com.wheaton.app"
-	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white"
-    >
-<ImageView 
-	android:id="@+id/logo"
-	android:layout_width="wrap_content"
-	android:layout_height="120dip"
-	android:layout_alignParentTop="true"
-	android:background="@drawable/stalkernet"
-	/>
-<EditText
-        android:id="@+id/text_box"
-        android:layout_centerHorizontal="true"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/logo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
+        android:adjustViewBounds="true"
+        android:src="@drawable/stalkernet" />
+
+    <EditText
+        android:id="@+id/text_box"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:background="@android:drawable/editbox_background"
-        />   
-<Button
+        android:hint="@string/search_hint"
+        android:lines="1"
+        android:inputType="textCapWords"
+        android:imeOptions="actionSearch"
+        android:background="@android:drawable/editbox_background" />
+
+    <Button
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
-        android:layout_height="35dip"
-        android:layout_below="@id/text_box"
-        android:layout_centerInParent="true"
-        android:text="Search" />
-<com.google.ads.AdView
-		android:id="@+id/ad"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		ads:adUnitId="a14d2a372c31403"
-		ads:adSize="BANNER"
-        ads:loadAdOnCreate="true"
-		/>
-       
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/search" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.ads.AdView
+        android:id="@+id/ad"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="a14d2a372c31403"
+        ads:loadAdOnCreate="true" />
+
+</LinearLayout>

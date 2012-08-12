@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:myapp="http://schemas.android.com/apk/res/com.wheaton.app"
-	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-	>
-<ListView
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" />
-<com.google.ads.AdView
-		android:id="@+id/ad"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		ads:adUnitId="a14d2a372c31403"
-		ads:adSize="BANNER"
-        ads:loadAdOnCreate="true"
-		/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="@android:color/transparent" />
+
+    <com.google.ads.AdView
+        android:id="@+id/ad"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="a14d2a372c31403"
+        ads:loadAdOnCreate="true" />
+
 </LinearLayout>

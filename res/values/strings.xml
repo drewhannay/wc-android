@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search">Search</string>
+    <string name="search_hint">Enter a name</string>
     <string name="app_name">Wheaton College</string>
     <string name="contact_label">Contact Us</string>
     <string name="next_button">Next</string>
