@@ -135,7 +135,7 @@ public class OpenFloorParser {
 		WebView v;
 		String webCode;
 		if(ERROR){
-			v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
+			v = (WebView) l.inflate(R.layout.webview, null).findViewById(R.id.web);
 			webCode = "<html><head><style type=\"text/css\"> h1 { font-size: 1.2em; font-weight: bold; " +
 			"text-align: center; }</style></head><body><br/><br/><br/><br/><h1>The open floor schedule is not yet available. Check back soon!</h1></body></html>";
 			v.loadData(webCode, "text/html", "utf-8");
@@ -144,7 +144,7 @@ public class OpenFloorParser {
 			return toReturn;
 		}
 		for(String day:schedule){
-			v = (WebView) l.inflate(R.layout.food_menu, null).findViewById(R.id.web);
+			v = (WebView) l.inflate(R.layout.webview, null).findViewById(R.id.web);
 			v.loadData(day, "text/html", "utf-8");
 			v.setBackgroundColor(0);
 			toReturn.add(v);
