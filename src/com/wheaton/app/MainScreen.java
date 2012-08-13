@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
  */
 public class MainScreen extends Activity
 {
+	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
