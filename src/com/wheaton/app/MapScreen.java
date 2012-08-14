@@ -1,29 +1,19 @@
 package com.wheaton.app;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
+import com.wheaton.utility.LoadURLTask;
 
 /*
  * Class to display campus map with pins at each building.
@@ -54,7 +44,14 @@ public class MapScreen extends MapActivity
 
 		m_overlays = m_mapView.getOverlays();
 		m_pinDrawable = getResources().getDrawable(R.drawable.map_pin_orange);
-		new LoadJSONTask(MainScreen.MAP_PINS_URL).execute();
+		new LoadURLTask(MainScreen.MAP_PINS_URL, new LoadURLTask.RunnableOfT<String>()
+		{
+			@Override
+			public void run(String result)
+			{
+				onLoadURLSucceeded(result);
+			}
+		}).execute();
 	}
 
 	@Override
@@ -63,7 +60,7 @@ public class MapScreen extends MapActivity
 		return false;
 	}
 
-	private void onLoadJSONSucceeded(String jsonString)
+	private void onLoadURLSucceeded(String jsonString)
 	{
 		JSONArray jsonArray = null;
 		GeoPoint point;
@@ -122,59 +119,6 @@ public class MapScreen extends MapActivity
 		mc.setZoom(20);
 
 		m_mapView.setSatellite(true);
-	}
-
-	private class LoadJSONTask extends AsyncTask<Void, Void, String>
-	{
-		public LoadJSONTask(String url)
-		{
-			m_url = url;
-		}
-
-		@Override
-		protected String doInBackground(Void... params)
-		{
-			StringBuilder builder = new StringBuilder();
-			HttpClient client = new DefaultHttpClient();
-			HttpGet httpGet = new HttpGet(m_url);
-			try
-			{
-				HttpResponse response = client.execute(httpGet);
-				StatusLine statusLine = response.getStatusLine();
-				int statusCode = statusLine.getStatusCode();
-				if (statusCode == 200)
-				{
-					HttpEntity entity = response.getEntity();
-					InputStream content = entity.getContent();
-					BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-					String line;
-					while ((line = reader.readLine()) != null)
-					{
-						builder.append(line);
-					}
-				}
-				else
-				{
-					Log.e(MapScreen.class.toString(), "Failed to download file:" + statusCode);
-				}
-			}
-			catch (Exception e)
-			{
-				Log.e("readURL", e.getMessage());
-			}
-			return builder.toString();
-		}
-
-		@Override
-		protected void onPostExecute(String result)
-		{
-			if (isCancelled())
-				return;
-			if (result != null)
-				onLoadJSONSucceeded(result);
-		}
-
-		private final String m_url;
 	}
 
 	private TapControlledMapView m_mapView;
