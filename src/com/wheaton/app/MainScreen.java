@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
  */
 public class MainScreen extends Activity
 {
+	public static final String CHAPEL_URL = "http://dl.dropbox.com/u/36045671/chapel.json";
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
 	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho-dev/person/searchJson?page_size=100&q=";
 	public static final String MENU_URL = "http://www.cafebonappetit.com/print-menu/cafe/339/menu/13292/days/not-today/pgbrks/0/";
@@ -77,12 +78,6 @@ public class MainScreen extends Activity
 		startActivity(new Intent(this, OpenFloorHome.class));
 	}
 
-	private void launchChapel()
-	{
-		m_progressDialog.dismiss();
-		startActivity(new Intent(this, ChapelHome.class));
-	}
-
 	private static final String CONTACT_URL = "https://spreadsheets.google.com/viewform?formkey=dDNFamI5UGJqRDZmNFRkZW96ZHEybXc6MQ";
 
 	private final OnClickListener m_buttonClickListener = new OnClickListener()
@@ -121,17 +116,7 @@ public class MainScreen extends Activity
 				startActivity(new Intent(MainScreen.this, About.class));
 				break;
 			case R.id.chapel:
-				new Thread()
-				{
-					@Override
-					public void run()
-					{
-						ChapelParser.parse(MainScreen.this);
-						m_handler.post(m_launchChapel);
-					}
-				}.start();
-				m_progressDialog = ProgressDialog.show(MainScreen.this, "Loading", "Please wait while the chapel schedule is loaded.",
-						true, false);
+				startActivity(new Intent(MainScreen.this, ChapelSchedule.class));
 				break;
 			}
 		}
@@ -143,15 +128,6 @@ public class MainScreen extends Activity
 		public void run()
 		{
 			launchOpenFloor();
-		}
-	};
-
-	private final Runnable m_launchChapel = new Runnable()
-	{
-		@Override
-		public void run()
-		{
-			launchChapel();
 		}
 	};
 
