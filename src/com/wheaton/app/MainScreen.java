@@ -22,6 +22,8 @@ import android.view.View.OnClickListener;
 public class MainScreen extends Activity
 {
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
+	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho-dev/person/searchJson?page_size=100&q=";
+	public static final String MENU_URL = "http://www.cafebonappetit.com/print-menu/cafe/339/menu/13292/days/not-today/pgbrks/0/";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -69,12 +71,6 @@ public class MainScreen extends Activity
 		return false;
 	}
 
-	private void launchMenu()
-	{
-		m_progressDialog.dismiss();
-		startActivity(new Intent(this, MenuHome.class));
-	}
-
 	private void launchOpenFloor()
 	{
 		m_progressDialog.dismiss();
@@ -91,31 +87,19 @@ public class MainScreen extends Activity
 
 	private final OnClickListener m_buttonClickListener = new OnClickListener()
 	{
+		@Override
 		public void onClick(View view)
 		{
-			Intent intent;
 			switch (view.getId())
 			{
 			case R.id.whos_who:
-				intent = new Intent(MainScreen.this, StalkernetHome.class);
-				startActivity(intent);
+				startActivity(new Intent(MainScreen.this, WhosWhoSearch.class));
 				break;
 			case R.id.menu:
-				// Preemptively grab the Menu information.
-				Thread thread = new Thread()
-				{
-					@Override
-					public void run()
-					{
-						MenuParser.parse(MainScreen.this);
-						m_handler.post(m_launchMenu);
-					}
-				};
-				thread.start();
-				m_progressDialog = ProgressDialog.show(MainScreen.this, "Loading", "Please wait while menus are loaded", true, false);
+				startActivity(new Intent(MainScreen.this, BonAppMenu.class));
 				break;
 			case R.id.open_floor:
-				thread = new Thread()
+				new Thread()
 				{
 					@Override
 					public void run()
@@ -123,8 +107,7 @@ public class MainScreen extends Activity
 						OpenFloorParser.parse(MainScreen.this);
 						m_handler.post(m_launchOpenFloor);
 					}
-				};
-				thread.start();
+				}.start();
 				m_progressDialog = ProgressDialog.show(MainScreen.this, "Loading", "Please wait while schedules are loaded", true,
 						false);
 				break;
@@ -138,7 +121,7 @@ public class MainScreen extends Activity
 				startActivity(new Intent(MainScreen.this, About.class));
 				break;
 			case R.id.chapel:
-				thread = new Thread()
+				new Thread()
 				{
 					@Override
 					public void run()
@@ -146,8 +129,7 @@ public class MainScreen extends Activity
 						ChapelParser.parse(MainScreen.this);
 						m_handler.post(m_launchChapel);
 					}
-				};
-				thread.start();
+				}.start();
 				m_progressDialog = ProgressDialog.show(MainScreen.this, "Loading", "Please wait while the chapel schedule is loaded.",
 						true, false);
 				break;
@@ -155,16 +137,9 @@ public class MainScreen extends Activity
 		}
 	};
 
-	private final Runnable m_launchMenu = new Runnable()
-	{
-		public void run()
-		{
-			launchMenu();
-		}
-	};
-
 	private final Runnable m_launchOpenFloor = new Runnable()
 	{
+		@Override
 		public void run()
 		{
 			launchOpenFloor();
@@ -173,6 +148,7 @@ public class MainScreen extends Activity
 
 	private final Runnable m_launchChapel = new Runnable()
 	{
+		@Override
 		public void run()
 		{
 			launchChapel();
