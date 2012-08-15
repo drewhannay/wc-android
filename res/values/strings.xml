@@ -15,7 +15,10 @@
     Contact Form by pressing the menu button on the home screen of the app.  If all is going wonderfully for you 
     (as it should, with all the work we put into this), then maybe you should thank us. Our CPO numbers are 1122, 2122, 
     3175, and 2263, respectively.  So if you suddenly find yourself in the mood for writing personal notes, keep us in mind.
-    (We also accept candy...yum...)</string>
+    (We also accept candy…yum…)</string>
+    <string name="connect_to_wheaton">You must be connected to the Wheaton College Wifi Network to use this feature</string>
+    <string name="send_mail">Send mail…</string>
+    <string name="no_email_clients">No email clients installed</string>
     <string name="add_title">Add a Link</string>
     <string name="edit_title">Edit</string>
     <string name="ok">Okay</string>

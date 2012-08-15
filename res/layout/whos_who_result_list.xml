@@ -5,12 +5,13 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/curPic"
-        android:layout_width="150dip"
-        android:layout_height="186dip"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="15dip" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="gone" />
 
     <ListView
         android:id="@android:id/list"
@@ -18,7 +19,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:cacheColorHint="@android:color/transparent"
-        android:drawSelectorOnTop="false" />
+        android:drawSelectorOnTop="false"
+        android:visibility="gone" />
 
     <com.google.ads.AdView
         android:id="@+id/ad"
