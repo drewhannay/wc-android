@@ -159,11 +159,15 @@ public class ChapelSchedule extends Activity
 			switch (view.getId())
 			{
 			case R.id.rightButton:
+				m_viewAnimator.setInAnimation(ChapelSchedule.this, R.anim.slide_in_right);
+				m_viewAnimator.setOutAnimation(ChapelSchedule.this, R.anim.slide_out_left);
 				m_viewAnimator.showNext();
 				setNextButtonVisibility();
 				m_previousButton.setVisibility(View.VISIBLE);
 				break;
 			case R.id.leftButton:
+				m_viewAnimator.setInAnimation(ChapelSchedule.this, R.anim.slide_in_left);
+				m_viewAnimator.setOutAnimation(ChapelSchedule.this, R.anim.slide_out_right);
 				m_viewAnimator.showPrevious();
 				setPreviousButtonVisibility();
 				m_nextButton.setVisibility(View.VISIBLE);
@@ -171,6 +175,8 @@ public class ChapelSchedule extends Activity
 			case R.id.todayButton:
 				if (m_viewAnimator.getDisplayedChild() != m_todayIndex)
 				{
+					m_viewAnimator.setInAnimation(ChapelSchedule.this, android.R.anim.fade_in);
+					m_viewAnimator.setOutAnimation(ChapelSchedule.this, android.R.anim.fade_out);
 					m_viewAnimator.setDisplayedChild(m_todayIndex);
 					setNextButtonVisibility();
 					setPreviousButtonVisibility();
