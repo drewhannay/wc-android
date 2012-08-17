@@ -8,12 +8,8 @@
     <string name="prev_button">Previous</string>
     <string name="today_button">Today</string>
     <string name="about_title">About</string>
-    <string name="about_text">This app was made for you by Drew Hannay, Alisa Maas, and Andrew Wolfe, with graphics
-    designed by Jacob Meindertsma. If you have any trouble with the app, or suggestions for improving it, fill out our 
-    Contact Form by pressing the menu button on the home screen of the app.  If all is going wonderfully for you 
-    (as it should, with all the work we put into this), then maybe you should thank us. Our CPO numbers are 1122, 2122, 
-    3175, and 2263, respectively.  So if you suddenly find yourself in the mood for writing personal notes, keep us in mind.
-    (We also accept candy…yum…)</string>
+    <string name="about_text">The Wheaton College App is entirely student led and student developed. If you are interested in contributing to the project, 
+        please send an email to wheatonapp@drewhannay.com and we\'ll give you the details about getting involved. Thanks for supporting our project!</string>
     <string name="connect_to_wheaton">You must be connected to the Wheaton College Wifi Network to use this feature</string>
     <string name="send_mail">Send mail…</string>
     <string name="no_email_clients">No email clients installed</string>
