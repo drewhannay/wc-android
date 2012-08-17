@@ -67,8 +67,8 @@ public class ChapelWeek
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder("<html><head><style type=\"text/css\"> h1 { font-size: 1.1em; font-weight: bold; "
-				+ "text-align: center; color:#CC6600; } h2 { font-size: 0.9em; } h3 { font-style:italic; font-size: 0.8em;}"
-				+ "p { font-size: 0.7em; } </style></head><body>");
+				+ "text-align: center; color:#CC6600; } h2 { text-align: center; font-size: 0.9em; } h3 { text-align: center; font-style:italic; font-size: 0.8em;}"
+				+ "p { text-align: center; font-size: 0.7em; } </style></head><body>");
 
 		for (JSONObject day : m_scheduleList)
 		{

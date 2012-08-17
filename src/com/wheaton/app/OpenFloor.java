@@ -126,8 +126,8 @@ public class OpenFloor extends Activity
 		try
 		{
 			builder.append("<head><style type=\"text/css\"> h1 { font-size: 1.1em; font-weight: bold; "
-					+ "text-align: center; color:#CC6600; } h2 { font-size: 0.9em; } h3 { font-style:italic; font-size: 0.8em;}"
-					+ "p { font-size: 0.7em; } </style></head>");
+					+ "text-align: center; color:#CC6600; } h2 { text-align: center; font-size: 0.9em; } h3 { font-style:italic; font-size: 0.8em;}"
+					+ "p { text-align: center; font-size: 0.7em; } </style></head>");
 			builder.append("<h1>" + getFormattedDate(jsonObject.getString("Date")) + "</h1>");
 
 			builder.append("<h2>Open Fischer Floors:</h2>");
@@ -152,6 +152,8 @@ public class OpenFloor extends Activity
 
 	private void appendFloorData(StringBuilder builder, JSONArray building) throws JSONException
 	{
+		builder.append("<p>");
+
 		if (building != null)
 		{
 			JSONObject floor;
@@ -168,6 +170,8 @@ public class OpenFloor extends Activity
 		{
 			builder.append("All Floors Closed");
 		}
+
+		builder.append("</p>");
 	}
 
 	private String getFormattedDate(String rawDate) throws ParseException
