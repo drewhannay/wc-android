@@ -1,11 +1,9 @@
 package com.wheaton.app;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +21,9 @@ public class MainScreen extends Activity
 {
 	public static final String CHAPEL_URL = "http://dl.dropbox.com/u/36045671/chapel.json";
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
-	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho-dev/person/searchJson?page_size=100&q=";
 	public static final String MENU_URL = "http://www.cafebonappetit.com/print-menu/cafe/339/menu/13292/days/not-today/pgbrks/0/";
+	public static final String OPEN_FLOOR_URL = "https://dl-web.dropbox.com/u/36045671/openFloors.json";
+	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho-dev/person/searchJson?page_size=100&q=";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -72,12 +71,6 @@ public class MainScreen extends Activity
 		return false;
 	}
 
-	private void launchOpenFloor()
-	{
-		m_progressDialog.dismiss();
-		startActivity(new Intent(this, OpenFloorHome.class));
-	}
-
 	private static final String CONTACT_URL = "https://spreadsheets.google.com/viewform?formkey=dDNFamI5UGJqRDZmNFRkZW96ZHEybXc6MQ";
 
 	private final OnClickListener m_buttonClickListener = new OnClickListener()
@@ -94,17 +87,7 @@ public class MainScreen extends Activity
 				startActivity(new Intent(MainScreen.this, BonAppMenu.class));
 				break;
 			case R.id.open_floor:
-				new Thread()
-				{
-					@Override
-					public void run()
-					{
-						OpenFloorParser.parse(MainScreen.this);
-						m_handler.post(m_launchOpenFloor);
-					}
-				}.start();
-				m_progressDialog = ProgressDialog.show(MainScreen.this, "Loading", "Please wait while schedules are loaded", true,
-						false);
+				startActivity(new Intent(MainScreen.this, OpenFloor.class));
 				break;
 			case R.id.map:
 				startActivity(new Intent(MainScreen.this, MapScreen.class));
@@ -122,19 +105,6 @@ public class MainScreen extends Activity
 		}
 	};
 
-	private final Runnable m_launchOpenFloor = new Runnable()
-	{
-		@Override
-		public void run()
-		{
-			launchOpenFloor();
-		}
-	};
-
-	// Need handler for callbacks to the UI thread
-	private final Handler m_handler = new Handler();
-
-	private ProgressDialog m_progressDialog;
 	private View m_whosWhoLauncher;
 	private View m_menuLauncher;
 	private View m_openFloorLauncher;

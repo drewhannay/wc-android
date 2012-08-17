@@ -24,7 +24,7 @@
         	android:label="@string/app_name" />
         <activity android:name=".BonAppMenu"
         	android:label="@string/app_name" />
-        <activity android:name=".OpenFloorHome"
+        <activity android:name=".OpenFloor"
         	android:label="@string/app_name" />
         <activity android:name=".MapScreen" 
         	android:label="@string/app_name"
