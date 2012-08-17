@@ -9,14 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-/**
- * Class to run the main screen of the application. Get references to the
- * different Views in the Activity and use them to let the user launch the
- * individual sections of the application.
- * 
- * @author Drew Hannay
- * 
- */
 public class MainScreen extends Activity
 {
 	public static final String CHAPEL_URL = "http://dl.dropbox.com/u/36045671/chapel.json";

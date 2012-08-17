@@ -15,11 +15,6 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
 import com.wheaton.utility.LoadURLTask;
 
-/*
- * Class to display campus map with pins at each building.
- * @author Drew Hannay, Andrew Wolfe
- * December 28, 2010
- */
 public class MapScreen extends MapActivity
 {
 	@Override

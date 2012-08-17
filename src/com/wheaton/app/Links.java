@@ -13,15 +13,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-/**
- * Class to display links to various resources on the web. Keep static, final
- * arrays of URLs and the text that should display in the ListActivity. Display
- * the text and set the onClickListeners to launch an Intent to the browser when
- * the list items are clicked.
- * 
- * @author Drew Hannay, Andrew Wolfe December 29, 2010
- * 
- */
 public class Links extends ListActivity
 {
 
