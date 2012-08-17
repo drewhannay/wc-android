@@ -10,7 +10,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:src="@drawable/stalkernet" />
+        android:src="@drawable/stalkernet"
+        android:contentDescription="@string/whos_who_header" />
 
     <EditText
         android:id="@+id/text_box"

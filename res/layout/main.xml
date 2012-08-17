@@ -31,7 +31,8 @@
                     android:layout_marginRight="13dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/stalkernet_square" />
+                    android:src="@drawable/stalkernet_square"
+                    android:contentDescription="@string/whos_who_button" />
 
                 <ImageView
                     android:id="@+id/chapel"
@@ -39,7 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/chapel" />
+                    android:src="@drawable/chapel"
+                    android:contentDescription="@string/chapel_button" />
             </LinearLayout>
 
             <LinearLayout
@@ -57,7 +59,8 @@
                     android:layout_marginRight="13dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/open_floor" />
+                    android:src="@drawable/open_floor"
+                    android:contentDescription="@string/open_floor_button" />
 
                 <ImageView
                     android:id="@+id/menu"
@@ -65,7 +68,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/menu" />
+                    android:src="@drawable/menu"
+                    android:contentDescription="@string/menu_button" />
             </LinearLayout>
 
             <ImageView
@@ -77,7 +81,8 @@
                 android:layout_marginRight="26dp"
                 android:layout_marginTop="13dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/about_horizontal" />
+                android:src="@drawable/about_horizontal"
+                android:contentDescription="@string/about_button" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -94,7 +99,8 @@
                     android:layout_marginRight="13dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/map" />
+                    android:src="@drawable/map"
+                    android:contentDescription="@string/map_button" />
 
                 <ImageView
                     android:id="@+id/links"
@@ -102,7 +108,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/links" />
+                    android:src="@drawable/links"
+                    android:contentDescription="@string/links_button" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

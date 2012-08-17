@@ -37,4 +37,16 @@
     <string name="my_wheaton_portal">My Wheaton Portal</string>
     <string name="registrar_s_catalog">Registrar\'s Catalog</string>
     <string name="wetn">WETN</string>
+    <string name="close_balloon">Close Balloon</string>
+    <string name="balloon_disclosure">Balloon Disclosure</string>
+    <string name="section_title">Section Title</string>
+    <string name="whos_who_header">Who\'s Who Header</string>
+    <string name="whos_who_button">Who\'s Who Button</string>
+    <string name="chapel_button">Chapel Button</string>
+    <string name="open_floor_button">Open Floor Button</string>
+    <string name="menu_button">Menu Button</string>
+    <string name="about_button">About Button</string>
+    <string name="map_button">Map Button</string>
+    <string name="links_button">Links Button</string>
+    <string name="whos_who_picture">Who\'s Who Picture</string>
 </resources>

@@ -48,6 +48,7 @@
             android:layout_gravity="center_vertical"
             android:paddingTop="3dip"
             android:src="@drawable/balloon_disclosure"
+            android:contentDescription="@string/balloon_disclosure"
             android:visibility="gone" />
     </LinearLayout>
 
@@ -59,7 +60,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="5dip"
         android:paddingTop="5dip"
-        
+        android:contentDescription="@string/close_balloon"
         android:src="@drawable/balloon_overlay_close" />
 
 </LinearLayout>

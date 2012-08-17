@@ -43,7 +43,8 @@
         android:id="@+id/headerImage"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/section_title" />
 
     <ViewAnimator
         android:id="@+id/view_area"

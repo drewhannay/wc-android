@@ -8,7 +8,8 @@
         android:id="@+id/picture"
         android:layout_width="150dp"
         android:layout_height="200dp"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/whos_who_picture" />
 
     <LinearLayout
         android:layout_width="wrap_content"
