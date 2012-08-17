@@ -7,8 +7,6 @@
     <string name="next_button">Next</string>
     <string name="prev_button">Previous</string>
     <string name="today_button">Today</string>
-    <string name="lunch_label">Lunch</string>
-    <string name="dinner_label">Dinner</string>
     <string name="about_title">About</string>
     <string name="about_text">This app was made for you by Drew Hannay, Alisa Maas, and Andrew Wolfe, with graphics
     designed by Jacob Meindertsma. If you have any trouble with the app, or suggestions for improving it, fill out our 
@@ -19,12 +17,6 @@
     <string name="connect_to_wheaton">You must be connected to the Wheaton College Wifi Network to use this feature</string>
     <string name="send_mail">Send mail…</string>
     <string name="no_email_clients">No email clients installed</string>
-    <string name="add_title">Add a Link</string>
-    <string name="edit_title">Edit</string>
-    <string name="ok">Okay</string>
-    <string name="cancel_button">Cancel</string>
-    <string name="name">Name</string>
-    <string name="url">URL</string>
     <string name="clear_cache">Clear Cached Data</string>
     <string name="academic_calendar">Academic Calendar</string>
     <string name="admissions">Admissions</string>
