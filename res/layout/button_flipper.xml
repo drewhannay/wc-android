@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/prev_button"
+            android:textColor="@android:color/black"
             android:visibility="invisible" />
 
         <Button
@@ -24,6 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/black"
             android:text="@string/today_button" />
 
         <Button
@@ -31,6 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/black"
             android:text="@string/next_button"
             android:visibility="invisible" />
 
