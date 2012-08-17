@@ -52,6 +52,9 @@ public class WhosWhoSearch extends Activity
 				performSearch();
 			}
 		});
+
+		setProgressBarIndeterminate(true);
+		setProgressBarIndeterminateVisibility(false);
 	}
 
 	private void performSearch()
@@ -61,7 +64,6 @@ public class WhosWhoSearch extends Activity
 		if (binder != null)
 			inputMethodManager.hideSoftInputFromWindow(binder, 0);
 
-		setProgressBarIndeterminate(true);
 		setProgressBarIndeterminateVisibility(true);
 		new LoadURLTask(MainScreen.WHOS_WHO_PREFIX + getSanitizedSearchQuery(), new LoadURLTask.RunnableOfT<String>()
 		{
