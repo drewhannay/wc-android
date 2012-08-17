@@ -63,10 +63,6 @@ public class MainScreen extends Activity
 		case R.id.contact:
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CONTACT_URL)));
 			return true;
-		case R.id.clear_cache:
-			for (String string : fileList())
-				deleteFile(string);
-			return true;
 		}
 		return false;
 	}
