@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +43,11 @@ public class OpenFloor extends Activity
 		m_previousButton = (Button) findViewById(R.id.leftButton);
 		m_todayButton = (Button) findViewById(R.id.todayButton);
 		m_viewAnimator = (ViewAnimator) findViewById(R.id.view_area);
+
+		Calendar calendar = new GregorianCalendar();
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		m_todayDate = calendar.getTime();
 
 		setProgressBarIndeterminate(true);
 		setProgressBarIndeterminateVisibility(true);
@@ -102,7 +108,7 @@ public class OpenFloor extends Activity
 			Log.e(TAG, "onLoadURLSucceeded", e);
 		}
 
-		if (!m_errorOccurred)
+		if (!m_errorOccurred && m_latestDate.after(m_todayDate))
 		{
 			for (View day : days)
 				m_viewAnimator.addView(day);
@@ -176,7 +182,11 @@ public class OpenFloor extends Activity
 
 	private String getFormattedDate(String rawDate) throws ParseException
 	{
-		return OUTPUT_FORMATTER.format(INPUT_FORMATTER.parse(rawDate));
+		Date date = INPUT_FORMATTER.parse(rawDate);
+		if (m_latestDate == null || date.after(m_latestDate))
+			m_latestDate = date;
+
+		return OUTPUT_FORMATTER.format(date);
 	}
 
 	private void loadErrorView()
@@ -231,11 +241,13 @@ public class OpenFloor extends Activity
 			+ "text-align: center; }</style></head><body><br/><br/><br/><br/><h1>The open floor schedule is not yet available. Check back soon!</h1></body></html>";
 
 	private final int m_todayIndex = new GregorianCalendar().get(Calendar.DAY_OF_WEEK) - 1;
+	private Date m_todayDate;
 
 	private Button m_nextButton;
 	private Button m_previousButton;
 	private Button m_todayButton;
 	private ViewAnimator m_viewAnimator;
 	private LoadURLTask m_loadURLTask;
+	private Date m_latestDate;
 	private boolean m_errorOccurred = false;
 }
