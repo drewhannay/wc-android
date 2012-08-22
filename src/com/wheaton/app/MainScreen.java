@@ -15,7 +15,7 @@ public class MainScreen extends Activity
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
 	public static final String MENU_URL = "http://www.cafebonappetit.com/print-menu/cafe/339/menu/13292/days/not-today/pgbrks/0/";
 	public static final String OPEN_FLOOR_URL = "https://dl-web.dropbox.com/u/36045671/openFloors.json";
-	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho-dev/person/searchJson?page_size=100&q=";
+	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho/person/searchJson?page_size=100&q=";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

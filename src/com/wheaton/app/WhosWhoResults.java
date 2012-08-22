@@ -130,6 +130,7 @@ public class WhosWhoResults extends ListActivity
 				holder = new ViewHolder();
 				holder.name = (TextView) convertView.findViewById(R.id.name);
 				holder.cpo = (TextView) convertView.findViewById(R.id.cpo);
+				holder.type = (TextView) convertView.findViewById(R.id.type);
 				holder.classification = (TextView) convertView.findViewById(R.id.classification);
 				holder.department = (TextView) convertView.findViewById(R.id.department);
 				holder.picture = (ImageView) convertView.findViewById(R.id.picture);
@@ -173,9 +174,13 @@ public class WhosWhoResults extends ListActivity
 				}
 				holder.name.setText(builder.toString());
 
-				setTextOrHideTextView(resultJSON.getString("CPOBox"), holder.cpo);
-				setTextOrHideTextView(resultJSON.getString("Classification"), holder.classification);
-				setTextOrHideTextView(resultJSON.getString("Dept"), holder.department);
+				setTextOrHideTextView("CPO ", resultJSON.getString("CPOBox"), holder.cpo);
+				setTextOrHideTextView("", resultJSON.getString("Classification"), holder.classification);
+				if (resultJSON.getInt("Type") == 1)
+					holder.type.setText("Faculty/Staff");
+				else
+					holder.type.setText("Student");
+				setTextOrHideTextView("Department: ", resultJSON.getString("Dept"), holder.department);
 			}
 			catch (Exception e)
 			{
@@ -185,10 +190,10 @@ public class WhosWhoResults extends ListActivity
 			return convertView;
 		}
 
-		private void setTextOrHideTextView(String text, TextView view)
+		private void setTextOrHideTextView(String prefix, String text, TextView view)
 		{
 			if (!isNullOrEmpty(text))
-				view.setText(text);
+				view.setText(prefix + text);
 			else
 				view.setVisibility(View.GONE);
 		}
@@ -203,6 +208,7 @@ public class WhosWhoResults extends ListActivity
 	{
 		TextView name;
 		TextView cpo;
+		TextView type;
 		TextView classification;
 		TextView department;
 		ImageView picture;
@@ -219,9 +225,7 @@ public class WhosWhoResults extends ListActivity
 			{
 				try
 				{
-					// TODO: Replace this when Brian adds an imageURL field to the JSON data
-					m_bitmaps.add(getBitmapFromURL("https://intra.wheaton.edu/Directory/wcid2/"
-							+ m_results.getJSONObject(i).getString("IdCardNum") + ".jpg"));
+					m_bitmaps.add(getBitmapFromURL(m_results.getJSONObject(i).getString("PhotoUrl")));
 				}
 				catch (JSONException e)
 				{
