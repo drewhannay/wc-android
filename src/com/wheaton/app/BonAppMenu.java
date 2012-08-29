@@ -27,9 +27,11 @@ public class BonAppMenu extends Activity
 		webView.loadUrl(MainScreen.MENU_URL);
 	}
 
-	private class MyWebViewClient extends WebViewClient {
+	private class MyWebViewClient extends WebViewClient
+	{
 	    @Override
-	    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+	    public boolean shouldOverrideUrlLoading(WebView view, String url)
+	    {
 	        view.loadUrl(url);
 	        return true;
 	    }
