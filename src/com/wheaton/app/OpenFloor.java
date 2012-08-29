@@ -44,11 +44,6 @@ public class OpenFloor extends Activity
 		m_todayButton = (Button) findViewById(R.id.todayButton);
 		m_viewAnimator = (ViewAnimator) findViewById(R.id.view_area);
 
-		Calendar calendar = new GregorianCalendar();
-		calendar.set(Calendar.HOUR_OF_DAY, 23);
-		calendar.set(Calendar.MINUTE, 59);
-		m_todayDate = calendar.getTime();
-
 		setProgressBarIndeterminate(true);
 		setProgressBarIndeterminateVisibility(true);
 
@@ -182,7 +177,7 @@ public class OpenFloor extends Activity
 
 	private String getFormattedDate(String rawDate) throws ParseException
 	{
-		Date date = INPUT_FORMATTER.parse(rawDate);
+		Date date = INPUT_FORMATTER.parse(rawDate + " 23:59");
 		if (m_latestDate == null || date.after(m_latestDate))
 			m_latestDate = date;
 
@@ -233,7 +228,7 @@ public class OpenFloor extends Activity
 	};
 
 	private static final String TAG = OpenFloor.class.toString();
-	private static final SimpleDateFormat INPUT_FORMATTER = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+	private static final SimpleDateFormat INPUT_FORMATTER = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
 	private static final SimpleDateFormat OUTPUT_FORMATTER = new SimpleDateFormat("EEEE, MMMM d, y", Locale.US);
 	private static final String[] weekdays = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
 			"Saturday" };
@@ -241,7 +236,7 @@ public class OpenFloor extends Activity
 			+ "text-align: center; }</style></head><body><br/><br/><br/><br/><h1>The open floor schedule is not yet available. Check back soon!</h1></body></html>";
 
 	private final int m_todayIndex = new GregorianCalendar().get(Calendar.DAY_OF_WEEK) - 1;
-	private Date m_todayDate;
+	private final Date m_todayDate = new Date();
 
 	private Button m_nextButton;
 	private Button m_previousButton;
