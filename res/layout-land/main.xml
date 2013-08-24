@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_weight="1"
     android:background="@android:color/white" >
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_marginBottom="26dp"
             android:layout_marginLeft="13dp"
             android:layout_marginTop="26dp"
@@ -26,8 +26,8 @@
                 android:layout_marginBottom="13dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/stalkernet_square"
-                android:contentDescription="@string/whos_who_button" />
+                android:contentDescription="@string/whos_who_button"
+                android:src="@drawable/stalkernet_square" />
 
             <ImageView
                 android:id="@+id/chapel"
@@ -35,16 +35,16 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/chapel"
-                android:contentDescription="@string/chapel_button" />
+                android:contentDescription="@string/chapel_button"
+                android:src="@drawable/chapel" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="26dp"            
-            android:layout_marginTop="26dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="26dp"
             android:layout_marginLeft="13dp"
+            android:layout_marginTop="26dp"
             android:orientation="vertical" >
 
             <ImageView
@@ -54,8 +54,8 @@
                 android:layout_marginBottom="13dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/open_floor"
-                android:contentDescription="@string/open_floor_button" />
+                android:contentDescription="@string/open_floor_button"
+                android:src="@drawable/open_floor" />
 
             <ImageView
                 android:id="@+id/menu"
@@ -63,28 +63,28 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/menu"
-                android:contentDescription="@string/menu_button" />
+                android:contentDescription="@string/menu_button"
+                android:src="@drawable/menu" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/about"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:layout_marginTop="26dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="26dp"
             android:layout_marginLeft="13dp"
+            android:layout_marginTop="26dp"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:src="@drawable/about_vertical"
-            android:contentDescription="@string/about_button" />
+            android:contentDescription="@string/about_button"
+            android:src="@drawable/about_vertical" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="26dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="26dp"
             android:layout_marginLeft="13dp"
+            android:layout_marginTop="26dp"
             android:orientation="vertical" >
 
             <ImageView
@@ -94,8 +94,8 @@
                 android:layout_marginBottom="13dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/map"
-                android:contentDescription="@string/map_button" />
+                android:contentDescription="@string/map_button"
+                android:src="@drawable/map" />
 
             <ImageView
                 android:id="@+id/links"
@@ -103,8 +103,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/links"
-                android:contentDescription="@string/links_button" />
+                android:contentDescription="@string/links_button"
+                android:src="@drawable/links" />
         </LinearLayout>
     </LinearLayout>
 

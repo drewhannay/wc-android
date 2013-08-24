@@ -44,11 +44,11 @@
         <ImageView
             android:id="@+id/balloon_disclosure"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
+            android:contentDescription="@string/balloon_disclosure"
             android:paddingTop="3dip"
             android:src="@drawable/balloon_disclosure"
-            android:contentDescription="@string/balloon_disclosure"
             android:visibility="gone" />
     </LinearLayout>
 
@@ -56,11 +56,11 @@
         android:id="@+id/balloon_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/close_balloon"
         android:paddingBottom="10dip"
         android:paddingLeft="10dip"
         android:paddingRight="5dip"
         android:paddingTop="5dip"
-        android:contentDescription="@string/close_balloon"
         android:src="@drawable/balloon_overlay_close" />
 
 </LinearLayout>
