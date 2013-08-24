@@ -14,7 +14,6 @@
     <string name="connect_to_wheaton">You must be connected to the Wheaton College Wifi Network to use this feature</string>
     <string name="send_mail">Send mail…</string>
     <string name="no_email_clients">No email clients installed</string>
-    <string name="clear_cache">Clear Cached Data</string>
     <string name="academic_calendar">Academic Calendar</string>
     <string name="admissions">Admissions</string>
     <string name="arena_theater">Arena Theater</string>
