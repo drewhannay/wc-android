@@ -4,12 +4,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/balloon_overlay_bg_selector"
-    android:minWidth="200dip"
+    android:minWidth="200dp"
     android:orientation="horizontal"
-    android:paddingBottom="25dip"
-    android:paddingLeft="10dip"
-    android:paddingRight="0dip"
-    android:paddingTop="0dip" >
+    android:paddingBottom="25dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp" >
 
     <LinearLayout
         android:id="@+id/balloon_inner_layout"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:minHeight="40dip"
+            android:minHeight="40dp"
             android:orientation="vertical" >
 
             <TextView
@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:contentDescription="@string/balloon_disclosure"
-            android:paddingTop="3dip"
+            android:paddingTop="3dp"
             android:src="@drawable/balloon_disclosure"
             android:visibility="gone" />
     </LinearLayout>
@@ -57,10 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/close_balloon"
-        android:paddingBottom="10dip"
-        android:paddingLeft="10dip"
-        android:paddingRight="5dip"
-        android:paddingTop="5dip"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
         android:src="@drawable/balloon_overlay_close" />
 
 </LinearLayout>

@@ -17,7 +17,7 @@
         android:id="@+id/text_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dip"
+        android:layout_margin="5dp"
         android:background="@android:drawable/editbox_background"
         android:hint="@string/search_hint"
         android:imeOptions="actionSearch"
