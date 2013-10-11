@@ -2,20 +2,35 @@ package com.wheaton.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainScreen extends Activity
 {
+	private DrawerLayout mDrawerLayout;
+	private ListView mDrawerList;
+	private ActionBarDrawerToggle mDrawerToggle;
+
 	public static final String CHAPEL_URL = "http://dl.dropbox.com/u/36045671/chapel.json";
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
 	public static final String MENU_URL = "http://www.cafebonappetit.com/print-menu/cafe/339/menu/13292/days/not-today/pgbrks/0/";
 	public static final String OPEN_FLOOR_URL = "http://cs.wheaton.edu/~drew.hannay/wheatonapp/GetFloorJson.php";
 	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho/person/searchJson?page_size=100&q=";
+
+	private CharSequence mDrawerTitle;
+	private CharSequence mTitle;
+	private String[] mPageTitles;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -23,81 +38,138 @@ public class MainScreen extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		m_whosWhoLauncher = findViewById(R.id.whos_who);
-		m_whosWhoLauncher.setOnClickListener(m_buttonClickListener);
-		m_menuLauncher = findViewById(R.id.menu);
-		m_menuLauncher.setOnClickListener(m_buttonClickListener);
-		m_openFloorLauncher = findViewById(R.id.open_floor);
-		m_openFloorLauncher.setOnClickListener(m_buttonClickListener);
-		m_mapLauncher = findViewById(R.id.map);
-		m_mapLauncher.setOnClickListener(m_buttonClickListener);
-		m_linksLauncher = findViewById(R.id.links);
-		m_linksLauncher.setOnClickListener(m_buttonClickListener);
-		m_aboutLauncher = findViewById(R.id.about);
-		m_aboutLauncher.setOnClickListener(m_buttonClickListener);
-		m_chapelLauncher = findViewById(R.id.chapel);
-		m_chapelLauncher.setOnClickListener(m_buttonClickListener);
+		mPageTitles = new String[]{"Home", "Campus Map", "Chapel Schedule", "Who's Who", "Academic Calendar", "Sports", "Meal Menu"};
+
+		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+		// set up the drawer's list view with items and click listener
+		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+				R.layout.drawer_list_item, mPageTitles));
+		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+		
+		Log.d("MyApp","Check Here");
+
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
+		mDrawerToggle = new ActionBarDrawerToggle(
+				this,
+				mDrawerLayout,
+				R.drawable.ic_drawer,
+				R.string.drawer_open,
+				R.string.drawer_close
+				) {
+			@Override
+			public void onDrawerClosed(View view) {
+				getActionBar().setTitle(mTitle);
+				invalidateOptionsMenu();
+			}
+
+			@Override
+			public void onDrawerOpened(View drawerView) {
+				getActionBar().setTitle(mDrawerTitle);
+				invalidateOptionsMenu();
+			}
+		};
+		Log.d("MyApp","Check Here 2");
+		
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		
+		Log.d("MyApp","Check Here 3");
+
+		if (savedInstanceState == null) {
+			selectItem(1);
+		}
+		
+		Log.d("MyApp","Check Here 4");
+
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		super.onCreateOptionsMenu(menu);
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	/* Called whenever we call invalidateOptionsMenu() */
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+
+		mDrawerLayout.isDrawerOpen(mDrawerList);
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId())
-		{
-		case R.id.contact:
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CONTACT_URL)));
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// The action bar home/up action should open or close the drawer.
+		// ActionBarDrawerToggle will take care of this.
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-		return false;
+		// Handle action buttons
+		switch(item.getItemId()) {
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
-	private static final String CONTACT_URL = "https://spreadsheets.google.com/viewform?formkey=dDNFamI5UGJqRDZmNFRkZW96ZHEybXc6MQ";
-
-	private final OnClickListener m_buttonClickListener = new OnClickListener()
-	{
+	/* The click listener for ListView in the navigation drawer */
+	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 		@Override
-		public void onClick(View view)
-		{
-			switch (view.getId())
-			{
-			case R.id.whos_who:
-				startActivity(new Intent(MainScreen.this, WhosWhoSearch.class));
-				break;
-			case R.id.menu:
-				startActivity(new Intent(MainScreen.this, BonAppMenu.class));
-				break;
-			case R.id.open_floor:
-				startActivity(new Intent(MainScreen.this, OpenFloor.class));
-				break;
-			case R.id.map:
-				startActivity(new Intent(MainScreen.this, MapScreen.class));
-				break;
-			case R.id.links:
-				startActivity(new Intent(MainScreen.this, Links.class));
-				break;
-			case R.id.about:
-				startActivity(new Intent(MainScreen.this, About.class));
-				break;
-			case R.id.chapel:
-				startActivity(new Intent(MainScreen.this, ChapelSchedule.class));
-				break;
-			}
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			selectItem(position);
 		}
-	};
+	}
 
-	private View m_whosWhoLauncher;
-	private View m_menuLauncher;
-	private View m_openFloorLauncher;
-	private View m_mapLauncher;
-	private View m_linksLauncher;
-	private View m_aboutLauncher;
-	private View m_chapelLauncher;
+	private void selectItem(int position) {
+		
+		switch (position)
+		{
+		case 0:
+			startActivity(new Intent(MainScreen.this, MapScreen.class));
+			break;
+		case 1:
+			startActivity(new Intent(MainScreen.this, ChapelSchedule.class));
+			break;
+		case 2:
+			startActivity(new Intent(MainScreen.this, WhosWhoSearch.class));
+			break;
+		case 3:
+			startActivity(new Intent(MainScreen.this, BonAppMenu.class));
+			break;
+		
+		}
+		
+		// update selected item and title, then close the drawer
+		mDrawerList.setItemChecked(position, true);
+		setTitle(mPageTitles[position]);
+		mDrawerLayout.closeDrawer(mDrawerList);
+	}
+
+	@Override
+	public void setTitle(CharSequence title) {
+		mTitle = title;
+		getActionBar().setTitle(mTitle);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		// Pass any configuration change to the drawer toggle
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+//
+//	private View m_whosWhoLauncher;
+//	private View m_menuLauncher;
+//	private View m_openFloorLauncher;
+//	private View m_mapLauncher;
+//	private View m_linksLauncher;
+//	private View m_aboutLauncher;
+//	private View m_chapelLauncher;
 }
