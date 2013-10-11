@@ -37,16 +37,22 @@ public class MainScreen extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
+		mTitle = mDrawerTitle = getTitle();
 		mPageTitles = new String[]{"Home", "Campus Map", "Chapel Schedule", "Who's Who", "Academic Calendar", "Sports", "Meal Menu"};
-
+		
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        
+        
+		Log.d("MyApp","Check Here2");
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		// set up the drawer's list view with items and click listener
+		Log.d("MyApp","Check Here3");
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
 				R.layout.drawer_list_item, mPageTitles));
+		Log.d("MyApp","Check Here4");
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-		
-		Log.d("MyApp","Check Here");
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -69,17 +75,13 @@ public class MainScreen extends Activity
 				invalidateOptionsMenu();
 			}
 		};
-		Log.d("MyApp","Check Here 2");
 		
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-		
-		Log.d("MyApp","Check Here 3");
+
 
 		if (savedInstanceState == null) {
 			selectItem(1);
 		}
-		
-		Log.d("MyApp","Check Here 4");
 
 	}
 
