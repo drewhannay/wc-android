@@ -45,4 +45,6 @@
     <string name="map_button">Map Button</string>
     <string name="links_button">Links Button</string>
     <string name="whos_who_picture">Who\'s Who Picture</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>
