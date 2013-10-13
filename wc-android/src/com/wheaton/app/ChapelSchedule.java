@@ -63,13 +63,14 @@ public class ChapelSchedule extends Fragment {
 			for (int i = 0; i < chapels.length(); i++) {
 				JSONObject month = chapels.getJSONObject(i);
 				JSONArray speakers = month.getJSONArray("speakers");
-				headerList.put(headerIndex, month.getJSONObject("month").toString());
+				headerList.put(headerIndex, month.getString("month"));
 				for(int j = 0; j < speakers.length(); j++) {
 					chapelList.add(speakers.getJSONObject(j));
+					headerIndex++;
 				}
 			}
 			
-			ListView lv = (ListView)mRootView.findViewById(R.id.chapelList);
+			ListView lv = (ListView)getView().findViewById(R.id.chapelList);
 	        lv.setAdapter(new HeaderList(getActivity(), chapelList, headerList));
 		} catch (JSONException e) {
 			m_errorOccurred = true;
