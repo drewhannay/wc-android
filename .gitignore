@@ -1,7 +1,6 @@
-bin/*
-.metadata/*
+bin/
+gen/
+.metadata/
 .project
-.settings/*
-.classpath
-gen/*
+.settings/
 .DS_Store
