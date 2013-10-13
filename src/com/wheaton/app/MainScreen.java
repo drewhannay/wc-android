@@ -1,12 +1,14 @@
 package com.wheaton.app;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,13 +18,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainScreen extends Activity
+public class MainScreen extends ActionBarActivity
 {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	public static final String CHAPEL_URL = "http://dl.dropbox.com/u/36045671/chapel.json";
+	public static final String CHAPEL_URL = "https://s3.amazonaws.com/wcstatic/chapel.json";
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
 	public static final String MENU_URL = "http://www.cafebonappetit.com/print-menu/cafe/339/menu/13292/days/not-today/pgbrks/0/";
 	public static final String OPEN_FLOOR_URL = "http://cs.wheaton.edu/~drew.hannay/wheatonapp/GetFloorJson.php";
@@ -54,7 +56,7 @@ public class MainScreen extends Activity
 		Log.d("MyApp","Check Here4");
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mDrawerToggle = new ActionBarDrawerToggle(
 				this,
@@ -65,14 +67,14 @@ public class MainScreen extends Activity
 				) {
 			@Override
 			public void onDrawerClosed(View view) {
-				getActionBar().setTitle(mTitle);
-				invalidateOptionsMenu();
+				getSupportActionBar().setTitle(mTitle);
+//				invalidateOptionsMenu();
 			}
 
 			@Override
 			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(mDrawerTitle);
-				invalidateOptionsMenu();
+				getSupportActionBar().setTitle(mDrawerTitle);
+//				invalidateOptionsMenu();
 			}
 		};
 		
@@ -123,14 +125,14 @@ public class MainScreen extends Activity
 	}
 
 	private void selectItem(int position) {
+		Fragment fragment = new ChapelSchedule();
 		
-		switch (position)
-		{
+		switch (position) {
 		case 0:
 			startActivity(new Intent(MainScreen.this, MapScreen.class));
 			break;
 		case 1:
-			startActivity(new Intent(MainScreen.this, ChapelSchedule.class));
+			fragment = new ChapelSchedule();
 			break;
 		case 2:
 			startActivity(new Intent(MainScreen.this, WhosWhoSearch.class));
@@ -140,6 +142,10 @@ public class MainScreen extends Activity
 			break;
 		
 		}
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
 		
 		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
@@ -150,7 +156,7 @@ public class MainScreen extends Activity
 	@Override
 	public void setTitle(CharSequence title) {
 		mTitle = title;
-		getActionBar().setTitle(mTitle);
+		getSupportActionBar().setTitle(mTitle);
 	}
 
 	@Override
