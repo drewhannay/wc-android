@@ -1,12 +1,16 @@
 package com.wheaton.app;
 
+import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +26,7 @@ public class MainScreen extends Activity
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	public static final String CHAPEL_URL = "http://dl.dropbox.com/u/36045671/chapel.json";
+	public static final String CHAPEL_URL = "https://s3.amazonaws.com/wcstatic/chapel.json";
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
 	public static final String MENU_URL = "http://www.cafebonappetit.com/print-menu/cafe/339/menu/13292/days/not-today/pgbrks/0/";
 	public static final String OPEN_FLOOR_URL = "http://cs.wheaton.edu/~drew.hannay/wheatonapp/GetFloorJson.php";
@@ -123,14 +127,14 @@ public class MainScreen extends Activity
 	}
 
 	private void selectItem(int position) {
+		Fragment fragment = new ChapelSchedule();
 		
-		switch (position)
-		{
+		switch (position) {
 		case 0:
 			startActivity(new Intent(MainScreen.this, MapScreen.class));
 			break;
 		case 1:
-			startActivity(new Intent(MainScreen.this, ChapelSchedule.class));
+			fragment = new ChapelSchedule();
 			break;
 		case 2:
 			startActivity(new Intent(MainScreen.this, WhosWhoSearch.class));
@@ -140,6 +144,10 @@ public class MainScreen extends Activity
 			break;
 		
 		}
+
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
 		
 		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
