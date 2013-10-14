@@ -54,7 +54,7 @@ public class ChapelSchedule extends Fragment {
 
 	private void onLoadURLSucceeded(String data) {
 
-		ArrayList<JSONObject> chapelList = new ArrayList<JSONObject>();
+		ArrayList<HashMap<String, String>> chapelList = new ArrayList<HashMap<String, String>>();
 		HashMap<Integer, String> headerList = new HashMap<Integer, String>();
 		
 		int headerIndex = 0;
@@ -65,13 +65,19 @@ public class ChapelSchedule extends Fragment {
 				JSONArray speakers = month.getJSONArray("speakers");
 				headerList.put(headerIndex, month.getString("month"));
 				for(int j = 0; j < speakers.length(); j++) {
-					chapelList.add(speakers.getJSONObject(j));
+					HashMap<String, String> day = new HashMap<String, String>();
+					
+					day.put("cp_item_header", speakers.getJSONObject(j).getString("title"));
+					day.put("cp_item_subtext", speakers.getJSONObject(j).getString("subtitle"));
+					day.put("cp_item_date", speakers.getJSONObject(j).getString("date"));
+					
+					chapelList.add(day);
 					headerIndex++;
 				}
 			}
 			
 			ListView lv = (ListView)getView().findViewById(R.id.chapelList);
-	        lv.setAdapter(new HeaderList(getActivity(), chapelList, headerList));
+	        lv.setAdapter(new HeaderList(getActivity(), R.layout.chapel_item, chapelList, headerList));
 		} catch (JSONException e) {
 			m_errorOccurred = true;
 			Log.e(TAG, "onLoadURLSucceeded", e);
