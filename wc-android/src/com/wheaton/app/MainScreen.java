@@ -28,6 +28,7 @@ public class MainScreen extends ActionBarActivity
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
 	public static final String MENU_URL = "http://wheatonorientation.herokuapp.com/menu";
 	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho/person/searchJson?page_size=100&q=";
+	public static final String ACADEMIC_CALENDAR = "http://25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
@@ -135,6 +136,9 @@ public class MainScreen extends ActionBarActivity
 			break;
 		case 3:
 			fragment = new WhosWhoSearch();
+			break;
+		case 4:
+			fragment = new AcademicCalendar();
 			break;
 		case 6:
 			fragment = new BonAppMenu();

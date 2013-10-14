@@ -77,15 +77,10 @@ public class HeaderList extends BaseAdapter {
             item.setTag(LIST_ITEM);
         }
         
-        
-        Log.d("TAG2", mListItems.get(position % mListItems.size()).toString());
-        
         Iterator<Entry<String, String>> it = mListItems.get(position % mListItems.size()).entrySet().iterator();
         
         while (it.hasNext()) {
-            Map.Entry<String, String> pairs = (Map.Entry<String, String>)it.next();
-            System.out.println(pairs.getKey() + " = " + pairs.getValue());
-            
+            Map.Entry<String, String> pairs = (Map.Entry<String, String>)it.next();         
             int id = getResId(pairs.getKey(), mContext, R.id.class);
             
             if(id > 0) {

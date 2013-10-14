@@ -29,7 +29,7 @@ public class ChapelSchedule extends Fragment {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
 		
-		View mRootView = inflater.inflate(R.layout.chapel, container, false);
+		View mRootView = inflater.inflate(R.layout.calendar_list, container, false);
         
 		m_loadURLTask = new LoadURLTask(MainScreen.CHAPEL_URL, new LoadURLTask.RunnableOfT<String>() {
 			@Override
