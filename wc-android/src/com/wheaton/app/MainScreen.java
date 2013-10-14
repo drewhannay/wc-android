@@ -26,7 +26,7 @@ public class MainScreen extends ActionBarActivity
 
 	public static final String CHAPEL_URL = "https://s3.amazonaws.com/wcstatic/chapel.json";
 	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
-	public static final String MENU_URL = "http://www.cafebonappetit.com/print-menu/cafe/339/menu/13292/days/not-today/pgbrks/0/";
+	public static final String MENU_URL = "http://wheatonorientation.herokuapp.com/menu";
 	public static final String OPEN_FLOOR_URL = "http://cs.wheaton.edu/~drew.hannay/wheatonapp/GetFloorJson.php";
 	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho/person/searchJson?page_size=100&q=";
 
@@ -134,13 +134,12 @@ public class MainScreen extends ActionBarActivity
 		case 1:
 			fragment = new ChapelSchedule();
 			break;
-		case 2:
-			startActivity(new Intent(MainScreen.this, WhosWhoSearch.class));
-			break;
 		case 3:
-			startActivity(new Intent(MainScreen.this, BonAppMenu.class));
+			fragment = new WhosWhoSearch();
 			break;
-		
+		case 6:
+			fragment = new BonAppMenu();
+			break;
 		}
 
         FragmentManager fragmentManager = getSupportFragmentManager();
