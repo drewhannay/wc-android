@@ -134,11 +134,8 @@ public class MainScreen extends ActionBarActivity
 		case 1:
 			fragment = new ChapelSchedule();
 			break;
-		case 2:
-			startActivity(new Intent(MainScreen.this, WhosWhoSearch.class));
-			break;
 		case 3:
-			startActivity(new Intent(MainScreen.this, BonAppMenu.class));
+			fragment = new WhosWhoSearch();
 			break;
 		case 6:
 			fragment = new BonAppMenu();

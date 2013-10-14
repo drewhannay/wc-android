@@ -11,8 +11,7 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class BonAppMenu extends Fragment
-{
+public class BonAppMenu extends Fragment {
 	public BonAppMenu() {
 		
 	}
@@ -39,8 +38,7 @@ public class BonAppMenu extends Fragment
 		return webView;
 	}
 
-	private class MyWebViewClient extends WebViewClient
-	{
+	private class MyWebViewClient extends WebViewClient {
 	    @Override
 	    public boolean shouldOverrideUrlLoading(WebView view, String url)
 	    {
