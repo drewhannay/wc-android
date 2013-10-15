@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.io.input.BOMInputStream;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -37,7 +39,8 @@ public class LoadURLTask extends AsyncTask<Void, Void, String>
 			{
 				HttpEntity entity = response.getEntity();
 				InputStream content = entity.getContent();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+
+				BufferedReader reader = new BufferedReader(new InputStreamReader(new BOMInputStream(content, false, ByteOrderMark.UTF_8)));
 				String line;
 				while ((line = reader.readLine()) != null)
 					builder.append(line);
