@@ -32,7 +32,6 @@ public class Header implements Item {
         }
 
         TextView text = (TextView) view.findViewById(R.id.list_hdr);
-        Log.d("STRING", name);
         text.setText(name);
 
         return view;

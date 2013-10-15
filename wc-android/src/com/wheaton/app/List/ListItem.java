@@ -10,6 +10,7 @@ import com.wheaton.app.R;
 import com.wheaton.app.List.TwoTextArrayAdapter.RowType;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,18 +43,22 @@ public class ListItem implements Item {
         
         while (it.hasNext()) {
             Map.Entry<String, String> pairs = (Map.Entry<String, String>)it.next();         
-            int id = getResId(pairs.getKey(), context, R.id.class);
+            int id = getResId(pairs.getKey(), R.id.class);
             
-            if(id > 0) {
-            	TextView txtView = (TextView)view.findViewById(id);
-            	txtView.setText(pairs.getValue());
+            try {
+            	if(id > 0) {
+            		TextView txtView = (TextView)view.findViewById(id);
+            		txtView.setText(pairs.getValue());
+            	}
+            } catch(Exception e) {
+            	
             }
         }
 
 		return view;
 	}
 	
-	public static int getResId(String variableName, Context context, Class<?> c) {
+	public static int getResId(String variableName, Class<?> c) {
         try {
             Field idField = c.getDeclaredField(variableName);
             return idField.getInt(idField);

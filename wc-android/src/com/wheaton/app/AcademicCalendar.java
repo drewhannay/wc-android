@@ -95,7 +95,7 @@ public class AcademicCalendar extends Fragment {
 						insideItem = true;
 					} else if (xpp.getName().equalsIgnoreCase("title")) {
 						if (insideItem)
-							day.put("cp_item_header", xpp.nextText());
+							day.put("item_header", xpp.nextText());
 					} else if (xpp.getName().equalsIgnoreCase("pubDate")) {
 						if (insideItem) {
 							try {  
@@ -104,7 +104,7 @@ public class AcademicCalendar extends Fragment {
 								e.printStackTrace();  
 							}
 							calendar.setTime(date);
-							day.put("cp_item_date", Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)));
+							day.put("item_date", Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)));
 						}
 					}
 				} else if (eventType == XmlPullParser.END_TAG
@@ -113,7 +113,7 @@ public class AcademicCalendar extends Fragment {
 							|| calendar.get(Calendar.YEAR) != lastDate.get(Calendar.YEAR)) {
 						items.add(new Header(getMonthForInt(calendar.get(Calendar.MONTH)) + " - " + calendar.get(Calendar.YEAR)));
 					}
-					items.add(new ListItem(day, R.layout.chapel_item));
+					items.add(new ListItem(day, R.layout.calendar_single_item));
 
 					lastDate = calendar;
 					insideItem = false;
