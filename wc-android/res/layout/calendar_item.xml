@@ -17,37 +17,41 @@
 	
     <TextView
         android:textIsSelectable="false"
-        android:id="@+id/cp_item_date"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_date"
+        android:layout_width="25dp"
         android:layout_height="wrap_content"
+     	android:gravity="center|center"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:textSize="17sp"
         android:ellipsize="marquee"
+        android:layout_centerVertical="true"
         android:singleLine="true"
         android:layout_alignParentLeft="true" />
     
     <TextView
         android:textIsSelectable="false"
-        android:id="@+id/cp_item_header"
+        android:id="@+id/item_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginRight="10dp"
-        android:layout_toRightOf="@id/cp_item_date"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/item_date"
         android:ellipsize="marquee"
         android:singleLine="true" />
 
     <TextView
         android:textIsSelectable="false"
-        android:id="@+id/cp_item_subtext"
+        android:id="@+id/item_subtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cp_item_header"
-        android:layout_marginLeft="10dp"
+        android:layout_below="@id/item_header"
+        android:layout_marginLeft="0dp"
         android:layout_marginRight="10dp"
-        android:layout_toRightOf="@id/cp_item_date"
+        android:layout_toRightOf="@id/item_date"
         android:ellipsize="marquee"
         android:singleLine="true" />
 </RelativeLayout>

@@ -4,8 +4,10 @@ import com.wheaton.app.R;
 import com.wheaton.app.List.TwoTextArrayAdapter.RowType;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class Header implements Item {
@@ -21,11 +23,10 @@ public class Header implements Item {
     }
 
     @Override
-    public View getView(Context context, View convertView) {
-        View view;
+    public View getView(Context context, View convertView, ViewGroup parent) {
+        View view = convertView;
         if (convertView == null) {
-            view = (View) LayoutInflater.from(context).inflate(R.layout.header_layout, null);
-            // Do some initialization
+            view = LayoutInflater.from(context).inflate(R.layout.header_layout, parent, false);
         } else {
             view = convertView;
         }
