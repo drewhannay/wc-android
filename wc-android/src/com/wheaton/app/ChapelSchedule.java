@@ -70,11 +70,15 @@ public class ChapelSchedule extends Fragment {
 				for(int j = 0; j < speakers.length(); j++) {
 					HashMap<String, String> day = new HashMap<String, String>();
 					
-					day.put("cp_item_header", speakers.getJSONObject(j).getString("title"));
-					day.put("cp_item_subtext", speakers.getJSONObject(j).getString("subtitle"));
-					day.put("cp_item_date", speakers.getJSONObject(j).getString("date"));
+					day.put("item_header", speakers.getJSONObject(j).getString("title"));
+					if(!speakers.getJSONObject(j).getString("subtitle").equals(""))
+						day.put("item_subtext", speakers.getJSONObject(j).getString("subtitle"));
+					day.put("item_date", speakers.getJSONObject(j).getString("date"));
 					
-					items.add(new ListItem(day, R.layout.chapel_item));
+					if(!speakers.getJSONObject(j).getString("subtitle").equals(""))
+						items.add(new ListItem(day, R.layout.calendar_item));
+					else
+						items.add(new ListItem(day, R.layout.calendar_single_item));
 				}
 			}
 			
