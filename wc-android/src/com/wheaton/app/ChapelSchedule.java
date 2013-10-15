@@ -2,6 +2,7 @@ package com.wheaton.app;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.wheaton.app.List.Header;
+import com.wheaton.app.List.Item;
+import com.wheaton.app.List.ListItem;
+import com.wheaton.app.List.TwoTextArrayAdapter;
 import com.wheaton.utility.LoadURLTask;
 
 public class ChapelSchedule extends Fragment {
@@ -54,16 +59,14 @@ public class ChapelSchedule extends Fragment {
 
 	private void onLoadURLSucceeded(String data) {
 
-		ArrayList<HashMap<String, String>> chapelList = new ArrayList<HashMap<String, String>>();
-		HashMap<Integer, String> headerList = new HashMap<Integer, String>();
-		
-		int headerIndex = 0;
+		List<Item> items = new ArrayList<Item>();
+
 		try {
 			JSONArray chapels = new JSONArray(data);
 			for (int i = 0; i < chapels.length(); i++) {
 				JSONObject month = chapels.getJSONObject(i);
 				JSONArray speakers = month.getJSONArray("speakers");
-				headerList.put(headerIndex, month.getString("month"));
+				items.add(new Header(month.getString("month")));
 				for(int j = 0; j < speakers.length(); j++) {
 					HashMap<String, String> day = new HashMap<String, String>();
 					
@@ -71,13 +74,12 @@ public class ChapelSchedule extends Fragment {
 					day.put("cp_item_subtext", speakers.getJSONObject(j).getString("subtitle"));
 					day.put("cp_item_date", speakers.getJSONObject(j).getString("date"));
 					
-					chapelList.add(day);
-					headerIndex++;
+					items.add(new ListItem(day, R.layout.chapel_item));
 				}
 			}
 			
 			ListView lv = (ListView)getView().findViewById(R.id.chapelList);
-	        lv.setAdapter(new HeaderList(getActivity(), R.layout.chapel_item, chapelList, headerList));
+			lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items));
 		} catch (JSONException e) {
 			m_errorOccurred = true;
 			Log.e(TAG, "onLoadURLSucceeded", e);
