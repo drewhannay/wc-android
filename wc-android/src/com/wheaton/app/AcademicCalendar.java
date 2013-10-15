@@ -1,6 +1,5 @@
 package com.wheaton.app;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -12,6 +11,7 @@ import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,8 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.wheaton.utility.AcademicCalendarXMLParser;
-import com.wheaton.utility.AcademicCalendarXMLParser.Entry;
+import com.wheaton.app.List.Header;
+import com.wheaton.app.List.Item;
+import com.wheaton.app.List.ListItem;
+import com.wheaton.app.List.TwoTextArrayAdapter;
 import com.wheaton.utility.LoadURLTask;
 
 public class AcademicCalendar extends Fragment {
@@ -43,7 +45,11 @@ public class AcademicCalendar extends Fragment {
 			@Override
 			public void run(String result) {
 				m_loadURLTask = null;
-				onLoadURLSucceeded(result);
+				try{
+					onLoadURLSucceeded(result);
+				} catch(Exception e) {
+
+				}
 			}
 		});
 		m_loadURLTask.execute();
@@ -60,56 +66,69 @@ public class AcademicCalendar extends Fragment {
 	//			m_loadURLTask.cancel(false);
 	//	}
 
-	private void onLoadURLSucceeded(String xml) {
-		
-		AcademicCalendarXMLParser acParser = new AcademicCalendarXMLParser();
-		List<Entry> entries = null;
-		
-		try {
-			entries = acParser.parse(new StringReader(xml));
-		} catch (XmlPullParserException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+	private void onLoadURLSucceeded(String xml) throws XmlPullParserException {
 
-		ArrayList<HashMap<String, String>> chapelList = new ArrayList<HashMap<String, String>>();
-		HashMap<Integer, String> headerList = new HashMap<Integer, String>();
-
-		int headerIndex = 0;
+		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+		factory.setNamespaceAware(false);
+		XmlPullParser xpp = factory.newPullParser();
+		xpp.setInput(new StringReader(xml));
 		
-		Log.d("TAG", entries.toString());
 
-		for (Entry en : entries) {
+		List<Item> items = new ArrayList<Item>();
+
+		boolean insideItem = false;
+
+		try { 
+			int eventType = xpp.getEventType();
+			SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy HH:mm:ss Z");
+			
 			HashMap<String, String> day = new HashMap<String, String>();
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); 
-
 			Date date = new Date();
 			Calendar calendar = Calendar.getInstance();
+			
+			while (eventType != XmlPullParser.END_DOCUMENT) {
+				if (eventType == XmlPullParser.START_TAG) {
+					if (xpp.getName().equalsIgnoreCase("item")) {
+						day = new HashMap<String, String>();
+						date = new Date();
+						calendar = Calendar.getInstance();
+						insideItem = true;
+					} else if (xpp.getName().equalsIgnoreCase("title")) {
+						if (insideItem)
+							day.put("cp_item_header", xpp.nextText());
+					} else if (xpp.getName().equalsIgnoreCase("pubDate")) {
+						if (insideItem) {
+							try {  
+								date = format.parse(xpp.nextText());   
+							} catch (Exception e) {  
+								e.printStackTrace();  
+							}
+							calendar.setTime(date);
+							day.put("cp_item_date", Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)));
+						}
+					}
+				} else if (eventType == XmlPullParser.END_TAG
+						&& xpp.getName().equalsIgnoreCase("item")) {
+					items.add(new ListItem(day, R.layout.chapel_item));
+//					if(calendar.get(Calendar.MONTH) != lastDate.get(Calendar.MONTH)
+//							|| calendar.get(Calendar.YEAR) != lastDate.get(Calendar.YEAR)) {
+//						Log.d("HAP", "PENNED");
+//						items.add(new Header(getMonthForInt(calendar.get(Calendar.MONTH)) + "" + calendar.get(Calendar.YEAR)));
+//					}
 
-			try {  
-				date = format.parse(en.date);   
-			} catch (Exception e) {  
-				e.printStackTrace();  
+					lastDate = calendar;
+					insideItem = false;
+				}
+
+				eventType = xpp.next(); // move to next element
 			}
+		} catch(Exception e) {
 
-			calendar.setTime(date);
-
-			day.put("cp_item_header", en.title);
-			day.put("cp_item_date", Integer.toString(calendar.get(Calendar.DAY_OF_WEEK)));
-			chapelList.add(day);
-
-			if(calendar.hashCode() != lastDate) {
-				headerList.put(headerIndex, getMonthForInt(calendar.get(Calendar.MONTH)) + "" + calendar.get(Calendar.YEAR));
-			}
-
-			lastDate = calendar.hashCode();
-			headerIndex++;
 		}
-		
+
 		ListView lv = (ListView)getView().findViewById(R.id.chapelList);
-		lv.setAdapter(new HeaderList(getActivity(), R.layout.chapel_item, chapelList, headerList));
-		
+		lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items));
+
 	}
 
 	public String getMonthForInt(int num) {
@@ -126,6 +145,6 @@ public class AcademicCalendar extends Fragment {
 
 	private LoadURLTask m_loadURLTask;
 	private View mRootView;
-	private int lastDate;
+	private Calendar lastDate;
 	private boolean m_errorOccurred = false;
 }
