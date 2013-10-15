@@ -12,6 +12,7 @@ import com.wheaton.app.List.TwoTextArrayAdapter.RowType;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ListItem implements Item {
@@ -27,7 +28,7 @@ public class ListItem implements Item {
 	}
 
 	@Override
-	public View getView(Context context, View convertView) {
+	public View getView(Context context, View convertView, ViewGroup parent) {
 		View view;
 		
 		if (convertView == null) {
