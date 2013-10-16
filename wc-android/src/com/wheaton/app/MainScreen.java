@@ -25,7 +25,7 @@ public class MainScreen extends ActionBarActivity
 	private ActionBarDrawerToggle mDrawerToggle;
 
 	public static final String CHAPEL_URL = "https://s3.amazonaws.com/wcstatic/chapel.json";
-	public static final String MAP_PINS_URL = "http://dl.dropbox.com/u/36045671/mapPins.json";
+	public static final String MAP_PINS_URL = "https://s3.amazonaws.com/wcstatic/location.json";
 	public static final String MENU_URL = "http://wheatonorientation.herokuapp.com/menu";
 	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho/person/searchJson?page_size=100&q=";
 	public static final String ACADEMIC_CALENDAR = "http://25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
@@ -46,14 +46,10 @@ public class MainScreen extends ActionBarActivity
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         
-        
-		Log.d("MyApp","Check Here2");
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		// set up the drawer's list view with items and click listener
-		Log.d("MyApp","Check Here3");
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
 				R.layout.drawer_list_item, mPageTitles));
-		Log.d("MyApp","Check Here4");
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -82,7 +78,7 @@ public class MainScreen extends ActionBarActivity
 
 
 		if (savedInstanceState == null) {
-			selectItem(1);
+			selectItem(2);
 		}
 
 	}
@@ -128,10 +124,14 @@ public class MainScreen extends ActionBarActivity
 		Fragment fragment = new ChapelSchedule();
 		
 		switch (position) {
-		case 0:
-			startActivity(new Intent(MainScreen.this, MapScreen.class));
-			break;
 		case 1:
+			try {
+				fragment = new MapScreen();
+			}catch(Exception e) {
+				e.getStackTrace();
+			}
+			break;
+		case 2:
 			fragment = new ChapelSchedule();
 			break;
 		case 3:

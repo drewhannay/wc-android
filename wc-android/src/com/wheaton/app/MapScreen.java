@@ -1,124 +1,83 @@
 package com.wheaton.app;
 
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapController;
-import com.google.android.maps.Overlay;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.wheaton.utility.LoadURLTask;
 
-public class MapScreen extends MapActivity
+public class MapScreen extends Fragment
 {
+	static final LatLng QUAD = new LatLng(41.870016, -88.098362);
+	
+	public MapScreen() {
+		
+	}
+	
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
+		
+		View mRootView = inflater.inflate(R.layout.map, container, false);
+		
+		setUpMapIfNeeded();
+		
+		return mRootView;
+	}	
+	
+	private void setUpMapIfNeeded() {
+        if (mMap == null) {
 
-		m_mapView = (TapControlledMapView) findViewById(R.id.map);
-		m_mapView.setBuiltInZoomControls(true);
-
-		// dismiss pop up with single tap
-		m_mapView.setOnSingleTapListener(new TapControlledMapView.OnSingleTapListener()
-		{
+            mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            if (mMap != null) {
+                setUpMap();
+            }
+        }
+    }
+	private void setUpMap() {
+		mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(QUAD, 19));
+		mMap.setMapType(2);
+        
+		new LoadURLTask(MainScreen.MAP_PINS_URL, new LoadURLTask.RunnableOfT<String>() {
 			@Override
-			public boolean onSingleTap(MotionEvent e)
-			{
-				m_itemizedOverlay.hideAllBalloons();
-				return true;
-			}
-		});
-
-		m_overlays = m_mapView.getOverlays();
-		m_pinDrawable = getResources().getDrawable(R.drawable.map_pin_orange);
-		new LoadURLTask(MainScreen.MAP_PINS_URL, new LoadURLTask.RunnableOfT<String>()
-		{
-			@Override
-			public void run(String result)
-			{
+			public void run(String result) {
 				onLoadURLSucceeded(result);
 			}
 		}).execute();
-	}
-
-	@Override
-	protected boolean isRouteDisplayed()
-	{
-		return false;
-	}
-
-	private void onLoadURLSucceeded(String jsonString)
-	{
+    }
+	
+	private void onLoadURLSucceeded(String jsonString) {
 		JSONArray jsonArray = null;
-		GeoPoint point;
-		try
-		{
+		try {
 			JSONObject jsonObject = new JSONObject(jsonString);
-			jsonArray = jsonObject.getJSONArray("pins");
+			jsonArray = jsonObject.getJSONArray("locations");
 
-			m_itemizedOverlay = new SimpleItemizedOverlay(m_pinDrawable, m_mapView);
-			m_itemizedOverlay.setShowClose(false);
-			m_itemizedOverlay.setShowDisclosure(true);
-
-			m_purpleOverlay = new SimpleItemizedOverlay(getResources().getDrawable(R.drawable.map_pin_blue), m_mapView);
-			m_purpleOverlay.setShowClose(false);
-			m_purpleOverlay.setShowDisclosure(true);
-
-			int latitude;
-			int longitude;
-			WheatonOverlayItem overlayItem;
-			for (int i = 0; i < jsonArray.length(); i++)
-			{
+			Double latitude;
+			Double longitude;
+			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject pin = jsonArray.getJSONObject(i);
-				latitude = (int) (Double.parseDouble(pin.getString("latitude")) * 1E6);
-				longitude = (int) (Double.parseDouble(pin.getString("longitude")) * 1E6);
-				point = new GeoPoint(latitude, longitude);
-
-				overlayItem = new WheatonOverlayItem(point, pin.getString("name"), null);
-
-				String url = pin.optString("url");
-				if (!url.equals(""))
-					overlayItem.setURL(url);
-
-				overlayItem.setIsPurple(pin.optBoolean("isPurple", false));
-
-				if (overlayItem.isPurple())
-					m_purpleOverlay.addOverlay(overlayItem);
-				else
-					m_itemizedOverlay.addOverlay(overlayItem);
+				latitude = Double.parseDouble(pin.getString("latitude"));
+				longitude = Double.parseDouble(pin.getString("longitude"));
+				
+				mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(pin.getString("name")));
 			}
-
-			m_overlays.add(m_itemizedOverlay);
-			if (m_purpleOverlay.size() > 0)
-				m_overlays.add(m_purpleOverlay);
-
-			m_mapView.invalidate();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		point = new GeoPoint(41870024, -88098384);
-
-		MapController mc = m_mapView.getController();
-		mc.animateTo(point);
-		mc.setZoom(20);
-
-		m_mapView.setSatellite(true);
 	}
 
-	private TapControlledMapView m_mapView;
-	private SimpleItemizedOverlay m_itemizedOverlay;
-	private SimpleItemizedOverlay m_purpleOverlay;
-	private List<Overlay> m_overlays;
-	private Drawable m_pinDrawable;
+	private GoogleMap mMap;
 }
