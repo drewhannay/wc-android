@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.wheaton.app.TapControlledMapView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/map"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:apiKey="0raW0RQy9H6ohTfOYThJz0_75WE8LNzZmqnAj5g"
-    android:clickable="true" />
+    tools:context=".MainActivity" >
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+
+</RelativeLayout> 
