@@ -86,6 +86,8 @@ public class AcademicCalendar extends Fragment {
 			Date date = new Date();
 			Calendar calendar = lastDate = Calendar.getInstance();
 			
+			items.add(new Header(getMonthForInt(calendar.get(Calendar.MONTH)) + " - " + calendar.get(Calendar.YEAR)));
+			
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				if (eventType == XmlPullParser.START_TAG) {
 					if (xpp.getName().equalsIgnoreCase("item")) {
