@@ -127,7 +127,7 @@ public class AcademicCalendar extends Fragment {
 
 		}
 
-		ListView lv = (ListView)getView().findViewById(R.id.chapelList);
+		ListView lv = (ListView)getView().findViewById(R.id.calendarList);
 		lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items));
 
 	}
