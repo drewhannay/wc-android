@@ -1,6 +1,7 @@
 package com.wheaton.app;
 
-import org.json.JSONArray;
+import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 public class SportsAdapter extends BaseAdapter {
 
-	public SportsAdapter(Context context, JSONArray sportsSchedule, int size) {
+	public SportsAdapter(Context context, ArrayList<JSONObject> sportsSchedule, int size) {
 		mResults = sportsSchedule;
 		mContext = context;
 		mSize = size;
@@ -23,19 +24,14 @@ public class SportsAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		if(mSize < 0)
-			return mResults.length();
+		if(mSize <= 0)
+			return mResults.size();
 		return mSize;
 	}
 
 	@Override
 	public Object getItem(int position) {
-		try {
-			return mResults.get(position);
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return null;
-		}
+		return mResults.get(position);
 	}
 
 	@Override
@@ -82,7 +78,7 @@ public class SportsAdapter extends BaseAdapter {
 	  return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 	}
 	
-	private final JSONArray mResults;
+	private final ArrayList<JSONObject> mResults;
 	private final int mSize;
 	private final Context mContext;
 }
