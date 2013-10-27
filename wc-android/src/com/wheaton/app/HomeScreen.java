@@ -87,9 +87,6 @@ public class HomeScreen extends Fragment {
 					e.printStackTrace();
 				}
 			}
-			
-			Log.d("TAG", afterDateSports.size()+"");
-			
 			ListView lv = (ListView)getView().findViewById(R.id.sports);
 			lv.setAdapter(new SportsAdapter(getActivity(), afterDateSports, 6));
 		} catch (JSONException e) {
