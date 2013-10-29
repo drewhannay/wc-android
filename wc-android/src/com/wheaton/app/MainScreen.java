@@ -27,8 +27,11 @@ public class MainScreen extends ActionBarActivity
 	public static final String CHAPEL_URL = "https://s3.amazonaws.com/wcstatic/chapel.json";
 	public static final String MAP_PINS_URL = "https://s3.amazonaws.com/wcstatic/location.json";
 	public static final String MENU_URL = "http://wheatonorientation.herokuapp.com/menu";
+	public static final String SPORTS_URL = "http://23.21.107.65/events/type/sport?contentType=json";
 	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho/person/searchJson?page_size=100&q=";
 	public static final String ACADEMIC_CALENDAR = "http://25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
+	public static final String EVENTS_CALENDAR = "http://25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
+	public static final String BANNER_URL = "https://s3.amazonaws.com/wcstatic/banners.json";
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
@@ -78,7 +81,7 @@ public class MainScreen extends ActionBarActivity
 
 
 		if (savedInstanceState == null) {
-			selectItem(2);
+			selectItem(0);
 		}
 
 	}
@@ -124,6 +127,9 @@ public class MainScreen extends ActionBarActivity
 		Fragment fragment = new ChapelSchedule();
 		
 		switch (position) {
+		case 0:
+			fragment = new HomeScreen();
+			break;
 		case 1:
 			try {
 				fragment = new MapScreen();
@@ -174,12 +180,4 @@ public class MainScreen extends ActionBarActivity
 		// Pass any configuration change to the drawer toggle
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-//
-//	private View m_whosWhoLauncher;
-//	private View m_menuLauncher;
-//	private View m_openFloorLauncher;
-//	private View m_mapLauncher;
-//	private View m_linksLauncher;
-//	private View m_aboutLauncher;
-//	private View m_chapelLauncher;
 }
