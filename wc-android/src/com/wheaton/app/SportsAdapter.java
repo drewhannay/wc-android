@@ -1,7 +1,11 @@
 package com.wheaton.app;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +20,7 @@ import android.widget.TextView;
 
 public class SportsAdapter extends BaseAdapter {
 
-	public SportsAdapter(Context context, ArrayList<JSONObject> sportsSchedule, int size) {
+	public SportsAdapter(Context context, JSONArray sportsSchedule, int size) {
 		mResults = sportsSchedule;
 		mContext = context;
 		mSize = size;
@@ -24,9 +28,9 @@ public class SportsAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		if(mResults.size() <= 0)
+		if(mResults.length() <= 0)
 			if(mSize < 0)
-				return mResults.size();
+				return mResults.length();
 			else
 				return 0;
 		return mSize;
@@ -34,7 +38,12 @@ public class SportsAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		return mResults.get(position);
+		try {
+			return mResults.getJSONObject(position);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -54,22 +63,35 @@ public class SportsAdapter extends BaseAdapter {
 		
 		JSONObject item = (JSONObject) getItem(position);
 		try {
+			JSONObject custom = (JSONObject) item.getJSONObject("custom");
+		
 			TextView sport = (TextView) view.findViewById(R.id.sport);
 			String sportStr = "";
-			if(item.getString("gender").equals("women"))
+			if(custom.getString("gender").equals("women"))
 				sportStr += "W. ";
 			else
 				sportStr += "M. ";
-			sportStr += capitalize(item.getString("sport"));
+			sportStr += capitalize(item.getString("title"));
 			sport.setText(sportStr);
 			TextView opponent = (TextView) view.findViewById(R.id.opponent);
-			opponent.setText(item.getString("opponent"));
+			opponent.setText(custom.getString("opponent"));
+			
+			Calendar c = new GregorianCalendar();
+			Log.d("DATE", item.getJSONArray("timeStamp").getLong(0) + "");
+		    c.setTimeInMillis((long)item.getJSONArray("timeStamp").getInt(0)*1000);
+		    
+		    
+		    SimpleDateFormat format1 = new SimpleDateFormat("MM/dd");
+		    SimpleDateFormat format2 = new SimpleDateFormat("h:mm a");
+
+		    String dateString = format1.format(c.getTime());
+		    String timeString = format2.format(c.getTime());
 			
 			TextView date = (TextView) view.findViewById(R.id.date);
-			date.setText(item.getJSONObject("date").getString("month") + "/" + item.getJSONObject("date").getString("day"));
+			date.setText(dateString);
 			
 			TextView time = (TextView) view.findViewById(R.id.time);
-			time.setText(item.getString("time"));
+			time.setText(timeString);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -81,7 +103,7 @@ public class SportsAdapter extends BaseAdapter {
 	  return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 	}
 	
-	private final ArrayList<JSONObject> mResults;
+	private final JSONArray mResults;
 	private final int mSize;
 	private final Context mContext;
 }
