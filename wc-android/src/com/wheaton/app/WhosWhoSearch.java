@@ -1,24 +1,25 @@
 package com.wheaton.app;
 
+import org.json.JSONArray;
+
 import com.wheaton.utility.LoadURLTask;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,13 +41,6 @@ public class WhosWhoSearch extends Fragment {
 					return true;
 				}
 				return false;
-			}
-		});
-
-		((Button) mRootView.findViewById(R.id.search_button)).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				performSearch();
 			}
 		});
 
@@ -79,15 +73,15 @@ public class WhosWhoSearch extends Fragment {
 
 	private void onLoadURLSucceeded(String data) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		if (data == null || data.equals(""))
-		{
+		if (data == null || data.equals("")) {
 			Toast.makeText(getActivity(), R.string.connect_to_wheaton, Toast.LENGTH_SHORT).show();
-		}
-		else
-		{
-			Intent intent = new Intent(getActivity(), WhosWhoResults.class);
-			intent.putExtra(WhosWhoResults.RESULTS_KEY, data);
-			startActivity(intent);
+		} else {
+			try {
+				ListView lv = (ListView)getActivity().findViewById(R.id.whoswho_results);
+				lv.setAdapter(new WhosWhoAdapter(getActivity(), new JSONArray(data)));
+			} catch(Exception e) {
+				Log.w("WhosWho", e);
+			}
 		}
 	}
 

@@ -29,11 +29,11 @@ public class SportsAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		if(mResults.length() <= 0)
-			if(mSize < 0)
-				return mResults.length();
-			else
-				return 0;
-		return mSize;
+			return 0;
+		if(mSize < 0)
+			return mResults.length();
+		else
+			return mSize;
 	}
 
 	@Override

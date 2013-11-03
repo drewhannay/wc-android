@@ -12,12 +12,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="15dp" />
 
         <ListView
             android:id="@+id/events"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="340dp"
             android:layout_below="@id/events_title" >
         </ListView>
         
@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="15dp"
+            android:layout_below="@id/events" />
 
         <ListView
             android:id="@+id/sports"

@@ -75,17 +75,15 @@ public class MapScreen extends Fragment
 	}
 
 	private void onLoadURLSucceeded(String jsonString) {
-		JSONArray jsonArray = null;
 		try {
-			JSONObject jsonObject = new JSONObject(jsonString);
-			jsonArray = jsonObject.getJSONArray("locations");
+			JSONArray jsonArray = new JSONArray(jsonString);
 
 			Double latitude;
 			Double longitude;
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject pin = jsonArray.getJSONObject(i);
-				latitude = Double.parseDouble(pin.getString("latitude"));
-				longitude = Double.parseDouble(pin.getString("longitude"));
+				latitude = Double.parseDouble(pin.getJSONObject("location").getString("latitude"));
+				longitude = Double.parseDouble(pin.getJSONObject("location").getString("longitude"));
 
 				mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(pin.getString("name")));
 			}

@@ -25,10 +25,10 @@ public class MainScreen extends ActionBarActivity
 	private ActionBarDrawerToggle mDrawerToggle;
 
 	public static final String CHAPEL_URL = "https://s3.amazonaws.com/wcstatic/chapel.json";
-	public static final String MAP_PINS_URL = "https://s3.amazonaws.com/wcstatic/location.json";
+	public static final String MAP_PINS_URL = "http://23.21.107.65/locations?contentType=json&limit=300";
 	public static final String MENU_URL = "http://wheatonorientation.herokuapp.com/menu";
 	public static final String SPORTS_URL = "http://23.21.107.65/events/type/sport?contentType=json";
-	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho/person/searchJson?page_size=100&q=";
+	public static final String WHOS_WHO_PREFIX = "http://23.21.107.65/people?contentType=json&limit=200&name=";
 	public static final String ACADEMIC_CALENDAR = "http://25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
 	public static final String EVENTS_CALENDAR = "http://25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
 	public static final String BANNER_URL = "https://s3.amazonaws.com/wcstatic/banners.json";
