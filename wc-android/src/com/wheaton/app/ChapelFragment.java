@@ -22,9 +22,9 @@ import com.wheaton.app.List.ListItem;
 import com.wheaton.app.List.TwoTextArrayAdapter;
 import com.wheaton.utility.LoadURLTask;
 
-public class ChapelSchedule extends Fragment {
+public class ChapelFragment extends Fragment {
 	
-	public ChapelSchedule() {
+	public ChapelFragment() {
         // Empty constructor required for fragment subclasses
     }
 	
@@ -48,14 +48,13 @@ public class ChapelSchedule extends Fragment {
 		return mRootView;
 	}
 
-//	@Override
-//	protected void onPause()
-//	{
-//		super.onPause();
-//
-//		if (m_loadURLTask != null)
-//			m_loadURLTask.cancel(false);
-//	}
+	@Override
+	public void onPause() {
+		super.onPause();
+
+		if (m_loadURLTask != null)
+			m_loadURLTask.cancel(false);
+	}
 
 	private void onLoadURLSucceeded(String data) {
 
@@ -76,9 +75,9 @@ public class ChapelSchedule extends Fragment {
 					day.put("item_date", speakers.getJSONObject(j).getString("date"));
 					
 					if(!speakers.getJSONObject(j).getString("subtitle").equals(""))
-						items.add(new ListItem(day, R.layout.calendar_item));
+						items.add(new ListItem(day, R.layout.item_calendar));
 					else
-						items.add(new ListItem(day, R.layout.calendar_single_item));
+						items.add(new ListItem(day, R.layout.item_calendar_single));
 				}
 			}
 			
@@ -91,7 +90,7 @@ public class ChapelSchedule extends Fragment {
 
 	}
 
-	private static final String TAG = ChapelSchedule.class.toString();
+	private static final String TAG = ChapelFragment.class.toString();
 
 	private LoadURLTask m_loadURLTask;
 	private View mRootView;

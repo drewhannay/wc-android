@@ -33,9 +33,9 @@ import com.wheaton.app.List.ListItem;
 import com.wheaton.app.List.TwoTextArrayAdapter;
 import com.wheaton.utility.LoadURLTask;
 
-public class HomeScreen extends Fragment {
+public class HomeFragment extends Fragment {
 	
-	public HomeScreen() {
+	public HomeFragment() {
         // Empty constructor required for fragment subclasses
     }
 	
@@ -45,7 +45,7 @@ public class HomeScreen extends Fragment {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
 		
-		View mRootView = inflater.inflate(R.layout.home, container, false);
+		View mRootView = inflater.inflate(R.layout.fragment_home, container, false);
 		
 		m_loadEventsURLTask = new LoadURLTask(MainScreen.EVENTS_CALENDAR, new LoadURLTask.RunnableOfT<String>() {
 			@Override
@@ -138,7 +138,7 @@ public class HomeScreen extends Fragment {
 						}
 					} else if (eventType == XmlPullParser.END_TAG
 							&& xpp.getName().equalsIgnoreCase("item")) {
-						items.add(new ListItem(day, R.layout.calendar_event));
+						items.add(new ListItem(day, R.layout.item_calendar_event));
 						insideItem = false;
 					}
 	
@@ -155,7 +155,7 @@ public class HomeScreen extends Fragment {
 		}
 	}
 
-	private static final String TAG = ChapelSchedule.class.toString();
+	private static final String TAG = ChapelFragment.class.toString();
 
 	private LoadURLTask m_loadEventsURLTask;
 	private LoadURLTask m_loadSportsURLTask;

@@ -31,13 +31,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class WhosWhoSearch extends Fragment implements OnQueryTextListener {
+public class WhosWhoFragment extends Fragment implements OnQueryTextListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		
-		View mRootView = inflater.inflate(R.layout.whos_who_search, container, false);
+		View mRootView = inflater.inflate(R.layout.fragment_whos_who, container, false);
 		
 		setHasOptionsMenu(true);
 

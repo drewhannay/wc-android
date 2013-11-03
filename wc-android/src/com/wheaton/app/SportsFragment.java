@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.wheaton.utility.LoadURLTask;
 
-public class Sports extends Fragment {
+public class SportsFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -21,7 +21,7 @@ public class Sports extends Fragment {
 
 		super.onCreateView(inflater, container, savedInstanceState);
 
-		View mRootView = inflater.inflate(R.layout.sport_list, container, false);
+		View mRootView = inflater.inflate(R.layout.fragment_sport, container, false);
 
 		mLoadURLTask = new LoadURLTask(MainScreen.SPORTS_URL, new LoadURLTask.RunnableOfT<String>() {
 			@Override
@@ -58,7 +58,7 @@ public class Sports extends Fragment {
 		}
 	}
 
-	private static final String TAG = ChapelSchedule.class.toString();
+	private static final String TAG = ChapelFragment.class.toString();
 
 	private LoadURLTask mLoadURLTask;
 	private View mRootView;

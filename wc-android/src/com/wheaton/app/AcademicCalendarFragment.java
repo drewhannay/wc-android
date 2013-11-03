@@ -27,9 +27,9 @@ import com.wheaton.app.List.ListItem;
 import com.wheaton.app.List.TwoTextArrayAdapter;
 import com.wheaton.utility.LoadURLTask;
 
-public class AcademicCalendar extends Fragment {
+public class AcademicCalendarFragment extends Fragment {
 
-	public AcademicCalendar() {
+	public AcademicCalendarFragment() {
 		// Empty constructor required for fragment subclasses
 	}
 
@@ -115,7 +115,7 @@ public class AcademicCalendar extends Fragment {
 							|| calendar.get(Calendar.YEAR) != lastDate.get(Calendar.YEAR)) {
 						items.add(new Header(getMonthForInt(calendar.get(Calendar.MONTH)) + " - " + calendar.get(Calendar.YEAR)));
 					}
-					items.add(new ListItem(day, R.layout.calendar_single_item));
+					items.add(new ListItem(day, R.layout.item_calendar_single));
 
 					lastDate = calendar;
 					insideItem = false;
@@ -142,7 +142,7 @@ public class AcademicCalendar extends Fragment {
 		return month;
 	}
 
-	private static final String TAG = ChapelSchedule.class.toString();
+	private static final String TAG = ChapelFragment.class.toString();
 
 	private LoadURLTask m_loadURLTask;
 	private View mRootView;

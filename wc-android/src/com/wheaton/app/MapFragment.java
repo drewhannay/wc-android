@@ -18,11 +18,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.wheaton.utility.LoadURLTask;
 
-public class MapScreen extends Fragment
+public class MapFragment extends Fragment
 {
 	static final LatLng QUAD = new LatLng(41.870016, -88.098362);
 
-	public MapScreen() {
+	public MapFragment() {
 
 	}
 
@@ -31,7 +31,7 @@ public class MapScreen extends Fragment
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 
-		View mRootView = inflater.inflate(R.layout.map, container, false);
+		View mRootView = inflater.inflate(R.layout.fragment_map, container, false);
 
 		MapView mapView = (MapView) mRootView.findViewById(R.id.mapView);
 

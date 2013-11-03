@@ -26,7 +26,7 @@ public class Header implements Item {
     public View getView(Context context, View convertView, ViewGroup parent) {
         View view = convertView;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.header_layout, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.item_header, parent, false);
         } else {
             view = convertView;
         }
