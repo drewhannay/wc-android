@@ -3,6 +3,12 @@ package com.wheaton.utility;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.input.BOMInputStream;
@@ -11,6 +17,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
@@ -28,7 +38,7 @@ public class LoadURLTask extends AsyncTask<Void, Void, String>
 	protected String doInBackground(Void... params)
 	{
 		StringBuilder builder = new StringBuilder();
-		HttpClient client = new DefaultHttpClient();
+		HttpClient client = Utils.sslClient(new DefaultHttpClient());
 		HttpGet httpGet = new HttpGet(m_url);
 		try
 		{
