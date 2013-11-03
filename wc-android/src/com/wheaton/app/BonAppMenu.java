@@ -11,7 +11,7 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class BonAppMenu extends Fragment {
+public class BonAppMenu extends TrackedFragment {
 	public BonAppMenu() {
 		
 	}

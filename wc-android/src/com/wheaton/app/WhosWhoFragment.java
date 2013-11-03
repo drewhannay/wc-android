@@ -31,7 +31,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class WhosWhoFragment extends Fragment implements OnQueryTextListener {
+public class WhosWhoFragment extends TrackedFragment implements OnQueryTextListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {

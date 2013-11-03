@@ -22,7 +22,7 @@ import com.wheaton.app.List.ListItem;
 import com.wheaton.app.List.TwoTextArrayAdapter;
 import com.wheaton.utility.LoadURLTask;
 
-public class ChapelFragment extends Fragment {
+public class ChapelFragment extends TrackedFragment {
 	
 	public ChapelFragment() {
         // Empty constructor required for fragment subclasses

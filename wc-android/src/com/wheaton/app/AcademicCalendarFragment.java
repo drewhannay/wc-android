@@ -27,7 +27,7 @@ import com.wheaton.app.List.ListItem;
 import com.wheaton.app.List.TwoTextArrayAdapter;
 import com.wheaton.utility.LoadURLTask;
 
-public class AcademicCalendarFragment extends Fragment {
+public class AcademicCalendarFragment extends TrackedFragment {
 
 	public AcademicCalendarFragment() {
 		// Empty constructor required for fragment subclasses
