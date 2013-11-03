@@ -146,6 +146,9 @@ public class MainScreen extends ActionBarActivity
 		case 4:
 			fragment = new AcademicCalendar();
 			break;
+		case 5:
+			fragment = new Sports();
+			break;
 		case 6:
 			fragment = new BonAppMenu();
 			break;

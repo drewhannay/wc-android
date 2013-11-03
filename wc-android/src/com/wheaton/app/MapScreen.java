@@ -42,6 +42,20 @@ public class MapScreen extends Fragment
 
 		return mRootView;
 	}	
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (mMap != null)
+			mMap.setMyLocationEnabled(true);
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (mMap != null)
+			mMap.setMyLocationEnabled(false);
+	}
 
 	private void setUpMapIfNeeded(MapView mapView) {
 		if (mMap == null) {
