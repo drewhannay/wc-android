@@ -52,7 +52,7 @@ public class MainScreen extends ActionBarActivity
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		// set up the drawer's list view with items and click listener
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.drawer_list_item, mPageTitles));
+				R.layout.item_drawer, mPageTitles));
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -124,30 +124,30 @@ public class MainScreen extends ActionBarActivity
 	}
 
 	private void selectItem(int position) {
-		Fragment fragment = new ChapelSchedule();
+		Fragment fragment = new ChapelFragment();
 		
 		switch (position) {
 		case 0:
-			fragment = new HomeScreen();
+			fragment = new HomeFragment();
 			break;
 		case 1:
 			try {
-				fragment = new MapScreen();
+				fragment = new MapFragment();
 			}catch(Exception e) {
 				e.getStackTrace();
 			}
 			break;
 		case 2:
-			fragment = new ChapelSchedule();
+			fragment = new ChapelFragment();
 			break;
 		case 3:
-			fragment = new WhosWhoSearch();
+			fragment = new WhosWhoFragment();
 			break;
 		case 4:
-			fragment = new AcademicCalendar();
+			fragment = new AcademicCalendarFragment();
 			break;
 		case 5:
-			fragment = new Sports();
+			fragment = new SportsFragment();
 			break;
 		case 6:
 			fragment = new BonAppMenu();

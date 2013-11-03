@@ -56,7 +56,7 @@ public class SportsAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
 		if (convertView == null) {
-			view = LayoutInflater.from(mContext).inflate(R.layout.sport_item, parent, false);
+			view = LayoutInflater.from(mContext).inflate(R.layout.item_sport, parent, false);
 		} else {
 			view = convertView;
 		}

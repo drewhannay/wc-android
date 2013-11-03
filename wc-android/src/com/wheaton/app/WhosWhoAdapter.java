@@ -48,7 +48,7 @@ class WhosWhoAdapter extends BaseAdapter {
 		ViewHolder holder;
 		
 		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.whos_who_search_result, parent, false);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_whos_who_result, parent, false);
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.name);
 			holder.cpo = (TextView) convertView.findViewById(R.id.cpo);
