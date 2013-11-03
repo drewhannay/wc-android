@@ -1,8 +1,13 @@
 package com.wheaton.app;
 
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+
 import org.json.JSONArray;
 
 import com.wheaton.utility.LoadURLTask;
+import com.wheaton.utility.Utils;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -79,7 +84,8 @@ public class WhosWhoSearch extends Fragment implements OnQueryTextListener {
 
 	private void onLoadURLSucceeded(String data) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		if (data == null || data.equals("")) {
+		if ((data == null || data.equals("")) 
+				&& Utils.isConnectedToNetwork("http://intra.wheaton.edu")) {
 			Toast.makeText(getActivity(), R.string.connect_to_wheaton, Toast.LENGTH_SHORT).show();
 		} else {
 			try {
@@ -91,6 +97,14 @@ public class WhosWhoSearch extends Fragment implements OnQueryTextListener {
 		}
 	}
 	
+	@Override
+	public void onPause() {
+		InputMethodManager inputMethodManager = (InputMethodManager) 
+				getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		
+		inputMethodManager.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+		super.onPause();
+	}
 
     public boolean onQueryTextChange(String newText) {
         mCurFilter = !TextUtils.isEmpty(newText) ? newText : null;
@@ -102,7 +116,6 @@ public class WhosWhoSearch extends Fragment implements OnQueryTextListener {
         performSearch();
         return true;
     }
-
 
 	private SearchView mSearchView;
 	private String mCurFilter;

@@ -9,12 +9,17 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.util.Log;
 
 public class Utils {
 	public static void CopyStream(InputStream is, OutputStream os) {
@@ -53,6 +58,22 @@ public class Utils {
 			return new DefaultHttpClient(ccm, client.getParams());
 		} catch (Exception ex) {
 			return null;
+		}
+	}
+	public static boolean isConnectedToNetwork(String url) {
+		final HttpClient client = Utils.sslClient(new DefaultHttpClient());
+		final HttpGet getRequest = new HttpGet(url);
+
+		try {
+			HttpResponse response = client.execute(getRequest);
+			final int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode != HttpStatus.SC_OK) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
 		}
 	}
 }
