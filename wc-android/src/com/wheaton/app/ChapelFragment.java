@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,16 +33,16 @@ public class ChapelFragment extends TrackedFragment {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
 		
-		View mRootView = inflater.inflate(R.layout.calendar_list, container, false);
+		mRootView = inflater.inflate(R.layout.calendar_list, container, false);
         
-		m_loadURLTask = new LoadURLTask(MainScreen.CHAPEL_URL, new LoadURLTask.RunnableOfT<String>() {
+		mLoadURLTask = new LoadURLTask(MainScreen.CHAPEL_URL, new LoadURLTask.RunnableOfT<String>() {
 			@Override
 			public void run(String result) {
-				m_loadURLTask = null;
+				mLoadURLTask = null;
 				onLoadURLSucceeded(result);
 			}
 		});
-		m_loadURLTask.execute();
+		mLoadURLTask.execute();
 		
 		return mRootView;
 	}
@@ -52,8 +51,8 @@ public class ChapelFragment extends TrackedFragment {
 	public void onPause() {
 		super.onPause();
 
-		if (m_loadURLTask != null)
-			m_loadURLTask.cancel(false);
+		if (mLoadURLTask != null)
+			mLoadURLTask.cancel(false);
 	}
 
 	private void onLoadURLSucceeded(String data) {
@@ -84,7 +83,7 @@ public class ChapelFragment extends TrackedFragment {
 			ListView lv = (ListView)getView().findViewById(R.id.calendarList);
 			lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items));
 		} catch (JSONException e) {
-			m_errorOccurred = true;
+			mErrorOccurred = true;
 			Log.e(TAG, "onLoadURLSucceeded", e);
 		}
 
@@ -92,7 +91,7 @@ public class ChapelFragment extends TrackedFragment {
 
 	private static final String TAG = ChapelFragment.class.toString();
 
-	private LoadURLTask m_loadURLTask;
+	private LoadURLTask mLoadURLTask;
 	private View mRootView;
-	private boolean m_errorOccurred = false;
+	private boolean mErrorOccurred = false;
 }

@@ -19,8 +19,6 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.util.Log;
-
 public class Utils {
 	public static void CopyStream(InputStream is, OutputStream os) {
 		final int buffer_size=1024;

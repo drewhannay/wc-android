@@ -14,8 +14,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +35,14 @@ public class AcademicCalendarFragment extends TrackedFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		super.onCreateView(inflater, container, savedInstanceState);
+		super.onCreateView(inflater, container, savedInstanceState); 
 
-		View mRootView = inflater.inflate(R.layout.calendar_list, container, false);
-
-		m_loadURLTask = new LoadURLTask(MainScreen.ACADEMIC_CALENDAR, new LoadURLTask.RunnableOfT<String>() {
+		mRootView = inflater.inflate(R.layout.calendar_list, container, false);
+		
+		mLoadURLTask = new LoadURLTask(MainScreen.ACADEMIC_CALENDAR, new LoadURLTask.RunnableOfT<String>() {
 			@Override
 			public void run(String result) {
-				m_loadURLTask = null;
+				mLoadURLTask = null;
 				try{
 					onLoadURLSucceeded(result);
 				} catch(Exception e) {
@@ -52,19 +50,18 @@ public class AcademicCalendarFragment extends TrackedFragment {
 				}
 			}
 		});
-		m_loadURLTask.execute();
+		mLoadURLTask.execute();
 
 		return mRootView;
 	}
 
-	//	@Override
-	//	protected void onPause()
-	//	{
-	//		super.onPause();
-	//
-	//		if (m_loadURLTask != null)
-	//			m_loadURLTask.cancel(false);
-	//	}
+	@Override
+	public void onPause(){
+		super.onPause();
+
+		if (mLoadURLTask != null)
+			mLoadURLTask.cancel(false);
+	}
 
 	private void onLoadURLSucceeded(String xml) throws XmlPullParserException {
 
@@ -72,7 +69,7 @@ public class AcademicCalendarFragment extends TrackedFragment {
 		factory.setNamespaceAware(false);
 		XmlPullParser xpp = factory.newPullParser();
 		xpp.setInput(new StringReader(xml));
-		
+
 
 		List<Item> items = new ArrayList<Item>();
 
@@ -81,13 +78,13 @@ public class AcademicCalendarFragment extends TrackedFragment {
 		try { 
 			int eventType = xpp.getEventType();
 			SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy HH:mm:ss Z");
-			
+
 			HashMap<String, String> day = new HashMap<String, String>();
 			Date date = new Date();
 			Calendar calendar = lastDate = Calendar.getInstance();
-			
+
 			items.add(new Header(getMonthForInt(calendar.get(Calendar.MONTH)) + " - " + calendar.get(Calendar.YEAR)));
-			
+
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				if (eventType == XmlPullParser.START_TAG) {
 					if (xpp.getName().equalsIgnoreCase("item")) {
@@ -142,10 +139,7 @@ public class AcademicCalendarFragment extends TrackedFragment {
 		return month;
 	}
 
-	private static final String TAG = ChapelFragment.class.toString();
-
-	private LoadURLTask m_loadURLTask;
+	private LoadURLTask mLoadURLTask;
 	private View mRootView;
 	private Calendar lastDate;
-	private boolean m_errorOccurred = false;
 }
