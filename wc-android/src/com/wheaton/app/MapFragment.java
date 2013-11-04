@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.wheaton.utility.LoadURLTask;
 
-public class MapFragment extends Fragment
+public class MapFragment extends TrackedFragment
 {
 	static final LatLng QUAD = new LatLng(41.870016, -88.098362);
 

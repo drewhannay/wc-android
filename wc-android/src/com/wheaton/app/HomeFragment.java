@@ -1,19 +1,15 @@
 package com.wheaton.app;
 
 import java.io.StringReader;
-import java.text.DateFormatSymbols;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -27,13 +23,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.wheaton.app.List.Header;
 import com.wheaton.app.List.Item;
 import com.wheaton.app.List.ListItem;
 import com.wheaton.app.List.TwoTextArrayAdapter;
 import com.wheaton.utility.LoadURLTask;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends TrackedFragment {
 	
 	public HomeFragment() {
         // Empty constructor required for fragment subclasses
@@ -68,6 +63,7 @@ public class HomeFragment extends Fragment {
 		
 		return mRootView;
 	}
+
 
 	private void onLoadSportsURLSucceeded(String data) {
 		try {

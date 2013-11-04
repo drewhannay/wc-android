@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.wheaton.utility.LoadURLTask;
 
-public class SportsFragment extends Fragment {
+public class SportsFragment extends TrackedFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
