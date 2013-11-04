@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ public class SportsFragment extends TrackedFragment {
 
 		super.onCreateView(inflater, container, savedInstanceState);
 
-		View mRootView = inflater.inflate(R.layout.fragment_sport, container, false);
+		mRootView = inflater.inflate(R.layout.fragment_sport, container, false);
 
 		mLoadURLTask = new LoadURLTask(MainScreen.SPORTS_URL, new LoadURLTask.RunnableOfT<String>() {
 			@Override

@@ -15,7 +15,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,26 +39,26 @@ public class HomeFragment extends TrackedFragment {
 		
 		super.onCreateView(inflater, container, savedInstanceState);
 		
-		View mRootView = inflater.inflate(R.layout.fragment_home, container, false);
+		mRootView = inflater.inflate(R.layout.fragment_home, container, false);
 		
-		m_loadEventsURLTask = new LoadURLTask(MainScreen.EVENTS_CALENDAR, new LoadURLTask.RunnableOfT<String>() {
+		mLoadEventsURLTask = new LoadURLTask(MainScreen.EVENTS_CALENDAR, new LoadURLTask.RunnableOfT<String>() {
 			@Override
 			public void run(String result) {
-				m_loadEventsURLTask = null;
+				mLoadEventsURLTask = null;
 				onLoadEventsURLSucceeded(result);
 			}
 		});
 		
-		m_loadSportsURLTask = new LoadURLTask(MainScreen.SPORTS_URL, new LoadURLTask.RunnableOfT<String>() {
+		mLoadSportsURLTask = new LoadURLTask(MainScreen.SPORTS_URL, new LoadURLTask.RunnableOfT<String>() {
 			@Override
 			public void run(String result) {
-				m_loadSportsURLTask = null;
+				mLoadSportsURLTask = null;
 				onLoadSportsURLSucceeded(result);
 			}
 		});
 		
-		m_loadEventsURLTask.execute();
-		m_loadSportsURLTask.execute();
+		mLoadEventsURLTask.execute();
+		mLoadSportsURLTask.execute();
 		
 		return mRootView;
 	}
@@ -73,7 +72,7 @@ public class HomeFragment extends TrackedFragment {
 			ListView lv = (ListView)getView().findViewById(R.id.sports);
 			lv.setAdapter(new SportsAdapter(getActivity(), new JSONArray(data), 6));
 		} catch (JSONException e) {
-			m_errorOccurred = true;
+			mErrorOccurred = true;
 			Log.e(TAG, "onLoadURLSucceeded", e);
 		}
 	}
@@ -153,8 +152,8 @@ public class HomeFragment extends TrackedFragment {
 
 	private static final String TAG = ChapelFragment.class.toString();
 
-	private LoadURLTask m_loadEventsURLTask;
-	private LoadURLTask m_loadSportsURLTask;
+	private LoadURLTask mLoadEventsURLTask;
+	private LoadURLTask mLoadSportsURLTask;
 	private View mRootView;
-	private boolean m_errorOccurred = false;
+	private boolean mErrorOccurred = false;
 }

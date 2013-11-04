@@ -3,11 +3,9 @@ package com.wheaton.app;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -23,8 +21,6 @@ public class BonAppMenu extends TrackedFragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		
 		Activity act = getActivity();
-		
-		//act.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
 		WebView webView = new WebView(getActivity());
 		webView.setWebViewClient(new MyWebViewClient());

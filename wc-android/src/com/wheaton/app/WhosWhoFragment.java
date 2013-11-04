@@ -1,9 +1,5 @@
 package com.wheaton.app;
 
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-
 import org.json.JSONArray;
 
 import com.wheaton.utility.LoadURLTask;
@@ -13,12 +9,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.text.TextUtils;
-import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,7 +30,7 @@ public class WhosWhoFragment extends TrackedFragment implements OnQueryTextListe
             Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		
-		View mRootView = inflater.inflate(R.layout.fragment_whos_who, container, false);
+		mRootView = inflater.inflate(R.layout.fragment_whos_who, container, false);
 		
 		setHasOptionsMenu(true);
 

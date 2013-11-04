@@ -10,7 +10,6 @@ import com.wheaton.app.R;
 import com.wheaton.app.List.TwoTextArrayAdapter.RowType;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -18,13 +18,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.wheaton.utility.LoadURLTask;
 
-public class MapFragment extends TrackedFragment
+public class MapFragment extends Fragment
 {
 	static final LatLng QUAD = new LatLng(41.870016, -88.098362);
 
-	public MapFragment() {
-
-	}
+	public MapFragment() {}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +57,7 @@ public class MapFragment extends TrackedFragment
 
 	private void setUpMapIfNeeded(MapView mapView) {
 		if (mMap == null) {
-
+			
 			mMap = mapView.getMap();
 			mMap.getUiSettings().setMyLocationButtonEnabled(false);
 			mMap.setMyLocationEnabled(true);
