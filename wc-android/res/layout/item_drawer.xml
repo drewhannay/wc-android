@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
+    android:minHeight="@dimen/min_listview_item_height"
+    android:paddingBottom="10dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:textColor="#111"/>
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:textColor="#111" />
