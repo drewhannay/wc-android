@@ -1,5 +1,8 @@
 package com.wheaton.app;
 
+import com.wheaton.utility.LoadURLTask;
+import com.wheaton.utility.Utils;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainScreen extends ActionBarActivity
 {
@@ -30,6 +34,7 @@ public class MainScreen extends ActionBarActivity
 	public static final String ACADEMIC_CALENDAR = "http://25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
 	public static final String EVENTS_CALENDAR = "http://25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
 	public static final String BANNER_URL = "https://s3.amazonaws.com/wcstatic/banners.json";
+	public static final String INTRA_URL = "http://intra.wheaton.edu";
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
@@ -139,7 +144,19 @@ public class MainScreen extends ActionBarActivity
 			fragment = new ChapelFragment();
 			break;
 		case 3:
-			fragment = new WhosWhoFragment();
+			new LoadURLTask(MainScreen.INTRA_URL, 
+					new LoadURLTask.RunnableOfT<String>() {
+				@Override
+				public void run(String result) {
+					if (result == null || result.equals("")) {
+						Toast.makeText(getApplicationContext(), R.string.connect_to_wheaton, Toast.LENGTH_SHORT).show();
+					} else {
+						Fragment fragment = new WhosWhoFragment();
+						FragmentManager fragmentManager = getSupportFragmentManager();
+				        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+					}
+				}
+			}).execute();
 			break;
 		case 4:
 			fragment = new AcademicCalendarFragment();
