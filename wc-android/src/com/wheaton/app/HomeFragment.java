@@ -45,7 +45,8 @@ public class HomeFragment extends TrackedFragment {
 			@Override
 			public void run(String result) {
 				mLoadEventsURLTask = null;
-				onLoadEventsURLSucceeded(result);
+				if (getActivity() != null)
+					onLoadEventsURLSucceeded(result);
 			}
 		});
 		
@@ -53,7 +54,8 @@ public class HomeFragment extends TrackedFragment {
 			@Override
 			public void run(String result) {
 				mLoadSportsURLTask = null;
-				onLoadSportsURLSucceeded(result);
+				if (getActivity() != null)
+					onLoadSportsURLSucceeded(result);
 			}
 		});
 		
