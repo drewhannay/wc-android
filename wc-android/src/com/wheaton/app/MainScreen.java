@@ -1,5 +1,6 @@
 package com.wheaton.app;
 
+import com.google.analytics.tracking.android.Log;
 import com.wheaton.utility.LoadURLTask;
 import com.wheaton.utility.Utils;
 
@@ -144,7 +145,7 @@ public class MainScreen extends ActionBarActivity
 			fragment = new ChapelFragment();
 			break;
 		case 3:
-			new LoadURLTask(MainScreen.INTRA_URL, 
+			new LoadURLTask(INTRA_URL, 
 					new LoadURLTask.RunnableOfT<String>() {
 				@Override
 				public void run(String result) {
