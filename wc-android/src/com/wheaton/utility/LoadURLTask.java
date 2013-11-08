@@ -19,20 +19,22 @@ import android.util.Log;
 
 public class LoadURLTask extends AsyncTask<Void, Void, String> {
 	public LoadURLTask(String url, RunnableOfT<String> callback) {
-		m_url = url;
-		m_callback = callback;
+		mUrl = url;
+		mCallback = callback;
 	}
 
 	@Override
 	protected String doInBackground(Void... params) {
 		StringBuilder builder = new StringBuilder();
 		HttpClient client = Utils.sslClient(new DefaultHttpClient());
-		HttpGet httpGet = new HttpGet(m_url);
+		HttpGet httpGet = new HttpGet(mUrl);
 		BufferedReader reader = null;
 		try {
 			HttpResponse response = client.execute(httpGet);
 			StatusLine statusLine = response.getStatusLine();
+			Log.d("TAG", statusLine.toString());
 			int statusCode = statusLine.getStatusCode();
+			Log.d("TAG", statusCode+"");
 			if (statusCode == 200) {
 				HttpEntity entity = response.getEntity();
 				InputStream content = entity.getContent();
@@ -59,7 +61,7 @@ public class LoadURLTask extends AsyncTask<Void, Void, String> {
 		if (isCancelled())
 			return;
 		if (result != null)
-			m_callback.run(result);
+			mCallback.run(result);
 	}
 
 	public static abstract class RunnableOfT<T> implements RunnableWithParam<T>{}
@@ -70,6 +72,6 @@ public class LoadURLTask extends AsyncTask<Void, Void, String> {
 
 	private static final String TAG = LoadURLTask.class.toString();
 
-	private final String m_url;
-	private final RunnableOfT<String> m_callback;
+	private final String mUrl;
+	private final RunnableOfT<String> mCallback;
 }
