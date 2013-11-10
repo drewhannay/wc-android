@@ -77,8 +77,7 @@ public class WhosWhoFragment extends TrackedFragment implements OnQueryTextListe
 
 	private void onLoadURLSucceeded(String data) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		if ((data == null || data.equals("")) 
-				&& Utils.isConnectedToNetwork("http://intra.wheaton.edu")) {
+		if (data == null || data.equals("")) {
 			Toast.makeText(getActivity(), R.string.connect_to_wheaton, Toast.LENGTH_SHORT).show();
 		} else {
 			try {
