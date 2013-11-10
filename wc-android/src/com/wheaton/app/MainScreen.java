@@ -6,6 +6,8 @@ import com.wheaton.utility.Utils;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -127,9 +129,9 @@ public class MainScreen extends ActionBarActivity
 		}
 	}
 
-	private void selectItem(int position) {
+	private void selectItem(final int position) {
 		Fragment fragment = new ChapelFragment();
-		
+		final int pos = position;
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
@@ -145,20 +147,23 @@ public class MainScreen extends ActionBarActivity
 			fragment = new ChapelFragment();
 			break;
 		case 3:
-			new LoadURLTask(INTRA_URL, 
-					new LoadURLTask.RunnableOfT<String>() {
-				@Override
-				public void run(String result) {
-					if (result == null || result.equals("")) {
-						Toast.makeText(getApplicationContext(), R.string.connect_to_wheaton, Toast.LENGTH_SHORT).show();
-					} else {
-						Fragment fragment = new WhosWhoFragment();
+			Handler h = new Handler() {
+			    @Override
+			    public void handleMessage(Message msg) {
+			        if (msg.what != 1) { 
+			        	Toast.makeText(getApplicationContext(), R.string.connect_to_wheaton, Toast.LENGTH_SHORT).show();
+			        } else { // code if connected
+			        	Fragment fragment = new WhosWhoFragment();
 						FragmentManager fragmentManager = getSupportFragmentManager();
 				        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-					}
-				}
-			}).execute();
-			break;
+				        mDrawerList.setItemChecked(position, true);
+						setTitle(mPageTitles[position]);
+						mDrawerLayout.closeDrawer(mDrawerList);
+			        }
+			    }
+			};
+			Utils.isNetworkAvailable(INTRA_URL, h, 2000);
+			return;
 		case 4:
 			fragment = new AcademicCalendarFragment();
 			break;

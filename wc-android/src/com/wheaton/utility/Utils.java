@@ -19,6 +19,8 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.os.Handler;
+
 public class Utils {
 	public static void CopyStream(InputStream is, OutputStream os) {
 		final int buffer_size=1024;
@@ -58,20 +60,42 @@ public class Utils {
 			return null;
 		}
 	}
-	public static boolean isConnectedToNetwork(String url) {
-		final HttpClient client = Utils.sslClient(new DefaultHttpClient());
-		final HttpGet getRequest = new HttpGet(url);
+	public static void isNetworkAvailable(final String url, final Handler handler, final int timeout) {
+		new Thread() {
+			private boolean responded = false;
 
-		try {
-			HttpResponse response = client.execute(getRequest);
-			final int statusCode = response.getStatusLine().getStatusCode();
-			if (statusCode != HttpStatus.SC_OK) {
-				return false;
-			} else {
-				return true;
+			@Override
+			public void run() {
+				new Thread() {
+
+					@Override
+					public void run() {
+						HttpGet requestForTest = new HttpGet(url);
+						try {
+							new DefaultHttpClient().execute(requestForTest); // can last...
+							responded = true;
+						} catch (Exception e) {}
+					}
+
+				}.start();
+
+				try {
+					int waited = 0;
+					while(!responded && (waited < timeout)) {
+						sleep(100);
+						if(!responded ) { 
+							waited += 100;
+						}
+					}
+				} 
+				catch(InterruptedException e) {} // do nothing 
+				finally { 
+					if (!responded) { handler.sendEmptyMessage(0); } 
+					else { handler.sendEmptyMessage(1); }
+				}
+
 			}
-		} catch (Exception e) {
-			return false;
-		}
+		}.start();
+
 	}
 }

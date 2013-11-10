@@ -32,9 +32,7 @@ public class LoadURLTask extends AsyncTask<Void, Void, String> {
 		try {
 			HttpResponse response = client.execute(httpGet);
 			StatusLine statusLine = response.getStatusLine();
-			Log.d("TAG", statusLine.toString());
 			int statusCode = statusLine.getStatusCode();
-			Log.d("TAG", statusCode+"");
 			if (statusCode == 200) {
 				HttpEntity entity = response.getEntity();
 				InputStream content = entity.getContent();
