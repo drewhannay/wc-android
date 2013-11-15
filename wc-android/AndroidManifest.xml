@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wheaton.app"
-    android:versionCode="17"
+    android:versionCode="18"
     android:versionName="3.0.0" >
 
     <uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
     <permission
         android:name="com.wheaton.app.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
