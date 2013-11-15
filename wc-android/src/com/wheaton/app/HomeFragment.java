@@ -74,7 +74,6 @@ public class HomeFragment extends TrackedFragment {
 			ListView lv = (ListView)getView().findViewById(R.id.sports);
 			lv.setAdapter(new SportsAdapter(getActivity(), new JSONArray(data), 6));
 		} catch (JSONException e) {
-			mErrorOccurred = true;
 			Log.e(TAG, "onLoadURLSucceeded", e);
 		}
 	}
@@ -157,5 +156,4 @@ public class HomeFragment extends TrackedFragment {
 	private LoadURLTask mLoadEventsURLTask;
 	private LoadURLTask mLoadSportsURLTask;
 	private View mRootView;
-	private boolean mErrorOccurred = false;
 }

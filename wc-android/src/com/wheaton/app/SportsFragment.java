@@ -2,14 +2,12 @@ package com.wheaton.app;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import com.wheaton.utility.LoadURLTask;
 
 public class SportsFragment extends TrackedFragment {
@@ -52,7 +50,6 @@ public class SportsFragment extends TrackedFragment {
 			ListView lv = (ListView)getView().findViewById(R.id.sportList);
 			lv.setAdapter(new SportsAdapter(getActivity(), new JSONArray(data), -1));
 		} catch (JSONException e) {
-			mErrorOccurred = true;
 			Log.e(TAG, "onLoadURLSucceeded", e);
 		}
 	}
@@ -61,5 +58,4 @@ public class SportsFragment extends TrackedFragment {
 
 	private LoadURLTask mLoadURLTask;
 	private View mRootView;
-	private boolean mErrorOccurred = false;
 }

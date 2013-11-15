@@ -83,7 +83,6 @@ public class ChapelFragment extends TrackedFragment {
 			ListView lv = (ListView)getView().findViewById(R.id.calendarList);
 			lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items));
 		} catch (JSONException e) {
-			mErrorOccurred = true;
 			Log.e(TAG, "onLoadURLSucceeded", e);
 		}
 
@@ -93,5 +92,4 @@ public class ChapelFragment extends TrackedFragment {
 
 	private LoadURLTask mLoadURLTask;
 	private View mRootView;
-	private boolean mErrorOccurred = false;
 }

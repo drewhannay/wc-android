@@ -1,9 +1,5 @@
 package com.wheaton.app;
 
-import com.google.analytics.tracking.android.Log;
-import com.wheaton.utility.LoadURLTask;
-import com.wheaton.utility.Utils;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.wheaton.utility.Utils;
 
 public class MainScreen extends ActionBarActivity
 {
@@ -131,7 +128,6 @@ public class MainScreen extends ActionBarActivity
 
 	private void selectItem(final int position) {
 		Fragment fragment = new ChapelFragment();
-		final int pos = position;
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();

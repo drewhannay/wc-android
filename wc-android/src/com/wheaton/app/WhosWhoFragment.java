@@ -1,10 +1,6 @@
 package com.wheaton.app;
 
 import org.json.JSONArray;
-
-import com.wheaton.utility.LoadURLTask;
-import com.wheaton.utility.Utils;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
@@ -23,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.wheaton.utility.LoadURLTask;
 
 public class WhosWhoFragment extends TrackedFragment implements OnQueryTextListener {
 	@Override
