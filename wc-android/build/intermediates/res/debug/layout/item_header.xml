@@ -1,0 +1,28 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:clickable="false"
+    android:background="#E6E6E6"
+    >
+
+    <View
+        android:id="@+id/item_separator"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:textIsSelectable="false"
+        android:id="@+id/list_hdr"
+        android:gravity="bottom|left"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/item_separator"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="15sp"
+        android:layout_alignParentLeft="true" />
+</RelativeLayout><!-- From: file:/Users/jackwork/dev/wc-android/wc-android/res/layout/item_header.xml -->
