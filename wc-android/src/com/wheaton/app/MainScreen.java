@@ -1,7 +1,6 @@
 package com.wheaton.app;
 
-import com.google.analytics.tracking.android.Log;
-import com.wheaton.utility.LoadURLTask;
+import com.google.android.gms.maps.MapFragment;
 import com.wheaton.utility.Utils;
 
 import android.content.res.Configuration;
@@ -29,13 +28,17 @@ public class MainScreen extends ActionBarActivity
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	public static final String CHAPEL_URL = "https://s3.amazonaws.com/wcstatic/chapel.json";
-	public static final String MAP_PINS_URL = "http://23.21.107.65/locations?contentType=json&limit=300";
-	public static final String MENU_URL = "http://wheatonorientation.herokuapp.com/menu";
-	public static final String SPORTS_URL = "http://23.21.107.65/events/type/sport?contentType=json";
-	public static final String WHOS_WHO_PREFIX = "http://23.21.107.65/people?contentType=json&limit=200&name=";
-	public static final String ACADEMIC_CALENDAR = "http://25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
-	public static final String EVENTS_CALENDAR = "http://25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
+	public static final String CHAPEL_URL = "https://isoncamp.us/wheaton/chapel";
+	public static final String MAP_PINS_URL = "https://isoncamp.us/wheaton/locations";
+	//public static final String MAP_PINS_URL = "http://23.21.107.65/locations?contentType=json&limit=300";
+	public static final String MENU_URL = "http://isoncamp.us/wheaton/menu";
+	//public static final String SPORTS_URL = "http://23.21.107.65/events/type/sport?contentType=json";
+	public static final String SPORTS_URL = "https://isoncamp.us/wheaton/sports";
+	public static final String WHOS_WHO_PREFIX = "https://www.isoncamp.us/wheaton/person";
+	public static final String ACADEMIC_CALENDAR = "http://www.25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
+	//public static final String ACADEMIC_CALENDAR = "https://isoncamp.us/wheaton/academic";
+	public static final String EVENTS_CALENDAR = "http://www.25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
+	//public static final String EVENTS_CALENDAR = "https://isoncamp.us/wheaton/events";
 	public static final String BANNER_URL = "https://s3.amazonaws.com/wcstatic/banners.json";
 	public static final String INTRA_URL = "http://intra.wheaton.edu";
 
@@ -138,7 +141,7 @@ public class MainScreen extends ActionBarActivity
 			break;
 		case 1:
 			try {
-				fragment = new MapFragment();
+				fragment = new WCMapFragment();
 			}catch(Exception e) {
 				e.getStackTrace();
 			}

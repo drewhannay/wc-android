@@ -3,8 +3,10 @@ package com.wheaton.app;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.annotation.TargetApi;
+import android.app.Fragment;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,31 +14,32 @@ import android.view.ViewGroup;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.wheaton.utility.LoadURLTask;
 
-public class MapFragment extends Fragment
+public class WCMapFragment extends android.support.v4.app.Fragment
 {
 	static final LatLng QUAD = new LatLng(41.870016, -88.098362);
 
-	public MapFragment() {}
+	public WCMapFragment() {}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 
-		View mRootView = inflater.inflate(R.layout.fragment_map, container, false);
+		View mRootView = inflater.inflate(R.layout.fragment_map, container);
 
-		MapView mapView = (MapView) mRootView.findViewById(R.id.mapView);
+
+/*		MapView mapView = (MapView) mRootView.findViewById(R.id.mapView);
 
 		mapView.onCreate(savedInstanceState);
 		mapView.onResume();		
 
-		setUpMapIfNeeded(mapView);
+		setUpMapIfNeeded(mapView);*/
 
 		return mRootView;
 	}	
@@ -78,12 +81,14 @@ public class MapFragment extends Fragment
 		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(QUAD, 19));
 		mMap.setMapType(2);
 
+		/*
 		new LoadURLTask(MainScreen.MAP_PINS_URL, new LoadURLTask.RunnableOfT<String>() {
 			@Override
 			public void run(String result) {
 				onLoadURLSucceeded(result);
 			}
 		}).execute();
+		*/
 	}
 
 	private void onLoadURLSucceeded(String jsonString) {
