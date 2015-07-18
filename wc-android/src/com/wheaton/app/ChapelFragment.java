@@ -1,8 +1,12 @@
 package com.wheaton.app;
 
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,26 +62,30 @@ public class ChapelFragment extends TrackedFragment {
 	private void onLoadURLSucceeded(String data) {
 
 		List<Item> items = new ArrayList<Item>();
+		boolean[] hasMonths = new boolean[12];
 
 		try {
 			JSONArray chapels = new JSONArray(data);
 			for (int i = 0; i < chapels.length(); i++) {
-				JSONObject month = chapels.getJSONObject(i);
-				JSONArray speakers = month.getJSONArray("speakers");
-				items.add(new Header(month.getString("month")));
-				for(int j = 0; j < speakers.length(); j++) {
-					HashMap<String, String> day = new HashMap<String, String>();
-					
-					day.put("item_header", speakers.getJSONObject(j).getString("title"));
-					if(!speakers.getJSONObject(j).getString("subtitle").equals(""))
-						day.put("item_subtext", speakers.getJSONObject(j).getString("subtitle"));
-					day.put("item_date", speakers.getJSONObject(j).getString("date"));
-					
-					if(!speakers.getJSONObject(j).getString("subtitle").equals(""))
-						items.add(new ListItem(day, R.layout.item_calendar));
-					else
-						items.add(new ListItem(day, R.layout.item_calendar_single));
+				HashMap<String, String> day = new HashMap<String, String>();
+
+				Date sessionDate = dateFromString(chapels.getJSONObject(i).getString("timeStamp"));
+				Log.v("TAG",":( " + sessionDate.getDate());
+
+				if(hasMonths[(sessionDate.getMonth())] == false) {
+					hasMonths[(sessionDate.getMonth())] = true;
+					items.add(new Header(new DateFormatSymbols().getMonths()[sessionDate.getMonth()]));
 				}
+				day.put("item_header", chapels.getJSONObject(i).getString("title"));
+				day.put("item_date", "" + sessionDate.getDate());
+
+				if(!chapels.getJSONObject(i).getString("description").equals("")) {
+					day.put("item_subtext", chapels.getJSONObject(i).getString("description"));
+					items.add(new ListItem(day, R.layout.item_calendar));
+				}
+				else
+					items.add(new ListItem(day, R.layout.item_calendar_single));
+
 			}
 			
 			ListView lv = (ListView)getView().findViewById(R.id.calendarList);
@@ -87,6 +95,15 @@ public class ChapelFragment extends TrackedFragment {
 			Log.e(TAG, "onLoadURLSucceeded", e);
 		}
 
+	}
+
+	private Date dateFromString(String toConvert){
+
+		String toParse = toConvert.substring(toConvert.indexOf('[') + 2, toConvert.indexOf(']') - 1);
+		Long parsed = Long.parseLong(toParse);
+		Long used = parsed * 1000;
+
+		return new Date(used);
 	}
 
 	private static final String TAG = ChapelFragment.class.toString();

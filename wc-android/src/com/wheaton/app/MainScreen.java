@@ -35,10 +35,10 @@ public class MainScreen extends ActionBarActivity
 	//public static final String SPORTS_URL = "http://23.21.107.65/events/type/sport?contentType=json";
 	public static final String SPORTS_URL = "https://isoncamp.us/wheaton/sports";
 	public static final String WHOS_WHO_PREFIX = "https://www.isoncamp.us/wheaton/person";
-	public static final String ACADEMIC_CALENDAR = "http://www.25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
-	//public static final String ACADEMIC_CALENDAR = "https://isoncamp.us/wheaton/academic";
-	public static final String EVENTS_CALENDAR = "http://www.25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
-	//public static final String EVENTS_CALENDAR = "https://isoncamp.us/wheaton/events";
+	//public static final String ACADEMIC_CALENDAR = "http://www.25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
+	public static final String ACADEMIC_CALENDAR = "https://isoncamp.us/wheaton/academic";
+	//public static final String EVENTS_CALENDAR = "http://www.25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
+	public static final String EVENTS_CALENDAR = "https://isoncamp.us/wheaton/events";
 	public static final String BANNER_URL = "https://s3.amazonaws.com/wcstatic/banners.json";
 	public static final String INTRA_URL = "http://intra.wheaton.edu";
 
