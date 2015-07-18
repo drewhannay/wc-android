@@ -31,7 +31,7 @@ public class WCMapFragment extends android.support.v4.app.Fragment
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 
-		View mRootView = inflater.inflate(R.layout.fragment_map, container);
+		View mRootView = inflater.inflate(R.layout.fragment_map, container,false);
 
 
 /*		MapView mapView = (MapView) mRootView.findViewById(R.id.mapView);
