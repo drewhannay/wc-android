@@ -1,6 +1,7 @@
 package com.wheaton.app;
 
 import java.io.StringReader;
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.wheaton.app.List.Header;
 import com.wheaton.app.List.Item;
 import com.wheaton.app.List.ListItem;
 import com.wheaton.app.List.TwoTextArrayAdapter;
@@ -69,6 +72,7 @@ public class HomeFragment extends TrackedFragment {
 	private void onLoadSportsURLSucceeded(String data) {
 		try {
 			TextView title = (TextView)getView().findViewById(R.id.sports_title);
+			title.setTypeface(null, Typeface.BOLD);
 			title.setText("Sports");
 
 			ListView lv = (ListView)getView().findViewById(R.id.sports);
@@ -78,13 +82,46 @@ public class HomeFragment extends TrackedFragment {
 		}
 	}
 	
-	private void onLoadEventsURLSucceeded(String xml) {
-		try {
-			
-			TextView title = (TextView)getView().findViewById(R.id.events_title);
-			title.setText("Upcoming");
-			
-			
+	private void onLoadEventsURLSucceeded(String data) {
+		TextView title = (TextView)getView().findViewById(R.id.events_title);
+		title.setTypeface(null, Typeface.BOLD);
+
+		title.setText("Upcoming");
+			List<Item> items = new ArrayList<Item>();
+			List<String> titles = new ArrayList<String>();
+			HashMap<String, String> day = new HashMap<String, String>();
+
+			try {
+				JSONArray events = new JSONArray(data);
+				Log.v("TAG", "LENGTH: " + events.length());
+				Calendar calendar = Calendar.getInstance();
+
+				for (int i = 0; i < events.length(); i++) {
+					if(!titles.contains(events.getJSONObject(i).getString("title"))) {
+						day = new HashMap<String, String>();
+						day.put("item_header", events.getJSONObject(i).getString("title"));
+						titles.add(events.getJSONObject(i).getString("title"));
+
+						Calendar sessionDate = dateFromString(events.getJSONObject(i).getString("timeStamp"));
+						SimpleDateFormat format1 = new SimpleDateFormat("MM/dd");
+						SimpleDateFormat format2 = new SimpleDateFormat("h:mm a");
+						String dateString = format1.format(sessionDate.getTime());
+						String timeString = format2.format(sessionDate.getTime());
+
+						day.put("item_date", dateString);
+						day.put("item_time", timeString);
+
+						items.add(new ListItem(day, R.layout.item_calendar_event));
+					}
+				}
+			}
+			catch (JSONException e){
+
+			}
+			ListView lv = (ListView)getView().findViewById(R.id.events);
+			lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items, 6));
+
+			/*
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 		
 			factory.setNamespaceAware(false);
@@ -143,13 +180,27 @@ public class HomeFragment extends TrackedFragment {
 			} catch(Exception e) {
 	 
 			}
+
 	
 			ListView lv = (ListView)getView().findViewById(R.id.events);
 			lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items, 6));
 		} catch(XmlPullParserException e) {
 			
 		}
+		*/
 	}
+
+
+	private Calendar dateFromString(String toConvert){
+		String toParse = toConvert.substring(toConvert.indexOf('[') + 2, toConvert.indexOf(']') - 1);
+		Long parsed = Long.parseLong(toParse);
+		Long used = parsed * 1000;
+
+		Calendar toReturn = Calendar.getInstance();
+		toReturn.setTimeInMillis(used);
+		return toReturn;
+	}
+
 
 	private static final String TAG = ChapelFragment.class.toString();
 

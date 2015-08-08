@@ -9,11 +9,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,24 +66,52 @@ public class AcademicCalendarFragment extends TrackedFragment {
 			mLoadURLTask.cancel(false);
 	}
 
-	private void onLoadURLSucceeded(String xml) throws XmlPullParserException {
-
-		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-		factory.setNamespaceAware(false);
-		XmlPullParser xpp = factory.newPullParser();
-		xpp.setInput(new StringReader(xml));
-
+	private void onLoadURLSucceeded(String data) {
 
 		List<Item> items = new ArrayList<Item>();
+		List<String> titles = new ArrayList<String>();
+		HashMap<String, String> day = new HashMap<String, String>();
+
+		try {
+			JSONArray events = new JSONArray(data);
+			Log.v("TAG", "LENGTH: " + events.length());
+			Calendar calendar = Calendar.getInstance();
+			boolean[] hasMonths = new boolean[12];
+
+			for (int i = 0; i < events.length(); i++) {
+				if(!titles.contains(events.getJSONObject(i).getString("title"))) {
+					day = new HashMap<String, String>();
+					day.put("item_header", events.getJSONObject(i).getString("title"));
+					titles.add(events.getJSONObject(i).getString("title"));
+
+					Date sessionDate = dateFromString(events.getJSONObject(i).getString("timeStamp"));
+
+					if(hasMonths[(sessionDate.getMonth())] == false) {
+						hasMonths[(sessionDate.getMonth())] = true;
+						items.add(new Header(new DateFormatSymbols().getMonths()[sessionDate.getMonth()] + " - " + (sessionDate.getYear()+1900)));
+					}
+					day.put("item_date", "" + sessionDate.getDate());
+					items.add(new ListItem(day, R.layout.item_calendar_single));
+				}
+			}
+		}
+		catch (JSONException e){
+
+		}
+		ListView lv = (ListView)getView().findViewById(R.id.calendarList);
+		lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items));
 
 		boolean insideItem = false;
 
-		try { 
+		/*
+		try {
 			int eventType = xpp.getEventType();
 			SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy HH:mm:ss Z");
 
 			HashMap<String, String> day = new HashMap<String, String>();
+
 			Date date = new Date();
+
 			Calendar calendar = lastDate = Calendar.getInstance();
 
 			items.add(new Header(getMonthForInt(calendar.get(Calendar.MONTH)) + " - " + calendar.get(Calendar.YEAR)));
@@ -120,12 +151,12 @@ public class AcademicCalendarFragment extends TrackedFragment {
 
 				eventType = xpp.next(); // move to next element
 			}
+
 		} catch(Exception e) {
 
 		}
+*/
 
-		ListView lv = (ListView)getView().findViewById(R.id.calendarList);
-		lv.setAdapter(new TwoTextArrayAdapter(getActivity(), items));
 
 	}
 
@@ -137,6 +168,15 @@ public class AcademicCalendarFragment extends TrackedFragment {
 			month = months[num];
 		}
 		return month;
+	}
+
+	private Date dateFromString(String toConvert){
+
+		String toParse = toConvert.substring(toConvert.indexOf('[') + 2, toConvert.indexOf(']') - 1);
+		Long parsed = Long.parseLong(toParse);
+		Long used = parsed * 1000;
+
+		return new Date(used);
 	}
 
 	private LoadURLTask mLoadURLTask;

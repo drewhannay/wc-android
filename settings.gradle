@@ -1,0 +1,2 @@
+include ':wc-android'
+include ':wc-appcompat'

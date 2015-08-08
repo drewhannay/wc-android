@@ -39,12 +39,12 @@
         android:textIsSelectable="false"
         android:id="@+id/time"
         android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_height="45dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:gravity="right"
+        android:gravity="right|center"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
         android:ellipsize="marquee"
         android:singleLine="true" />
     
@@ -52,12 +52,12 @@
         android:textIsSelectable="false"
         android:id="@+id/date"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_alignParentTop="true"
+        android:layout_height="45dp"
+        android:gravity="right|center"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
         android:layout_toLeftOf="@id/time"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
         android:ellipsize="marquee"
         android:singleLine="true" />
 
