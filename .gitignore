@@ -1,4 +1,8 @@
 bin/
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
 gen/
 build/
 .metadata/
