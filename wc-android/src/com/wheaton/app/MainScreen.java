@@ -1,6 +1,5 @@
 package com.wheaton.app;
 
-import com.google.android.gms.maps.MapFragment;
 import com.wheaton.utility.Utils;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.wheaton.utility.Utils;
 
 public class MainScreen extends ActionBarActivity
 {
@@ -51,13 +49,13 @@ public class MainScreen extends ActionBarActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		mTitle = mDrawerTitle = getTitle();
 		mPageTitles = new String[]{"Home", "Campus Map", "Chapel Schedule", "Who's Who", "Academic Calendar", "Sports", "Meal Menu"};
-		
+
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        
+
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		// set up the drawer's list view with items and click listener
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -85,7 +83,7 @@ public class MainScreen extends ActionBarActivity
 //				invalidateOptionsMenu();
 			}
 		};
-		
+
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 
@@ -152,7 +150,7 @@ public class MainScreen extends ActionBarActivity
 			Handler h = new Handler() {
 			    @Override
 			    public void handleMessage(Message msg) {
-			        if (msg.what != 1) { 
+			        if (msg.what != 1) {
 			        	Toast.makeText(getApplicationContext(), R.string.connect_to_wheaton, Toast.LENGTH_SHORT).show();
 			        } else { // code if connected
 			        	Fragment fragment = new WhosWhoFragment();
@@ -180,7 +178,7 @@ public class MainScreen extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-		
+
 		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mPageTitles[position]);
