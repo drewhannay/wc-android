@@ -15,10 +15,13 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.android.gms:play-services-maps:7.5.0'
     compile 'com.google.android.gms:play-services-analytics:7.5.0'
-
-    compile files('libs/commons-io-2.4.jar')
+    compile 'commons-io:commons-io:2.4'
 }
