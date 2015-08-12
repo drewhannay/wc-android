@@ -8,8 +8,8 @@ android {
         applicationId 'com.wheaton.app'
         minSdkVersion 9
         targetSdkVersion 22
-        versionCode 19
-        versionName '3.0.1'
+        versionCode 20
+        versionName '3.0.2'
 
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
