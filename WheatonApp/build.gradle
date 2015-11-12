@@ -26,4 +26,7 @@ dependencies {
 
     compile 'commons-io:commons-io:2.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    compile "com.mixpanel.android:mixpanel-android:4.6.4"
+    compile "com.google.android.gms:play-services:3.1+"
 }
