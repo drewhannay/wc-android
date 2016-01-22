@@ -28,19 +28,19 @@ public class MainScreen extends ActionBarActivity
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	public static final String CHAPEL_URL = "https://isoncamp.us/wheaton/chapel";
-	public static final String MAP_PINS_URL = "https://isoncamp.us/wheaton/locations";
+	public static final String CHAPEL_URL = "http://mobileapps.wheaton.edu/api/chapel";
+	public static final String MAP_PINS_URL = "http://mobileapps.wheaton.edu/api/locations";
 	//public static final String MAP_PINS_URL = "http://23.21.107.65/locations?contentType=json&limit=300";
-	public static final String MENU_URL = "http://isoncamp.us/wheaton/menu";
+	public static final String MENU_URL = "http://mobileapps.wheaton.edu/api/menu";
 	//public static final String SPORTS_URL = "http://23.21.107.65/events/type/sport?contentType=json";
-	public static final String SPORTS_URL = "https://isoncamp.us/wheaton/sports";
+	public static final String SPORTS_URL = "http://mobileapps.wheaton.edu/api/sports";
 	//public static final String WHOS_WHO_PREFIX = "https://www.isoncamp.us/wheaton/person";
-	public static final String WHOS_WHO_PREFIX = "https://webapp.wheaton.edu/whoswho/person/searchJson";
+	public static final String WHOS_WHO_PREFIX = "https://intra.wheaton.edu/whoswho/person/searchJson";
 	//public static final String ACADEMIC_CALENDAR = "http://www.25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
-	public static final String ACADEMIC_CALENDAR = "https://isoncamp.us/wheaton/academic";
+	public static final String ACADEMIC_CALENDAR = "http://mobileapps.wheaton.edu/api/academic";
 	//public static final String EVENTS_CALENDAR = "http://www.25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
-	public static final String EVENTS_CALENDAR = "https://isoncamp.us/wheaton/events";
-	public static final String BANNER_URL = "https://s3.amazonaws.com/wcstatic/banners.json";
+	public static final String EVENTS_CALENDAR = "http://mobileapps.wheaton.edu/api/events";
+	public static final String BANNER_URL = "http://mobileapps.wheaton.edu/api/banners";
 	public static final String INTRA_URL = "http://intra.wheaton.edu";
 
 	private CharSequence mDrawerTitle;
@@ -142,7 +142,7 @@ public class MainScreen extends ActionBarActivity
 		Fragment fragment = new ChapelFragment();
 		switch (position) {
 		case 0:
-			fragment = new HomeFragment();
+			fragment = new HomeFragment(getApplicationContext());
 			mixpanel.track("Opened Home");
 			break;
 		case 1:

@@ -30,12 +30,12 @@ public class WCMapFragment extends android.support.v4.app.Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_map, container, false);
 
 
-/*		MapView mapView = (MapView) mRootView.findViewById(R.id.mapView);
+		MapView mapView = (MapView) mRootView.findViewById(R.id.mapView);
 
 		mapView.onCreate(savedInstanceState);
 		mapView.onResume();		
 
-		setUpMapIfNeeded(mapView);*/
+		setUpMapIfNeeded(mapView);
 
         return mRootView;
     }
@@ -61,7 +61,11 @@ public class WCMapFragment extends android.support.v4.app.Fragment {
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
             mMap.setMyLocationEnabled(true);
 
-            MapsInitializer.initialize(this.getActivity());
+            try {
+                MapsInitializer.initialize(this.getActivity());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             if (mMap != null) {
                 setUpMap();

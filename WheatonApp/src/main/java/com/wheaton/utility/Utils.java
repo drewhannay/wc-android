@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Calendar;
+
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -30,6 +32,19 @@ public class Utils {
 		}
 		catch(Exception ex){}
 	}
+
+
+	public static Calendar dateFromString(String toConvert){
+		String toParse = toConvert.substring(toConvert.indexOf('[') + 2, toConvert.indexOf(']') - 1);
+		double parsed = Double.parseDouble(toParse);
+		long used = (long) parsed * 1000;
+
+		Calendar toReturn = Calendar.getInstance();
+		toReturn.setTimeInMillis(used);
+		return toReturn;
+	}
+
+
 	public static HttpClient sslClient(HttpClient client) {
 		try {
 			X509TrustManager tm = new X509TrustManager() { 

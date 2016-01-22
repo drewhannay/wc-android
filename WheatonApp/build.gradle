@@ -3,13 +3,14 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
+    android.enforceUniquePackageName = false
 
     defaultConfig {
         applicationId 'com.wheaton.app'
         minSdkVersion 9
         targetSdkVersion 22
         versionCode 20
-        versionName '3.0.2'
+        versionName '3.1'
 
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
@@ -28,5 +29,4 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
     compile "com.mixpanel.android:mixpanel-android:4.6.4"
-    compile "com.google.android.gms:play-services:3.1+"
 }
