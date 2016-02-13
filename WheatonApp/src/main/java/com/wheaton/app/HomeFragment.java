@@ -49,11 +49,11 @@ public class HomeFragment extends TrackedFragment {
 		
 		mRootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-
+/*
         ViewPager viewPager = (ViewPager) mRootView.findViewById(R.id.view_pager);
         ImagePagerAdapter adapter = new ImagePagerAdapter();
         viewPager.setAdapter(adapter);
-
+*/
         WindowManager wm = (WindowManager) myContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         DisplayMetrics myMetrics = new DisplayMetrics();
@@ -111,7 +111,7 @@ public class HomeFragment extends TrackedFragment {
 
 			try {
 				JSONArray events = new JSONArray(data);
-				Log.v("TAG", "LENGTH: " + events.length());
+				//Log.v("TAG", "LENGTH: " + events.length());
 				Calendar calendar = Calendar.getInstance();
 
 				for (int i = 0; i < events.length(); i++) {
