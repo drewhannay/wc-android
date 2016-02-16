@@ -33,10 +33,8 @@ import com.wheaton.utility.Utils;
 
 
 public class HomeFragment extends TrackedFragment {
-	private Context myContext;
 
-	public HomeFragment(Context aContext) {
-        myContext = aContext;
+	public HomeFragment() {
 	    // Empty constructor required for fragment subclasses
     }
 
@@ -49,15 +47,15 @@ public class HomeFragment extends TrackedFragment {
 		
 		mRootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-/*
-        ViewPager viewPager = (ViewPager) mRootView.findViewById(R.id.view_pager);
+
+        /*ViewPager viewPager = (ViewPager) mRootView.findViewById(R.id.view_pager);
         ImagePagerAdapter adapter = new ImagePagerAdapter();
-        viewPager.setAdapter(adapter);
-*/
+        viewPager.setAdapter(adapter);*/
+/*
         WindowManager wm = (WindowManager) myContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         DisplayMetrics myMetrics = new DisplayMetrics();
-        display.getMetrics(myMetrics);
+        display.getMetrics(myMetrics);*/
         //realViewSwitcher.setLayoutParams(new ViewGroup.LayoutParams(myMetrics.widthPixels, myMetrics.widthPixels/2));
 
 
@@ -145,8 +143,40 @@ public class HomeFragment extends TrackedFragment {
 
 
 
+/*
+//In development: banner scroll view
 
     private class ImagePagerAdapter extends PagerAdapter {
+		public ImagePagerAdapter(){
+			//obtain list of images
+
+			mLoadImagesURLTask = new LoadURLTask(MainScreen.CHAPEL_URL, new LoadURLTask.RunnableOfT<String>() {
+				@Override
+				public void run(String result) {
+					mLoadImagesURLTask = null;
+					try {
+						JSONArray images = new JSONArray(result);
+						mImages = new int[images.length()];
+
+						for(int i = 0; i < images.length(); i++){
+							//first field is image url
+
+							mImages[i] = ImageIO.read(images[i]);
+							//second field is link url
+						}
+					}
+					catch (JSONException e) {
+						Log.e(TAG, "onLoadURLSucceeded", e);
+					}
+
+				}
+			});
+			mLoadImagesURLTask.execute();
+			//determine count of images
+
+			//create array
+
+		}
         private int[] mImages = new int[] {
                 R.drawable.chiang_mai,
                 R.drawable.himeji,
@@ -178,11 +208,12 @@ public class HomeFragment extends TrackedFragment {
         }
     }
 
-
+*/
 
 	private static final String TAG = ChapelFragment.class.toString();
 
 	private LoadURLTask mLoadEventsURLTask;
 	private LoadURLTask mLoadSportsURLTask;
+	private LoadURLTask mLoadImagesURLTask;
 	private View mRootView;
 }

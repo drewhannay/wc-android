@@ -142,7 +142,7 @@ public class MainScreen extends ActionBarActivity
 		Fragment fragment = new ChapelFragment();
 		switch (position) {
 		case 0:
-			fragment = new HomeFragment(getApplicationContext());
+			fragment = new HomeFragment();
 			mixpanel.track("Opened Home");
 			break;
 		case 1:
