@@ -19,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
+
 
 public class MainScreen extends ActionBarActivity
 {
@@ -26,29 +28,35 @@ public class MainScreen extends ActionBarActivity
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	public static final String CHAPEL_URL = "https://isoncamp.us/wheaton/chapel";
-	public static final String MAP_PINS_URL = "https://isoncamp.us/wheaton/locations";
+	public static final String CHAPEL_URL = "http://mobileapps.wheaton.edu/api/chapel";
+	public static final String MAP_PINS_URL = "http://mobileapps.wheaton.edu/api/locations";
 	//public static final String MAP_PINS_URL = "http://23.21.107.65/locations?contentType=json&limit=300";
-	public static final String MENU_URL = "http://isoncamp.us/wheaton/menu";
+	public static final String MENU_URL = "http://mobileapps.wheaton.edu/api/menu";
 	//public static final String SPORTS_URL = "http://23.21.107.65/events/type/sport?contentType=json";
-	public static final String SPORTS_URL = "https://isoncamp.us/wheaton/sports";
-	public static final String WHOS_WHO_PREFIX = "https://www.isoncamp.us/wheaton/person";
+	public static final String SPORTS_URL = "http://mobileapps.wheaton.edu/api/sports";
+	//public static final String WHOS_WHO_PREFIX = "https://www.isoncamp.us/wheaton/person";
+	public static final String WHOS_WHO_PREFIX = "https://intra.wheaton.edu/whoswho/person/searchJson";
 	//public static final String ACADEMIC_CALENDAR = "http://www.25livepub.collegenet.com/calendars/event-collections-general_calendar_wp.rss";
-	public static final String ACADEMIC_CALENDAR = "https://isoncamp.us/wheaton/academic";
+	public static final String ACADEMIC_CALENDAR = "http://mobileapps.wheaton.edu/api/academic";
 	//public static final String EVENTS_CALENDAR = "http://www.25livepub.collegenet.com/calendars/intra-campus-calendar.rss";
-	public static final String EVENTS_CALENDAR = "https://isoncamp.us/wheaton/events";
-	public static final String BANNER_URL = "https://s3.amazonaws.com/wcstatic/banners.json";
+	public static final String EVENTS_CALENDAR = "http://mobileapps.wheaton.edu/api/events";
+	public static final String BANNER_URL = "http://mobileapps.wheaton.edu/api/banners";
 	public static final String INTRA_URL = "http://intra.wheaton.edu";
 
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mPageTitles;
+	private MixpanelAPI mixpanel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+		String projectToken = "ba1c3c53b3cd538357b7f85ff033c648"; // e.g.: "1ef7e30d2a58d27f4b90c42e31d6d7ad"
+		mixpanel = MixpanelAPI.getInstance(this, projectToken);
+
 
 		mTitle = mDrawerTitle = getTitle();
 		mPageTitles = new String[]{"Home", "Campus Map", "Chapel Schedule", "Who's Who", "Academic Calendar", "Sports", "Meal Menu"};
@@ -135,8 +143,10 @@ public class MainScreen extends ActionBarActivity
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
+			mixpanel.track("Opened Home");
 			break;
 		case 1:
+			mixpanel.track("Opened Map");
 			try {
 				fragment = new WCMapFragment();
 			}catch(Exception e) {
@@ -144,9 +154,11 @@ public class MainScreen extends ActionBarActivity
 			}
 			break;
 		case 2:
+			mixpanel.track("Opened Chapel");
 			fragment = new ChapelFragment();
 			break;
 		case 3:
+			mixpanel.track("Whos Who");
 			Handler h = new Handler() {
 			    @Override
 			    public void handleMessage(Message msg) {
@@ -165,12 +177,15 @@ public class MainScreen extends ActionBarActivity
 			Utils.isNetworkAvailable(INTRA_URL, h, 2000);
 			return;
 		case 4:
+			mixpanel.track("Opened Academic");
 			fragment = new AcademicCalendarFragment();
 			break;
 		case 5:
+			mixpanel.track("Opened Sports");
 			fragment = new SportsFragment();
 			break;
 		case 6:
+			mixpanel.track("Opened Menu");
 			fragment = new BonAppMenu();
 			break;
 		}
@@ -203,5 +218,11 @@ public class MainScreen extends ActionBarActivity
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggle
 		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	protected void onDestroy() {
+		mixpanel.flush();
+		super.onDestroy();
 	}
 }

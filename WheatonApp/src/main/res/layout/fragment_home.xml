@@ -6,7 +6,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-        
+
+
+        <!--android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" /-->
+
         <TextView
             android:id="@+id/events_title"
             android:layout_width="match_parent"
@@ -17,7 +23,7 @@
         <ListView
             android:id="@+id/events"
             android:layout_width="match_parent"
-            android:layout_height="340dp"
+            android:layout_height="320dp"
             android:layout_below="@id/events_title" >
         </ListView>
         

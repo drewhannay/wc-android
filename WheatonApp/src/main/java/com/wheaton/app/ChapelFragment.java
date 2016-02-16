@@ -99,8 +99,9 @@ public class ChapelFragment extends TrackedFragment {
 	private Date dateFromString(String toConvert){
 
 		String toParse = toConvert.substring(toConvert.indexOf('[') + 2, toConvert.indexOf(']') - 1);
-		Long parsed = Long.parseLong(toParse);
-		Long used = parsed * 1000;
+		double parsed = Double.parseDouble(toParse);
+		long used = (long) parsed * 1000;
+
 
 		return new Date(used);
 	}

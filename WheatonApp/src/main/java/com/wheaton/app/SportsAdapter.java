@@ -73,7 +73,7 @@ public class SportsAdapter extends BaseAdapter {
 			opponent.setText(custom.getString("opponent"));
 
 			Calendar c = new GregorianCalendar(); 
-			c.setTimeInMillis((long)item.getJSONArray("timeStamp").getInt(0)*1000);
+			c.setTimeInMillis((long)(item.getJSONArray("timeStamp").getDouble(0))*1000);
 
 			SimpleDateFormat format1 = new SimpleDateFormat("MM/dd");
 			SimpleDateFormat format2 = new SimpleDateFormat("h:mm a");
